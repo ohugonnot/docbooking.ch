@@ -1,0 +1,421 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Book a Doctor's Visit near You. 12 - 48 hours Waiting only">
+		<meta name="keywords" content="booking, doctor, visit, august, september, october, schedules, medicine, general practitioner, therapist, physiotherapist, dentist, psychologist, flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy">
+		<meta name="author" content="DocBooking.ch">
+		<meta name="google-site-verification" content="9eQ9giGNEjTdLoRdI96g8EB9DPAuQ0r8-hM0HBnDsc8" />
+		<!--<meta http-equiv="refresh" content="300">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>{% block title %}DocBooking.ch - Book your Doctor Now !{% endblock %}</title>
+		<!-- Favicons -->
+		<link href="/assets/img/favicon.png" rel="icon">
+		
+		<link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" as="style">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+		<!-- Fontawesome CSS -->
+		<link rel="preload" href="/assets/plugins/fontawesome/css/all.min.css" as="style">
+		<link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css">
+		{% endif %}
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="/assets/plugins/fancybox/jquery.fancybox.min.css">
+		<!-- Daterangepicker CSS -->
+		<link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" type="text/css" />
+		<link rel="stylesheet" href="/assets/plugins/dropzone/dist/dropzone.css" type="text/css" />
+		{% endif %}
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/assets/css/style.min.css">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="/assets/js/html5shiv.min.js"></script>
+			<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+		{% block stylesheets %}{% endblock %}
+
+	</head>
+	<body class="{{ classBody }}">
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+			<header class="header">
+				<nav class="navbar navbar-expand-lg header-nav">
+					<div class="navbar-header">
+						<a id="mobile_btn" href="javascript:void(0);">
+							<span class="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</a>
+						<a href="{{ path('app_index') }}" class="navbar-brand logo">
+							<img src="/assets/img/logo.png" class="img-fluid" alt="Logo" loading="lazy">
+						</a>
+					</div>
+
+					<div class="main-menu-wrapper">
+						<div class="menu-header">
+							<a href="{{ path('app_index') }}" class="menu-logo">
+								<img src="/assets/img/logo.png" class="img-fluid" alt="Logo" loading="lazy">
+							</a>
+							<a id="menu_close" class="menu-close" href="javascript:void(0);">
+								<i class="fas fa-times"></i>
+							</a>
+						</div>
+						<ul class="main-nav">
+							<li>
+								<a href="{{ path('app_index') }}">Home</a>
+							</li>
+                            <li>
+                                <a href="{{path('app_doctor_login')}}">Doctors</a>
+                            </li>
+						</ul>
+
+					</div>
+					
+					<ul class="nav header-navbar-rht">
+						{% if not app.user %}
+						<li class="nav-item">
+							<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">Are you a healthcare professional?</a>
+						</li>
+						{% endif %}
+
+						<li class="nav-item contact-item">
+							<a href="{{ path('app_help_for_doctors') }}">
+								<div class="header-contact-img">
+									<i class="far fa-hospital"></i>							
+								</div>
+								<div class="header-contact-detail">
+									<p class="contact-info-header">Contact & Help</p>
+									<p class="contact-header">for Healthcare Professionals</p>
+								</div>
+							</a>
+						</li>
+
+						{% if not app.user and app.request.attributes.get('_route') not in ['app_doctor_profile'] %}
+
+						<li class="nav-item contact-item">
+							<a href="{{ path('app_patient_register') }}">
+								<div class="header-contact-img">
+									<i class="far fa-user"></i>									
+								</div>
+								<div class="header-contact-detail">
+									<p class="contact-header">Login / Signup</p>
+									<p class="contact-info-header">Manage my Acct</p>
+								</div>
+							</a>
+						</li>
+
+						{% endif %}
+
+						<li class="nav-item">
+							{% if app.user %}
+								<div class="btn-group">
+									<button type="button" class="btn header-login">WELCOME {{ app.user.firstname }} {{ app.user.lastname }}</button>
+									<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<div class="dropdown-menu">
+										{% if 'ROLE_PATIENT' in app.user.getRoles() %}
+											<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">Dashboard</a>
+											<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">Favourites</a>
+											<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">Profile Settings</a>
+											<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">Change Password</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="{{ path('app_patient_logout') }}">Logout</a>
+										{% endif %}
+										{% if 'ROLE_DOCTOR' in app.user.getRoles() %}
+											<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">Dashboard</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">Schedule Timings</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">Appointments</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">My Patients</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">Profile Settings</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_social') }}">Social Media</a>
+											<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">Change Password</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">Logout</a>
+										{% endif %}
+									</div>
+								</div>
+							{% else %}
+
+							{% endif %}
+						</li>
+					</ul>
+				</nav>	
+			</header>
+			{% block body %}{% endblock %}
+			{% if app.request.attributes.get('_route') in ['app_index'] %}
+			{% if app.user %}
+				{% if 'ROLE_PATIENT' in  app.user.getRoles() %}
+
+				<!-- MEDoctor -->
+
+				<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+					<br>
+                    <br>
+                    <br>
+					<h1 style="text-align:center">Meanwhile, I Check my Symptoms to Prepare for my Medical Visit</h1>
+					<br>
+					<div class="blog grid-blog">
+						<center id="iframeS">	
+						</center>
+					</div>
+				</div>
+
+				<!-- /MEDoctor -->
+
+				{% endif %}
+			{% else %}
+
+				<!-- MEDoctor -->
+
+				<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+                			<br>
+                			<br>
+                			<h1 style="text-align:center">Meanwhile, I Check my Symptoms to Prepare for my Visit</h1>
+                			<br>
+					<div class="blog grid-blog">
+						<center id="iframeS">	
+						</center>
+					</div>
+				</div>
+
+				<!-- /MEDoctor -->
+
+			{% endif %}
+			{% endif %}
+
+			<!-- Footer -->
+
+			<footer class="footer">
+				<!-- Footer Top -->
+				<div class="footer-top">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<div class="footer-logo">
+										<img src="/assets/img/footer-logo.png" alt="logo" loading="lazy">
+									</div>
+									<div class="footer-about-content">
+										<p><a href="{{path('app_about')}}" target="_blank"><i class="fas fa-angle-double-right"></i> About DocBooking</a></p>
+										<p>Book a Doctor at Short notice near You.<br>Stop waiting 10-15 Days to see a Doctor.</p>
+										<div class="social-icon">
+											<ul>
+												<li>
+													<a href="https://www.facebook.com/DocBookingCompany" target="_blank"><i class="fab fa-facebook-f"></i></a>
+												</li>
+												<li>
+													<a href="https://twitter.com/docbooking" target="_blank"><i class="fab fa-twitter"></i></a>
+												</li>
+												<li>
+													<a href="https://www.linkedin.com/company/medoctor-inc-/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+												</li>
+												<li>
+													<a href="https://www.instagram.com/docbooking_company/" target="_blank"><i class="fab fa-instagram"></i></a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-dribbble"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">For Patients</h2>
+									<ul>
+										<li><a href="{{path('app_patient_login')}}"><i class="fas fa-angle-double-right"></i> Patient Login</a></li>
+										<li><a href="{{path('app_patient_register')}}"><i class="fas fa-angle-double-right"></i> New Patient Registration</a></li>
+										<li><a href="{{path('app_ddx')}}"><i class="fas fa-angle-double-right"></i> Symptom Checker for the Patient</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">For Doctors</h2>
+									<ul>
+									<li><a href="{{path('app_doctor_login')}}"><i class="fas fa-angle-double-right"></i> Doctor Login</a></li>
+									<li><a href="{{path('app_doctor_register')}}"><i class="fas fa-angle-double-right"></i> New Doctor Registration</a></li>
+									<li><a href="{{path('app_help_for_doctors')}}"><i class="fas fa-angle-double-right"></i> Help for Doctors</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-contact">
+									<h2 class="footer-title">Contact Us</h2>
+									<div class="footer-contact-info">
+
+										<div class="conveythis-no-translate">
+
+										<div class="footer-address">
+											<span><i class="fas fa-map-marker-alt"></i></span>
+											<p> 4, place de la Gare<br>1020 Lausanne-Renens<br>Switzerland </p>
+										</div>
+										<p>
+											<i class="fas fa-phone-alt"></i>
+											079 323 55 23
+										</p>
+										<p class="mb-0">
+											<i class="fas fa-envelope"></i>
+                                            
+<script type="text/javascript">
+<!--
+    var string1 = "docbooking.switzerland";
+    var string2 = "@";
+    var string3 = "gmail.com";
+    var string4 = string1 + string2 + string3;
+    document.write("<a href=" + "mail" + "to:" + string1 + string2 + string3 + ">" + string4 + "</a>");
+//-->
+</script>
+
+										</p>
+
+                                 					       </div>
+
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Footer Top -->
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<div class="container-fluid">
+						<!-- Copyright -->
+						<div class="copyright">
+							<div class="row">
+								<div class="col-md-6 col-lg-6">
+									<div class="copyright-text">
+										<p class="mb-0">&copy; 2020 DocBooking. All rights reserved.</p>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-6">
+									<!-- Copyright Menu -->
+									<div class="copyright-menu">
+										<ul class="policy-menu">
+											<li><a href="{{path('app_term_condition')}}">Terms and Conditions</a></li>
+											<li><a href="{{path('app_privacy_policy')}}">Confidentiality Policy</a></li>
+											<li><a href="{{path('app_404')}}">Error Page</a></li>
+										</ul>
+									</div>
+									<!-- /Copyright Menu -->
+								</div>
+							</div>
+						</div>
+						<!-- /Copyright -->
+					</div>
+				</div>
+				<!-- /Footer Bottom -->
+			</footer>
+			<!-- /Footer -->
+		</div>
+		<!-- /Main Wrapper -->
+		<!-- jQuery -->
+		<script src="/dist/js/jquery.min_27ef0cf5b0aad238d1db627eeb3e267b.js"></script>
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<script type="text/javascript" src="/dist/js/dropzone_3457502a349a1ada90962163a851d327.js"></script>
+		{% endif %}
+		<!-- Bootstrap Core JS -->
+		<script src="/dist/js/popper.min_a7580283d40ca068b7fe9a13ed59c572.js"></script>
+		<script src="/dist/js/bootstrap.min_f745f5b657ea07a877ca5d9c9afd6088.js"></script>
+		
+		<script type="text/javascript" src="/dist/js/bootstrap-tagsinput_cf65c0f0d8883eb11b79a0cf6d08c858.js"></script>
+		<!-- Sticky Sidebar JS -->
+		<script src="/dist/js/ResizeSensor_ee5245fb564fdd73f09dc64cc27d826e.js"></script>
+		<script src="/dist/js/theia-sticky-sidebar_d9305d6386598c09c3ece7bc54c4e6ba.js"></script>
+		<!-- Select2 JS -->
+		<script src="/assets/plugins/select2/js/select2.min.js"></script>
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<!-- Datetimepicker JS -->
+		<script src="/assets/js/moment.min.js"></script>
+		<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+		<!-- Fancybox JS -->
+		<script src="/dist/js/jquery.fancybox.min_7da7bedea5b0d3b836fa7b3e1658cd47.js"></script>
+		{% endif %}
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<!-- Daterangepicker JS -->
+		<script src="/dist/js/daterangepicker_169c627a5cfff815cd5c966188ec887d.js"></script>
+		{% endif %}
+		<!-- Custom JS -->
+		<script src="/dist/js/script_326c27a54e173d9853a38fe318bd7490.js"></script>
+
+		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ee32a58ea573ea6" async="async"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158937519-1"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-158937519-1');
+		</script>
+		<!-- End Global site tag (gtag.js) - Google Analytics -->
+		{% block javascripts %}
+		{# Default javascripts #}
+		{% endblock %}
+		{% block profilemodals %}{% endblock %}
+		{% if app.request.attributes.get('_route') != 'app_index' %} 
+		<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var elements = document.getElementsByTagName("INPUT");
+			for (var i = 0; i < elements.length; i++) {
+				elements[i].oninvalid = function(e) {
+					e.target.setCustomValidity("");
+					if (!e.target.validity.valid) {
+						e.target.setCustomValidity("This field cannot be left blank");
+					}
+				};
+				elements[i].oninput = function(e) {
+					e.target.setCustomValidity("");
+				};
+			}
+		})
+		</script>
+		{% endif %}
+
+		<script type="text/javascript">
+		$(window).load(function() {
+			var f = document.createElement('iframe');
+			f.src = 'https://www.medoctor.com'; 
+			f.width = 300; 
+			f.height = 740;
+			f.loading = 'lazy';
+			f.scrolling = 'no';
+			f.style = 'border: none;';
+			$('#iframeS').append(f);
+		});
+		</script>
+
+<script src="//cdn.conveythis.com/javascript/conveythis-initializer.js"></script>
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function(e) {
+		ConveyThis_Initializer.init({
+			api_key: "pub_3823debe0b5fda3a676a98f8a5f232b4"
+		});
+	});
+</script>
+
+	</body>
+</html>

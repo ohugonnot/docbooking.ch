@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<!-- Breadcrumb -->
+	<div class="breadcrumb-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-md-12 col-12">
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+						</ol>
+					</nav>
+					<h2 class="breadcrumb-title">Dashboard</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Breadcrumb -->
+	<!-- Page Content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Profile Sidebar -->
+				<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+					<div class="profile-sidebar">
+						<div class="widget-profile pro-widget-content">
+							<div class="profile-info-widget">
+								<a href="#" class="booking-doc-img">
+									<img src="{% if app.user.getPictureProfile() %} {{app.user.getPictureProfile()}} {% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
+								</a>
+								<div class="profile-det-info">
+									<h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
+									<div class="patient-details">
+										{% if app.user.getDateBirth() %}
+											{% set difference = app.user.getDateBirth().diff(date('Y')).format('%y') %}
+											<h5>
+												<i class="fas fa-birthday-cake"></i> 
+												{{app.user.getDateBirth().format('d M Y')}}, 
+												{{ difference }} years
+											</h5>
+										{% endif %}
+										<h5 class="mb-0">
+											<i class="fas fa-map-marker-alt"></i> 
+											{% if app.user.getCity() %}
+												{{ app.user.getCity() }}, 
+											{% endif %}
+											{% if app.user.getCountry() %}
+												{{ app.user.getCountry() }}
+											{% endif %}
+										</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="dashboard-widget">
+							<nav class="dashboard-menu">
+								<ul>
+									<li{% if app.request.attributes.get('_route') == 'app_patient_dashboard' %} class="active" {% endif %}>
+										<a href="{{ path('app_patient_dashboard') }}">
+											<i class="fas fa-columns"></i>
+											<span>Dashboard</span>
+										</a>
+									</li>
+									<li{% if app.request.attributes.get('_route') == 'app_patient_profile_settings' %} class="active" {% endif %}>
+										<a href="{{ path('app_patient_profile_settings') }}">
+											<i class="fas fa-user-cog"></i>
+											<span>Profile Settings</span>
+										</a>
+									</li>
+									<li{% if app.request.attributes.get('_route') == 'app_patient_profile_change_password' %} class="active" {% endif %}>
+										<a href="{{ path('app_patient_profile_change_password') }}">
+											<i class="fas fa-lock"></i>
+											<span>Change Password</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('app_patient_logout') }}">
+											<i class="fas fa-sign-out-alt"></i>
+											<span>Logout</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!-- / Profile Sidebar -->
+				<div class="col-md-7 col-lg-8 col-xl-9">
+					{% block profileb %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Page Content -->
+{% endblock %}

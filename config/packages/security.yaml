@@ -1,0 +1,79 @@
+security:
+    encoders:
+        App\Entity\Patient:
+            algorithm: auto
+        App\Entity\Doctor:
+            algorithm: auto
+
+
+    role_hierarchy:
+        ROLE_PATIENT:     ROLE_USER
+        ROLE_DOCTOR:      ROLE_USER
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_patient_provider:
+            entity:
+                class: App\Entity\Patient
+                property: email
+        app_doctor_provider:
+            entity:
+                class: App\Entity\Doctor
+                property: email
+        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload user from session & other features (e.g. switch_user)
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        patient:
+            pattern: ^/patient/
+            provider: app_patient_provider
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\PatientAuthenticator
+            logout:
+                path:   app_patient_logout
+                target: app_patient_login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+        doctor:
+            pattern: ^/doctor/
+            provider: app_doctor_provider
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\DoctorAuthenticator
+            logout:
+                path:   app_doctor_logout
+                target: app_doctor_login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+        main:
+            anonymous: lazy
+                # where to redirect after logout
+                # target: app_any_route
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/patient/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/patient/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/doctor/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/doctor/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_PATIENT, ROLE_DOCTOR] }

@@ -1,0 +1,273 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}{{ doctor.getTitle() }} {{ app.user.firstname }} {{ app.user.lastname }}{% endblock %}
+
+
+
+{% block body %}
+
+	<!-- Breadcrumb -->
+
+	<div class="breadcrumb-bar">
+
+		<div class="container-fluid">
+
+			<div class="row align-items-center">
+
+				<div class="col-md-12 col-12">
+
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+
+						<ol class="breadcrumb">
+
+							<li class="breadcrumb-item"><a href="{{path('app_doctor_dashboard')}}">Home</a></li>
+
+							<li class="breadcrumb-item active" aria-current="page">Your Profile</li>
+
+						</ol>
+
+					</nav>
+
+					<h2 class="breadcrumb-title">Dashboard 
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %}
+
+					
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %}
+
+					- Schedule Timings
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %}
+
+					- Appointments
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_patients' %}
+
+					- My Patients
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %}
+
+					- Business Hours
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %}
+
+					- Profile Settings
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_social' %}
+
+					- Social Media
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %}
+
+					- Change Password
+
+					{% endif %}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- /Breadcrumb -->
+
+	<!-- Page Content -->
+
+	<div class="content">
+
+		<div class="container-fluid">
+
+			<div class="row">
+
+				<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">	
+
+					<!-- Profile Sidebar -->
+
+					<div class="profile-sidebar">
+
+						<div class="widget-profile pro-widget-content">
+
+							<div class="profile-info-widget">
+
+								<a href="#" class="booking-doc-img">
+
+									<img src="{% if doctor.getPictureProfile() %}{{doctor.getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+
+								</a>
+
+								<div class="profile-det-info">
+
+									<h3>{{ doctor.getTitle() }} {{ app.user.firstname }} {{ app.user.lastname }}</h3>
+
+									<div class="patient-details">
+
+										<h5 class="mb-0">{{doctor.getSpeciality()}}</h5>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="dashboard-widget">
+
+							<nav class="dashboard-menu">
+
+								<ul>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_dashboard') }}">
+
+											<i class="fas fa-columns"></i>
+
+											<span>Dashboard</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_schedule_timings') }}">
+
+											<i class="fas fa-hourglass-start"></i>
+
+											<span>Schedule Timings</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_appointments') }}">
+
+											<i class="fas fa-calendar-check"></i>
+
+											<span>Appointments</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_patients' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_patients') }}">
+
+											<i class="fas fa-user-injured"></i>
+
+											<span>My Patients</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_business_hours') }}">
+
+											<i class="fas fa-clock"></i>
+
+											<span>Business Hours</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_profilesettings') }}">
+
+											<i class="fas fa-user-cog"></i>
+
+											<span>Profile Settings</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_social' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_social') }}">
+
+											<i class="fas fa-share-alt"></i>
+
+											<span>Social Media</span>
+
+										</a>
+
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %} class="active" {% endif %}>
+
+										<a href="{{ path('app_doctor_changepassword') }}">
+
+											<i class="fas fa-lock"></i>
+
+											<span>Change Password</span>
+
+										</a>
+
+									</li>
+
+									<li>
+
+										<a href="{{ path('app_doctor_logout') }}">
+
+											<i class="fas fa-sign-out-alt"></i>
+
+											<span>Logout</span>
+
+										</a>
+
+									</li>
+
+								</ul>
+
+							</nav>
+
+						</div>
+
+					</div>
+
+					<!-- /Profile Sidebar -->
+
+				</div>
+
+				<div class="col-md-7 col-lg-8 col-xl-9">
+
+					{% block profileb %}{% endblock %}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>		
+
+	<!-- /Page Content -->
+
+{% endblock %}

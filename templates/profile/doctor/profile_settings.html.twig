@@ -1,0 +1,781 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+
+{% block stylesheets %}
+<style>
+.tag{
+	margin: 0 !important;
+}
+</style>
+{% endblock %}
+
+{% block profileb %}
+	{% for flashError in app.flashes('doctor_profile_social_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	{% for flashError in app.flashes('doctor_profile_social_success') %}
+		<div class="alert alert-success" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	{{ form_start(requestForm) }}
+	<!-- Basic Information -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Basic Information</h4>
+			<div class="row form-row">
+				<div class="col-12 col-md-12">
+					<div class="form-group">
+						{% do requestForm.picture_profile.setRendered %}
+						<div class="change-avatar">
+							<div class="profile-img">
+								<img src="{% if app.user.getPictureProfile() %} {{app.user.getPictureProfile()}} {% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+							</div>
+							<div class="upload-img">
+								<div class="change-photo-btn">
+									<span><i class="fa fa-upload"></i> Upload Photo</span>
+									<input type="file" id="{{requestForm.picture_profile.vars.id}}" name="{{requestForm.picture_profile.vars.full_name}}" class="upload">
+								</div>
+								<small class="form-text text-muted">Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it <a href="https://tinyjpg.com/">here</a>. A quality image of the face increases bookings by 40%.</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					{{ form_row(requestForm.email) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.title) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.first_name) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.last_name) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.phone_number) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.gender) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{% do requestForm.date_birth.setRendered %}
+					<div class="form-group">
+						<label for="{{requestForm.date_birth.vars.id}}">{{requestForm.date_birth.vars.label}}</label>
+						<div class="cal-icon">
+							<input type="text" id="{{requestForm.date_birth.vars.id}}" name="{{requestForm.date_birth.vars.full_name}}" class="form-control" value="{{requestForm.date_birth.vars.value}}" placeholder="dd/MM/yyyy">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Basic Information -->
+	<!-- Speciality -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Speciality</h4>
+			{{ form_row(requestForm.speciality) }}
+		</div>
+	</div>
+	<!-- /Speciality -->
+	<!-- About Me -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">About Me</h4>
+			{{ form_row(requestForm.about_me) }}
+		</div>
+	</div>
+	<!-- /About Me -->	
+	<!-- Clinic Info -->
+	<div class="card">
+		{% do requestForm.idClinic.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Clinic Info</h4>
+			<div class="clinic-info" data-prototype="{{ '<div class="row form-row clinic-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-md-6"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-10"><div class="form-group"><label>Clinic Images</label><div id="dZUpload__name__" class="dropzone" style="border:4px dashed black"></div></div><div class="upload-wrap"></div><input type="hidden" id="%s" name="%s" class="form-control" value="%s"></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.idClinic.vars.prototype.name.vars.label, requestForm.idClinic.vars.prototype.name.vars.id,requestForm.idClinic.vars.prototype.name.vars.full_name,requestForm.idClinic.vars.prototype.name.vars.value, requestForm.idClinic.vars.prototype.address.vars.label,requestForm.idClinic.vars.prototype.address.vars.id,requestForm.idClinic.vars.prototype.address.vars.full_name,requestForm.idClinic.vars.prototype.address.vars.value,requestForm.idClinic.vars.prototype.images.vars.id,requestForm.idClinic.vars.prototype.images.vars.full_name,requestForm.idClinic.vars.prototype.images.vars.value)|e('html_attr') }}">
+				{% set i = 0 %}
+				{% for clinic in requestForm.idClinic %}
+					<div class="row form-row clinic-cont">
+						<div class="col-12 col-md-10 col-lg-11">
+							<div class="row form-row">
+								<div class="col-md-6">
+									{{ form_row(clinic.name) }}
+								</div>
+								<div class="col-md-6">
+									{{ form_row(clinic.address) }}
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Clinic Images</label>
+										<div class="dropzone dlpro-dropzone" style="border:4px dashed black" data-upload="{{i}}"></div>
+										{{ form_row(clinic.images) }}
+									</div>
+									{% set images = clinic.images.vars.value|split(',') %}
+									<div class="upload-wrap">
+										{% for img in images %}
+											<div class="upload-images">
+											<img src="/public/uploads/doctors/clinics/{{img}}" alt="Upload Image">
+											<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-2 col-lg-1">
+							<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+							<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
+						</div>
+					</div>
+					{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-clinic"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Clinic Info -->
+	<!-- Contact Details -->
+	<div class="card contact-card">
+		<div class="card-body">
+			<h4 class="card-title">Contact Details</h4>
+			<div class="row form-row">
+				<div class="col-md-6">
+					{{ form_row(requestForm.address_line_1) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.address_line_2) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.city) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.state) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.country) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.postal_code) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Contact Details -->
+	<!-- Pricing -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Pricing</h4>
+			<div class="form-group mb-0">
+				<div id="pricing_select">
+					{% do requestForm.price_type.setRendered %}
+					{% for key, item in requestForm.price_type.children %}
+					<div class="custom-control custom-radio custom-control-inline">
+						<input  type="radio" 
+								id="{{item.vars.id}}" 
+								name="{{item.vars.full_name}}" 
+								class="custom-control-input" 
+								value="{{item.vars.value}}" 
+								{{ item.vars.checked ? 'checked' : '' }} 
+								>
+						<label class="custom-control-label" 
+									for="{{item.vars.id}}">{{item.vars.label}}</label>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="row custom_price_cont" id="custom_price_cont">
+				{% do requestForm.price_custom_value.setRendered %}
+				<div class="col-md-4">
+					<input type="text" class="form-control" id="{{requestForm.price_custom_value.vars.id}}" name="{{requestForm.price_custom_value.vars.full_name}}" value="{{requestForm.price_custom_value.vars.value}}" placeholder="20">
+					<small class="form-text text-muted">Custom price you can add</small>
+				</div>
+			</div>						
+		</div>
+	</div>
+	<!-- /Pricing -->
+	<!-- Spoken Languages -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Spoken Languages</h4>
+			<div class="form-group mb-0">
+				<div id="pricing_select">
+					{% do requestForm.spoken_languages.setRendered %}
+					{% set disp = 'none' %}
+					{% set checkedvalue = '' %}
+					{% for key, item in requestForm.spoken_languages.children %}
+					<div class="custom-control custom-control-inline">
+						<input  type="checkbox" 
+								id="{{item.vars.id}}" 
+								name="{{item.vars.full_name}}" 
+								class="custom-control-input" 
+								value="{{item.vars.value}}" 
+								{{ item.vars.checked ? 'checked' : '' }} 
+								>
+						<label class="custom-control-label" 
+									for="{{item.vars.id}}">{{item.vars.label}}</label>
+						{% if item.vars.value == 'Other' and item.vars.checked %}
+							{% set disp = 'block' %}
+							{% set checkedvalue = item.vars.value %}
+						{% endif %}
+					</div>
+					{% endfor %}
+					<div class="custom-control custom-control-inline" style="width:23%">
+						{{ form_row(requestForm.lang_other) }}
+					</div>
+				</div>
+			</div>						
+		</div>
+	</div>
+	<!-- /Spoken Languages -->
+	<!-- MEDoctor -->
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Receiving Patient Info by MEDoctor</h4>
+			<div class="form-group mb-0">
+				<div id="medoctor_select">
+					{% do requestForm.receiving_patient_info.setRendered %}
+					{% for key, item in requestForm.receiving_patient_info.children %}
+						<div class="custom-control custom-radio custom-control-inline">
+							<input  type="radio" 
+									id="{{item.vars.id}}" 
+									name="{{item.vars.full_name}}" 
+									class="custom-control-input" 
+									value="{{item.vars.value}}" 
+									{{ item.vars.checked ? 'checked' : '' }} 
+									>
+							<label class="custom-control-label" 
+									for="{{item.vars.id}}">{{item.vars.label}}</label>
+						</div>
+				{% endfor %}
+				</div>
+			</div>						
+		</div>
+	</div>
+	<!-- /MEDoctor -->
+	<!-- Services and Specialization -->
+	<div class="card services-card">
+		<div class="card-body">
+			<h4 class="card-title">Services and Specialization</h4>
+			{% do requestForm.services.setRendered %}
+			<div class="form-group">
+				<label>Services</label>
+				<input 
+					type="text" 
+					data-role="tagsinput" 
+					id="{{requestForm.services.vars.id}}" 
+					name="{{requestForm.services.vars.full_name}}" 
+					class="input-tags form-control" 
+					placeholder="Enter Services"  
+					value="{{requestForm.services.vars.value}}"
+				>
+				<small class="form-text text-muted">Note : Type & Press enter to add new services</small>
+			</div> 
+			{% do requestForm.specialization.setRendered %}
+			<div class="form-group mb-0">
+				<label>Specialization </label>
+				<input 
+					class="input-tags form-control" 
+					type="text" 
+					id="{{requestForm.specialization.vars.id}}"
+					data-role="tagsinput" 
+					placeholder="Enter Specialization" 
+					name="{{requestForm.specialization.vars.full_name}}" 
+					value="{{requestForm.specialization.vars.value}}" 
+				>
+				<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
+			</div> 
+		</div>       
+	</div>
+	<!-- /Services and Specialization -->
+	<!-- Education -->
+	<div class="card">
+		{% do requestForm.education.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Education</h4>
+			<div class="education-info" data-prototype="{{ '<div class="row form-row education-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.education.vars.prototype.degree.vars.label, requestForm.education.vars.prototype.degree.vars.id,requestForm.education.vars.prototype.degree.vars.full_name,requestForm.education.vars.prototype.degree.vars.value, requestForm.education.vars.prototype.college_institute.vars.label, requestForm.education.vars.prototype.college_institute.vars.id,requestForm.education.vars.prototype.college_institute.vars.full_name,requestForm.education.vars.prototype.college_institute.vars.value, requestForm.education.vars.prototype.year_completion.vars.label, requestForm.education.vars.prototype.year_completion.vars.id,requestForm.education.vars.prototype.year_completion.vars.full_name,requestForm.education.vars.prototype.year_completion.vars.value)|e('html_attr') }}">
+			{% for education in requestForm.education %}
+				<div class="row form-row education-cont">
+					<div class="col-12 col-md-10 col-lg-11">
+						<div class="row form-row">
+							<div class="col-12 col-md-6 col-lg-4">
+								{{ form_row(education.degree) }}
+						</div>
+						<div class="col-12 col-md-6 col-lg-4">
+							{{ form_row(education.college_institute) }}
+						</div>
+						<div class="col-12 col-md-6 col-lg-4">
+							{{ form_row(education.year_completion) }}
+						</div>
+						</div>
+						</div>
+						<div class="col-12 col-md-2 col-lg-1">
+							<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+							<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
+						</div>
+					</div>
+			{% endfor %}
+			
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Education -->			
+	<!-- Experience -->
+	<div class="card">
+		{% do requestForm.experience.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Experience</h4>
+			<div class="experience-info" data-prototype="{{ '<div class="row form-row experience-cont"><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.experience.vars.prototype.hospital_name.vars.label, requestForm.experience.vars.prototype.hospital_name.vars.id,requestForm.experience.vars.prototype.hospital_name.vars.full_name,requestForm.experience.vars.prototype.hospital_name.vars.value,requestForm.experience.vars.prototype.experience_from.vars.label, requestForm.experience.vars.prototype.experience_from.vars.id,requestForm.experience.vars.prototype.experience_from.vars.full_name,requestForm.experience.vars.prototype.experience_from.vars.value,requestForm.experience.vars.prototype.experience_to.vars.label, requestForm.experience.vars.prototype.experience_to.vars.id,requestForm.experience.vars.prototype.experience_to.vars.full_name,requestForm.experience.vars.prototype.experience_to.vars.value,requestForm.experience.vars.prototype.designation.vars.label, requestForm.experience.vars.prototype.designation.vars.id,requestForm.experience.vars.prototype.designation.vars.full_name,requestForm.experience.vars.prototype.designation.vars.value)|e('html_attr') }}">
+				{% for experience in requestForm.experience %}
+				<div class="row form-row experience-cont">
+					<div class="col-12 col-md-10 col-lg-11">
+						<div class="row form-row">
+							<div class="col-12 col-md-6 col-lg-4">
+								{{ form_row(experience.hospital_name) }}
+							</div>
+							<div class="col-12 col-md-6 col-lg-4">
+								{{ form_row(experience.experience_from) }}
+							</div>
+							<div class="col-12 col-md-6 col-lg-4">
+								{{ form_row(experience.experience_to) }}
+							</div>
+							<div class="col-12 col-md-6 col-lg-4">
+								{{ form_row(experience.designation) }}
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-2 col-lg-1">
+						<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+						<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Experience -->
+	<!-- Awards -->
+	<div class="card">
+		{% do requestForm.awards.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Awards</h4>
+			<div class="awards-info" data-prototype="{{ '<div class="row form-row awards-cont"><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.awards.vars.prototype.awards.vars.label, requestForm.awards.vars.prototype.awards.vars.id,requestForm.awards.vars.prototype.awards.vars.full_name,requestForm.awards.vars.prototype.awards.vars.value,requestForm.awards.vars.prototype.year.vars.label, requestForm.awards.vars.prototype.year.vars.id,requestForm.awards.vars.prototype.year.vars.full_name,requestForm.awards.vars.prototype.year.vars.value)|e('html_attr') }}">
+				{% for awards in requestForm.awards %}
+				<div class="row form-row awards-cont">
+					<div class="col-12 col-md-5">
+						{{ form_row(awards.awards) }}
+					</div>
+					<div class="col-12 col-md-5">
+						{{ form_row(awards.year) }}
+					</div>
+					<div class="col-12 col-md-2">
+						<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+						<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i>
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Awards -->
+	<!-- Memberships -->
+	<div class="card">
+		{% do requestForm.memberships.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Memberships</h4>
+			<div class="membership-info" data-prototype="{{ '<div class="row form-row membership-cont"><div class="col-12 col-md-10 col-lg-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2 col-lg-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.memberships.vars.prototype.memberships.vars.label, requestForm.memberships.vars.prototype.memberships.vars.id,requestForm.memberships.vars.prototype.memberships.vars.full_name,requestForm.memberships.vars.prototype.memberships.vars.value)|e('html_attr') }}">
+				{% for memberships in requestForm.memberships %}
+				<div class="row form-row membership-cont">
+					<div class="col-12 col-md-10 col-lg-5">
+						{{ form_row(memberships.memberships) }}
+					</div>
+					<div class="col-12 col-md-2 col-lg-2">
+						<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+						<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Memberships -->
+	<!-- Registrations -->
+	<div class="card">
+		{% do requestForm.registrations.setRendered %}
+		<div class="card-body">
+			<h4 class="card-title">Registrations</h4>
+			<div class="registrations-info" data-prototype="{{ '<div class="row form-row reg-cont"><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.registrations.vars.prototype.registrations.vars.label, requestForm.registrations.vars.prototype.registrations.vars.id,requestForm.registrations.vars.prototype.registrations.vars.full_name,requestForm.registrations.vars.prototype.registrations.vars.value,requestForm.registrations.vars.prototype.year.vars.label, requestForm.registrations.vars.prototype.year.vars.id,requestForm.registrations.vars.prototype.year.vars.full_name,requestForm.registrations.vars.prototype.year.vars.value)|e('html_attr') }}">	
+			{% for registrations in requestForm.registrations %}
+				<div class="row form-row reg-cont">
+					<div class="col-12 col-md-5">
+						{{ form_row(registrations.registrations) }}
+					</div>
+					<div class="col-12 col-md-5">
+						{{ form_row(registrations.year) }}
+					</div>
+					<div class="col-12 col-md-2">
+						<label class="d-md-block d-sm-none d-none">&nbsp;</label>
+						<a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+			<div class="add-more">
+				<a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Registrations -->
+	<div class="submit-section submit-btn-bottom">
+		<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+	</div>
+	{{ form_end(requestForm) }}	
+	
+	
+
+   <script type="text/template" id="qq-template-manual-trigger">
+        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
+            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+            </div>
+            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                <span class="qq-upload-drop-area-text-selector"></span>
+            </div>
+            <div class="buttons">
+                <div class="qq-upload-button-selector qq-upload-button">
+                    <div>Select files</div>
+                </div>
+                <button type="button" id="trigger-upload" class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i> Upload
+                </button>
+            </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Processing dropped files...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+            <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
+                <li>
+                    <div class="qq-progress-bar-container-selector">
+                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                    </div>
+                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                    <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
+                    <span class="qq-upload-file-selector qq-upload-file"></span>
+                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                    <span class="qq-upload-size-selector qq-upload-size"></span>
+                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
+                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                </li>
+            </ul>
+
+            <dialog class="qq-alert-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">Close</button>
+                </div>
+            </dialog>
+
+            <dialog class="qq-confirm-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">No</button>
+                    <button type="button" class="qq-ok-button-selector">Yes</button>
+                </div>
+            </dialog>
+
+            <dialog class="qq-prompt-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <input type="text">
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                    <button type="button" class="qq-ok-button-selector">Ok</button>
+                </div>
+            </dialog>
+        </div>
+    </script>
+
+
+<div id="preview-template" style="display: none;">
+    
+    <div class="dz-preview dz-file-preview">
+      <div class="dz-image"><img data-dz-thumbnail /></div>
+
+      <div class="dz-details">
+        <div class="dz-size"><span data-dz-size></span></div>
+        <div class="dz-filename"><span data-dz-name></span></div>
+      </div>
+      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+      <div class="dz-error-message"><span data-dz-errormessage></span></div>
+
+
+
+      <div class="dz-success-mark">
+
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+          <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+          <title>Check</title>
+          <desc>Created with Sketch.</desc>
+          <defs></defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+          </g>
+        </svg>
+      
+      </div>
+      <div class="dz-error-mark">
+
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+            <title>error</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                    <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+                </g>
+            </g>
+        </svg>
+
+      </div>
+
+
+    </div>
+  </div>
+	
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+Dropzone.autoDiscover = false;
+function init(index){
+	var dropzone = new Dropzone('#dZUpload' + index, {
+		url: '{{ oneup_uploader_endpoint('gallery') }}',
+		previewTemplate: document.querySelector('#preview-template').innerHTML,
+		parallelUploads: 2,
+		thumbnailHeight: 120,
+		thumbnailWidth: 120,
+		maxFilesize: 3,
+		filesizeBase: 1000,
+		thumbnail: function(file, dataUrl) {
+			if (file.previewElement) {
+				file.previewElement.classList.remove("dz-file-preview");
+				var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+				for (var i = 0; i < images.length; i++) {
+					var thumbnailElement = images[i];
+					thumbnailElement.alt = file.name;
+					thumbnailElement.src = dataUrl;
+				}
+				setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+			}
+		},
+		success: function (file, response) {
+            var imgName = response.fileName;
+			var img = $('#doctor_profile_settings_form_idClinic_' + index + '_images').val();
+			if(img){
+				img = img + ',' + imgName;
+			}
+			else{
+				img = imgName;
+			}
+			$('#doctor_profile_settings_form_idClinic_' + index + '_images').val(img);
+            console.log("2-Successfully uploaded :" + JSON.stringify(imgName));
+        }
+	});
+}
+function initUpload(){
+	$('.dlpro-dropzone').each(function() {
+		var index = $(this).data('upload');
+		$(this).attr('id', 'dZUpload' + index);
+		var dropzone = new Dropzone('#dZUpload' + index, {
+			url: '{{ oneup_uploader_endpoint('gallery') }}',
+			previewTemplate: document.querySelector('#preview-template').innerHTML,
+			parallelUploads: 2,
+			thumbnailHeight: 120,
+			thumbnailWidth: 120,
+			maxFilesize: 3,
+			filesizeBase: 1000,
+			thumbnail: function(file, dataUrl) {
+				if (file.previewElement) {
+					file.previewElement.classList.remove("dz-file-preview");
+					var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+					for (var i = 0; i < images.length; i++) {
+						var thumbnailElement = images[i];
+						thumbnailElement.alt = file.name;
+						thumbnailElement.src = dataUrl;
+					}
+					setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+				}
+			},
+			success: function (file, response) {
+				var imgName = response.fileName;
+				var img = $('#doctor_profile_settings_form_idClinic_' + index + '_images').val();
+				if(img){
+					img = img + ',' + imgName;
+				}
+				else{
+					img = imgName;
+				}
+				$('#doctor_profile_settings_form_idClinic_' + index + '_images').val(img);
+				console.log("2-Successfully uploaded :" + JSON.stringify(imgName));
+			}
+		}); 
+	});
+}
+window.addEventListener('load', initUpload);
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    $('.education-info').attr('data-index', $('.education-info').find('education-cont').length);
+    $('.add-education').on('click', function(e) {
+		var prototype = $('.education-info').data('prototype');
+		var index = parseInt($('.education-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.education-info').attr('data-index', index);
+		$(".education-info").append(newForm);
+		init(index);
+    });
+	$('.education-info').children()[0].remove();
+});
+jQuery(document).ready(function() {
+    $('.experience-info').attr('data-index', $('.experience-info').find('experience-cont').length);
+    $('.add-experience').on('click', function(e) {
+		var prototype = $('.experience-info').data('prototype');
+		var index = parseInt($('.experience-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.experience-info').attr('data-index', index);
+		$(".experience-info").append(newForm);
+		init(index);
+    });
+	let first = $('.experience-info').children().find(".form-group").find(":input")[0];
+	if($(first).val() === ""){
+		$('.experience-info').children()[0].remove();
+	};
+	$('.experience-info').children()[0].remove();
+});
+jQuery(document).ready(function() {
+    $('.awards-info').attr('data-index', $('.awards-info').find('awards-cont').length);
+    $('.add-award').on('click', function(e) {
+		var prototype = $('.awards-info').data('prototype');
+		var index = parseInt($('.awards-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.awards-info').attr('data-index', index);
+		$(".awards-info").append(newForm);
+		init(index);
+    });
+});
+jQuery(document).ready(function() {
+    $('.membership-info').attr('data-index', $('.membership-info').find('membership-cont').length);
+    $('.add-membership').on('click', function(e) {
+		var prototype = $('.membership-info').data('prototype');
+		var index = parseInt($('.membership-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.membership-info').attr('data-index', index);
+		$(".membership-info").append(newForm);
+		init(index);
+    });
+});
+jQuery(document).ready(function() {
+    $('.registrations-info').attr('data-index', $('.registrations-info').find('reg-cont').length);
+    $('.add-reg').on('click', function(e) {
+		var prototype = $('.registrations-info').data('prototype');
+		var index = parseInt($('.registrations-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.registrations-info').attr('data-index', index);
+		$(".registrations-info").append(newForm);
+		init(index);
+    });
+});
+jQuery(document).ready(function() {
+    $('.clinic-info').attr('data-index', $('.clinic-info').find('clinic-cont').length);
+    $('.add-clinic').on('click', function(e) {
+		var prototype = $('.clinic-info').data('prototype');
+		var index = parseInt($('.clinic-info').attr('data-index')) + 1;
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.clinic-info').attr('data-index', index);
+		$(".clinic-info").append(newForm);
+		init(index);
+    });
+});
+$(".clinic-info").on('click','.trash', function () {
+	$(this).closest('.clinic-cont').remove();
+	return false;
+});
+$(".education-info").on('click','.trash', function () {
+	$(this).closest('.education-cont').remove();
+	return false;
+});
+$(".experience-info").on('click','.trash', function () {
+	$(this).closest('.experience-cont').remove();
+	return false;
+});
+$(".awards-info").on('click','.trash', function () {
+	$(this).closest('.awards-cont').remove();
+	return false;
+});
+$(".membership-info").on('click','.trash', function () {
+	$(this).closest('.membership-cont').remove();
+	return false;
+});
+$(".registrations-info").on('click','.trash', function () {
+	$(this).closest('.reg-cont').remove();
+	return false;
+});
+$('#pricing_select input[name="doctor_profile_settings_form[price_type]"]').on('click', function() {
+	if ($(this).val() == 'price_free') {
+		$('#custom_price_cont').hide();
+	}
+	if ($(this).val() == 'custom_price') {
+		$('#custom_price_cont').show();
+	}
+	else {}
+});
+$(document).ready(function(){
+	if ($('#doctor_profile_settings_form_spoken_languages_6').is(':checked')) {
+		$('#doctor_profile_settings_form_lang_other').css('display', 'block');
+	}
+	else{
+		$('#doctor_profile_settings_form_lang_other').css('display', 'none');
+	}
+	$('input[name="doctor_profile_settings_form[spoken_languages][]"]').change(function() {
+        if(this.checked) {
+			var val = $(this).val();
+			if(val == 'Other'){
+				$('#doctor_profile_settings_form_lang_other').css('display', 'block');
+			}
+        } 
+		else{
+			$('#doctor_profile_settings_form_lang_other').css('display', 'none');
+		}
+    });
+});
+{% if requestForm.idClinic is empty %}
+$(document).ready(function(){
+	var newForm = $('.clinic-form').html();
+	newForm = newForm.replace(/__name__/g, 0);
+	$('.clinic-form').html(newForm);
+});
+{% endif %}
+
+</script>  
+{% endblock %}

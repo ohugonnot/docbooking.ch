@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckoutController!{% endblock %}
+
+{% block body %}
+	<!-- Breadcrumb -->
+	<div class="breadcrumb-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-md-12 col-12">
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Booking</li>
+						</ol>
+					</nav>
+					<h2 class="breadcrumb-title">Booking</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Breadcrumb -->		
+	<!-- Page Content -->
+	<div class="content success-page-cont">
+		<div class="container-fluid">		
+			<div class="row justify-content-center">
+				<div class="col-lg-6">		
+					<!-- Success Card -->
+					<div class="card success-card">
+						<div class="card-body">
+							<div class="success-cont">
+								<i class="fas fa-check"></i>
+								<h3>Appointment booked Successfully!</h3>
+								<p><h3>Appointment booked with <br>
+								<strong>Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}}</strong><br> on <strong>{{appointment.getAppDate().format('j M Y')}}, at {{appointment.getAppTime().format('H:i')}}</strong></h3><br><br>
+                                <h4>Your Appointment will be <strong>confirmed by Email and Text Message</strong></h4></p>
+							</div>
+						</div>
+					</div>
+					<!-- /Success Card -->		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="invoice-content">
+						<div class="invoice-item">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="invoice-logo">
+										<img src="/assets/img/logo.png" alt="logo">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<p class="invoice-details">
+										<strong>Order:</strong> #{{ "%'08.8s"|format(appointment.getId()) }} <br>
+										<strong>Issued:</strong> {{appointment.getCreateTime().format('j/m/Y')}}
+									</p>
+								</div>
+							</div>
+						</div>		
+						<!-- Invoice Item -->
+						<div class="invoice-item">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="invoice-info">
+										<strong class="customer-text">Confirmation From</strong>
+										<p class="invoice-details invoice-details-two">
+											Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}} <br>
+											{{doctor.getAddressLine1()}}<br>
+											{{doctor.getPostalCode()}} {{doctor.getState()}}, {{doctor.getCountry()}} <br>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="invoice-info invoice-info2">
+										<strong class="customer-text">Booking confirmed For</strong>
+										<p class="invoice-details">
+											{{appointment.getPatientID().getFirstName()}} {{appointment.getPatientID().getLastName()}}<br>
+											{{appointment.getPatientID().getAddress()}} <br>
+											{{appointment.getPatientID().getPostalCode()}}, {{appointment.getPatientID().getCity()}} <br>
+                                            {{appointment.getPatientID().getPhoneNumber()}} <br>
+                                            {{appointment.getPatientID().getEmail()}} <br>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Invoice Item -->
+						<!-- Invoice Item -->
+						<!-- <div class="invoice-item"> -->
+						<!-- <div class="row"> -->
+						<!-- <div class="col-md-12"> -->
+						<!-- <div class="invoice-info"> -->
+						<!-- <strong class="customer-text">Payment Method</strong> -->
+						<!-- <p class="invoice-details invoice-details-two"> -->
+						<!-- Debit Card <br> -->
+						<!-- XXXXXXXXXXXX-2541 <br> -->
+						<!-- HDFC Bank<br> -->
+						<!-- </p> -->
+						<!-- </div> -->
+						<!-- </div> -->
+						<!-- </div> -->
+						<!-- </div> -->
+						<!-- /Invoice Item -->		
+						<!-- Invoice Item -->
+						<div class="invoice-item invoice-table-wrap">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="table-responsive">
+										<table class="invoice-table table table-bordered">
+											<thead>
+												<tr>
+													<th>Description</th>
+													<th class="text-center">Quantity</th>
+													<th class="text-center">VAT</th>
+													<th class="text-right">Total</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>General Consultation</td>
+													<td class="text-center">1</td>
+													<td class="text-center">&euro; 0</td>
+													<td class="text-right">&euro;{{appointment.getProductPrice()}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-md-6 col-xl-4 ml-auto">
+									<div class="table-responsive">
+										<table class="invoice-table-two table">
+											<tbody>
+												<tr>
+													<th>Subtotal:</th>
+													<td><span>&euro;{{appointment.getProductPrice()}}</span></td>
+												</tr>
+												<tr>
+													<th>Discount:</th>
+													<td><span>-0%</span></td>
+												</tr>
+												<tr>
+													<th>Total Amount:</th>
+													<td><span>&euro;{{appointment.getProductPrice()}}</span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Invoice Item -->
+						<!-- Invoice Information -->
+						<div class="other-info">
+							<h4>Other information</h4>
+							<p class="text-muted mb-0">Door Access Code to the Building is 2244B after 19h00.
+								Depending on the waiting list, your waiting time can be aound 30 minutes.</p>
+							</div>
+							<!-- /Invoice Information -->
+                        </div>
+                    </div>
+			</div>
+			<!-- /Page Content -->
+		</div>
+	</div>
+{% endblock %}

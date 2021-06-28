@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\IndexController::index
+oneup_uploader:
+    resource: .
+    type: uploader
+

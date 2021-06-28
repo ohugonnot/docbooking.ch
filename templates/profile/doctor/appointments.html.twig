@@ -1,0 +1,201 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+{% block profileb %}
+	{% if not appointments_length %}
+	<p>The appointment list is empty.</p>
+	{% else %}
+	<div class="appointments">
+		{% for flashError in app.flashes('doctor_profile_appointments_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+		{% for flashError in app.flashes('doctor_profile_appointments_success') %}
+			<div class="alert alert-success" role="alert">{{ flashError }}</div>
+		{% endfor %}
+		{% for appointment in appointments|sort((a,b)=>b.getAppCombinedDate()<=>a.getAppCombinedDate()) %}
+		<!-- Appointment List -->
+		<div class="appointment-list">
+			<div class="profile-info-widget">
+				<a href="patient-profile.html" class="booking-doc-img">
+					<img src="{% if appointment.getPatientID().getPictureProfile() %}{{appointment.getPatientID().getPictureProfile()}}{% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
+				</a>
+				<div class="profile-det-info">
+					<h3><a href="patient-profile.html">{{appointment.getPatientID().getFirstName()}} {{appointment.getPatientID().getLastName()}}</a></h3>
+					<div class="patient-details">
+						<h5><i class="far fa-clock"></i> {{appointment.getAppDate().format('j M Y')}}, {{appointment.getAppTime().format('H:i')}}</h5>
+						<h5><i class="fas fa-map-marker-alt"></i> {{appointment.getPatientID().getState()}}, {{appointment.getPatientID().getCountry()}}</h5>
+						<h5><i class="fas fa-envelope"></i> {{appointment.getPatientID().getEmail()}}</h5>
+						<h5 class="mb-0"><i class="fas fa-phone"></i> {{appointment.getPatientID().getPhoneNumber()}}</h5>
+					</div>
+				</div>
+			</div>
+			<div class="appointment-action">
+				<a href="#" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}" class="btn btn-sm bg-info-light">
+					<i class="far fa-eye"></i> View
+				</a>
+				{% if appointment.getStatus() == 0 %}
+				<a href="{{path('app_doctor_appointments_success', {id: appointment.getId()})}}" class="btn btn-sm bg-success-light">
+					<i class="fas fa-check"></i> Accept
+				</a>
+				<a href="{{path('app_doctor_appointments_cancel', {id: appointment.getId()})}}" class="btn btn-sm bg-danger-light">
+					<i class="fas fa-times"></i> Cancel
+				</a>
+				{% else %}
+				<a href="#" class="btn btn-sm bg-success-light">
+					{% if appointment.getStatus() == 1 %}
+						PENDIND
+					{% endif %}
+					{% if appointment.getStatus() == 2 %}
+						COMPLETE
+					{% endif %}
+					{% if appointment.getStatus() == 3 %}
+						CANCELLED
+					{% endif %}
+				</a>
+				{% endif %}
+			</div>
+		</div>
+		
+		<!-- /Appointment List -->
+		{% endfor %}					
+	</div>	
+	{% endif %}
+{% endblock %}
+{% block profilemodals %}
+	{% for appointment in appointments %}
+	<!-- Modal -->
+		<div class="modal fade" id="viewModalAppointment{{appointment.getId()}}" tabindex="-1" role="dialog" aria-labelledby="viewModalAppointment{{appointment.getId()}}Title" aria-hidden="true">
+			<div class="modal-dialog modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Appointment ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					
+					<div class="invoice-content">
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-logo">
+												<img src="/assets/img/logo.png" alt="logo">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<p class="invoice-details">
+												<strong>Order:</strong> #{{ "%'08.8s"|format(appointment.getId()) }} <br>
+												<strong>Issued:</strong> {{appointment.getCreateTime().format('j/m/Y')}}
+											</p>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Invoice Item -->
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-info">
+												<strong class="customer-text">Confirmation From</strong>
+												<p class="invoice-details invoice-details-two">
+													Dr. {{appointment.getDoctorID().getFirstName()}} {{appointment.getDoctorID().getLastName()}} <br>
+													{{appointment.getDoctorID().getAddressLine1()}}<br>
+													{{appointment.getDoctorID().getPostalCode()}} {{appointment.getDoctorID().getState()}}, {{appointment.getDoctorID().getCountry()}} <br>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="invoice-info invoice-info2">
+												<strong class="customer-text">Booking confirmed For</strong>
+												<p class="invoice-details">
+													{{appointment.getPatientID().getFirstName()}} {{appointment.getPatientID().getLastName()}}<br>
+													{% if appointment.getPatientID().getInsurance() %}
+													Insurance {{appointment.getPatientID().getInsurance()}}: {{appointment.getPatientID().getInsuranceNum()}}<br>
+													{% endif %}
+													{{appointment.getPatientID().getAddress()}} <br>
+													{{appointment.getPatientID().getPostalCode()}}, {{appointment.getPatientID().getCity()}} <br>
+													{{appointment.getPatientID().getPhoneNumber()}} <br>
+													{{appointment.getPatientID().getEmail()}} <br>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+								
+								<!-- Invoice Item -->
+								<!-- <div class="invoice-item"> -->
+									<!-- <div class="row"> -->
+										<!-- <div class="col-md-12"> -->
+											<!-- <div class="invoice-info"> -->
+												<!-- <strong class="customer-text">Payment Method</strong> -->
+												<!-- <p class="invoice-details invoice-details-two"> -->
+													<!-- Debit Card <br> -->
+													<!-- XXXXXXXXXXXX-2541 <br> -->
+													<!-- HDFC Bank<br> -->
+												<!-- </p> -->
+											<!-- </div> -->
+										<!-- </div> -->
+									<!-- </div> -->
+								<!-- </div> -->
+								<!-- /Invoice Item -->
+								
+								<!-- Invoice Item -->
+								<div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th>Description</th>
+															<th class="text-center">Quantity</th>
+															<th class="text-center">VAT</th>
+															<th class="text-right">Total</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>General Consultation</td>
+															<td class="text-center">1</td>
+															<td class="text-center">CHF  0</td>
+															<td class="text-right">CHF  {{appointment.getProductPrice()}}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-6 col-xl-4 ml-auto">
+											<div class="table-responsive">
+												<table class="invoice-table-two table">
+													<tbody>
+														<tr>
+															<th>Subtotal:</th>
+															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
+														</tr>
+														<tr>
+															<th>Discount:</th>
+															<td><span>-0%</span></td>
+														</tr>
+														<tr>
+															<th>Estimated Price:</th>
+															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+                            </div>
+					
+					
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

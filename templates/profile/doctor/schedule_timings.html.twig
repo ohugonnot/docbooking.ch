@@ -1,0 +1,92 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+
+{% block profileb %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-body">
+					{% for flashError in app.flashes('doctor_timing_timing_error') %}
+						<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+					{% endfor %}
+					{% for flashError in app.flashes('doctor_profile_timing_success') %}
+						<div class="alert alert-success" role="alert">{{ flashError }}</div>
+					{% endfor %}
+					<h4 class="card-title">Schedule Timings</h4>
+					<div class="profile-box">
+						<div class="row">
+							<div class="col-lg-4">
+								<form id="formSlot" method="get">
+									<div class="form-group">               
+										<label>Timing Slot Duration</label>
+										<select id="timeSlot" name="slot" class="select form-control">
+											<option>-</option>
+											<option value="15" {% if app.request.get('' ~ 'slot') == '15' %}selected{%endif%}>15 mins</option>
+											<option value="20" {% if app.request.get('' ~ 'slot') == '20' %}selected{%endif%}>20 mins</option>
+											<option value="30" {% if app.request.get('' ~ 'slot') == '30' %}selected{%endif%}>30 mins</option>  
+											<option value="45" {% if app.request.get('' ~ 'slot') == '45' %}selected{%endif%}>45 mins</option>
+											<option value="1" {% if app.request.get('' ~ 'slot') == '1' %}selected{%endif%}>1 Hour</option>
+										</select>
+										{% if url_vars['name'] is defined %}
+										<input type="hidden" name="{{url_vars['name']}}" value="{{url_vars['value']}}">
+										{% endif %}
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<a id="dlproAddSlotLink" class="edit-link d-none" href=""><i class="fa fa-check"></i> SAVE SLOTS FOR THIS WEEK</a>
+							</div>
+							<div class="col-md-12">
+								<div class="card booking-schedule schedule-widget">
+									{{scheduletimings|raw}}
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+	$('#timeSlot').change(function(){
+		$('#formSlot').submit();
+	});
+	$(document).on('click', '.dlproTimeElement' , function(){
+		if($('#dlproAddSlotLink').hasClass('d-none')){
+			$('#dlproAddSlotLink').removeClass('d-none');
+		}
+		if($(this).hasClass('selected')){
+			$(this).removeClass('selected');
+		}
+		else{
+			$(this).addClass('selected');
+		}
+		return false;
+	});
+	$(document).on('click', '#dlproAddSlotLink', function(e){
+		var arr_output = [];
+		$('.dlproTimeElement').each(function() {
+			var selected = $(this).hasClass('selected');
+			var day = $(this).data('day');
+			var month = $(this).data('month');
+			var year = $(this).data('year');
+			var id = $(this).data('id');
+			var time = $(this).data('time');
+			var step = $(this).data('step');
+			arr_output.push({id: id, selected: selected, day: day, month: month, year: year, time: time, step: step}); 
+		});
+		$.post(
+			'{{ path('app_doctor_schedule_timings_save') }}',
+			{data: JSON.stringify(arr_output), time_slot: $('#timeSlot').val()},
+			function(response){
+				window.location.reload(false);
+			}
+		);
+		return false;
+	});
+</script>
+{% endblock %}

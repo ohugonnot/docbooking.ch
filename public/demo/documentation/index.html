@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>Doccure - Doctor Appointment Booking Bootstrap Template</title>
+		
+		<!-- Favicon -->
+        <link rel="shortcut icon" href="assets/img/favicon.png">
+
+		<!-- Styles -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+
+	</head>
+
+	<body data-spy="scroll" data-target=".nav-sidebar" data-offset="100">
+		<header>
+			<nav class="navbar" id="home">
+				<div class="container">
+					<div class="navbar-left">
+						<a class="navbar-brand" href="index.html">
+							<img class="logo-dark" src="assets/img/logo.png" alt="logo">
+						</a>
+					</div>
+					<a class="btn btn-round btn-orange" href="#introduction">Getting Started</a>
+				</div>
+			</nav>
+		</header>
+
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<!-- Header -->
+				<div class="page-header">
+					<div class="container">
+						<h1>Documentation</h1>
+						<p class="lead"><strong>Doccure</strong> - Doctor Appointment Booking Bootstrap Template</p>
+					</div>
+				</div>
+				<!-- Header -->
+
+				<!-- Main Content -->
+				<main class="main-content">
+					<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-xl-3">
+							<aside class="sidebar sidebar-sticky">
+								<div class="sidebar-body">
+									<ul class="nav nav-sidebar">
+										<li class="nav-item">
+											<a class="nav-link" href="#introduction">Introduction</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#get-started">HTML Installation</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#requirements">Requirements</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#filestructure">File Structure</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#htmlstructure">Html Structure</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#file_config">File Configuration</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#credits">Credits</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#support">Support</a>
+										</li>
+									</ul>
+								</div>
+							</aside>
+						</div>
+						
+						<div class="col-md-7 col-xl-8 ml-md-auto">
+							<h3 id="introduction">Introduction</h3>
+							<ul>
+								<li>Created on: 28 Nov 2019</li>
+								<li>Developed by: <a target="_blank" href="https://dreamguys.co.in/">DreamGuy's Technologies</a></li>
+								<li>Support via email: <a href="mailto:admin@dreamguys.co.in">business@dreamguys.co.in</a></li>
+								<li>Support via ThemeForest: <a target="_blank" href="http://themeforest.net/user/dreamguys">Take me there</a></li>
+							</ul>
+							<p><strong>Doccure</strong> provides online appointment scheduling system for your patients. It also called
+Multiple Clinic Booking for doctor appointment which has many features to be provided for
+patients who are seeking particular doctor or specialist. This template consists of the details
+around the city so user can find the nearest clinic and doctor. It is classified the details as per the
+categories of the clinic services. The information is like details of the doctors, clinics, images and
+so on. User has option to give ratings and comments about the clinic.</p>
+							<hr class="hr-dash my-7">
+							
+							<h3 id="get-started">HTML Installation</h3>
+							<ul>
+							<li>
+								After unzipping Template Files, you will find our product Doccure-&gt;HTML(Source code), Documentation, and License in the following Main Files folder.
+							</li>
+							<li>
+								Open HTML folder, copy all files and paste in your localhost or server root folder. Now you can run this Template in any web browser from your PC or Laptop.
+							</li>
+							</ul>
+							<p><strong>For example:</strong><br> localhost/doccure/index.html  or  www.example.com/index.html</p>
+							<hr class="hr-dash my-7">
+
+							<h3 id="requirements">Requirements</h3>
+							<p>Working with our Doccure product, before going to edit all the HTML, CSS and JS files you will need a text editor.</p>
+							<p>In this case, we recommended the <strong>Sublime Text 3 editor or Notepad++</strong> as it allows you to edit the files efficiently and all the editable files are located in "Doccure->HTML" folder.</p>
+							<hr class="hr-dash my-7">
+							
+							<h3 id="filestructure">File Structure</h3>
+<pre class="language-markup line-numbers"><code>Doccure/
+  ├── html/                             <span><span class="hljs-comment">// All HTML files</span></span>
+  │   ├── assets/                       <span><span>// All css into this folder</span></span>
+  │   	├── css/                        <span><span>// All css, js, Image files are here</span></span>
+  │   	├── fonts/                      <span><span>// All fonts into this folder</span></span>
+  │   	├── img/                        <span><span>// All images into this folder</span></span>
+  │   	├── js/                         <span><span>// All js into this folder</span></span>
+  │   	├── plugins/                    <span><span>// Third party plugins into this folder</span></span>
+  │   ├── index.html                    <span><span>// Main index page</span></span>
+  │   ├── rest of the html pages        <span><span>// Remaining html pages</span></span>
+  ├── documentation/                    <span><span>// Documentation files</span></span>
+  ├── License/                          <span><span>// License files</span></span>
+  ├── admin/                            <span><span>// Admin files</span></span>
+</code>
+</pre>
+							<hr class="hr-dash">
+							
+							<h3 id="htmlstructure">Html Structure</h3>
+						
+<pre class="prettyprint lang-html linenums"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0"&gt;
+  &lt;title&gt;Doccure - Doctor Appointment Booking Bootstrap Template &lt;/title&gt;
+  &lt;link href="assets/img/favicon.png" rel="icon"&gt;
+  &lt;link rel="stylesheet" href="assets/css/bootstrap.min.css"&gt;
+  &lt;link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css"&gt;
+  &lt;link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css"&gt;
+  &lt;link rel="stylesheet" href="assets/css/style.css"&gt;
+&lt;/head&gt;
+  &lt;body&gt;
+	&lt;div class="main-wrapper"&gt;
+	   &lt;div class="header"&gt;
+	   &lt;/div&gt;
+	   &lt;div class="breadcrumb-bar"&gt;
+	   &lt;/div&gt;
+	   &lt;div class="content"&gt; 
+		&lt;div class="container-fluid"&gt;
+		&lt;/div&gt;
+	   &lt;/div&gt;
+	&lt;/div&gt;
+	&lt;script src="assets/js/jquery.min.js"&gt;&lt;/script&gt;
+	&lt;script src="assets/js/popper.min.js"&gt;&lt;/script&gt;
+	&lt;script src="assets/js/bootstrap.min.js"&gt;&lt;/script&gt;
+	&lt;script src="assets/js/slick.js"&gt;&lt;/script&gt;
+	&lt;script src="assets/js/script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+							<hr class="hr-dash">
+
+							<h3 id="file_config">File Configuration</h3>
+							<h4>How to change Logo ? </h4>
+							<p>You can change the logo or replace it from img folder or you can edit it from HTML file.</p>
+						
+<pre class="prettyprint lang-html linenums"><code>&lt;div class="navbar-header"&gt;
+  &lt;a href="index.html" class="navbar-brand logo"&gt;
+	&lt;img src="assets/img/logo.png" class="img-fluid" alt="Logo"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+						
+							<h4>How to change Header background color ? </h4>
+							<p>You can change the header background color in style.css as per your wish</p>
+							<p><img src="assets/img/header_color.jpg" alt=""></p>
+						
+							<h4>How to change Google Font ? </h4>
+							<p>Go to style.css and line number 55. Here we have the default font family Mada</p>
+<pre class="prettyprint lang-html linenums"><code>@import url('https://fonts.googleapis.com/css?family=Mada:400,500,600,700&display=swap');</code></pre>
+							<hr class="hr-dash">
+
+							<h3 id="credits">Credits</h3>
+							<p>We've used the following resources as listed. These are some awesome creation and we are thankful to the community.</p>
+							<ul>
+								<li><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></li>
+								<li><a target="_blank" href="https://jquery.com/">Jquery</a></li>
+								<li><a target="_blank" href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
+								<li><a target="_blank" href="https://select2.github.io/">Select2</a></li>
+								<li><a target="_blank" href="https://github.com/Eonasdan/bootstrap-datetimepicker">Date Timepicker</a></li>
+								<li><a target="_blank" href="http://www.google.com/fonts">Google Fonts</a></li>
+								<li><a target="_blank" href="https://morrisjs.github.io/morris.js/">Morris</a></li>
+								<li><a target="_blank" href="https://summernote.org/">Summernote</a></li>
+								<li><a target="_blank" href="http://fancyapps.com/fancybox/3/">Fancy Box</a></li>
+								<li><a target="_blank" href="https://www.dropzonejs.com/">Dropzone JS</a></li>
+								<li><a target="_blank" href="https://jqueryui.com/">Jquery UI</a></li>
+								<li><a target="_blank" href="https://fullcalendar.io/">Full Callender</a></li>
+								<li><a target="_blank" href="https://momentjs.com/">Moment JS</a></li>
+								<li><a target="_blank" href="https://popper.js.org/">Popper JS</a></li>
+							</ul>
+
+							<hr class="hr-dash">
+
+							<h3 id="support">Support</h3>
+							<p>You get full life-time support with this item. If you need some help or found a bug or issue with the template, You can always contact us at here via email and we will respond to you within 1 day.</p>
+							<hr class="hr-dash">
+						</div>
+
+						</div>
+						</div>
+					</main>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer class="footer text-center">
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-auto mr-auto">
+							<nav class="nav justify-content-center justify-content-lg-start">
+								<a class="nav-link" href="#home">Home</a>
+							</nav>
+						</div>
+
+						<div class="col-lg-auto">
+							&copy; <a href="https://dreamguys.co.in/">Dreamguys</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- /footer -->
+
+
+    <!-- Scripts -->
+    <script src="assets/js/script.js"></script>
+
+  </body>
+</html>

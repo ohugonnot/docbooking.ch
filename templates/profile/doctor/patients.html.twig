@@ -1,0 +1,39 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+
+{% block profileb %}
+	{% if not patients %}
+	<p>The patient list is empty.</p>
+	{% else %}
+	<div class="row row-grid">
+		{% for patient in patients %}
+		<div class="col-md-6 col-lg-4 col-xl-3">
+			<div class="card widget-profile pat-widget-profile">
+				<div class="card-body">
+					<div class="pro-widget-content">
+						<div class="profile-info-widget">
+							<a href="patient-profile.html" class="booking-doc-img">
+								<img src="{% if patient.getPictureProfile() %}{{patient.getPictureProfile()}}{% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
+							</a>
+							<div class="profile-det-info">
+								<h3><a href="#">{{patient.getFirstName()}} {{patient.getLastName()}}</a></h3>
+								<div class="patient-details">
+									<h5><b>Patient ID :</b> P{{ "%06d"|format(patient.getId()) }}</h5>
+									<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patient.getState()}}, {{patient.getCountry()}}</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="patient-info">
+						<ul>
+							<li>Phone <span>{{patient.getPhoneNumber()}}</span></li>
+							<li>Age <span>38 Years, Male</span></li>
+							<li>Blood Group <span>{{patient.getBloodGroup()}}</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}

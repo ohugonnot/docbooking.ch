@@ -1,0 +1,73 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    patient_directory: '%kernel.project_dir%/public/uploads/patients'
+    doctor_directory: '%kernel.project_dir%/public/uploads/doctors'
+    max_mind.user_id: '382897'
+    max_mind.license_key: '72HuvXjR0bYRXz3s'
+    container.dumper.inline_factories: true
+    
+cravler_max_mind_geo_ip:
+    client:
+        user_id: '%max_mind.user_id%'
+        license_key: '%max_mind.license_key%'
+    path: '%kernel.project_dir%/Resources/MaxMind'
+    db:
+        country: 'GeoIP2-Country.mmdb'
+        city: 'GeoIP2-City.mmdb'
+        asn: 'GeoIP2-ASN.mmdb'
+        connection_type: 'GeoIP2-Connection-Type.mmdb'
+        anonymous_ip: 'GeoIP2-Anonymous-IP.mmdb'
+        enterprise: 'GeoIP2-Enterprise.mmdb'
+        domain: 'GeoIP2-Domain.mmdb'
+        isp: 'GeoIP2-ISP.mmdb'
+    source:
+        country: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&suffix=tar.gz&license_key=%max_mind.license_key%'
+        city: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&suffix=tar.gz&license_key=%max_mind.license_key%'
+        asn: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz&license_key=%max_mind.license_key%'
+    md5_check:
+        country: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&suffix=tar.gz.md5&license_key=%max_mind.license_key%'
+        city: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&suffix=tar.gz.md5&license_key=%max_mind.license_key%'
+        asn: 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&suffix=tar.gz.md5&license_key=%max_mind.license_key%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    app.upload_listener:
+        class: App\EventListener\UploadListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+knp_paginator:
+    page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+    default_options:
+        page_name: page                 # page query parameter name
+        sort_field_name: sort           # sort field query parameter name
+        sort_direction_name: direction  # sort direction query parameter name
+        distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        #filter_field_name: filterField  # filter field query parameter name
+        #filter_value_name: filterValue  # filter value query parameter name
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template

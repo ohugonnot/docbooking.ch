@@ -1,0 +1,157 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+{% block stylesheets %}
+<style>
+
+.businessHours .text-grey {
+    color: #9E9E9E
+}
+
+.businessHours .fa {
+    font-size: 25px;
+    cursor: pointer
+}
+
+.businessHours input,
+.businessHours select {
+    padding: 2px 6px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    border-radius: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center !important
+}
+
+.businessHours input:focus,
+.businessHours select:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #00C853;
+    outline-width: 0
+}
+
+::placeholder {
+    opacity: 1
+}
+
+.businessHours button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+.businessHours .btn {
+    border-radius: 50px;
+    width: 120px
+}
+
+.businessHours .exit {
+    border: 1px solid #9E9E9E;
+
+    background-color: transparent
+}
+
+.businessHours .exit:hover {
+    border: 1px solid #9E9E9E;
+    color: #000 !important;
+    background-color: #9E9E9E
+}
+
+@media screen and (max-width: 768px) {
+    .mob {
+        width: 70%
+    }
+
+    select.mob {
+        width: 50%
+    }
+}
+</style>
+{% endblock %}
+{% block profileb %}
+	<div class="card businessHours">
+		<div class="card-body">
+			<h4 class="card-title">Basic Information</h4>
+			{% for flashError in app.flashes('doctor_profile_business_hours_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
+			{% for flashError in app.flashes('doctor_profile_business_hours_success') %}
+				<div class="alert alert-success" role="alert">{{ flashError }}</div>
+			{% endfor %}
+			<form method="post" action="{{path('app_doctor_business_hours_save')}}">
+				<div class="row px-3 list">
+					<div class="col-sm-12 list business-hours-info" data-prototype="{{ '<div class="mb-2 row justify-content-between px-3 business-hours-cont"><select id="day__name__" name="business-hours[__name__][day]" class="mb-2 mob"><option value="Mon">Mon</option><option value="Tue">Tue</option><option value="Wed">Wed</option><option value="Thu">Thu</option><option value="Fri">Fri</option><option value="Sat">Sat</option><option value="Sun">Sun</option></select><div class="mob"><label class="text-grey mr-1">From</label><input class="ml-1" type="time" id="from__name__" name="business-hours[__name__][from]"></div><div class="mob mb-2"><label class="text-grey mr-4">To</label><input class="ml-1" type="time" id="to__name__" name="business-hours[__name__][to]"></div><div class="mob mb-2"><label class="text-grey mr-4">Closed</label><input class="ml-1" type="checkbox" name="business-hours[__name__][dlproClosed]"></div><div class="mt-1 cancel fa fa-times text-danger delete"></div></div>'|e('html_attr') }}">
+						{% if business_hours %}
+							{% set i = 0 %}
+							{% for business_hour in business_hours %}
+								<div class="mb-2 row justify-content-between px-3 business-hours-cont">
+									<select id="day{{i}}" name="business-hours[{{i}}][day]" class="mb-2 mob">
+										<option value="Mon" {% if business_hour.day == 'Mon' %}selected{% endif %}>Mon</option>
+										<option value="Tue" {% if business_hour.day == 'Tue' %}selected{% endif %}>Tue</option>
+										<option value="Wed" {% if business_hour.day == 'Wed' %}selected{% endif %}>Wed</option>
+										<option value="Thu" {% if business_hour.day == 'Thu' %}selected{% endif %}>Thu</option>
+										<option value="Fri" {% if business_hour.day == 'Fri' %}selected{% endif %}>Fri</option>
+										<option value="Sat" {% if business_hour.day == 'Sat' %}selected{% endif %}>Sat</option>
+										<option value="Sun" {% if business_hour.day == 'Sun' %}selected{% endif %}>Sun</option>
+									</select>
+									<div class="mob">
+										<label class="text-grey mr-1">From</label>
+										<input class="ml-1" type="time" id="from{{i}}" name="business-hours[{{i}}][from]" value="{{business_hour.from}}">
+									</div>
+									<div class="mob mb-2">
+										<label class="text-grey mr-4">To</label>
+										<input class="ml-1" type="time" id="to{{i}}" name="business-hours[{{i}}][to]" value="{{business_hour.to}}">
+									</div>
+									<div class="mob mb-2">
+										<label class="text-grey mr-4">Closed</label>
+										<input class="ml-1" type="checkbox" name="business-hours[{{i}}][dlproClosed]" {% if business_hour.dlproClosed is defined %}checked{% endif %}>
+									</div>
+									<div class="mt-1 cancel fa fa-times text-danger delete"></div>
+								</div>
+								{% set i = i + 1 %}
+							{% endfor %}
+						{% endif %}
+					</div>
+				</div>
+				<div class="row px-3 mt-3">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-10">
+						<div class="row px-3">
+							<div class="fa fa-plus-circle text-success add"></div>
+							<p class="text-success ml-3 add">Save</p>
+						</div>
+					</div>
+				</div>
+				<div class="row px-3 mt-3 justify-content-center"> 
+					<button class="btn exit mr-2">Cancel</button> 
+					<button type="submit" class="btn btn-success ml-2">Done</button> 
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    $('.business-hours-info').attr('data-index', $('.business-hours-info').find('.business-hours-cont').length);
+    $('.add').on('click', function(e) {
+		var prototype = $('.business-hours-info').data('prototype');
+		var index = parseInt($('.business-hours-info').attr('data-index'));
+		if($('.business-hours-info').find('.business-hours-cont').length){
+			index = index + 1;
+		}
+		var newForm = prototype;
+		newForm = newForm.replace(/__name__/g, index);
+		$('.business-hours-info').attr('data-index', index);
+		$(".business-hours-info").append(newForm);
+    });
+});
+$(".business-hours-info").on('click','.delete', function () {
+	$(this).closest('.business-hours-cont').remove();
+	return false;
+});
+</script>
+{% endblock %}
