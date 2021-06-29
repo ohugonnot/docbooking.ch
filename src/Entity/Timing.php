@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TimingRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,18 +58,6 @@ class Timing
         return $this->id;
     }
 
-    public function getDay(): ?int
-    {
-        return $this->day;
-    }
-
-    public function setDay(?int $day): self
-    {
-        $this->day = $day;
-
-        return $this;
-    }
-
     public function getMonth(): ?int
     {
         return $this->month;
@@ -92,20 +81,32 @@ class Timing
 
         return $this;
     }
-	
-	public function getDayNameOfMonth(): ?string
-             {
-         		$dateDB = strval($this->getDay()) . '/' . strval($this->month+1) . '/' . strval($this->year);
-         		$d = \DateTime::createFromFormat('d/m/Y', $dateDB);
-                 return $d->format('D');
-             }
-	
-	public function getNameOfMonth(): ?string
-             {
-         		$dateDB = strval($this->getDay()) . '/' . strval($this->month) . '/' . strval($this->year);
-         		$d = \DateTime::createFromFormat('d/m/Y', $dateDB);
-                 return $d->format('M');
-             }
+
+    public function getDayNameOfMonth(): ?string
+    {
+        $dateDB = strval($this->getDay()) . '/' . strval($this->month + 1) . '/' . strval($this->year);
+        $d = DateTime::createFromFormat('d/m/Y', $dateDB);
+        return $d->format('D');
+    }
+
+    public function getDay(): ?int
+    {
+        return $this->day;
+    }
+
+    public function setDay(?int $day): self
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    public function getNameOfMonth(): ?string
+    {
+        $dateDB = strval($this->getDay()) . '/' . strval($this->month) . '/' . strval($this->year);
+        $d = DateTime::createFromFormat('d/m/Y', $dateDB);
+        return $d->format('M');
+    }
 
     public function getTimes(): ?string
     {
@@ -123,17 +124,17 @@ class Timing
     {
         return $this->time_slot;
     }
-	
-	public function getTimesArray(): ?array
-             {
-                 return json_decode($this->times);
-             }
 
     public function setTimeSlot(?string $time_slot): self
     {
         $this->time_slot = $time_slot;
 
         return $this;
+    }
+
+    public function getTimesArray(): ?array
+    {
+        return json_decode($this->times);
     }
 
     public function getIdDoctor(): ?Doctor

@@ -12,10 +12,10 @@ class BookingController extends AbstractController
      */
     public function index()
     {
-		$class='account-page';
+        $class = 'account-page';
         return $this->render('booking/index.html.twig', [
             'controller_name' => 'BookingController',
-			'classBody' 		=> $class,
+            'classBody' => $class,
         ]);
     }
 }

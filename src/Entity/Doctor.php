@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DoctorRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,18 +21,18 @@ class Doctor implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $first_name;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $last_name;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $gender;
@@ -40,90 +41,90 @@ class Doctor implements UserInterface
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $email;
-	
-	 /**
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string", nullable=false)
      */
     private $password;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phone_number;
-	
-	/**
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $date_birth;
-	
-	
-	/**
+
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $about_me;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address_line_1;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address_line_2;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $state;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $country;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $postal_code;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture_profile;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $receiving_patient_info;
 
-	/**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $price_type;
 
-	/**
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $price_custom_value;
-	
-	/**
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $speciality;
-	
-	/**
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $services;
-	
-	/**
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $specialization;
@@ -132,17 +133,17 @@ class Doctor implements UserInterface
      * @ORM\Column(type="simple_array", nullable=false)
      */
     private $roles;
-	
-	/**
-	 * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(type="datetime")
-	 */
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
     private $create_at;
-	
-	/**
-	 * @Gedmo\Timestampable(on="update")
-	 * @ORM\Column(type="datetime")
-	 */
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
     private $updated_at;
 
     /**
@@ -238,22 +239,22 @@ class Doctor implements UserInterface
         $this->registrations = new ArrayCollection();
         $this->appointments = new ArrayCollection();
     }
-	
-	public function __toString()
-                                                                                     {
-                                                                                         $format = "Doctor (id: %s)\n";
-                                                                                         return sprintf($format, $this->id);
-                                                                                     }
+
+    public function __toString()
+    {
+        $format = "Doctor (id: %s)\n";
+        return sprintf($format, $this->id);
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-	
-	public function getEmail(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->email;
-                                                                                                               	}
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
 
     public function setEmail(string $email): self
     {
@@ -262,34 +263,10 @@ class Doctor implements UserInterface
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getGender(): ?string
     {
-        return $this->first_name;
+        return $this->gender;
     }
-
-    public function setFirstName(string $first_name): self
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
-	
-	public function getLastName(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->last_name;
-                                                                                                               	}
-
-    public function setLastName(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-	
-	public function getGender(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->gender;
-                                                                                                               	}
 
     public function setGender(string $gender): self
     {
@@ -297,11 +274,11 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getPhoneNumber(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->phone_number;
-                                                                                                               	}
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phone_number;
+    }
 
     public function setPhoneNumber(string $phone_number): self
     {
@@ -309,11 +286,11 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getDateBirth()
-                                                                                                               	{
-                                                                                                               		return $this->date_birth;
-                                                                                                               	}
+
+    public function getDateBirth()
+    {
+        return $this->date_birth;
+    }
 
     public function setDateBirth($date_birth)
     {
@@ -321,94 +298,22 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getAboutMe(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->about_me;
-                                                                                                               	}
+
+    public function getAboutMe(): ?string
+    {
+        return $this->about_me;
+    }
 
     public function setAboutMe(?string $about_me): self
     {
         $this->about_me = $about_me;
         return $this;
     }
-	
-	public function getAddressLine1(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->address_line_1;
-                                                                                                               	}
 
-    public function setAddressLine1(?string $address_line_1): self
+    public function getPictureProfile(): ?string
     {
-        $this->address_line_1 = $address_line_1;
-
-        return $this;
+        return $this->picture_profile;
     }
-	
-	public function getAddressLine2(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->address_line_2;
-                                                                                                               	}
-
-    public function setAddressLine2(?string $address_line_2): self
-    {
-        $this->address_line_2 = $address_line_2;
-
-        return $this;
-    }
-	
-	public function getCity(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->city;
-                                                                                                               	}
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-	
-	public function getState(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->state;
-                                                                                                               	}
-
-    public function setState(string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-	
-	public function getCountry(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->country;
-                                                                                                               	}
-
-    public function setCountry(string $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-	
-	public function getPostalCode(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->postal_code;
-                                                                                                               	}
-
-    public function setPostalCode(string $postal_code): self
-    {
-        $this->postal_code = $postal_code;
-
-        return $this;
-    }
-	
-	public function getPictureProfile(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->picture_profile;
-                                                                                                               	}
 
     public function setPictureProfile(string $picture_profile): self
     {
@@ -416,11 +321,11 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getReceivingPatientInfo(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->receiving_patient_info;
-                                                                                                               	}
+
+    public function getReceivingPatientInfo(): ?string
+    {
+        return $this->receiving_patient_info;
+    }
 
     public function setReceivingPatientInfo(?string $receiving_patient_info): self
     {
@@ -428,12 +333,11 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	
-	public function getServices(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->services;
-                                                                                                               	}
+
+    public function getServices(): ?string
+    {
+        return $this->services;
+    }
 
     public function setServices(?string $services): self
     {
@@ -441,11 +345,11 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getSpecialization(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->specialization;
-                                                                                                               	}
+
+    public function getSpecialization(): ?string
+    {
+        return $this->specialization;
+    }
 
     public function setSpecialization(?string $specialization): self
     {
@@ -453,38 +357,38 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getCreateAt(): ?\DateTime
-                                                                                     {
-                                                                                 		return $this->create_at;
-                                                                                 	}
-	
-	public function getUpdatedAt(): ?\DateTime
-                                                                                 	{
-                                                                                 		return $this->updated_at;
-                                                                                 	}
 
-	public function setPriceCustomValue(?int $price_custom_value): self
-                                                                                                               	{
-                                                                                                               		$this->price_custom_value = $price_custom_value;
-                                                                                                               		return $this;
-                                                                                                               	}
-	
-	public function getPriceCustomValue(): ?int
-                                                                                                               	{
-                                                                                                               		return $this->price_custom_value;
-                                                                                                               	}
+    public function getCreateAt(): ?DateTime
+    {
+        return $this->create_at;
+    }
 
-	public function setPriceType(?string $price_type): self
-                                                                                                               	{
-                                                                                                               		$this->price_type = $price_type;
-                                                                                                               		return $this;
-                                                                                                               	}
-	
-	public function getPriceType(): ?string
-                                                                                                               	{
-                                                                                                               		return $this->price_type;
-                                                                                                               	}
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updated_at;
+    }
+
+    public function getPriceCustomValue(): ?int
+    {
+        return $this->price_custom_value;
+    }
+
+    public function setPriceCustomValue(?int $price_custom_value): self
+    {
+        $this->price_custom_value = $price_custom_value;
+        return $this;
+    }
+
+    public function getPriceType(): ?string
+    {
+        return $this->price_type;
+    }
+
+    public function setPriceType(?string $price_type): self
+    {
+        $this->price_type = $price_type;
+        return $this;
+    }
 
     /**
      * A visual identifier that represents this user.
@@ -493,16 +397,16 @@ class Doctor implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
-     /**
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
-		$roles = $this->roles;
-		
+        $roles = $this->roles;
+
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_DOCTOR';
 
@@ -511,7 +415,7 @@ class Doctor implements UserInterface
 
     public function setRoles(array $roles): self
     {
-		$this->roles = $roles;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -521,7 +425,7 @@ class Doctor implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -824,21 +728,21 @@ class Doctor implements UserInterface
     {
         return $this->business_hours;
     }
-	
-	public function getBusinessHoursArray()
-                                                                   {
-                                                               		$data = json_decode($this->business_hours, true);
-                                                               		if($data){
-                                                               			$data = $data['business-hours'];
-                                                               		}
-                                                                       return $data;
-                                                                   }
 
     public function setBusinessHours(?string $business_hours): self
     {
         $this->business_hours = $business_hours;
 
         return $this;
+    }
+
+    public function getBusinessHoursArray()
+    {
+        $data = json_decode($this->business_hours, true);
+        if ($data) {
+            $data = $data['business-hours'];
+        }
+        return $data;
     }
 
     public function getLatitude(): ?string
@@ -864,16 +768,41 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getUrlProfile(){
-		$title = '';
-		/*if($this->getTitle()){
-			$title = str_replace(' ', '', $this->getTitle()) . '-';
-		}*/
-		$name = str_replace(' ', '-',  /*str_replace('.', '', $title) .*/ $this->getFirstName() . '-' .  $this->getLastName());
-		$name = str_replace('.', '', $name);
-		return $name;
-	}
+
+    public function getUrlProfile()
+    {
+        $title = '';
+        /*if($this->getTitle()){
+            $title = str_replace(' ', '', $this->getTitle()) . '-';
+        }*/
+        $name = str_replace(' ', '-',  /*str_replace('.', '', $title) .*/ $this->getFirstName() . '-' . $this->getLastName());
+        $name = str_replace('.', '', $name);
+        return $name;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->last_name;
+    }
+
+    public function setLastName(string $last_name): self
+    {
+        $this->last_name = $last_name;
+
+        return $this;
+    }
 
     public function getSlug(): ?string
     {
@@ -883,18 +812,6 @@ class Doctor implements UserInterface
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getSpokenLanguages(): ?array
-    {
-        return $this->spoken_languages;
-    }
-
-    public function setSpokenLanguages(?array $spoken_languages): self
-    {
-        $this->spoken_languages = $spoken_languages;
 
         return $this;
     }
@@ -910,87 +827,176 @@ class Doctor implements UserInterface
 
         return $this;
     }
-	
-	public function getFormattedAddress(){
-        $state   		= $this->getState();
-		$city			= $this->getCity(); 
-        $country 		= $this->getCountry();
+
+    public function getFormattedAddress()
+    {
+        $state = $this->getState();
+        $city = $this->getCity();
+        $country = $this->getCountry();
         $address_line_1 = $this->getAddressLine1();
         $address_line_2 = $this->getAddressLine2();
-        $code_postale 	= $this->getPostalCode();
+        $code_postale = $this->getPostalCode();
         $formated_address = '<address>';
-		if($address_line_1){
-			$formated_address .= $address_line_1 . ', ';
-		}
-		if($address_line_2){
-			$formated_address .= $address_line_2 . ', ';
-		}
-		if($code_postale){
-			$formated_address .= $code_postale . ' ';
-		}
-		if($code_postale){
-			$formated_address .= $city . ' ';
-		}
-		if($state){
-			$formated_address .= $state;
-		}
-		$formated_address .= '</address>';
+        if ($address_line_1) {
+            $formated_address .= $address_line_1 . ', ';
+        }
+        if ($address_line_2) {
+            $formated_address .= $address_line_2 . ', ';
+        }
+        if ($code_postale) {
+            $formated_address .= $code_postale . ' ';
+        }
+        if ($code_postale) {
+            $formated_address .= $city . ' ';
+        }
+        if ($state) {
+            $formated_address .= $state;
+        }
+        $formated_address .= '</address>';
         return $formated_address;
     }
-  
-  
-  
-  public function getFormattedAddress2(){
-		$state   		= $this->getState();
-		$city			= $this->getCity(); 
-		$country 		= $this->getCountry();
-		$address_line_1 = $this->getAddressLine1();
-		$address_line_2 = $this->getAddressLine2();
-		$code_postale 	= $this->getPostalCode();
-		$formated_address = '';
-		if($address_line_1){
-			$formated_address .=  $address_line_1 .', ';
-		}
-		if($address_line_2){
-			$formated_address .=  $address_line_2 . ', ';
-		}
-		if($code_postale){
-			$formated_address .=  $code_postale . ' ';
-		}
-		if($city){
-			$formated_address .=  $city . ' ';
-		}
-		if($state){
-			$formated_address .=  $state;
-		}
-		return $formated_address;
-  }
 
-  public function getLangOther(): ?string
-  {
-      return $this->lang_other;
-  }
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
 
-  public function setLangOther(?string $lang_other): self
-  {
-      $this->lang_other = $lang_other;
+    public function setState(string $state): self
+    {
+        $this->state = $state;
 
-      return $this;
-  }
-  
-  public function getDisplayLanguage(){
-	  $langs = $this->getSpokenLanguages();
-	  if(is_array($langs)){
-		  $final_langs = array_filter($langs, function($value){return !is_null($value) && $value !== 'Other';});
-		  $lang_other = explode(' ', str_replace('Choose a Language...', '', $this->getLangOther()));
-		  $final_langs = array_merge($final_langs, $lang_other);
-		  $final_langs = array_filter($final_langs, function($value){return !is_null($value) && $value !== '';});
-		  return implode(' | ', $final_langs);
-	  }
-  }
-  
-  
-  /** @see \Serializable::serialize() */
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getAddressLine1(): ?string
+    {
+        return $this->address_line_1;
+    }
+
+    public function setAddressLine1(?string $address_line_1): self
+    {
+        $this->address_line_1 = $address_line_1;
+
+        return $this;
+    }
+
+    public function getAddressLine2(): ?string
+    {
+        return $this->address_line_2;
+    }
+
+    public function setAddressLine2(?string $address_line_2): self
+    {
+        $this->address_line_2 = $address_line_2;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postal_code;
+    }
+
+    public function setPostalCode(string $postal_code): self
+    {
+        $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    public function getFormattedAddress2()
+    {
+        $state = $this->getState();
+        $city = $this->getCity();
+        $country = $this->getCountry();
+        $address_line_1 = $this->getAddressLine1();
+        $address_line_2 = $this->getAddressLine2();
+        $code_postale = $this->getPostalCode();
+        $formated_address = '';
+        if ($address_line_1) {
+            $formated_address .= $address_line_1 . ', ';
+        }
+        if ($address_line_2) {
+            $formated_address .= $address_line_2 . ', ';
+        }
+        if ($code_postale) {
+            $formated_address .= $code_postale . ' ';
+        }
+        if ($city) {
+            $formated_address .= $city . ' ';
+        }
+        if ($state) {
+            $formated_address .= $state;
+        }
+        return $formated_address;
+    }
+
+    public function getDisplayLanguage()
+    {
+        $langs = $this->getSpokenLanguages();
+        if (is_array($langs)) {
+            $final_langs = array_filter($langs, function ($value) {
+                return !is_null($value) && $value !== 'Other';
+            });
+            $lang_other = explode(' ', str_replace('Choose a Language...', '', $this->getLangOther()));
+            $final_langs = array_merge($final_langs, $lang_other);
+            $final_langs = array_filter($final_langs, function ($value) {
+                return !is_null($value) && $value !== '';
+            });
+            return implode(' | ', $final_langs);
+        }
+    }
+
+    public function getSpokenLanguages(): ?array
+    {
+        return $this->spoken_languages;
+    }
+
+    public function setSpokenLanguages(?array $spoken_languages): self
+    {
+        $this->spoken_languages = $spoken_languages;
+
+        return $this;
+    }
+
+    public function getLangOther(): ?string
+    {
+        return $this->lang_other;
+    }
+
+    public function setLangOther(?string $lang_other): self
+    {
+        $this->lang_other = $lang_other;
+
+        return $this;
+    }
+
+
+    /** @see \Serializable::serialize() */
     /*public function serialize()
     {
         return serialize(array(
@@ -1037,6 +1043,6 @@ class Doctor implements UserInterface
 			$this->lang_other
         ));
     }*/
-  
- 
+
+
 }

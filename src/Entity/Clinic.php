@@ -70,17 +70,17 @@ class Clinic
     {
         return $this->images;
     }
-	
-	public function getImagesArray()
-    {
-        return explode(',', $this->images);
-    }
 
     public function setImages(?string $images): self
     {
         $this->images = $images;
 
         return $this;
+    }
+
+    public function getImagesArray()
+    {
+        return explode(',', $this->images);
     }
 
     public function getDoctorID(): ?Doctor

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Doctor;
 use App\Form\DoctorChangePasswordFormType;
 use App\Form\DoctorResetPasswordRequestFormType;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +26,12 @@ class DoctorResetPasswordController extends AbstractController
     use ResetPasswordControllerTrait;
 
     private $resetPasswordHelper;
-	private $dlproMailer;
+    private $dlproMailer;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, \Swift_Mailer $mailer2)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, Swift_Mailer $mailer2)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
-		$this->dlproMailer = $mailer2;
+        $this->dlproMailer = $mailer2;
     }
 
     /**
@@ -48,13 +50,66 @@ class DoctorResetPasswordController extends AbstractController
                 $mailer
             );
         }
-		
-		$class='account-page';
+
+        $class = 'account-page';
 
         return $this->render('reset_password/doctor/request.html.twig', [
             'requestForm' => $form->createView(),
-			'classBody' => $class
+            'classBody' => $class
         ]);
+    }
+
+    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
+    {
+        $user = $this->getDoctrine()->getRepository(Doctor::class)->findOneBy([
+            'email' => $emailFormData,
+        ]);
+
+        // Marks that you are allowed to see the app_check_email page.
+        $this->setCanCheckEmailInSession();
+
+        // Do not reveal whether a user account was found or not.
+        if (!$user) {
+            return $this->redirectToRoute('app_doctor_check_email');
+        }
+
+        try {
+            $resetToken = $this->resetPasswordHelper->generateResetToken($user);
+        } catch (ResetPasswordExceptionInterface $e) {
+            $this->addFlash('reset_password_error', sprintf(
+                'There was a problem handling your password reset request - %s',
+                $e->getReason()
+            ));
+
+            return $this->redirectToRoute('app_doctor_forgot_password_request');
+        }
+
+        /*$email = (new TemplatedEmail())
+            ->from(new Address('ziedaifa1@gmail.com', 'DocBooking'))
+            ->to($user->getEmail())
+            ->subject('Your password reset request')
+            ->htmlTemplate('reset_password/doctor/email.html.twig')
+            ->context([
+                'resetToken' => $resetToken,
+                'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
+            ])
+        ;
+
+        $mailer->send($email);*/
+
+        $message = (new Swift_Message('Your password reset request'))
+            ->setFrom('docbooking0@gmail.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'reset_password/doctor/email.html.twig',
+                    ['resetToken' => $resetToken, 'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime()]
+                ),
+                'text/html'
+            );
+        $this->dlproMailer->send($message);
+
+        return $this->redirectToRoute('app_doctor_check_email');
     }
 
     /**
@@ -68,12 +123,12 @@ class DoctorResetPasswordController extends AbstractController
         if (!$this->canCheckEmail()) {
             return $this->redirectToRoute('app_doctor_forgot_password_request');
         }
-		
-		$class='account-page';
+
+        $class = 'account-page';
 
         return $this->render('reset_password/doctor/check_email.html.twig', [
             'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
-			'classBody' => $class
+            'classBody' => $class
         ]);
     }
 
@@ -130,65 +185,12 @@ class DoctorResetPasswordController extends AbstractController
 
             return $this->redirectToRoute('app_doctor_login');
         }
-		
-		$class='account-page';
+
+        $class = 'account-page';
 
         return $this->render('reset_password/doctor/reset.html.twig', [
             'resetForm' => $form->createView(),
-			'classBody' => $class
+            'classBody' => $class
         ]);
-    }
-
-    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
-    {
-        $user = $this->getDoctrine()->getRepository(Doctor::class)->findOneBy([
-            'email' => $emailFormData,
-        ]);
-
-        // Marks that you are allowed to see the app_check_email page.
-        $this->setCanCheckEmailInSession();
-
-        // Do not reveal whether a user account was found or not.
-        if (!$user) {
-            return $this->redirectToRoute('app_doctor_check_email');
-        }
-
-        try {
-            $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (ResetPasswordExceptionInterface $e) {
-            $this->addFlash('reset_password_error', sprintf(
-                'There was a problem handling your password reset request - %s',
-                $e->getReason()
-            ));
-
-            return $this->redirectToRoute('app_doctor_forgot_password_request');
-        }
-
-        /*$email = (new TemplatedEmail())
-            ->from(new Address('ziedaifa1@gmail.com', 'DocBooking'))
-            ->to($user->getEmail())
-            ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/doctor/email.html.twig')
-            ->context([
-                'resetToken' => $resetToken,
-                'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
-            ])
-        ;
-
-        $mailer->send($email);*/
-		
-		$message = (new \Swift_Message('Your password reset request'))
-						->setFrom('docbooking0@gmail.com')
-						->setTo($user->getEmail())
-						->setBody(
-								$this->renderView(
-									'reset_password/doctor/email.html.twig',
-									['resetToken' => $resetToken,'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime()]
-								),
-								'text/html'
-						);
-		$this->dlproMailer->send($message);
-
-        return $this->redirectToRoute('app_doctor_check_email');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,13 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Appointment
 {
-	public static $STATUT_PENDIND = 0;
-	public static $STATUT_PENDIND_PAYMENT = 1;
-	public static $STATUT_COMPLETE = 2;
-	public static $STATUT_CANCELLED = 3;
-	
-	public static $STATUT_NOT_PAIED = 0;
-	public static $STATUT_PAIED = 1;
+    public static $STATUT_PENDIND = 0;
+    public static $STATUT_PENDIND_PAYMENT = 1;
+    public static $STATUT_COMPLETE = 2;
+    public static $STATUT_CANCELLED = 3;
+
+    public static $STATUT_NOT_PAIED = 0;
+    public static $STATUT_PAIED = 1;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -53,13 +54,13 @@ class Appointment
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $status;
-	
-	 /**
+
+    /**
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $isPayed;
-	
-	/**
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $date_paied;
@@ -78,8 +79,8 @@ class Appointment
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $orderID;
-	
-	/**
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $app_date;
@@ -93,7 +94,7 @@ class Appointment
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $create_time;
-	
+
 
     public function getId(): ?int
     {
@@ -207,13 +208,13 @@ class Appointment
 
         return $this;
     }
-	
-	public function getDatePaied(): ?\DateTimeInterface
-                      {
-                          return $this->date_paied;
-                      }
 
-    public function setDatePaied(?\DateTimeInterface $date_paied): self
+    public function getDatePaied(): ?DateTimeInterface
+    {
+        return $this->date_paied;
+    }
+
+    public function setDatePaied(?DateTimeInterface $date_paied): self
     {
         $this->date_paied = $date_paied;
 
@@ -231,42 +232,43 @@ class Appointment
 
         return $this;
     }
-	
-	public function getAppDate(): ?\DateTimeInterface
-                               {
-                                   return $this->app_date;
-                               }
 
-    public function setAppDate(?\DateTimeInterface $app_date): self
+    public function getAppDate(): ?DateTimeInterface
+    {
+        return $this->app_date;
+    }
+
+    public function setAppDate(?DateTimeInterface $app_date): self
     {
         $this->app_date = $app_date;
 
         return $this;
     }
 
-    public function getAppTime(): ?\DateTimeInterface
+    public function getAppTime(): ?DateTimeInterface
     {
         return $this->app_time;
     }
 
-    public function setAppTime(?\DateTimeInterface $app_time): self
+    public function setAppTime(?DateTimeInterface $app_time): self
     {
         $this->app_time = $app_time;
 
         return $this;
     }
 
-    public function getCreateTime(): ?\DateTimeInterface
+    public function getCreateTime(): ?DateTimeInterface
     {
         return $this->create_time;
     }
 
-    public function setCreateTime(?\DateTimeInterface $create_time): self
+    public function setCreateTime(?DateTimeInterface $create_time): self
     {
         $this->create_time = $create_time;
 
         return $this;
     }
+
     public function getAppCombinedDate()
     {
         $date = $this->app_date;

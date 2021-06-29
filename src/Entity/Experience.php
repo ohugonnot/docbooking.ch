@@ -75,28 +75,28 @@ class Experience
     {
         return $this->experience_to;
     }
-	
-	public function getExperienceToCustom()
-    {
-        return ($this->experience_to->format('Y') == date('Y')) ? 'Present' : $this->experience_to->format('Y');
-    }
-	
-	public function getExperienceTotalYear()
-    {
-		$value = $this->experience_to->format('Y') - $this->experience_from->format('Y');
-		$output = $value . 'year';
-		if($value<2){
-			$output = $value . 'years';
-		}
-		$output = '(' . $output . ')';
-        return $output;
-    }
 
     public function setExperienceTo($experience_to): self
     {
         $this->experience_to = $experience_to;
 
         return $this;
+    }
+
+    public function getExperienceToCustom()
+    {
+        return ($this->experience_to->format('Y') == date('Y')) ? 'Present' : $this->experience_to->format('Y');
+    }
+
+    public function getExperienceTotalYear()
+    {
+        $value = $this->experience_to->format('Y') - $this->experience_from->format('Y');
+        $output = $value . 'year';
+        if ($value < 2) {
+            $output = $value . 'years';
+        }
+        $output = '(' . $output . ')';
+        return $output;
     }
 
     public function getDesignation(): ?string
