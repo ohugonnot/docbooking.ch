@@ -25,7 +25,7 @@ class Memberships
     /**
      * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="memberships")
      */
-    private $idDoctor;
+    private $doctor;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class Memberships
         return $this;
     }
 
-    public function getIdDoctor(): ?Doctor
+    public function getDoctor(): ?Doctor
     {
-        return $this->idDoctor;
+        return $this->doctor;
     }
 
-    public function setIdDoctor(?Doctor $idDoctor): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        $this->idDoctor = $idDoctor;
+        $this->doctor = $doctor;
 
         return $this;
     }

@@ -39,10 +39,10 @@
 																<tr>
 																	<td>
 																		<h2 class="table-avatar">
-																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctorID().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="{% if appointment.getDoctorID().getPictureProfile() %}{{appointment.getDoctorID().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
+																				<img class="avatar-img rounded-circle" src="{% if appointment.getDoctor().getPictureProfile() %}{{appointment.getDoctor().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
 																			</a>
-																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctorID().getUrlProfile()})}}">{{appointment.getDoctorID().getTitle()}}  {{appointment.getDoctorID().getFirstName()}}  {{appointment.getDoctorID().getLastName()}}<span>{{appointment.getDoctorID().getSpeciality()}}</span></a>
+																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()}}</span></a>
 																		</h2>
 																	</td>
 																	<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
@@ -133,10 +133,10 @@
 											<div class="invoice-info">
 												<strong class="customer-text">Confirmation From</strong>
 												<p class="invoice-details invoice-details-two">
-													{{appointment.getDoctorID().getTitle()}}  {{appointment.getDoctorID().getFirstName()}} {{appointment.getDoctorID().getLastName()}} <br>
-													{{appointment.getDoctorID().getAddressLine1()}}<br>
-													{{appointment.getDoctorID().getAddressLine2()}}<br>
-													{{appointment.getDoctorID().getPostalCode()}} {{appointment.getDoctorID().getCity()}} <br> {{appointment.getDoctorID().getState()}} {{appointment.getDoctorID().getCountry()}} <br>
+													{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}} {{appointment.getDoctor().getLastName()}} <br>
+													{{appointment.getDoctor().getAddressLine1()}}<br>
+													{{appointment.getDoctor().getAddressLine2()}}<br>
+													{{appointment.getDoctor().getPostalCode()}} {{appointment.getDoctor().getCity()}} <br> {{appointment.getDoctor().getState()}} {{appointment.getDoctor().getCountry()}} <br>
 												</p>
 											</div>
 										</div>

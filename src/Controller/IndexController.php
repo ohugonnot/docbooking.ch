@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class IndexController extends AbstractController
 {
@@ -92,10 +93,7 @@ class IndexController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/", name="app_index")
-     */
-    public function index(DoctorRepository $doctorRepository, PaginatorInterface $paginator, Request $request, UrlHelper $urlHelper, AppointmentRepository $appointmentRepository)
+    public function getUserFinal()
     {
         $user = $this->getUser();
         if (!$user) {
@@ -124,7 +122,16 @@ class IndexController extends AbstractController
                 $user = $user_repository->find($user->getId());
             }
         }
+        return $user;
+    }
 
+    /**
+     * @Route("/", name="app_index")
+     */
+    public function index(PaginatorInterface $paginator, Request $request, UrlHelper $urlHelper, AppointmentRepository $appointmentRepository)
+    {
+        $user = $this->getUserFinal();
+        dump($user);
         $isDoctor = false;
         if ($user) {
             $roles = $user->getRoles();
@@ -134,13 +141,12 @@ class IndexController extends AbstractController
         }
 
         $options_other = [];
+        $doctorRepository = $this->getDoctrine()->getRepository(Doctor::class);
         $list_doctors = $doctorRepository->findAll();
         foreach ($list_doctors as $doctor) {
-            // continue;
-            $timingDB = $doctor->getIdTiming();
+            $timingDB = $doctor->getTimings();
             $next_available = [];
             foreach ($timingDB as $time) {
-                //  continue;
                 $day = $time->getDay();
                 $year = $time->getYear();
                 $month = $time->getMonth();
@@ -303,7 +309,7 @@ class IndexController extends AbstractController
             if ($doctor->getLangOther()) {
                 $options_other[$doctor->getLangOther()] = $doctor->getLangOther();
             }
-            $timingDB = $doctor->getIdTiming();
+            $timingDB = $doctor->getTimings();
             $next_available = [];
             $next_available_string = '--:--';
             foreach ($timingDB as $time) {
@@ -386,10 +392,10 @@ class IndexController extends AbstractController
                 $doctor->getPassword(),
                 $doctor->getSalt(),
                 $doctor->getDoctorSocial(),
-                $doctor->getIdTiming(),
-                $doctor->getIdClinic(),
-                $doctor->getEducation(),
-                $doctor->getExperience(),
+                $doctor->getTimings(),
+                $doctor->getClinics(),
+                $doctor->getEducations(),
+                $doctor->getExperiences(),
                 $doctor->getAwards(),
                 $doctor->getRegistrations(),
                 $doctor->getAppointments(),
@@ -458,7 +464,7 @@ class IndexController extends AbstractController
         }
         $timing = $this->formatHeaderTiming($time_stamp, $is_next_prev);
         $global_array = $timing['time'];
-        $array = $doctor->getIdTiming()->filter(
+        $array = $doctor->getTimings()->filter(
             function ($entry) use ($global_array) {
                 $exist = false;
                 foreach ($global_array as $tms) {

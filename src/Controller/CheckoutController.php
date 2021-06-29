@@ -213,7 +213,7 @@ class CheckoutController extends AbstractController
             $appointment->setProductTotal($this->get('session')->get('total'));
             $appointment->setStatus($status);
             $appointment->setPatientID($patient);
-            $appointment->setDoctorID($doctor);
+            $appointment->setDoctor($doctor);
             $appointment->setIsPayed($is_paid);
             $appointment->setOrderID($order_id);
             $appointment->setCreateTime(DateTime::createFromFormat(DateTimeInterface::ISO8601, $create_time));
@@ -307,7 +307,7 @@ class CheckoutController extends AbstractController
             'controller_name' => 'CheckoutController',
             'classBody' => $class,
             'appointment' => $appointment,
-            'doctor' => $appointment->getDoctorID()
+            'doctor' => $appointment->getDoctor()
         ]);
     }
 

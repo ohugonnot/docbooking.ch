@@ -52,10 +52,10 @@ class SearchController extends AbstractController
                 $doctor->getPassword(),
                 $doctor->getSalt(),
                 $doctor->getDoctorSocial(),
-                $doctor->getIdTiming(),
-                $doctor->getIdClinic(),
-                $doctor->getEducation(),
-                $doctor->getExperience(),
+                $doctor->getTimings(),
+                $doctor->getClinics(),
+                $doctor->getEducations(),
+                $doctor->getExperiences(),
                 $doctor->getAwards(),
                 $doctor->getRegistrations(),
                 $doctor->getAppointments(),
@@ -245,7 +245,7 @@ class SearchController extends AbstractController
                 $limit++;
             }
             $options_other[$doctor->getLangOther()] = $doctor->getLangOther();
-            $timingDB = $doctor->getIdTiming();
+            $timingDB = $doctor->getTimings();
             $next_available = [];
             foreach ($timingDB as $time) {
                 $day = $time->getDay();

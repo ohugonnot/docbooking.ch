@@ -148,7 +148,7 @@
                                     {% endif %}
                                 </div>
 
-                                {% if doctor.getIdClinic() %}
+                                {% if doctor.getClinics() %}
                                     <div class="clinic-details">
                                         <ul>
                                             {% if doctor.getPriceCustomValue() %}
@@ -160,7 +160,7 @@
                                         </ul>
 
                                         <ul class="clinic-gallery">
-                                            {% for clinic in doctor.getIdClinic() %}
+                                            {% for clinic in doctor.getClinics() %}
                                                 {% for img in clinic.getImagesArray() %}
                                                     <li>
                                                         <a href="/public/uploads/doctors/clinics/{{ img }}"
@@ -193,7 +193,7 @@
             </div>
 
             <div class="card booking-schedule schedule-widget">
-                {% set times = doctor.getIdTiming() %}
+                {% set times = doctor.getTimings() %}
                 {{ times|formathomeCalendar(doctor)|raw }}
             </div>
             <div class="card">
@@ -221,12 +221,12 @@
                                             <p>{{ doctor.getAboutMe() }}</p>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getEducation() %}
+                                    {% if doctor.getEducations() %}
                                         <div class="widget education-widget">
                                             <h4 class="widget-title">Education</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    {% for education in doctor.getEducation() %}
+                                                    {% for education in doctor.getEducations() %}
                                                         <li>
                                                             <div class="experience-user">
                                                                 <div class="before-circle"></div>
@@ -245,12 +245,12 @@
                                             </div>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getExperience() %}
+                                    {% if doctor.getExperiences() %}
                                         <div class="widget experience-widget">
                                             <h4 class="widget-title">Work & Experience</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    {% for experience in doctor.getExperience() %}
+                                                    {% for experience in doctor.getExperiences() %}
                                                         <li>
                                                             <div class="experience-user">
                                                                 <div class="before-circle"></div>
@@ -272,7 +272,7 @@
                                             </div>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getExperience() %}
+                                    {% if doctor.getExperiences() %}
                                         <div class="widget awards-widget">
                                             <h4 class="widget-title">Awards</h4>
                                             <div class="experience-box">
@@ -326,7 +326,7 @@
                         </div>
 
                         <div role="tabpanel" id="doc_locations" class="tab-pane fade">
-                            {% for clinic in doctor.getIdClinic() %}
+                            {% for clinic in doctor.getClinics() %}
                                 <div class="location-list">
                                     <div class="row">
                                         <div class="col-md-6">

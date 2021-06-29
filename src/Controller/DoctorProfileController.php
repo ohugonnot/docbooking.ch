@@ -269,23 +269,23 @@ class DoctorProfileController extends AbstractController
                 $user->setLongitude($lng);
             }
 
-            foreach ($user->getIdClinic() as &$clinic) {
-                $clinic->setDoctorID($this->getUser());
+            foreach ($user->getClinics() as &$clinic) {
+                $clinic->setDoctor($this->getUser());
             }
-            foreach ($user->getEducation() as &$education) {
-                $education->setIdDoctor($this->getUser());
+            foreach ($user->getEducations() as &$education) {
+                $education->setDoctor($this->getUser());
             }
-            foreach ($user->getExperience() as &$experience) {
-                $experience->setIdDoctor($this->getUser());
+            foreach ($user->getExperiences() as &$experience) {
+                $experience->setDoctor($this->getUser());
             }
             foreach ($user->getAwards() as &$awards) {
-                $awards->setIdDoctor($this->getUser());
+                $awards->setDoctor($this->getUser());
             }
             foreach ($user->getMemberships() as &$memberships) {
-                $memberships->setIdDoctor($this->getUser());
+                $memberships->setDoctor($this->getUser());
             }
             foreach ($user->getRegistrations() as &$registrations) {
-                $registrations->setIdDoctor($this->getUser());
+                $registrations->setDoctor($this->getUser());
             }
             $link = $user->getUrlProfile();
             $slug = $user->getSlug();
@@ -372,7 +372,7 @@ class DoctorProfileController extends AbstractController
                 $time->setYear($data['year']);
                 $time->setTimes($data['times']);
                 $time->setTimeSlot($time_slot);
-                $time->setIdDoctor($user);
+                $time->setDoctor($user);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($time);
                 $entityManager->flush();
@@ -473,7 +473,7 @@ class DoctorProfileController extends AbstractController
         //$date = new \DateTime($date);
         //$week = $date->format("W");
         //$weekStartEnd = $this->getStartAndEndDate($week, $date->format("Y"));
-        $allTiming = $this->getUser()->getIdTiming();
+        $allTiming = $this->getUser()->getTimings();
         $allTimingArray = [];
         foreach ($allTiming as $timing) {
             $allTimingArray[$timing->getDay() . $timing->getMonth() . $timing->getYear()] = [
@@ -526,7 +526,7 @@ class DoctorProfileController extends AbstractController
         $output[] = '<i class="fa fa-chevron-left"></i>' . "\n";
         $output[] = '</a>' . "\n";
         $output[] = '</li>' . "\n";
-        $timingDB = $doctor->getIdTiming();
+        $timingDB = $doctor->getTimings();
         foreach ($timing['time'] as $time) {
             $date = $time[0] . '-' . $time[1] . '-' . $time[2];
             $dateObj = DateTime::createFromFormat('j-m-Y', $date);

@@ -279,7 +279,7 @@ class DoctorProfileSettingsFormType extends AbstractType
 				'label'=>false,
 				'attr' => ['class' => 'form-control']
 			])
-			->add('idClinic', CollectionType::class, [
+			->add('clinics', CollectionType::class, [
 				'entry_type'   => DoctorClinicFormType::class,
 				'entry_options' => ['label' => false],
 				'allow_add' => true,
@@ -294,12 +294,12 @@ class DoctorProfileSettingsFormType extends AbstractType
 				'entry_options' => ['label' => false],
 				'allow_add' => true,
 			])
-			->add('experience', CollectionType::class, [
+			->add('experiences', CollectionType::class, [
 				'entry_type'   => DoctorProfileExperienceFormType::class,
 				'entry_options' => ['label' => false],
 				'allow_add' => true,
 			])
-			->add('education', CollectionType::class, [
+			->add('educations', CollectionType::class, [
 				'entry_type'   => DoctorProfileEducationFormType::class,
 				'entry_options' => ['label' => false],
 				'allow_add' => true,

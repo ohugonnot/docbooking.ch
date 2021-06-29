@@ -20,227 +20,225 @@ class Doctor implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $first_name;
+    private string $first_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $last_name;
+    private string $last_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $gender;
+    private ?string $gender;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", nullable=false)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $phone_number;
+    private ?string $phone_number;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $date_birth;
+    private ?DateTime $date_birth;
 
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $about_me;
+    private ?string $about_me;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address_line_1;
+    private ?string $address_line_1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address_line_2;
+    private ?string $address_line_2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $city;
+    private ?string $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $state;
+    private ?string $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $country;
+    private ?string $country;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $postal_code;
+    private ?string $postal_code;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $picture_profile;
+    private ?string $picture_profile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $receiving_patient_info;
+    private ?string $receiving_patient_info;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $price_type;
+    private ?string $price_type;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $price_custom_value;
+    private ?int $price_custom_value;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $speciality;
+    private ?string $speciality;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $services;
+    private ?string $services;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $specialization;
+    private ?string $specialization;
 
     /**
      * @ORM\Column(type="simple_array", nullable=false)
      */
-    private $roles;
+    private array $roles;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    private $create_at;
+    private ?DateTime $create_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=DoctorSocial::class, inversedBy="DoctorID", cascade={"persist", "remove"})
-     */
-    private $doctorSocial;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Timing::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $idTiming;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Clinic::class, mappedBy="doctorID", cascade={"persist", "remove"})
-     */
-    private $idClinic;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $education;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $experience;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Awards::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $awards;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Memberships::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $memberships;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Registrations::class, mappedBy="idDoctor", cascade={"persist", "remove"})
-     */
-    private $registrations;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Appointment::class, mappedBy="doctorID", cascade={"persist", "remove"} )
-     */
-    private $appointments;
+    private ?DateTime $updated_at;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $business_hours;
+    private ?string $business_hours;
 
     /**
      * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
      */
-    private $latitude;
+    private ?string $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
      */
-    private $longitude;
+    private ?string $longitude;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
-    private $slug;
+    private ?string $slug;
 
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $spoken_languages = [];
+    private ?array $spoken_languages = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $lang_other;
+    private ?string $lang_other;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=DoctorSocial::class, inversedBy="doctors")
+     */
+    private ?DoctorSocial $doctorSocial;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Timing::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $timings;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Clinic::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $clinics;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $educations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $experiences;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Awards::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $awards;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Memberships::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $memberships;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Registrations::class, mappedBy="doctor", cascade={"persist", "remove"})
+     */
+    private Collection $registrations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Appointment::class, mappedBy="doctor", cascade={"persist", "remove"} )
+     */
+    private Collection $appointments;
 
     public function __construct()
     {
-        $this->doctorSocials = new ArrayCollection();
-        $this->doctorClinics = new ArrayCollection();
-        $this->idTiming = new ArrayCollection();
-        $this->idClinic = new ArrayCollection();
-        $this->education = new ArrayCollection();
-        $this->experience = new ArrayCollection();
+        $this->timings = new ArrayCollection();
+        $this->clinics = new ArrayCollection();
+        $this->educations = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
         $this->awards = new ArrayCollection();
         $this->memberships = new ArrayCollection();
         $this->registrations = new ArrayCollection();
         $this->appointments = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         $format = "Doctor (id: %s)\n";
         return sprintf($format, $this->id);
@@ -287,12 +285,12 @@ class Doctor implements UserInterface
         return $this;
     }
 
-    public function getDateBirth()
+    public function getDateBirth() : ?DateTime
     {
         return $this->date_birth;
     }
 
-    public function setDateBirth($date_birth)
+    public function setDateBirth($date_birth): self
     {
         $this->date_birth = $date_birth;
 
@@ -397,7 +395,17 @@ class Doctor implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->email;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 
     /**
@@ -425,7 +433,7 @@ class Doctor implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string)$this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -467,28 +475,28 @@ class Doctor implements UserInterface
     /**
      * @return Collection|Timing[]
      */
-    public function getIdTiming(): Collection
+    public function getTimings(): Collection
     {
-        return $this->idTiming;
+        return $this->timings;
     }
 
-    public function addIdTiming(Timing $idTiming): self
+    public function addTiming(Timing $timing): self
     {
-        if (!$this->idTiming->contains($idTiming)) {
-            $this->idTiming[] = $idTiming;
-            $idTiming->setIdDoctor($this);
+        if (!$this->timings->contains($timing)) {
+            $this->timings[] = $timing;
+            $timing->setDoctor($this);
         }
 
         return $this;
     }
 
-    public function removeIdTiming(Timing $idTiming): self
+    public function removeTiming(Timing $timing): self
     {
-        if ($this->idTiming->contains($idTiming)) {
-            $this->idTiming->removeElement($idTiming);
+        if ($this->timings->contains($timing)) {
+            $this->timings->removeElement($timing);
             // set the owning side to null (unless already changed)
-            if ($idTiming->getIdDoctor() === $this) {
-                $idTiming->setIdDoctor(null);
+            if ($timing->getDoctor() === $this) {
+                $timing->setDoctor(null);
             }
         }
 
@@ -498,28 +506,28 @@ class Doctor implements UserInterface
     /**
      * @return Collection|Clinic[]
      */
-    public function getIdClinic(): Collection
+    public function getClinics(): Collection
     {
-        return $this->idClinic;
+        return $this->clinics;
     }
 
-    public function addIdClinic(Clinic $idClinic): self
+    public function addClinic(Clinic $clinic): self
     {
-        if (!$this->idClinic->contains($idClinic)) {
-            $this->idClinic[] = $idClinic;
-            $idClinic->setDoctorID($this);
+        if (!$this->clinics->contains($clinic)) {
+            $this->clinics[] = $clinic;
+            $clinic->setDoctor($this);
         }
 
         return $this;
     }
 
-    public function removeIdClinic(Clinic $idClinic): self
+    public function removeClinic(Clinic $clinic): self
     {
-        if ($this->idClinic->contains($idClinic)) {
-            $this->idClinic->removeElement($idClinic);
+        if ($this->clinics->contains($clinic)) {
+            $this->clinics->removeElement($clinic);
             // set the owning side to null (unless already changed)
-            if ($idClinic->getDoctorID() === $this) {
-                $idClinic->setDoctorID(null);
+            if ($clinic->getDoctor() === $this) {
+                $clinic->setDoctor(null);
             }
         }
 
@@ -529,16 +537,16 @@ class Doctor implements UserInterface
     /**
      * @return Collection|Education[]
      */
-    public function getEducation(): Collection
+    public function getEducations(): Collection
     {
-        return $this->education;
+        return $this->educations;
     }
 
     public function addEducation(Education $education): self
     {
-        if (!$this->education->contains($education)) {
-            $this->education[] = $education;
-            $education->setIdDoctor($this);
+        if (!$this->educations->contains($education)) {
+            $this->educations[] = $education;
+            $education->setDoctor($this);
         }
 
         return $this;
@@ -546,11 +554,11 @@ class Doctor implements UserInterface
 
     public function removeEducation(Education $education): self
     {
-        if ($this->education->contains($education)) {
-            $this->education->removeElement($education);
+        if ($this->educations->contains($education)) {
+            $this->educations->removeElement($education);
             // set the owning side to null (unless already changed)
-            if ($education->getIdDoctor() === $this) {
-                $education->setIdDoctor(null);
+            if ($education->getDoctor() === $this) {
+                $education->setDoctor(null);
             }
         }
 
@@ -560,16 +568,16 @@ class Doctor implements UserInterface
     /**
      * @return Collection|Experience[]
      */
-    public function getExperience(): Collection
+    public function getExperiences(): Collection
     {
-        return $this->experience;
+        return $this->experiences;
     }
 
     public function addExperience(Experience $experience): self
     {
-        if (!$this->experience->contains($experience)) {
-            $this->experience[] = $experience;
-            $experience->setIdDoctor($this);
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences[] = $experience;
+            $experience->setDoctor($this);
         }
 
         return $this;
@@ -577,11 +585,11 @@ class Doctor implements UserInterface
 
     public function removeExperience(Experience $experience): self
     {
-        if ($this->experience->contains($experience)) {
-            $this->experience->removeElement($experience);
+        if ($this->experiences->contains($experience)) {
+            $this->experiences->removeElement($experience);
             // set the owning side to null (unless already changed)
-            if ($experience->getIdDoctor() === $this) {
-                $experience->setIdDoctor(null);
+            if ($experience->getDoctor() === $this) {
+                $experience->setDoctor(null);
             }
         }
 
@@ -600,7 +608,7 @@ class Doctor implements UserInterface
     {
         if (!$this->awards->contains($award)) {
             $this->awards[] = $award;
-            $award->setIdDoctor($this);
+            $award->setDoctor($this);
         }
 
         return $this;
@@ -611,8 +619,8 @@ class Doctor implements UserInterface
         if ($this->awards->contains($award)) {
             $this->awards->removeElement($award);
             // set the owning side to null (unless already changed)
-            if ($award->getIdDoctor() === $this) {
-                $award->setIdDoctor(null);
+            if ($award->getDoctor() === $this) {
+                $award->setDoctor(null);
             }
         }
 
@@ -631,7 +639,7 @@ class Doctor implements UserInterface
     {
         if (!$this->memberships->contains($membership)) {
             $this->memberships[] = $membership;
-            $membership->setIdDoctor($this);
+            $membership->setDoctor($this);
         }
 
         return $this;
@@ -642,8 +650,8 @@ class Doctor implements UserInterface
         if ($this->memberships->contains($membership)) {
             $this->memberships->removeElement($membership);
             // set the owning side to null (unless already changed)
-            if ($membership->getIdDoctor() === $this) {
-                $membership->setIdDoctor(null);
+            if ($membership->getDoctor() === $this) {
+                $membership->setDoctor(null);
             }
         }
 
@@ -662,7 +670,7 @@ class Doctor implements UserInterface
     {
         if (!$this->registrations->contains($registration)) {
             $this->registrations[] = $registration;
-            $registration->setIdDoctor($this);
+            $registration->setDoctor($this);
         }
 
         return $this;
@@ -673,8 +681,8 @@ class Doctor implements UserInterface
         if ($this->registrations->contains($registration)) {
             $this->registrations->removeElement($registration);
             // set the owning side to null (unless already changed)
-            if ($registration->getIdDoctor() === $this) {
-                $registration->setIdDoctor(null);
+            if ($registration->getDoctor() === $this) {
+                $registration->setDoctor(null);
             }
         }
 
@@ -693,7 +701,7 @@ class Doctor implements UserInterface
     {
         if (!$this->appointments->contains($appointment)) {
             $this->appointments[] = $appointment;
-            $appointment->setDoctorID($this);
+            $appointment->setDoctor($this);
         }
 
         return $this;
@@ -704,8 +712,8 @@ class Doctor implements UserInterface
         if ($this->appointments->contains($appointment)) {
             $this->appointments->removeElement($appointment);
             // set the owning side to null (unless already changed)
-            if ($appointment->getDoctorID() === $this) {
-                $appointment->setDoctorID(null);
+            if ($appointment->getDoctor() === $this) {
+                $appointment->setDoctor(null);
             }
         }
 
@@ -771,13 +779,8 @@ class Doctor implements UserInterface
 
     public function getUrlProfile()
     {
-        $title = '';
-        /*if($this->getTitle()){
-            $title = str_replace(' ', '', $this->getTitle()) . '-';
-        }*/
         $name = str_replace(' ', '-',  /*str_replace('.', '', $title) .*/ $this->getFirstName() . '-' . $this->getLastName());
-        $name = str_replace('.', '', $name);
-        return $name;
+        return str_replace('.', '', $name);
     }
 
     public function getFirstName(): ?string
@@ -828,32 +831,9 @@ class Doctor implements UserInterface
         return $this;
     }
 
-    public function getFormattedAddress()
+    public function getFormattedAddress() : string
     {
-        $state = $this->getState();
-        $city = $this->getCity();
-        $country = $this->getCountry();
-        $address_line_1 = $this->getAddressLine1();
-        $address_line_2 = $this->getAddressLine2();
-        $code_postale = $this->getPostalCode();
-        $formated_address = '<address>';
-        if ($address_line_1) {
-            $formated_address .= $address_line_1 . ', ';
-        }
-        if ($address_line_2) {
-            $formated_address .= $address_line_2 . ', ';
-        }
-        if ($code_postale) {
-            $formated_address .= $code_postale . ' ';
-        }
-        if ($code_postale) {
-            $formated_address .= $city . ' ';
-        }
-        if ($state) {
-            $formated_address .= $state;
-        }
-        $formated_address .= '</address>';
-        return $formated_address;
+        return '<address>'.$this->getFormattedAddress2().'</address>';
     }
 
     public function getState(): ?string
@@ -928,34 +908,28 @@ class Doctor implements UserInterface
         return $this;
     }
 
-    public function getFormattedAddress2()
+    public function getFormattedAddress2() :string
     {
         $state = $this->getState();
         $city = $this->getCity();
-        $country = $this->getCountry();
         $address_line_1 = $this->getAddressLine1();
         $address_line_2 = $this->getAddressLine2();
         $code_postale = $this->getPostalCode();
         $formated_address = '';
-        if ($address_line_1) {
+        if ($address_line_1)
             $formated_address .= $address_line_1 . ', ';
-        }
-        if ($address_line_2) {
+        if ($address_line_2)
             $formated_address .= $address_line_2 . ', ';
-        }
-        if ($code_postale) {
+        if ($code_postale)
             $formated_address .= $code_postale . ' ';
-        }
-        if ($city) {
+        if ($city)
             $formated_address .= $city . ' ';
-        }
-        if ($state) {
+        if ($state)
             $formated_address .= $state;
-        }
         return $formated_address;
     }
 
-    public function getDisplayLanguage()
+    public function getDisplayLanguage() : ?string
     {
         $langs = $this->getSpokenLanguages();
         if (is_array($langs)) {
@@ -969,6 +943,7 @@ class Doctor implements UserInterface
             });
             return implode(' | ', $final_langs);
         }
+        return null;
     }
 
     public function getSpokenLanguages(): ?array
@@ -1027,9 +1002,9 @@ class Doctor implements UserInterface
 			$this->updated_at,
 			$this->doctorSocial,
 			$this->idTiming,
-			$this->idClinic,
-			$this->education,
-			$this->experience,
+			$this->clinics,
+			$this->educations,
+			$this->experiences,
 			$this->awards,
 			$this->memberships,
 			$this->registrations,

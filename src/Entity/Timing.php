@@ -21,37 +21,37 @@ class Timing
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $day;
+    private ?int $day;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $month;
+    private ?int $month;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $year;
+    private ?int $year;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $times;
+    private ?string $times;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $time_slot;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="idTiming")
-     */
-    private $idDoctor;
+    private ?string $time_slot;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $week;
+    private ?int $week;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="timings")
+     */
+    private ?Doctor $doctor;
 
     public function getId(): ?int
     {
@@ -137,14 +137,14 @@ class Timing
         return json_decode($this->times);
     }
 
-    public function getIdDoctor(): ?Doctor
+    public function getDoctor(): ?Doctor
     {
-        return $this->idDoctor;
+        return $this->doctor;
     }
 
-    public function setIdDoctor(?Doctor $idDoctor): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        $this->idDoctor = $idDoctor;
+        $this->doctor = $doctor;
 
         return $this;
     }

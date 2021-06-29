@@ -28,72 +28,72 @@ class Appointment
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $product_name;
+    private ?string $product_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $product_sku;
+    private ?string $product_sku;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $product_price;
+    private ?string $product_price;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $product_subtotal;
+    private ?string $product_subtotal;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $product_total;
+    private ?string $product_total;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $status;
+    private ?int $status;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $isPayed;
+    private ?int $isPayed;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $date_paied;
+    private ?DateTimeInterface $date_paied;
 
     /**
      * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="appointments")
      */
-    private $patientID;
+    private ?Patient $patientID;
 
     /**
      * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="appointments")
      */
-    private $doctorID;
+    private ?Doctor $doctor;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $orderID;
+    private ?string $orderID;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $app_date;
+    private ?DateTimeInterface $app_date;
 
     /**
      * @ORM\Column(type="time", nullable=true)
      */
-    private $app_time;
+    private ?DateTimeInterface $app_time;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $create_time;
+    private ?DateTimeInterface $create_time;
 
 
     public function getId(): ?int
@@ -185,14 +185,14 @@ class Appointment
         return $this;
     }
 
-    public function getDoctorID(): ?Doctor
+    public function getDoctor(): ?Doctor
     {
-        return $this->doctorID;
+        return $this->doctor;
     }
 
-    public function setDoctorID(?Doctor $doctorID): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        $this->doctorID = $doctorID;
+        $this->doctor = $doctor;
 
         return $this;
     }
@@ -269,7 +269,7 @@ class Appointment
         return $this;
     }
 
-    public function getAppCombinedDate()
+    public function getAppCombinedDate(): string
     {
         $date = $this->app_date;
         $time = $this->app_time;

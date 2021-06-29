@@ -30,7 +30,7 @@
 			<center><h3><p style="color:rgb(152,86,176)">This is the Schedule I have Chosen</p></h3></center>
 			<!-- Schedule Widget -->
 			<div class="card booking-schedule schedule-widget">	
-				{{doctor.getIdTiming()|formatTimingCheckout(timeSelected, daySelected, monthSelected, yearSelected)|raw}}			
+				{{doctor.getTimings()|formatTimingCheckout(timeSelected, daySelected, monthSelected, yearSelected)|raw}}
 			</div>
 			<!-- /Schedule Widget -->
 			<center><h3><p style="color:rgb(152,86,176)">I Complete my Booking</p></h3></center>

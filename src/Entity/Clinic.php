@@ -20,22 +20,22 @@ class Clinic
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
+    private ?string $address;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $images;
+    private ?string $images;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="idClinic")
+     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="clinics")
      */
-    private $doctorID;
+    private ?Doctor $doctor;
 
     public function getId(): ?int
     {
@@ -83,14 +83,14 @@ class Clinic
         return explode(',', $this->images);
     }
 
-    public function getDoctorID(): ?Doctor
+    public function getDoctor(): ?Doctor
     {
-        return $this->doctorID;
+        return $this->doctor;
     }
 
-    public function setDoctorID(?Doctor $doctorID): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        $this->doctorID = $doctorID;
+        $this->doctor = $doctor;
 
         return $this;
     }

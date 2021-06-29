@@ -22,46 +22,46 @@ class DoctorSocial
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $websiteURL;
+    private ?string $websiteURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $facebookURL;
+    private ?string $facebookURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $twitterURL;
+    private ?string $twitterURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $instagramURL;
+    private ?string $instagramURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $pinterestURL;
+    private ?string $pinterestURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $linkedinURL;
+    private ?string $linkedinURL;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $youtubeURL;
+    private ?string $youtubeURL;
 
     /**
-     * @ORM\OneToMany(targetEntity=Doctor::class, mappedBy="doctorSocial")
+     * @ORM\OneToMany(targetEntity=Doctor::class, mappedBy="doctorSocial", cascade={"persist", "remove"})
      */
-    private $DoctorID;
+    private Collection $doctors;
 
     public function __construct()
     {
-        $this->DoctorID = new ArrayCollection();
+        $this->doctors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,28 +156,28 @@ class DoctorSocial
     /**
      * @return Collection|Doctor[]
      */
-    public function getDoctorID(): Collection
+    public function getDoctors(): Collection
     {
-        return $this->DoctorID;
+        return $this->doctors;
     }
 
-    public function addDoctorID(Doctor $doctorID): self
+    public function addDoctor(Doctor $doctor): self
     {
-        if (!$this->DoctorID->contains($doctorID)) {
-            $this->DoctorID[] = $doctorID;
-            $doctorID->setDoctorSocial($this);
+        if (!$this->doctors->contains($doctor)) {
+            $this->doctors[] = $doctor;
+            $doctor->setDoctorSocial($this);
         }
 
         return $this;
     }
 
-    public function removeDoctorID(Doctor $doctorID): self
+    public function removeDoctor(Doctor $doctor): self
     {
-        if ($this->DoctorID->contains($doctorID)) {
-            $this->DoctorID->removeElement($doctorID);
+        if ($this->doctors->contains($doctor)) {
+            $this->doctors->removeElement($doctor);
             // set the owning side to null (unless already changed)
-            if ($doctorID->getDoctorSocial() === $this) {
-                $doctorID->setDoctorSocial(null);
+            if ($doctor->getDoctorSocial() === $this) {
+                $doctor->setDoctorSocial(null);
             }
         }
 

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Appointment;
+use App\Entity\Doctor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,39 +48,39 @@ class AppointmentRepository extends ServiceEntityRepository
         ;
     }
 	
-	public function findByNotTodayDate($doctorid)
+	public function findByNotTodayDate($doctor)
     {
 		$date = new \DateTime();
         return $this->createQueryBuilder('a')
-            ->where('a.doctorID = :val')
+            ->where('a.doctor = :val')
 			->andWhere('a.app_date > :val1')
-            ->setParameter('val', $doctorid)
+            ->setParameter('val', $doctor)
 			->setParameter('val1', $date->format('Y-m-j'))
             ->getQuery()
             ->getResult()
         ;
     }
 	
-	public function findByTodayDate($doctorid)
+	public function findByTodayDate($doctor)
     {
 		$date = new \DateTime();
         return $this->createQueryBuilder('a')
-            ->where('a.doctorID = :val')
+            ->where('a.doctor = :val')
 			->andWhere('a.app_date = :val1')
-            ->setParameter('val', $doctorid)
+            ->setParameter('val', $doctor)
 			->setParameter('val1', $date->format('Y-m-j'))
             ->getQuery()
             ->getResult()
         ;
     }
 	
-	public function findByTodayFullDate($doctorid)
+	public function findByTodayFullDate($doctor)
     {
 		$date = new \DateTime();
         return $this->createQueryBuilder('a')
-            ->where('a.doctorID = :val')
+            ->where('a.doctor = :val')
 			->andWhere('a.create_time between :val2 AND :val3')
-            ->setParameter('val', $doctorid)
+            ->setParameter('val', $doctor)
 			->setParameter('val2', $date->format('Y-m-j 00:00:00'))
 			->setParameter('val3', $date->format('Y-m-j H:i:s'))
             ->getQuery()

@@ -87,12 +87,12 @@
 	<!-- /About Me -->	
 	<!-- Clinic Info -->
 	<div class="card">
-		{% do requestForm.idClinic.setRendered %}
+		{% do requestForm.clinics.setRendered %}
 		<div class="card-body">
 			<h4 class="card-title">Clinic Info</h4>
-			<div class="clinic-info" data-prototype="{{ '<div class="row form-row clinic-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-md-6"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-10"><div class="form-group"><label>Clinic Images</label><div id="dZUpload__name__" class="dropzone" style="border:4px dashed black"></div></div><div class="upload-wrap"></div><input type="hidden" id="%s" name="%s" class="form-control" value="%s"></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.idClinic.vars.prototype.name.vars.label, requestForm.idClinic.vars.prototype.name.vars.id,requestForm.idClinic.vars.prototype.name.vars.full_name,requestForm.idClinic.vars.prototype.name.vars.value, requestForm.idClinic.vars.prototype.address.vars.label,requestForm.idClinic.vars.prototype.address.vars.id,requestForm.idClinic.vars.prototype.address.vars.full_name,requestForm.idClinic.vars.prototype.address.vars.value,requestForm.idClinic.vars.prototype.images.vars.id,requestForm.idClinic.vars.prototype.images.vars.full_name,requestForm.idClinic.vars.prototype.images.vars.value)|e('html_attr') }}">
+			<div class="clinic-info" data-prototype="{{ '<div class="row form-row clinic-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-md-6"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-10"><div class="form-group"><label>Clinic Images</label><div id="dZUpload__name__" class="dropzone" style="border:4px dashed black"></div></div><div class="upload-wrap"></div><input type="hidden" id="%s" name="%s" class="form-control" value="%s"></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.clinics.vars.prototype.name.vars.label, requestForm.clinics.vars.prototype.name.vars.id,requestForm.clinics.vars.prototype.name.vars.full_name,requestForm.clinics.vars.prototype.name.vars.value, requestForm.clinics.vars.prototype.address.vars.label,requestForm.clinics.vars.prototype.address.vars.id,requestForm.clinics.vars.prototype.address.vars.full_name,requestForm.clinics.vars.prototype.address.vars.value,requestForm.clinics.vars.prototype.images.vars.id,requestForm.clinics.vars.prototype.images.vars.full_name,requestForm.clinics.vars.prototype.images.vars.value)|e('html_attr') }}">
 				{% set i = 0 %}
-				{% for clinic in requestForm.idClinic %}
+				{% for clinic in requestForm.clinics %}
 					<div class="row form-row clinic-cont">
 						<div class="col-12 col-md-10 col-lg-11">
 							<div class="row form-row">
@@ -289,11 +289,11 @@
 	<!-- /Services and Specialization -->
 	<!-- Education -->
 	<div class="card">
-		{% do requestForm.education.setRendered %}
+		{% do requestForm.educations.setRendered %}
 		<div class="card-body">
 			<h4 class="card-title">Education</h4>
-			<div class="education-info" data-prototype="{{ '<div class="row form-row education-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.education.vars.prototype.degree.vars.label, requestForm.education.vars.prototype.degree.vars.id,requestForm.education.vars.prototype.degree.vars.full_name,requestForm.education.vars.prototype.degree.vars.value, requestForm.education.vars.prototype.college_institute.vars.label, requestForm.education.vars.prototype.college_institute.vars.id,requestForm.education.vars.prototype.college_institute.vars.full_name,requestForm.education.vars.prototype.college_institute.vars.value, requestForm.education.vars.prototype.year_completion.vars.label, requestForm.education.vars.prototype.year_completion.vars.id,requestForm.education.vars.prototype.year_completion.vars.full_name,requestForm.education.vars.prototype.year_completion.vars.value)|e('html_attr') }}">
-			{% for education in requestForm.education %}
+			<div class="education-info" data-prototype="{{ '<div class="row form-row education-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.educations.vars.prototype.degree.vars.label, requestForm.educations.vars.prototype.degree.vars.id,requestForm.educations.vars.prototype.degree.vars.full_name,requestForm.educations.vars.prototype.degree.vars.value, requestForm.educations.vars.prototype.college_institute.vars.label, requestForm.educations.vars.prototype.college_institute.vars.id,requestForm.educations.vars.prototype.college_institute.vars.full_name,requestForm.educations.vars.prototype.college_institute.vars.value, requestForm.educations.vars.prototype.year_completion.vars.label, requestForm.educations.vars.prototype.year_completion.vars.id,requestForm.educations.vars.prototype.year_completion.vars.full_name,requestForm.educations.vars.prototype.year_completion.vars.value)|e('html_attr') }}">
+			{% for education in requestForm.educations %}
 				<div class="row form-row education-cont">
 					<div class="col-12 col-md-10 col-lg-11">
 						<div class="row form-row">
@@ -324,11 +324,11 @@
 	<!-- /Education -->			
 	<!-- Experience -->
 	<div class="card">
-		{% do requestForm.experience.setRendered %}
+		{% do requestForm.experiences.setRendered %}
 		<div class="card-body">
 			<h4 class="card-title">Experience</h4>
-			<div class="experience-info" data-prototype="{{ '<div class="row form-row experience-cont"><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.experience.vars.prototype.hospital_name.vars.label, requestForm.experience.vars.prototype.hospital_name.vars.id,requestForm.experience.vars.prototype.hospital_name.vars.full_name,requestForm.experience.vars.prototype.hospital_name.vars.value,requestForm.experience.vars.prototype.experience_from.vars.label, requestForm.experience.vars.prototype.experience_from.vars.id,requestForm.experience.vars.prototype.experience_from.vars.full_name,requestForm.experience.vars.prototype.experience_from.vars.value,requestForm.experience.vars.prototype.experience_to.vars.label, requestForm.experience.vars.prototype.experience_to.vars.id,requestForm.experience.vars.prototype.experience_to.vars.full_name,requestForm.experience.vars.prototype.experience_to.vars.value,requestForm.experience.vars.prototype.designation.vars.label, requestForm.experience.vars.prototype.designation.vars.id,requestForm.experience.vars.prototype.designation.vars.full_name,requestForm.experience.vars.prototype.designation.vars.value)|e('html_attr') }}">
-				{% for experience in requestForm.experience %}
+			<div class="experience-info" data-prototype="{{ '<div class="row form-row experience-cont"><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.experiences.vars.prototype.hospital_name.vars.label, requestForm.experiences.vars.prototype.hospital_name.vars.id,requestForm.experiences.vars.prototype.hospital_name.vars.full_name,requestForm.experiences.vars.prototype.hospital_name.vars.value,requestForm.experiences.vars.prototype.experience_from.vars.label, requestForm.experiences.vars.prototype.experience_from.vars.id,requestForm.experiences.vars.prototype.experience_from.vars.full_name,requestForm.experiences.vars.prototype.experience_from.vars.value,requestForm.experiences.vars.prototype.experience_to.vars.label, requestForm.experiences.vars.prototype.experience_to.vars.id,requestForm.experiences.vars.prototype.experience_to.vars.full_name,requestForm.experiences.vars.prototype.experience_to.vars.value,requestForm.experiences.vars.prototype.designation.vars.label, requestForm.experiences.vars.prototype.designation.vars.id,requestForm.experiences.vars.prototype.designation.vars.full_name,requestForm.experiences.vars.prototype.designation.vars.value)|e('html_attr') }}">
+				{% for experience in requestForm.experiences %}
 				<div class="row form-row experience-cont">
 					<div class="col-12 col-md-10 col-lg-11">
 						<div class="row form-row">
@@ -585,14 +585,14 @@ function init(index){
 		},
 		success: function (file, response) {
             var imgName = response.fileName;
-			var img = $('#doctor_profile_settings_form_idClinic_' + index + '_images').val();
+			var img = $('#doctor_profile_settings_form_clinics_' + index + '_images').val();
 			if(img){
 				img = img + ',' + imgName;
 			}
 			else{
 				img = imgName;
 			}
-			$('#doctor_profile_settings_form_idClinic_' + index + '_images').val(img);
+			$('#doctor_profile_settings_form_clinics_' + index + '_images').val(img);
             console.log("2-Successfully uploaded :" + JSON.stringify(imgName));
         }
 	});
@@ -623,14 +623,14 @@ function initUpload(){
 			},
 			success: function (file, response) {
 				var imgName = response.fileName;
-				var img = $('#doctor_profile_settings_form_idClinic_' + index + '_images').val();
+				var img = $('#doctor_profile_settings_form_clinics_' + index + '_images').val();
 				if(img){
 					img = img + ',' + imgName;
 				}
 				else{
 					img = imgName;
 				}
-				$('#doctor_profile_settings_form_idClinic_' + index + '_images').val(img);
+				$('#doctor_profile_settings_form_clinics_' + index + '_images').val(img);
 				console.log("2-Successfully uploaded :" + JSON.stringify(imgName));
 			}
 		}); 
@@ -769,7 +769,7 @@ $(document).ready(function(){
 		}
     });
 });
-{% if requestForm.idClinic is empty %}
+{% if requestForm.clinics is empty %}
 $(document).ready(function(){
 	var newForm = $('.clinic-form').html();
 	newForm = newForm.replace(/__name__/g, 0);

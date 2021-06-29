@@ -533,9 +533,9 @@
                                                 </div>
                                                 
 												{% endif %}
-												{% if doctor.getIdClinic() %}
+												{% if doctor.getClinics() %}
 												<ul class="clinic-gallery">
-													{% for clinic in doctor.getIdClinic()%}
+													{% for clinic in doctor.getClinics()%}
 														{% set imgs = clinic.getImagesArray() %}
 														{% for img in imgs %}
 														<li>
@@ -564,7 +564,7 @@
                 
 							<!-- Schedule Widget -->
 							<div class="card booking-schedule schedule-widget">
-								{% set times = doctor.getIdTiming() %}
+								{% set times = doctor.getTimings() %}
 								{{times|formathomeCalendar(doctor)|raw}}
 							</div>
 							<!-- /Schedule Widget -->

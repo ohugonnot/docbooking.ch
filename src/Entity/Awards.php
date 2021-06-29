@@ -20,17 +20,17 @@ class Awards
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $awards;
+    private ?string $awards;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $year;
+    private ?int $year;
 
     /**
      * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="awards")
      */
-    private $idDoctor;
+    private ?Doctor $doctor;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Awards
         return $this;
     }
 
-    public function getIdDoctor(): ?Doctor
+    public function getDoctor(): ?Doctor
     {
-        return $this->idDoctor;
+        return $this->doctor;
     }
 
-    public function setIdDoctor(?Doctor $idDoctor): self
+    public function setDoctor(?Doctor $doctor): self
     {
-        $this->idDoctor = $idDoctor;
+        $this->doctor = $doctor;
 
         return $this;
     }
