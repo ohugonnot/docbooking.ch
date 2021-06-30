@@ -113,12 +113,12 @@ class DoctorProfileController extends AbstractController
         $patients_is = [];
         $patients = [];
         foreach ($appointments_stat as $appointment) {
-            $patients[] = $appointment->getPatientID()->getId();
+            $patients[] = $appointment->getPatient()->getId();
         }
         $patientsIds = array_unique($patients);
         $patients_today = [];
         foreach ($appointments_today as $appointment) {
-            $patients[] = $appointment->getPatientID()->getId();
+            $patients[] = $appointment->getPatient()->getId();
         }
         $patients_today = array_unique($patients);
         $class = 'account-page';
@@ -787,7 +787,7 @@ class DoctorProfileController extends AbstractController
         $patients_is = [];
         $patients = [];
         foreach ($appointments as $appointment) {
-            $patients[] = $appointment->getPatientID()->getId();
+            $patients[] = $appointment->getPatient()->getId();
         }
         $patientsIds = array_unique($patients);
         $patients = [];

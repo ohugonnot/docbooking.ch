@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class IndexController extends AbstractController
 {
@@ -131,68 +130,74 @@ class IndexController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request, UrlHelper $urlHelper, AppointmentRepository $appointmentRepository)
     {
         $user = $this->getUserFinal();
-        dump($user);
-        $isDoctor = false;
-        if ($user) {
-            $roles = $user->getRoles();
-            if (in_array('ROLE_DOCTOR', $roles)) {
-                $isDoctor = true;
-            }
-        }
+        $isDoctor = $user?$user->isDoctor():false;
+        $q = $request->request->get('search-field-q');
+        $filter_address = $request->request->get('filter_address');
+        $filter_distance = $request->request->get('filter_distance');
 
         $options_other = [];
         $doctorRepository = $this->getDoctrine()->getRepository(Doctor::class);
-        $list_doctors = $doctorRepository->findAll();
-        foreach ($list_doctors as $doctor) {
-            $timingDB = $doctor->getTimings();
+        $doctors = $doctorRepository->findAll();
+        $now = new DateTime('now');
+        foreach ($doctors as $doctor) {
             $next_available = [];
-            foreach ($timingDB as $time) {
+            $find = false;
+            $timings = $doctor->getTimings();
+            $appointments = $doctor->getAppointments();
+            foreach ($timings as $time) {
                 $day = $time->getDay();
                 $year = $time->getYear();
                 $month = $time->getMonth();
-                $times = json_decode($time->getTimes(), true);
+                $date_time = DateTime::createFromFormat('y-m-d G:i',$year . '-' . $month . '-' . $day.' 23:59');
+                if($date_time<$now)
+                    continue;
+                $times = $time->getTimes(true);
                 foreach ($times as $t) {
-                    $exisAppointment = $appointmentRepository->findExistAppointment($year . '-' . $month . '-' . $day, $t['time']);
-                    $dt = date('y-m-d H:i', strtotime($year . '-' . $month . '-' . $day . ' ' . $t['time']));
-                    $datetime = DateTime::createFromFormat('y-m-d H:i', $dt);
-                    $now = new DateTime('now');
-                    if ($t['selected'] && empty($exisAppointment) && $now <= $datetime) {
+                    $date_time = DateTime::createFromFormat('y-m-d G:i',$year . '-' . $month . '-' . $day . ' ' . $t['time']);
+                    $has_appointement = false;
+                    foreach($appointments as $appointment)
+                        if($appointment->getAppDateTime()->getTimestamp() === $date_time->getTimestamp())
+                            $has_appointement = true;
+                    if ($t['selected'] && !$has_appointement && $now <= $date_time) {
                         $next_available[] = [
                             'day' => $day,
                             'year' => $year,
                             'month' => $month,
                             'time' => $t['time'],
-                            'date' => $dt
+                            'date' => $date_time,
+                            'timing'=>$t,
+                            'doctor'=>$doctor,
                         ];
+                        $find = true;
+                        break;
                     }
                 }
+                if($find)
+                    break;
             }
             if ($next_available) {
-                usort($next_available, function ($a, $b) {
-                    return strtotime($a["date"]) - strtotime($b["date"]);
+                usort($next_available, function($a, $b) {
+                    $ad = $a['date'];
+                    $bd = $b['date'];
+                    if ($ad == $bd)
+                        return 0;
+                    return $ad < $bd ? -1 : 1;
                 });
                 $next = $next_available[0];
-                //foreach ($next_available as $next) {
-                $dt = date('y-m-d H:i', strtotime($next['year'] . '-' . $next['month'] . '-' . $next['day'] . ' ' . $next['time']));
-                $str_time = explode(':', $next['time']);
-                $time_seconds = $str_time[0] * 3600 + $str_time[1] * 60;
-                //echo $doctor->getId() . ' ** ' . $dt . ' | ';
                 $filter_all_doctors[] = [
-                    'date' => $dt,
+                    'next_available'=>$next_available,
+                    'doctor'=>$doctor,
+                    'date' => $next['date'],
                     'id' => $doctor->getId()
                 ];
-                //}
             }
         }
-        //Fields search
-        $q = $request->request->get('search-field-q');
-        $filter_address = $request->request->get('filter_address');
-        $filter_distance = $request->request->get('filter_distance');
-        $where_arr = [];
 
+        $where_arr = [];
         if ($q) {
             $where_arr[] = '(a.first_name LIKE \'%' . $q . '%\' OR a.last_name LIKE \'%' . $q . '%\')';
         }
+
         $filter_address_maps = '';
         if ($filter_address) {
             foreach ($filter_address as $d) {
@@ -248,14 +253,14 @@ class IndexController extends AbstractController
         $sql = '';
         $orderBy = '';
         $having = '';
-        if ($request->query->get('dsort') || $filter_distance) {
+        if ($filter_distance || $request->query->get('dsort')) {
             $client = HttpClient::create();
             $response = $client->request('GET', 'http://ip-api.com/json/' . $_SERVER['REMOTE_ADDR']);
             $resp_json = $response->getContent();
             $data = json_decode($resp_json, true);
             $lat = $data['lat'];
             $long = $data['lon'];
-            if ($filter_distance) {
+            if ($filter_distance && $filter_address_maps) {
                 $client = HttpClient::create();
                 $adresse = '';
                 $response = $client->request('GET', 'https://maps.googleapis.com/maps/api/directions/json?origin=' . str_replace(' ', '+', $filter_address_maps) . '&destination=' . str_replace(' ', '+', $filter_address_maps) . '&key=AIzaSyB_fWsdvWvc9pHt-AyXFbl_vz7R7sjrco4');
@@ -266,17 +271,22 @@ class IndexController extends AbstractController
                 $long = isset($localisation['routes'][0]['bounds']['northeast']['lng']) ? $localisation['routes'][0]['bounds']['northeast']['lng'] : 2.2899323;
                 $having = ' HAVING distance < ' . $filter_distance;
             }
-            $sql = sprintf(', ROUND(6353 * 2 * ASIN(SQRT( POWER(SIN((%s - abs(a.latitude)) * pi()/180 / 2),2) + COS(%s * pi()/180 ) * COS( abs(a.latitude) *  pi()/180) * POWER(SIN((%s - a.longitude) *  pi()/180 / 2), 2) )), 2)   AS distance', $lat, $lat, $long, $lat);
-
-
+            $sql = sprintf(', ROUND(6353 * 2 * ASIN(SQRT( POWER(SIN((%s - abs(a.latitude)) * pi()/180 / 2),2) + COS(%s * pi()/180 ) * COS( abs(a.latitude) *  pi()/180) * POWER(SIN((%s - a.longitude) *  pi()/180 / 2), 2) )), 2) AS distance', $lat, $lat, $long, $lat);
             /* (6371 * acos( cos( radians(a.latitude) ) * cos( radians( %s ) ) * cos( radians( %s ) - radians(a.longitude) ) + sin( radians(a.latitude) ) * sin( radians( %s ) )) ) AS distance', $lat, $long, $lat);*/
-            $orderBy = ' ORDER BY distance ASC';
-        } else if ($request->query->get('psort')) {
-            $orderBy = ' ORDER BY a.price_custom_value ' . ucwords($request->query->get('psort'));
-        } else if ($request->query->get('svsort')) {
+            $orderBy = ' distance ASC';
+        }
+        else if ($request->query->get('psort')) {
+            $orderBy = ' a.price_custom_value ' . ucwords($request->query->get('psort'));
+        }
+        if($request->query->get('svsort') || (!$request->query->get('psort') && !$request->query->get('dsort'))) {
+            $request->query->set('svsort','true');
             $filter_all_doctors = $filter_all_doctors ?? [];
-            usort($filter_all_doctors, function ($a, $b) {
-                return strtotime($a["date"]) - strtotime($b["date"]);
+            usort($filter_all_doctors, function($a, $b) {
+                $ad = $a['date'];
+                $bd = $b['date'];
+                if ($ad == $bd)
+                    return 0;
+                return $ad < $bd ? -1 : 1;
             });
             $ids = [];
             foreach ($filter_all_doctors as $id) {
@@ -284,9 +294,12 @@ class IndexController extends AbstractController
             }
             $reversed = array_reverse($ids);
             if (!empty($reversed))
-                $orderBy = ' ORDER BY FIELD(a.id,' . implode(',', $reversed) . ') DESC';
+                if(empty($orderBy))
+                    $orderBy = ' FIELD(a.id,' . implode(',', $reversed) . ') DESC';
+                else
+                    $orderBy = ' FIELD(a.id,' . implode(',', $reversed) . ') DESC, '.$orderBy;
         }
-
+        $orderBy = (!empty($orderBy))?' ORDER BY '.$orderBy:'';
         $dql = "SELECT a" . $sql . " FROM App:Doctor a" . $where . $having . $orderBy;
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery($dql);
@@ -299,7 +312,6 @@ class IndexController extends AbstractController
         $allDoctors = [];
         $limit = 1;
         foreach ($pagination as $doctor) {
-            //var_dump($doctor);die;
             if (is_array($doctor)) {
                 $doctor = $doctor[0];
             }
@@ -362,58 +374,6 @@ class IndexController extends AbstractController
                 $limit++;
             }
         }
-        $doctors_array_to_json = [];
-        foreach ($list_doctors as $doctor) {
-            $doctors_array_to_json[] = [
-                $doctor->getId(),
-                $doctor->getEmail(),
-                $doctor->getFirstName(),
-                $doctor->getLastName(),
-                $doctor->getGender(),
-                $doctor->getPhoneNumber(),
-                $doctor->getDateBirth(),
-                $doctor->getAboutMe(),
-                $doctor->getAddressLine1(),
-                $doctor->getAddressLine2(),
-                $doctor->getCity(),
-                $doctor->getState(),
-                $doctor->getCountry(),
-                $doctor->getPostalCode(),
-                $doctor->getPictureProfile(),
-                $doctor->getReceivingPatientInfo(),
-                $doctor->getServices(),
-                $doctor->getSpecialization(),
-                $doctor->getCreateAt(),
-                $doctor->getUpdatedAt(),
-                $doctor->getPriceCustomValue(),
-                $doctor->getPriceType(),
-                $doctor->getUsername(),
-                $doctor->getRoles(),
-                $doctor->getPassword(),
-                $doctor->getSalt(),
-                $doctor->getDoctorSocial(),
-                $doctor->getTimings(),
-                $doctor->getClinics(),
-                $doctor->getEducations(),
-                $doctor->getExperiences(),
-                $doctor->getAwards(),
-                $doctor->getRegistrations(),
-                $doctor->getAppointments(),
-                $doctor->getSpeciality(),
-                $doctor->getBusinessHours(),
-                $doctor->getBusinessHoursArray(),
-                $doctor->getLatitude(),
-                $doctor->getLongitude(),
-                $doctor->getUrlProfile(),
-                $doctor->getSlug(),
-                $doctor->getSpokenLanguages(),
-                $doctor->getTitle(),
-                $doctor->getFormattedAddress(),
-                $doctor->getFormattedAddress2(),
-                $doctor->getLangOther(),
-                $doctor->getDisplayLanguage()
-            ];
-        }
         $class = '';
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
@@ -438,7 +398,6 @@ class IndexController extends AbstractController
             'filter_province_code' =>    /*$data_location['province_code']*/ [],
             'filter_community' =>    /*$data_location['community']*/ [],
             'filter_community_code' =>    /*$data_location['community_code']*/ [],
-            'doctors_array_to_json' => $doctors_array_to_json
         ]);
     }
 

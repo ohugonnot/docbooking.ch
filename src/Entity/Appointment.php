@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity(repositoryClass=AppointmentRepository::class)
@@ -66,16 +68,6 @@ class Appointment
     private ?DateTimeInterface $date_paied;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="appointments")
-     */
-    private ?Patient $patientID;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="appointments")
-     */
-    private ?Doctor $doctor;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $orderID;
@@ -95,6 +87,15 @@ class Appointment
      */
     private ?DateTimeInterface $create_time;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="appointments")
+     */
+    private ?Patient $patient;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Doctor::class, inversedBy="appointments")
+     */
+    private ?Doctor $doctor;
 
     public function getId(): ?int
     {
@@ -173,14 +174,14 @@ class Appointment
         return $this;
     }
 
-    public function getPatientID(): ?Patient
+    public function getPatient(): ?Patient
     {
-        return $this->patientID;
+        return $this->patient;
     }
 
-    public function setPatientID(?Patient $patientID): self
+    public function setPatient(?Patient $patient): self
     {
-        $this->patientID = $patientID;
+        $this->patient = $patient;
 
         return $this;
     }
@@ -274,5 +275,13 @@ class Appointment
         $date = $this->app_date;
         $time = $this->app_time;
         return $date->format("Y-m-d") . " " . $time->format("H:i:s");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAppDateTime() : DateTime
+    {
+        return new DateTime($this->app_date->format('Y-m-d') .' ' .$this->app_time->format('H:i:s'));
     }
 }

@@ -138,13 +138,13 @@ class Doctor implements UserInterface
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    private ?DateTime $create_at;
+    private $create_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
-    private ?DateTime $updated_at;
+    private $updated_at;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -187,7 +187,7 @@ class Doctor implements UserInterface
     private ?DoctorSocial $doctorSocial;
 
     /**
-     * @ORM\OneToMany(targetEntity=Timing::class, mappedBy="doctor", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Timing::class, mappedBy="doctor", cascade={"persist", "remove"}, fetch="EAGER")
      */
     private Collection $timings;
 
@@ -222,7 +222,7 @@ class Doctor implements UserInterface
     private Collection $registrations;
 
     /**
-     * @ORM\OneToMany(targetEntity=Appointment::class, mappedBy="doctor", cascade={"persist", "remove"} )
+     * @ORM\OneToMany(targetEntity=Appointment::class, mappedBy="doctor", cascade={"persist", "remove"}, fetch="EAGER" )
      */
     private Collection $appointments;
 
@@ -968,6 +968,15 @@ class Doctor implements UserInterface
         $this->lang_other = $lang_other;
 
         return $this;
+    }
+
+    public function isDoctor() : bool
+    {
+        $roles = $this->getRoles();
+        if (in_array('ROLE_DOCTOR', $roles)) {
+            return true;
+        }
+        return false;
     }
 
 

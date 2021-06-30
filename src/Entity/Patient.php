@@ -28,73 +28,73 @@ class Patient implements UserInterface, Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $first_name;
+    private string $first_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $last_name;
+    private string $last_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $blood_group;
+    private ?string $blood_group;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true, nullable=false)
      */
-    private $email;
+    private string $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", nullable=false)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $phone_number;
+    private string $phone_number;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $date_birth;
+    private ?DateTime $date_birth;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
+    private ?string $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $city;
+    private ?string $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $state;
+    private ?string $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $country;
+    private ?string $country;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $postal_code;
+    private ?string $postal_code;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $picture_profile;
+    private ?string $picture_profile;
 
     /**
      * @ORM\Column(type="simple_array", nullable=false)
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -109,21 +109,20 @@ class Patient implements UserInterface, Serializable
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Appointment::class, cascade={"persist", "remove"}, mappedBy="patientID")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $insurance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $insurance_num;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Appointment::class, cascade={"persist", "remove"}, mappedBy="patient")
      * @ORM\OrderBy({"app_date" = "DESC"})
      */
-    private $appointments;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $insurance;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $insurance_num;
-
+    private Collection $appointments;
 
     public function __construct()
     {
@@ -135,7 +134,6 @@ class Patient implements UserInterface, Serializable
         $format = "Question (id: %s)\n";
         return sprintf($format, $this->id);
     }
-
 
     public function getId(): ?int
     {
@@ -254,7 +252,17 @@ class Patient implements UserInterface, Serializable
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->email;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 
     /**
@@ -282,7 +290,7 @@ class Patient implements UserInterface, Serializable
      */
     public function getPassword(): string
     {
-        return (string)$this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -310,7 +318,7 @@ class Patient implements UserInterface, Serializable
     }
 
     /** @see \Serializable::serialize() */
-    public function serialize()
+    public function serialize(): ?string
     {
         return serialize(array(
             $this->id,
@@ -336,7 +344,7 @@ class Patient implements UserInterface, Serializable
     }
 
     /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
+    public function unserialize($serialized) : void
     {
         list (
             $this->id,
@@ -373,7 +381,7 @@ class Patient implements UserInterface, Serializable
     {
         if (!$this->appointments->contains($appointment)) {
             $this->appointments[] = $appointment;
-            $appointment->setPatientID($this);
+            $appointment->setPatient($this);
         }
 
         return $this;
@@ -384,8 +392,8 @@ class Patient implements UserInterface, Serializable
         if ($this->appointments->contains($appointment)) {
             $this->appointments->removeElement($appointment);
             // set the owning side to null (unless already changed)
-            if ($appointment->getPatientID() === $this) {
-                $appointment->setPatientID(null);
+            if ($appointment->getPatient() === $this) {
+                $appointment->setPatient(null);
             }
         }
 
@@ -395,7 +403,6 @@ class Patient implements UserInterface, Serializable
     public function getFormattedAddress2()
     {
         $state = $this->getState();
-        $country = $this->getCountry();
         $address = $this->getAddress();
         $code_postale = $this->getPostalCode();
         $formated_address = $address . ',' . $code_postale . ' ' . $state;
@@ -475,5 +482,9 @@ class Patient implements UserInterface, Serializable
         $this->insurance_num = $insurance_num;
 
         return $this;
+    }
+    public function isDoctor() : bool
+    {
+        return false;
     }
 }

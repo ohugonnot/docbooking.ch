@@ -15,7 +15,7 @@
 		  gtag('config', 'UA-158937519-1');
 		</script>
 		<!--<meta http-equiv="refresh" content="300">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 		<title>{% block title %}DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only{% endblock %}</title>
 		<!-- Favicons -->
 		<link href="assets/img/favicon.png" rel="icon">
@@ -109,7 +109,7 @@
 						<li class="nav-item">
 							{% if app.user %}
 								<div class="btn-group">
-									<button type="button" class="btn header-login">WELCOME {{ app.user.firstname }} {{ app.user.lastname }},</button>
+									<button type="button" class="btn header-login">{{ app.user.firstname }} {{ app.user.lastname }},</button>
 									<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="sr-only">Toggle Dropdown</span>
 									</button>

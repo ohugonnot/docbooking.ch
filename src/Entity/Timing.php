@@ -108,8 +108,19 @@ class Timing
         return $d->format('M');
     }
 
-    public function getTimes(): ?string
+    public function getTimes(bool $decode=false)
     {
+        if($decode)
+        {
+            $times = json_decode($this->times,true);
+            foreach($times as $k=>$time)
+            {
+                $temp = explode(':',$time['time']);
+                $temp[1] = str_pad($temp[1], 2, '0');
+                $times[$k]['time'] = implode(':',$temp);
+            }
+            return $times;
+        }
         return $this->times;
     }
 

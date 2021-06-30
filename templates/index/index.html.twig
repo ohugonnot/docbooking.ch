@@ -139,9 +139,11 @@
     border-radius: 2px;
 }
 .select2-container{
-	display: flex;
-    flex-wrap: wrap;
-    width: 100% !important;
+	/*
+		display: flex;
+	    flex-wrap: wrap;
+    	width: 100% !important;
+	 */
 }
 .selection{
 	width: 100% !important;
@@ -165,19 +167,15 @@
 		<h1 style="text-align:center">I Want to Book a Healthcare Professional</h1>
 	</div>
 
-	<!-- Map -->
-	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12" style="padding: 0px 0px">
 		<br>
 		<div id="map" class="map-listing"></div>
-		<br>
 	</div>
-	<!-- /Map -->
 
-	<!-- Breadcrumb -->
 	<div class="breadcrumb-bar">
 		<div class="container-fluid">
 			<div class="row align-items-center">
-				<div class="col-md-8 col-8">
+				<div class="col-md-8 col-sm-12">
 					<nav aria-label="breadcrumb" class="page-breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">Home</a></li>
@@ -186,17 +184,17 @@
 					</nav>
 					<h2 class="breadcrumb-title">{{ pagination.getTotalItemCount() }} matches</h2>
 				</div>
-				<div class="col-md-4 col-4">
+				<div class="col-md-4 col-sm-12">
 					<div class="sort-by">
 						{# sorting of properties based on query components #}
 						<span class="sort-title">Sort by</span>
 						<span class="sortby-filter">
-							<select name="sort" id="dlproSort" class="select">
+							<select name="sort" id="dlproSort" class="select" style="min-width: 250px">
 								<option>Select</option>
-								<option class="sortable" data-href="/?svsort=true" title="Shortest Waiting for Visit" value="Shortest Waiting for Visit">Shortest Waiting for Visit</option>
-                                <option class="sortable" data-href="/?dsort=true" title="Shortest Distance" value="Shortest Distance">Shortest Distance</option>
-								<option class="sortable" data-href="/?psort=asc" title="Lowest Price" value="Lowest Price">Lowest Price</option>
-								<option class="sortable" data-href="/?psort=desc" title="Highest Price" value="Highest Price">Highest Price</option>
+								<option {% if app.request.get('svsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?svsort=true" title="Shortest Waiting for Visit" value="Shortest Waiting for Visit">Shortest Waiting for Visit</option>
+                                <option {% if app.request.get('dsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?dsort=true" title="Shortest Distance" value="Shortest Distance">Shortest Distance</option>
+								<option {% if app.request.get('psort') == 'asc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=asc" title="Lowest Price" value="Lowest Price">Lowest Price</option>
+								<option {% if app.request.get('psort') == 'desc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=desc" title="Highest Price" value="Highest Price">Highest Price</option>
 							</select>
 						</span>
 					</div>
@@ -204,13 +202,25 @@
 			</div>
 		</div>
 	</div>
-	<!-- /Breadcrumb -->
-	<!-- Page Content -->
+
+	<section class="section section-search">
+		<div class="container-fluid">
+			<div class="banner-wrapper">
+				<div class="search-box">
+					<div class="form-group search-info">
+						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="Search by Doctor Name" value="{{q}}">
+						<div class="Typeahead-menu"></div>
+					</div>
+					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-                    <br>
                         <h1 style="text-align:center">I Select</h1>
                     <br>
 					<!-- Search Filter -->
@@ -436,7 +446,6 @@
           		</div>
 
 				<div class="col-md-12 col-lg-8 col-xl-9">
-                    <br>
 					<h1 style="text-align:center">I Book my Healthcare Professional</h1>
                     <br>
                     <div class="load-more text-center dlpro-pagination">
@@ -593,30 +602,7 @@
 				</div>
 			</div>
 		<!-- /MEDoctor -->
-        
-        <!-- Keyword Search -->
-
-			<section class="section section-search">
-		          <div class="container-fluid">
-			         <div class="banner-wrapper">
-				        <div class="search-box">
-					       <div class="form-group search-info">
-						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="Search by Doctor Name" value="{{q}}">
-						<div class="Typeahead-menu"></div>
-					       </div>
-						<br>
-					       <button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
-				        </div>
-			         </div>
-		          </div>
-			</section>
-            <br>
-            <br>
-        <!-- /Keyword Search -->
-        
 	</div>
-
-	<!-- /Page Content -->
 {% endblock %}
 {% block javascripts %}
 <script type="text/javascript">
@@ -754,99 +740,101 @@ $(document).ready(function(){
 	}
 });
 </script>
+{% verbatim %}
 <script id="result-template" type="text/x-handlebars-template">
-	<div class="ProfileCard u-cf" onClick="window.location.replace('https://www.docbooking.ch/doctor/{{'{{slug}}'}}.html');">
-		<img class="ProfileCard-avatar" src="{{ '{{' }}picture_profile{{ '}}' }}" loading="lazy">
+	<div class="ProfileCard u-cf" onClick="window.location.replace('https://www.docbooking.ch/doctor/{{slug}}.html');">
+		<img class="ProfileCard-avatar" src="{{picture_profile}}" loading="lazy">
 		<div class="ProfileCard-details">
-			<div class="ProfileCard-realName">{{ '{{' }}first_name{{ '}}' }}&nbsp;{{ '{{' }}last_name{{ '}}' }}</div>
-			<div class="ProfileCard-languages">{{ '{{' }}spoken_languages{{ '}}' }}</div>
+			<div class="ProfileCard-realName">{{first_name}}&nbsp;{{last_name}}</div>
+			<div class="ProfileCard-languages">{{spoken_languages}}</div>
 			<div class="ProfileCard-description">
-				{{ '{{#if (eq speciality "General Practitioner")}}' }}
+				{{#if (eq speciality "General Practitioner")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5> 
-				{{ '{{else if (eq speciality "Urologist")}}' }}
+				{{else if (eq speciality "Urologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Neurologist")}}' }}
+				{{else if (eq speciality "Neurologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-10.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Dentist")}}' }}
+				{{else if (eq speciality "Dentist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Dental Hygienist")}}' }}
+				{{else if (eq speciality "Dental Hygienist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Orthopedist")}}' }}
+				{{else if (eq speciality "Orthopedist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Cardiologist")}}' }}
+				{{else if (eq speciality "Cardiologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Psychologist")}}' }}
+				{{else if (eq speciality "Psychologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Nutritionist-Dietician")}}' }}
+				{{else if (eq speciality "Nutritionist-Dietician")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-08.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Alternative/Natural Medicine")}}' }}
+				{{else if (eq speciality "Alternative/Natural Medicine")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-12.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Pediatrician")}}' }}
+				{{else if (eq speciality "Pediatrician")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-13.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Dermatologist / Aesthetics")}}' }}
+				{{else if (eq speciality "Dermatologist / Aesthetics")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-11.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Gynecologist")}}' }}
+				{{else if (eq speciality "Gynecologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-14.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Physiotherapist")}}' }}
+				{{else if (eq speciality "Physiotherapist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-07.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else if (eq speciality "Ophtalmologist")}}' }}
+				{{else if (eq speciality "Ophtalmologist")}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-09.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{speciality}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{else}}'}}
+				{{else}}
 					<h5 class="doc-department">
 						<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">
-						{{ '{{' }}speciality{{ '}}' }}
+						{{speciality}}
 					</h5>
-				{{ '{{/if}}' }}
+				{{/if}}
 			</div>
-			<div class="ProfileCard-address">{{ '{{' }}description{{ '}}' }}</div>
+			<div class="ProfileCard-address">{{description}}</div>
         </div>
     </div>
 </script>
+{% endverbatim %}
 <script>
 $('.searchbar-place-around-me-icon').on('click', function(e){
 	if(!$('.searchbar-place-around-me-button').hasClass('searchbar-place-around-me-button-enabled')){
@@ -876,7 +864,7 @@ $(document).ready(function(){
 	$('select[name="filter_distance"]').val('{{filter_distance}}').trigger('change');
 	{% endif %}
 	{%if filter_address %}
-	$('.js-filter-address-basic-multiple').select2('val', {{filter_address|json_encode()|raw}}).trigger('change');
+	$('.js-filter-address-basic-multiple').select2('val', {{filter_address|json_encode()|raw}});
 	{% endif %}
 	$('#search-q-submit').on('click', function(){
 		$('#search-field-q').val($('#search-doctor-field').val());

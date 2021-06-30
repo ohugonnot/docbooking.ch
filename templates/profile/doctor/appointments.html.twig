@@ -15,15 +15,15 @@
 		<div class="appointment-list">
 			<div class="profile-info-widget">
 				<a href="patient-profile.html" class="booking-doc-img">
-					<img src="{% if appointment.getPatientID().getPictureProfile() %}{{appointment.getPatientID().getPictureProfile()}}{% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
+					<img src="{% if appointment.getPatient().getPictureProfile() %}{{appointment.getPatient().getPictureProfile()}}{% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
 				</a>
 				<div class="profile-det-info">
-					<h3><a href="patient-profile.html">{{appointment.getPatientID().getFirstName()}} {{appointment.getPatientID().getLastName()}}</a></h3>
+					<h3><a href="patient-profile.html">{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}</a></h3>
 					<div class="patient-details">
 						<h5><i class="far fa-clock"></i> {{appointment.getAppDate().format('j M Y')}}, {{appointment.getAppTime().format('H:i')}}</h5>
-						<h5><i class="fas fa-map-marker-alt"></i> {{appointment.getPatientID().getState()}}, {{appointment.getPatientID().getCountry()}}</h5>
-						<h5><i class="fas fa-envelope"></i> {{appointment.getPatientID().getEmail()}}</h5>
-						<h5 class="mb-0"><i class="fas fa-phone"></i> {{appointment.getPatientID().getPhoneNumber()}}</h5>
+						<h5><i class="fas fa-map-marker-alt"></i> {{appointment.getPatient().getState()}}, {{appointment.getPatient().getCountry()}}</h5>
+						<h5><i class="fas fa-envelope"></i> {{appointment.getPatient().getEmail()}}</h5>
+						<h5 class="mb-0"><i class="fas fa-phone"></i> {{appointment.getPatient().getPhoneNumber()}}</h5>
 					</div>
 				</div>
 			</div>
@@ -107,14 +107,14 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Booking confirmed For</strong>
 												<p class="invoice-details">
-													{{appointment.getPatientID().getFirstName()}} {{appointment.getPatientID().getLastName()}}<br>
-													{% if appointment.getPatientID().getInsurance() %}
-													Insurance {{appointment.getPatientID().getInsurance()}}: {{appointment.getPatientID().getInsuranceNum()}}<br>
+													{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}<br>
+													{% if appointment.getPatient().getInsurance() %}
+													Insurance {{appointment.getPatient().getInsurance()}}: {{appointment.getPatient().getInsuranceNum()}}<br>
 													{% endif %}
-													{{appointment.getPatientID().getAddress()}} <br>
-													{{appointment.getPatientID().getPostalCode()}}, {{appointment.getPatientID().getCity()}} <br>
-													{{appointment.getPatientID().getPhoneNumber()}} <br>
-													{{appointment.getPatientID().getEmail()}} <br>
+													{{appointment.getPatient().getAddress()}} <br>
+													{{appointment.getPatient().getPostalCode()}}, {{appointment.getPatient().getCity()}} <br>
+													{{appointment.getPatient().getPhoneNumber()}} <br>
+													{{appointment.getPatient().getEmail()}} <br>
 												</p>
 											</div>
 										</div>

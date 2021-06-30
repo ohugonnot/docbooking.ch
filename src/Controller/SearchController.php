@@ -74,8 +74,7 @@ class SearchController extends AbstractController
                 $doctor->getDisplayLanguage()
             ];*/
         }
-        $response = new JsonResponse($doctors_array);
-        return $response;
+        return new JsonResponse($doctors_array);
     }
 
     /**
@@ -304,8 +303,13 @@ class SearchController extends AbstractController
     {
         $q = $request->query->get('q');
         $doctors = $doctorRepository->findBySearchField($q);
-        //var_dump($doctors);die;
-        $response = new JsonResponse($doctors);
-        return $response;
+        foreach($doctors as $k=>$doctor)
+        {
+            if(!$doctor['picture_profile'])
+                $doctors[$k]['picture_profile']='/assets/img/doctor-default.jpg';
+            if(!empty($doctor['spoken_languages']))
+                $doctors[$k]['spoken_languages']= implode(', ',$doctor['spoken_languages']);
+        }
+        return new JsonResponse($doctors);
     }
 }
