@@ -332,7 +332,7 @@
 										<div class="dl1e6-0 cmCNPn">
 											<div class="bkivry-0 jQpQPf">
 												<div class="bkivry-0 j3cl20-0 vxeagd-0 egmZCc">
-													<select id="form-field-1" name="filter_address[]" data-placeholder="town, canton, region" multiple="multiple" class="sc-1od3ffh-0 kqWqou js-filter-address-basic-multiple" tabindex="8">
+													<select id="form-field-1" name="filter_address[]" data-placeholder="town" multiple="multiple" class="sc-1od3ffh-0 kqWqou js-filter-address-basic-multiple" tabindex="8">
 														<option value=""></option>
 														{%for city in filter_place%}
 															<option value="{{city}}">{{city}}</option>
@@ -597,7 +597,7 @@
                 	<br>
 				<div class="blog grid-blog">
 					<div class="center-object">
-						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="730"></iframe>
+						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="550"></iframe>
 					</div>
 				</div>
 			</div>
@@ -864,7 +864,7 @@ $(document).ready(function(){
 	$('select[name="filter_distance"]').val('{{filter_distance}}').trigger('change');
 	{% endif %}
 	{%if filter_address %}
-	$('.js-filter-address-basic-multiple').select2('val', {{filter_address|json_encode()|raw}});
+		$('.js-filter-address-basic-multiple').val({{filter_address|json_encode()|raw}}).change();
 	{% endif %}
 	$('#search-q-submit').on('click', function(){
 		$('#search-field-q').val($('#search-doctor-field').val());
