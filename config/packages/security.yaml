@@ -1,10 +1,10 @@
 security:
-    encoders:
+    enable_authenticator_manager: true
+    password_hashers:
         App\Entity\Patient:
             algorithm: auto
         App\Entity\Doctor:
             algorithm: auto
-
 
     role_hierarchy:
         ROLE_PATIENT:     ROLE_USER
@@ -33,7 +33,7 @@ security:
         patient:
             pattern: ^/patient/
             provider: app_patient_provider
-            anonymous: true
+            #anonymous: true
             guard:
                 authenticators:
                     - App\Security\PatientAuthenticator
@@ -47,7 +47,7 @@ security:
         doctor:
             pattern: ^/doctor/
             provider: app_doctor_provider
-            anonymous: true
+            #anonymous: true
             guard:
                 authenticators:
                     - App\Security\DoctorAuthenticator
@@ -59,7 +59,8 @@ security:
                 lifetime: 604800 # 1 week in seconds
                 path:     /
         main:
-            anonymous: lazy
+            #anonymous: true
+            lazy: true
                 # where to redirect after logout
                 # target: app_any_route
             # activate different ways to authenticate
