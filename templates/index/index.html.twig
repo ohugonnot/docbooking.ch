@@ -203,19 +203,6 @@
 		</div>
 	</div>
 
-	<section class="section section-search">
-		<div class="container-fluid">
-			<div class="banner-wrapper">
-				<div class="search-box">
-					<div class="form-group search-info">
-						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="Search by Doctor Name" value="{{q}}">
-						<div class="Typeahead-menu"></div>
-					</div>
-					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<div class="content">
 		<div class="container-fluid">
@@ -589,6 +576,24 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Search by Doctor Name -->
+
+	<section class="section section-search">
+		<div class="container-fluid">
+			<div class="banner-wrapper">
+				<div class="search-box">
+					<div class="form-group search-info">
+						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="Search by Doctor Name" value="{{q}}">
+						<div class="Typeahead-menu"></div>
+					</div>
+					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+		<!-- /Search by Doctor Name -->
         
 		<!-- MEDoctor -->
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
@@ -597,7 +602,7 @@
                 	<br>
 				<div class="blog grid-blog">
 					<div class="center-object">
-						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="550"></iframe>
+						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="740"></iframe>
 					</div>
 				</div>
 			</div>
@@ -835,6 +840,7 @@ $(document).ready(function(){
     </div>
 </script>
 {% endverbatim %}
+
 <script>
 $('.searchbar-place-around-me-icon').on('click', function(e){
 	if(!$('.searchbar-place-around-me-button').hasClass('searchbar-place-around-me-button-enabled')){
