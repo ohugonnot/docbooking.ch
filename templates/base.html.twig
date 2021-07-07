@@ -43,7 +43,7 @@
 		<![endif]-->
 		{% block stylesheets %}{% endblock %}
 	</head>
-	<body class="{{ classBody }}">
+	<body class="{{ classBody | default('') }}">
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 			<header class="header">
@@ -109,7 +109,7 @@
 						<li class="nav-item">
 							{% if app.user %}
 								<div class="btn-group">
-									<button type="button" class="btn header-login">{{ app.user.firstname }} {{ app.user.lastname }},</button>
+									<button type="button" class="btn header-login">{{ app.user.firstname | default('') }} {{ app.user.lastname | default('') }},</button>
 									<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<span class="sr-only">Toggle Dropdown</span>
 									</button>

@@ -5,17 +5,18 @@ security:
             algorithm: auto
         App\Entity\Doctor:
             algorithm: auto
+        App\Entity\Admin:
+            algorithm: auto
 
     role_hierarchy:
         ROLE_PATIENT:     ROLE_USER
         ROLE_DOCTOR:      ROLE_USER
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_DOCTOR, ROLE_PATIENT]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_patient_provider:
             entity:
                 class: App\Entity\Patient
@@ -24,8 +25,10 @@ security:
             entity:
                 class: App\Entity\Doctor
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -58,6 +61,20 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+        admin:
+            pattern: ^/admin/
+            provider: app_admin_provider
+            #anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\AdminAuthenticator
+            logout:
+                path:   app_admin_logout
+                target: app_admin_login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
         main:
             #anonymous: true
             lazy: true
@@ -72,7 +89,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/patient/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/patient/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/doctor/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Admin;
 use App\Entity\Doctor;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,11 +21,11 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class DoctorAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class AdminAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_doctor_login';
+    public const LOGIN_ROUTE = 'app_admin_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -67,7 +68,7 @@ class DoctorAuthenticator extends AbstractFormLoginAuthenticator implements Pass
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Doctor::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(Admin::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error

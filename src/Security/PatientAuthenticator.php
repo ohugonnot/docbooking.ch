@@ -92,18 +92,13 @@ class PatientAuthenticator extends AbstractFormLoginAuthenticator implements Pas
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey))
             return new RedirectResponse($targetPath);
-        }
-		
 		$redirect_to = $request->request->get('redirect_to');
-		
-		if($redirect_to){
+		if($redirect_to)
 			return new RedirectResponse($redirect_to);
-		}
-		else{
+		else
 			return new RedirectResponse($this->urlGenerator->generate('app_patient_dashboard'));
-		}
     }
 
     protected function getLoginUrl()
