@@ -91,7 +91,7 @@ class AdminSecurityController extends AbstractController
     public function appointments(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>g'DESC']);
+        $appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>'DESC']);
         return $this->render('admin/appointments.html.twig',['appointments'=>$appointments]);
     }
 }
