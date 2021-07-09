@@ -29,6 +29,9 @@ security:
             entity:
                 class: App\Entity\Admin
                 property: email
+        all_users:
+            chain:
+                providers: [ 'app_patient_provider', 'app_doctor_provider', 'app_admin_provider' ]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -75,6 +78,7 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: all_users }
         main:
             #anonymous: true
             lazy: true
