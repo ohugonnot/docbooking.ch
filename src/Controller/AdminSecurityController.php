@@ -62,7 +62,15 @@ class AdminSecurityController extends AbstractController
      */
     public function dashboard(): Response
     {
-        return $this->render('security/admin/page.html.twig',[]);
+        $em = $this->getDoctrine()->getManager();
+        $nb_doctors = $em->getRepository(Doctor::class)->count([]);
+        $nb_patients = $em->getRepository(Patient::class)->count([]);
+        $nb_appointments = $em->getRepository(Appointment::class)->count([]);
+        return $this->render('security/admin/page.html.twig',[
+            'nb_doctors' => $nb_doctors,
+            'nb_patients' => $nb_patients,
+            'nb_appointments' => $nb_appointments,
+        ]);
     }
 
     /**
