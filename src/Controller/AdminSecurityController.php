@@ -57,8 +57,32 @@ class AdminSecurityController extends AbstractController
     /**
      * @Route("/admin/dashboard", name="app_admin_dashboard")
      */
-    public function dashboard()
+    public function dashboard(): Response
     {
         return $this->render('security/admin/page.html.twig',[]);
+    }
+
+    /**
+     * @Route("/admin/doctors", name="app_admin_doctors")
+     */
+    public function doctors(): Response
+    {
+        return $this->render('admin/doctors.html.twig',[]);
+    }
+
+    /**
+     * @Route("/admin/patients", name="app_admin_patients)
+     */
+    public function patients(): Response
+    {
+        return $this->render('admin/patients.html.twig',[]);
+    }
+
+    /**
+     * @Route("/admin/appointments", name="app_admin_appointments")
+     */
+    public function appointments(): Response
+    {
+        return $this->render('admin/appointments.html.twig',[]);
     }
 }
