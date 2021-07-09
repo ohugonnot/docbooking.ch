@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Entity\Appointment;
+use App\Entity\Doctor;
+use App\Entity\Patient;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,15 +70,19 @@ class AdminSecurityController extends AbstractController
      */
     public function doctors(): Response
     {
-        return $this->render('admin/doctors.html.twig',[]);
+        $em = $this->getDoctrine()->getManager();
+        $doctors = $em->getRepository(Doctor::class)->findBy([],['first_name'=>'ASC']);
+        return $this->render('admin/doctors.html.twig',['doctors'=>$doctors]);
     }
 
     /**
-     * @Route("/admin/patients", name="app_admin_patients)
+     * @Route("/admin/patients", name="app_admin_patients")
      */
     public function patients(): Response
     {
-        return $this->render('admin/patients.html.twig',[]);
+        $em = $this->getDoctrine()->getManager();
+        $patients = $em->getRepository(Patient::class)->findBy([],['first_name'=>'ASC']);
+        return $this->render('admin/patients.html.twig',['patients'=>$patients]);
     }
 
     /**
@@ -83,6 +90,8 @@ class AdminSecurityController extends AbstractController
      */
     public function appointments(): Response
     {
-        return $this->render('admin/appointments.html.twig',[]);
+        $em = $this->getDoctrine()->getManager();
+        $appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>g'DESC']);
+        return $this->render('admin/appointments.html.twig',['appointments'=>$appointments]);
     }
 }
