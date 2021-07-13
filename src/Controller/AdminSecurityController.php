@@ -66,10 +66,16 @@ class AdminSecurityController extends AbstractController
         $nb_doctors = $em->getRepository(Doctor::class)->count([]);
         $nb_patients = $em->getRepository(Patient::class)->count([]);
         $nb_appointments = $em->getRepository(Appointment::class)->count([]);
-        return $this->render('security/admin/page.html.twig',[
+        $last_patients = $em->getRepository(Patient::class)->findBy([],['create_at'=>'DESC'],5);
+        $last_doctors = $em->getRepository(Doctor::class)->findByLastAppointement();
+        $last_appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>'DESC'],5);
+        return $this->render('/admin/page.html.twig',[
             'nb_doctors' => $nb_doctors,
             'nb_patients' => $nb_patients,
             'nb_appointments' => $nb_appointments,
+            'last_patients' => $last_patients,
+            'last_doctors' => $last_doctors,
+            'last_appointments' => $last_appointments,
         ]);
     }
 

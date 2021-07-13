@@ -82,6 +82,18 @@ class DoctorRepository extends ServiceEntityRepository implements PasswordUpgrad
         ;
     }
 
+    public function findByLastAppointement()
+    {
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.appointments', 'a')
+            ->groupBy('d.id')
+            ->orderBy('a.create_time', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Doctor
     {
