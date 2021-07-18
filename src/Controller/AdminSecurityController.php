@@ -9,6 +9,7 @@ use App\Entity\Patient;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use LogicException;
+use PhpParser\Comment\Doc;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,8 +89,7 @@ class AdminSecurityController extends AbstractController
      */
     public function doctors(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $dql   = "SELECT d FROM App:Doctor d";
-        $query = $em->createQuery($dql);
+        $query = $em->getRepository(Doctor::class)->createQueryBuilder('d');
         $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(

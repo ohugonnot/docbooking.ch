@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th {% if pagination.isSorted('d.lastName') %} class="sorted"{% endif %}>
-                                            {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.lastName') }}
+                                            {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.last_name') }}
                                         </th>
                                         <th {% if pagination.isSorted('d.city') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'City', 'd.city') }}
@@ -56,7 +56,7 @@
                                             {{ knp_pagination_sortable(pagination, 'Speciality', 'd.speciality') }}
                                         </th>
                                         <th {% if pagination.isSorted('d.phoneNumber') %} class="sorted"{% endif %}>
-                                            {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phoneNumber') }}
+                                            {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phone_number') }}
                                         </th>
                                         <th>Actions</th>
                                     </tr>
