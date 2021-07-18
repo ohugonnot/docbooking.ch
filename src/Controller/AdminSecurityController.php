@@ -6,9 +6,12 @@ use App\Entity\Admin;
 use App\Entity\Appointment;
 use App\Entity\Doctor;
 use App\Entity\Patient;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -83,11 +86,22 @@ class AdminSecurityController extends AbstractController
     /**
      * @Route("/admin/doctors", name="app_admin_doctors")
      */
-    public function doctors(): Response
+    public function doctors(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT d FROM App:Doctor d";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit',10),
+            [
+                'defaultSortFieldName'      => 'd.first_name',
+                'defaultSortDirection' => 'ASC'
+            ]
+        );
         $doctors = $em->getRepository(Doctor::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors]);
+        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors,'pagination'=>$pagination]);
     }
 
     /**

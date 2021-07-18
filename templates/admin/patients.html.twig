@@ -25,10 +25,10 @@
                                     <thead>
                                     <tr>
                                         <th>Patient Name</th>
+                                        <th>Email</th>
                                         <th>City</th>
                                         <th>Address</th>
                                         <th>Phone</th>
-                                        <th>Last Visit</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -38,17 +38,20 @@
                                             <td>
                                                 <h2 class="table-avatar">
                                                     <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ patient.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
-                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">{{ patient.lastname|striptags|slice(0, 15) }} {{ patient.firstname|striptags|slice(0, 15) }}</a> </a>
+                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">{{ patient.lastname|striptags|slice(0, 15) }} {{ patient.firstname|striptags|slice(0, 15) }}</a>
                                                 </h2>
                                             </td>
+                                            <td>{{ patient.email }}</td>
                                             <td>{{ patient.city }}</td>
                                             <td>{{ patient.formattedAddress2 }}</td>
                                             <td>{{ patient.phoneNumber }}</td>
-                                            <td></td>
                                             <td class="text-right">
                                                 <div class="actions">
+                                                    <a class="btn btn-sm bg-success-light" href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">
+                                                        <i class="fe fe-pencil"></i>
+                                                    </a>
                                                     <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_patient_delete',{id:patient.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
-                                                        <i class="fe fe-trash"></i> Delete
+                                                        <i class="fe fe-trash"></i>
                                                     </a>
                                                 </div>
                                             </td>
@@ -97,8 +100,7 @@
             $("#delete_modal input#id").val(id);
         });
         $(document).on("click", ".action-delete", function () {
-            let url = $("#delete_modal input#id").val();
-            window.location.href = url;
+            window.location.href = $("#delete_modal input#id").val();
         });
     </script>
 {% endblock %}

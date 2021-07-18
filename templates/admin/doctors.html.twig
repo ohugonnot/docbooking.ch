@@ -18,24 +18,48 @@
             </div>
         </div>
         <!-- /Page Header -->
-
+        {{ dump(app.request.query.all) }}
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="datatable table table-hover table-center mb-0">
+                            <div class="count">
+                                {{ pagination.getTotalItemCount }}
+                            </div>
+                            <div class="form-group">
+                                <div style="float: left;">
+                                    <select class="custom-select custom-select-sm" name="limit" id="limit">
+                                        <option disabled selected>Number per page</option>
+                                        <option {% if app.request.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
+                                        <option {% if app.request.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
+                                        <option {% if app.request.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <table class="table table-hover table-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Doctor Name</th>
-                                        <th>Speciality</th>
-                                        <th>Telephone</th>
-                                        <th>Member Since</th>
+                                        <th {% if pagination.isSorted('d.lastName') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.lastName') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('d.email') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Email', 'd.email') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('d.speciality') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Speciality', 'd.speciality') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('d.phoneNumber') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phoneNumber') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('d.createdAt') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Member Since', 'd.createdAt') }}
+                                        </th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for doctor in doctors %}
+                                    {% for doctor in pagination %}
                                     <tr>
                                     <td>
                                         <h2 class="table-avatar">
@@ -43,13 +67,17 @@
                                             <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">Dr. {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
                                         </h2>
                                     </td>
+                                    <td>{{ doctor.email }}</td>
                                     <td>{{ doctor.speciality }}</td>
                                     <td>{{ doctor.phoneNumber }}</td>
                                     <td>{{ doctor.createAt|date() }}</td>
                                     <td class="text-right">
                                         <div class="actions">
+                                            <a  class="btn btn-sm bg-success-light" href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">
+                                                <i class="fe fe-pencil"></i>
+                                            </a>
                                             <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_doctor_delete',{id:doctor.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
-                                                <i class="fe fe-trash"></i> Delete
+                                                <i class="fe fe-trash"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -57,6 +85,9 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
+                            <div class="navigation">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,6 +119,7 @@
         </div>
     </div>
     <!-- /Delete Modal -->
+
 {% endblock %}
 
 {% block javascripts %}
@@ -98,8 +130,15 @@
             $("#delete_modal input#id").val(id);
         });
         $(document).on("click", ".action-delete", function () {
-            let url = $("#delete_modal input#id").val();
-            window.location.href = url;
+            window.location.href = $("#delete_modal input#id").val();
+        });
+        $('#limit').change(function(){
+            {% set route = app.request.attributes.get('_route') %}
+            {% set route_params = app.request.attributes.get('_route_params') %}
+            {% set query = route_params|merge(app.request.query.all) %}
+            let url = "{{ path(route,query|merge({ 'limit': '_itemNum' }))|escape('js') }}";
+            let item = $('select#limit').val();
+            jQuery(location).attr('href', url.replace('_itemNum',item));
         });
     </script>
 {% endblock %}
