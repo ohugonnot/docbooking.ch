@@ -42,7 +42,7 @@ class PatientProfileController extends AbstractController
         }
 
         $patient = $this->getDoctrine()->getRepository(Patient::class)->find($this->getUser()->getId());
-        $appointments = $patient->getAppointments();
+        $appointments = ($patient) ? $patient->getAppointments() : [];
         $class = 'account-page';
         return $this->render('profile/patient/index.html.twig', [
             'controller_name' => 'PatientProfileController',

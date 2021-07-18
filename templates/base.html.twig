@@ -41,13 +41,16 @@
 			<script src="/assets/js/html5shiv.min.js"></script>
 			<script src="/assets/js/respond.min.js"></script>
 		<![endif]-->
+		<style>
+			.from-admin {background-color: #f7ff4052;}
+		</style>
 		{% block stylesheets %}{% endblock %}
 	</head>
 	<body class="{{ classBody | default('') }}">
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 			<header class="header">
-				<nav class="navbar navbar-expand-lg header-nav">
+				<nav class="navbar navbar-expand-lg header-nav {% if is_granted('IS_IMPERSONATOR') %} from-admin {% endif %}">
 					<div class="navbar-header">
 						<a id="mobile_btn" href="javascript:void(0);">
 							<span class="bar-icon">
@@ -60,86 +63,94 @@
 							<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
 						</a>
 					</div>
-					<div class="main-menu-wrapper">
-						<div class="menu-header">
-							<a href="{{ path('app_index') }}" class="menu-logo">
-								<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
-							</a>
-							<a id="menu_close" class="menu-close" href="javascript:void(0);">
-								<i class="fas fa-times"></i>
-							</a>
-						</div>
-						<ul class="main-nav">
-							<li>
-								<a href="{{ path('app_index') }}">Home</a>
-							</li>	
-							<li>
-								<a href="{{ path('app_doctor_login') }}">Doctors</a>
-                            </li>
-						</ul>
-					</div>
-					<ul class="nav header-navbar-rht">
-						{% if not app.user %}
-						<li class="nav-item">
-							<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">Are you a healthcare professional?</a>
-						</li>
+					{% if is_granted('IS_IMPERSONATOR') %}
+						{% if app.user.isPatient %}
+							<a href="{{ impersonation_exit_path(path('app_admin_patients') ) }}">Return to admin</a>
+						{% else %}
+							<a href="{{ impersonation_exit_path(path('app_admin_doctors') ) }}">Return to admin</a>
 						{% endif %}
-						<li class="nav-item contact-item">
-							<div class="header-contact-img">
-								<i class="far fa-hospital"></i>							
+					{% else %}
+						<div class="main-menu-wrapper">
+							<div class="menu-header">
+								<a href="{{ path('app_index') }}" class="menu-logo">
+									<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
+								</a>
+								<a id="menu_close" class="menu-close" href="javascript:void(0);">
+									<i class="fas fa-times"></i>
+								</a>
 							</div>
-							<div class="header-contact-detail">
-								<p class="contact-header">Contact</p>
-								<p class="contact-info-header"> +41 79 323 55 23</p>
-							</div>
-						</li>
-						{% if not app.user %}
-						<li class="nav-item contact-item">
-							<a href="{{ path('app_patient_register') }}">
+							<ul class="main-nav">
+								<li>
+									<a href="{{ path('app_index') }}">Home</a>
+								</li>
+								<li>
+									<a href="{{ path('app_doctor_login') }}">Doctors</a>
+								</li>
+							</ul>
+						</div>
+						<ul class="nav header-navbar-rht">
+							{% if not app.user %}
+								<li class="nav-item">
+									<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">Are you a healthcare professional?</a>
+								</li>
+							{% endif %}
+							<li class="nav-item contact-item">
 								<div class="header-contact-img">
-									<i class="far fa-user"></i>									
+									<i class="far fa-hospital"></i>
 								</div>
 								<div class="header-contact-detail">
-									<p class="contact-header">Login / Signup</p>
-									<p class="contact-info-header">Manage my Acct</p>
+									<p class="contact-header">Contact</p>
+									<p class="contact-info-header"> +41 79 323 55 23</p>
 								</div>
-							</a>
-						</li>
-						{% endif %}
-						<li class="nav-item">
-							{% if app.user %}
-								<div class="btn-group">
-									<button type="button" class="btn header-login">{{ app.user.firstname | default('') }} {{ app.user.lastname | default('') }},</button>
-									<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span class="sr-only">Toggle Dropdown</span>
-									</button>
-									<div class="dropdown-menu">
-										{% if 'ROLE_PATIENT' in app.user.getRoles() %}
-											<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">Dashboard</a>
-											<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">Favourites</a>
-											<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">Profile Settings</a>
-											<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">Change Password</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="{{ path('app_patient_logout') }}">Logout</a>
-										{% endif %}
-										{% if 'ROLE_DOCTOR' in app.user.getRoles() %}
-											<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">Dashboard</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">Schedule Timings</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">Appointments</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">My Patients</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">Profile Settings</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_social') }}">Social Media</a>
-											<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">Change Password</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">Logout</a>
-										{% endif %}
-									</div>
-								</div>
-							{% else %}
-
+							</li>
+							{% if not app.user %}
+								<li class="nav-item contact-item">
+									<a href="{{ path('app_patient_register') }}">
+										<div class="header-contact-img">
+											<i class="far fa-user"></i>
+										</div>
+										<div class="header-contact-detail">
+											<p class="contact-header">Login / Signup</p>
+											<p class="contact-info-header">Manage my Acct</p>
+										</div>
+									</a>
+								</li>
 							{% endif %}
-						</li>
-					</ul>
+							<li class="nav-item">
+								{% if app.user %}
+									<div class="btn-group">
+										<button type="button" class="btn header-login">{{ app.user.firstname | default('') }} {{ app.user.lastname | default('') }},</button>
+										<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<div class="dropdown-menu">
+											{% if 'ROLE_PATIENT' in app.user.getRoles() %}
+												<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">Dashboard</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">Favourites</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">Profile Settings</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">Change Password</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="{{ path('app_patient_logout') }}">Logout</a>
+											{% endif %}
+											{% if 'ROLE_DOCTOR' in app.user.getRoles() %}
+												<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">Dashboard</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">Schedule Timings</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">Appointments</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">My Patients</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">Profile Settings</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_social') }}">Social Media</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">Change Password</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">Logout</a>
+											{% endif %}
+										</div>
+									</div>
+								{% else %}
+
+								{% endif %}
+							</li>
+						</ul>
+					{% endif %}
 				</nav>
 			</header>
 			{% block body %}{% endblock %}
