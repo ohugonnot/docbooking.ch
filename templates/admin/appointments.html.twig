@@ -1,1 +1,139 @@
-{{ dump(appointments) }}
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+    <div class="page-wrapper" style="min-height: 916px;">
+        <div class="content container-fluid">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">List of Appointment</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Appointment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-12 p-0">
+                                    <div class="count float-right">
+                                        Total of appointments : {{ pagination.getTotalItemCount }}
+                                    </div>
+                                    <div class="input-group col-sm-4 pl-0 float-left">
+                                        <input id="search-input" type="text" value="{{ search|default(null) }}" class="form-control" placeholder="Search appointments">
+                                        <div class="input-group-append">
+                                            <button id="search" class="btn btn-secondary" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="form-group">
+                                        <div class="float-right">
+                                            <select class="custom-select custom-select-sm" name="limit" id="limit">
+                                                <option disabled selected>Number per page</option>
+                                                <option {% if limit == 10 %} selected="selected" {% endif %} value="10">10</option>
+                                                <option {% if limit == 25 %} selected="selected" {% endif %} value="25">25</option>
+                                                <option {% if limit == 50 %} selected="selected" {% endif %} value="50">50</option>
+                                            </select>
+                                        </div>
+                                        <div class="float-left navigation">
+                                            {{ knp_pagination_render(pagination) }}
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover table-center mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th {% if pagination.isSorted('a.app_date') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Date', 'a.app_date') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('p.last_name') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Patient Name', 'p.last_name') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.last_name') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.last_name') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('a.product_total') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Estimated Price', 'a.product_total') }}
+                                            </th>
+
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for appointment in pagination %}
+                                            {% set doctor = appointment.doctor %}
+                                            {% set patient = appointment.patient %}
+                                            <tr>
+                                                <td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ patient.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                                        <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">{{ patient.lastname|striptags|slice(0, 15) }} {{ patient.firstname|striptags|slice(0, 15) }}</a>
+                                                    </h2>
+                                                    <a class="d-block" href="mailto:{{ patient.email }}">{{ patient.email }}</a>
+                                                    <span class="d-block">{{ patient.phoneNumber }}</span>
+                                                    <span class="d-block">{{ patient.city }}</span>
+                                                </td>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                                        <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">{{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
+                                                    </h2>
+                                                    <a class="d-block" href="mailto:{{ doctor.email }}">{{ doctor.email }}</a>
+                                                    <span class="d-block">{{ doctor.phoneNumber }}</span>
+                                                    <span class="d-block">{{ doctor.city }}</span>
+                                                </td>
+                                                <td>CHF {{appointment.getProductPrice() | default(' - ')}}
+                                                    <span class="d-block">
+                                                        {% if appointment.getIsPayed() == 1 %}
+                                                            {{appointment.getDatePaied().format('j M Y')}}
+                                                        {% else %}
+                                                            -
+                                                        {% endif %}
+                                                    </span>
+                                                <td>
+                                                <td class="text-right">
+                                                    <div class="table-action">
+                                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}"  class="btn btn-sm bg-info-light">
+                                                            <i class="fe fe-eye"></i>
+                                                        </a>
+                                                        <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_appointment_delete',{id:appointment.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
+                                                            <i class="fe fe-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="navigation">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include '_include/delete_modal.html.twig' %}
+
+{% endblock %}
+
+{% block profilemodals %}
+    {% for appointment in pagination %}
+        {% include '_include/appointment_modal.html.twig' with {appointment: appointment} %}
+    {% endfor %}
+{% endblock %}

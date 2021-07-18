@@ -104,7 +104,7 @@ class AdminSecurityController extends AbstractController
         $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
+            $query,
             $request->query->getInt('page', 1),
             $limit,
             [
@@ -149,7 +149,7 @@ class AdminSecurityController extends AbstractController
         $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
+            $query,
             $request->query->getInt('page', 1),
             $limit,
             [
@@ -176,10 +176,47 @@ class AdminSecurityController extends AbstractController
     /**
      * @Route("/admin/appointments", name="app_admin_appointments")
      */
-    public function appointments(): Response
+    public function appointments(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
+    {
+        $query = $em->getRepository(Appointment::class)->createQueryBuilder('a')
+            ->leftJoin('a.doctor', 'd')
+            ->leftJoin('a.patient', 'p')
+            ->addSelect('d')
+            ->addSelect('p');
+        $search = $request->query->get('search',null);
+        if($search)
+            $query->andWhere('d.last_name LIKE :search')
+                ->orWhere('d.first_name LIKE :search')
+                ->orWhere('p.last_name LIKE :search')
+                ->orWhere('p.first_name LIKE :search')
+                ->orWhere('a.app_date LIKE :search')
+                ->orWhere('a.app_time LIKE :search')
+                ->orWhere('a.product_price LIKE :search')
+                ->setParameter('search', '%'.$search.'%');
+        $limit = $request->query->getInt('limit',25);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $limit,
+            [
+                'defaultSortFieldName'      => 'a.create_time',
+                'defaultSortDirection' => 'DESC'
+            ]
+        );
+        $appointments = $em->getRepository(Appointment::class)->findBy([], ['create_time' => 'DESC']);
+        return $this->render('admin/appointments.html.twig', ['appointments' => $appointments, 'pagination'=>$pagination, 'limit'=>$limit, 'search'=>$search]);
+    }
+
+    /**
+     * @Route("admin/appointment/delete/{id}", name="app_appointment_delete")
+     */
+    public function deleteAppointment(Appointment $appointment): RedirectResponse
     {
         $em = $this->getDoctrine()->getManager();
-        $appointments = $em->getRepository(Appointment::class)->findBy([], ['create_time' => 'DESC']);
-        return $this->render('admin/appointments.html.twig', ['appointments' => $appointments]);
+        $em->remove($appointment);
+        $em->flush();
+        return $this->redirectToRoute('app_admin_appointments');
     }
+
 }

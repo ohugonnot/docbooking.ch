@@ -1,235 +1,91 @@
 {% extends 'profile/patient/layout.html.twig' %}
 
 {% block profileb %}
-							<div class="card">
-								<div class="card-body pt-0">
-								
-									<!-- Tab Menu -->
-									<nav class="user-tabs mb-4">
-										<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-											<li class="nav-item">
-												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
-											</li>
-										</ul>
-									</nav>
-									<!-- /Tab Menu -->
-									
-									<!-- Tab Content -->
-									<div class="tab-content pt-0">
-										
-										<!-- Appointment Tab -->
-										<div id="pat_appointments" class="tab-pane fade show active">
-											<div class="card card-table mb-0">
-												<div class="card-body">
-													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
-															<thead>
-																<tr>
-																	<th>Doctor</th>
-																	<th>Appt Date</th>
-																	<th>Booking Date</th>
-																	<th>Estimated Price</th>
-																	<!--<th>Paied Date</th>-->
-																	<th>Status</th>
-																	<th></th>
-																</tr>
-															</thead>
-															<tbody>
-																{% for appointment in appointments %}
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="{% if appointment.getDoctor().getPictureProfile() %}{{appointment.getDoctor().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
-																			</a>
-																			<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()}}</span></a>
-																		</h2>
-																	</td>
-																	<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
-																	<td>{{appointment.getCreateTime().format('j M Y')}}</td>
-																	<td>CHF {{appointment.getProductPrice()}}</td>
-																	<!--<td>
-																		{% if appointment.getIsPayed() == 1 %}
-																			{{appointment.getDatePaied().format('j M Y')}}
-																		{% else %}
-																			-
-																		{% endif %}
-																	</td>-->
-																	<td>
-																		{% if appointment.getStatus() == 0 or appointment.getStatus() == 1 %}
-																			<span class="badge badge-pill bg-warning-light">PENDIND</span></td>
-																			{% if appointment.getStatus() == 1 %}
-																			<a href="https://www.sandbox.paypal.com/checkoutnow?token={{appointment.getOrderID()}}" class="btn btn-sm">
-																				<i class="fab fa-cc-paypal"></i> Pay Now
-																			</a>
-																			{% endif %}
-																		{% endif %}
-																		{% if appointment.getStatus() == 2 %}
-																			<span class="badge badge-pill bg-success-light">COMPLETE</span>
-																		{% endif %}
-																		{% if appointment.getStatus() == 3 %}
-																			<span class="badge badge-pill bg-danger-light">CANCELLED</span>
-																		{% endif %}
-																		
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}"  class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																{% endfor %}
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- /Appointment Tab -->
-									</div>
-									<!-- Tab Content -->
-									
-								</div>
-							</div>
-						
+	<div class="card">
+		<div class="card-body pt-0">
+			<nav class="user-tabs mb-4">
+				<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+					<li class="nav-item">
+						<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="tab-content pt-0">
+				<div id="pat_appointments" class="tab-pane fade show active">
+					<div class="card card-table mb-0">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-hover table-center mb-0">
+									<thead>
+										<tr>
+											<th>Doctor</th>
+											<th>Appt Date</th>
+											<th>Booking Date</th>
+											<th>Estimated Price</th>
+											<!--<th>Paied Date</th>-->
+											<th>Status</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for appointment in appointments %}
+										<tr>
+											<td>
+												<h2 class="table-avatar">
+													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
+														<img class="avatar-img rounded-circle" src="{% if appointment.getDoctor().getPictureProfile() %}{{appointment.getDoctor().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+													</a>
+													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()}}</span></a>
+												</h2>
+											</td>
+											<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
+											<td>{{appointment.getCreateTime().format('j M Y')}}</td>
+											<td>CHF {{appointment.getProductPrice()}}</td>
+											<!--<td>
+												{% if appointment.getIsPayed() == 1 %}
+													{{appointment.getDatePaied().format('j M Y')}}
+												{% else %}
+													-
+												{% endif %}
+											</td>-->
+											<td>
+												{% if appointment.getStatus() == 0 or appointment.getStatus() == 1 %}
+													<span class="badge badge-pill bg-warning-light">PENDIND</span></td>
+													{% if appointment.getStatus() == 1 %}
+													<a href="https://www.sandbox.paypal.com/checkoutnow?token={{appointment.getOrderID()}}" class="btn btn-sm">
+														<i class="fab fa-cc-paypal"></i> Pay Now
+													</a>
+													{% endif %}
+												{% endif %}
+												{% if appointment.getStatus() == 2 %}
+													<span class="badge badge-pill bg-success-light">COMPLETE</span>
+												{% endif %}
+												{% if appointment.getStatus() == 3 %}
+													<span class="badge badge-pill bg-danger-light">CANCELLED</span>
+												{% endif %}
 
-{% endblock %}
-{% block profilemodals %}
-	{% for appointment in appointments %}
-	<!-- Modal -->
-		<div class="modal fade" id="viewModalAppointment{{appointment.getId()}}" tabindex="-1" role="dialog" aria-labelledby="viewModalAppointment{{appointment.getId()}}Title" aria-hidden="true">
-			<div class="modal-dialog modal-dialog modal-lg modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Appointment ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-					
-					<div class="invoice-content">
-								<div class="invoice-item">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="invoice-logo">
-												<img src="/assets/img/logo.png" alt="logo">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<p class="invoice-details">
-												<strong>Order:</strong> #{{ "%'08.8s"|format(appointment.getId()) }} <br>
-												<strong>Issued:</strong> {{appointment.getCreateTime().format('j/m/Y')}}
-											</p>
-										</div>
-									</div>
-								</div>
-								
-								<!-- Invoice Item -->
-								<div class="invoice-item">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="invoice-info">
-												<strong class="customer-text">Confirmation From</strong>
-												<p class="invoice-details invoice-details-two">
-													{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}} {{appointment.getDoctor().getLastName()}} <br>
-													{{appointment.getDoctor().getAddressLine1()}}<br>
-													{{appointment.getDoctor().getAddressLine2()}}<br>
-													{{appointment.getDoctor().getPostalCode()}} {{appointment.getDoctor().getCity()}} <br> {{appointment.getDoctor().getState()}} {{appointment.getDoctor().getCountry()}} <br>
-												</p>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="invoice-info invoice-info2">
-												<strong class="customer-text">Booking confirmed For</strong>
-												<p class="invoice-details">
-													{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}<br>
-													{{appointment.getPatient().getAddress()}} <br>
-													{{appointment.getPatient().getPostalCode()}}, {{appointment.getPatient().getCity()}} <br>
-													{{appointment.getPatient().getPhoneNumber()}} <br>
-													{{appointment.getPatient().getEmail()}} <br>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /Invoice Item -->
-								
-								<!-- Invoice Item -->
-								<!-- <div class="invoice-item"> -->
-									<!-- <div class="row"> -->
-										<!-- <div class="col-md-12"> -->
-											<!-- <div class="invoice-info"> -->
-												<!-- <strong class="customer-text">Payment Method</strong> -->
-												<!-- <p class="invoice-details invoice-details-two"> -->
-													<!-- Debit Card <br> -->
-													<!-- XXXXXXXXXXXX-2541 <br> -->
-													<!-- HDFC Bank<br> -->
-												<!-- </p> -->
-											<!-- </div> -->
-										<!-- </div> -->
-									<!-- </div> -->
-								<!-- </div> -->
-								<!-- /Invoice Item -->
-								
-								<!-- Invoice Item -->
-								<div class="invoice-item invoice-table-wrap">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="table-responsive">
-												<table class="invoice-table table table-bordered">
-													<thead>
-														<tr>
-															<th>Description</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">VAT</th>
-															<th class="text-right">Total</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>General Consultation</td>
-															<td class="text-center">1</td>
-															<td class="text-center">CHF  0</td>
-															<td class="text-right">CHF {{appointment.getProductPrice()}}</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<div class="col-md-6 col-xl-4 ml-auto">
-											<div class="table-responsive">
-												<table class="invoice-table-two table">
-													<tbody>
-														<tr>
-															<th>Subtotal:</th>
-															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
-														</tr>
-														<tr>
-															<th>Discount:</th>
-															<td><span>-0%</span></td>
-														</tr>
-														<tr>
-															<th>Total Amount:</th>
-															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /Invoice Item -->
-                            </div>
-					
-					
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<td class="text-right">
+												<div class="table-action">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}"  class="btn btn-sm bg-info-light">
+														<i class="far fa-eye"></i> View
+													</a>
+												</div>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+{% endblock %}
+
+{% block profilemodals %}
+	{% for appointment in appointments %}
+		{% include '_include/appointment_modal.html.twig' with {appointment: appointment} %}
 	{% endfor %}
 {% endblock %}
