@@ -9,7 +9,6 @@ use App\Entity\Patient;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use LogicException;
-use PhpParser\Comment\Doc;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,6 +89,18 @@ class AdminSecurityController extends AbstractController
     public function doctors(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
         $query = $em->getRepository(Doctor::class)->createQueryBuilder('d');
+        $search = $request->query->get('search',null);
+        if($search)
+            $query->andWhere('d.last_name LIKE :search')
+                ->orWhere('d.first_name LIKE :search')
+                ->orWhere('d.email LIKE :search')
+                ->orWhere('d.address_line_1 LIKE :search')
+                ->orWhere('d.city LIKE :search')
+                ->orWhere('d.phone_number LIKE :search')
+                ->orWhere('d.country LIKE :search')
+                ->orWhere('d.postal_code LIKE :search')
+                ->orWhere('d.speciality LIKE :search')
+                ->setParameter('search', '%'.$search.'%');
         $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(
@@ -102,7 +113,7 @@ class AdminSecurityController extends AbstractController
             ]
         );
         $doctors = $em->getRepository(Doctor::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors, 'pagination'=>$pagination, 'limit'=>$limit]);
+        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors, 'pagination'=>$pagination, 'limit'=>$limit, 'search'=>$search]);
     }
 
     /**
@@ -121,7 +132,20 @@ class AdminSecurityController extends AbstractController
      */
     public function patients(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $em->getRepository(Patient::class)->createQueryBuilder('p');
+        $query = $em->getRepository(Patient::class)
+            ->createQueryBuilder('p');
+
+        $search = $request->query->get('search',null);
+        if($search)
+            $query->andWhere('p.last_name LIKE :search')
+                ->orWhere('p.first_name LIKE :search')
+                ->orWhere('p.email LIKE :search')
+                ->orWhere('p.address LIKE :search')
+                ->orWhere('p.city LIKE :search')
+                ->orWhere('p.phone_number LIKE :search')
+                ->orWhere('p.country LIKE :search')
+                ->orWhere('p.postal_code LIKE :search')
+                ->setParameter('search', '%'.$search.'%');
         $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(
@@ -135,7 +159,7 @@ class AdminSecurityController extends AbstractController
         );
 
         $patients = $em->getRepository(Patient::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/patients.html.twig', ['patients' => $patients, 'pagination'=>$pagination, 'limit'=>$limit]);
+        return $this->render('admin/patients.html.twig', ['patients' => $patients, 'pagination'=>$pagination, 'limit'=>$limit, 'search' => $search]);
     }
 
     /**

@@ -185,6 +185,38 @@
 
         <!-- Custom JS -->
         <script  src="/assets/admin/js/script.js"></script>
+
+        <script>
+            $(document).on("click", ".action-delete-modal", function () {
+                let id = $(this).data('url');
+                $("#delete_modal input#id").val(id);
+            });
+            $(document).on("click", ".action-delete", function () {
+                window.location.href = $("#delete_modal input#id").val();
+            });
+            $('#limit').change(function(){
+                {% set route = app.request.attributes.get('_route') %}
+                {% set route_params = app.request.attributes.get('_route_params') %}
+                {% set query = route_params|merge(app.request.query.all) %}
+                let url = "{{ path(route,query|merge({ 'limit': '_itemNum' }))|escape('js') }}";
+                let item = $('select#limit').val();
+                jQuery(location).attr('href', url.replace('_itemNum',item));
+            });
+            $(document).on("keyup", "input#search-input", function(e){
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    $("#search").trigger('click');
+                }
+            });
+            $(document).on("click", "#search", function(){
+                {% set route = app.request.attributes.get('_route') %}
+                {% set route_params = app.request.attributes.get('_route_params') %}
+                {% set query = route_params|merge(app.request.query.all) %}
+                let url = "{{ path(route,query|merge({ 'search': '_search' }))|escape('js') }}";
+                let item = $('input#search-input').val();
+                jQuery(location).attr('href', url.replace('_search',item));
+            });
+        </script>
     {% endblock %}
 </body>
 </html>
