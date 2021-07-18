@@ -97,12 +97,12 @@ class AdminSecurityController extends AbstractController
             $request->query->getInt('page', 1),
             $limit,
             [
-                'defaultSortFieldName'      => 'd.first_name',
+                'defaultSortFieldName'      => 'd.last_name',
                 'defaultSortDirection' => 'ASC'
             ]
         );
         $doctors = $em->getRepository(Doctor::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors,'pagination'=>$pagination, 'limit'=>$limit]);
+        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors, 'pagination'=>$pagination, 'limit'=>$limit]);
     }
 
     /**
@@ -119,11 +119,23 @@ class AdminSecurityController extends AbstractController
     /**
      * @Route("/admin/patients", name="app_admin_patients")
      */
-    public function patients(): Response
+    public function patients(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository(Patient::class)->createQueryBuilder('p');
+        $limit = $request->query->getInt('limit',25);
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1),
+            $limit,
+            [
+                'defaultSortFieldName'      => 'p.last_name',
+                'defaultSortDirection' => 'ASC'
+            ]
+        );
+
         $patients = $em->getRepository(Patient::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/patients.html.twig', ['patients' => $patients]);
+        return $this->render('admin/patients.html.twig', ['patients' => $patients, 'pagination'=>$pagination, 'limit'=>$limit]);
     }
 
     /**

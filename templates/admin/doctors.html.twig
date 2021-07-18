@@ -43,7 +43,7 @@
                             <table class="table table-hover table-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th {% if pagination.isSorted('d.lastName') %} class="sorted"{% endif %}>
+                                        <th {% if pagination.isSorted('d.last_name') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.last_name') }}
                                         </th>
                                         <th {% if pagination.isSorted('d.city') %} class="sorted"{% endif %}>
@@ -55,7 +55,7 @@
                                         <th {% if pagination.isSorted('d.speciality') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Speciality', 'd.speciality') }}
                                         </th>
-                                        <th {% if pagination.isSorted('d.phoneNumber') %} class="sorted"{% endif %}>
+                                        <th {% if pagination.isSorted('d.phone_number') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phone_number') }}
                                         </th>
                                         <th>Actions</th>

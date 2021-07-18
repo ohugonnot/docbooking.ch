@@ -21,19 +21,45 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="datatable table table-hover table-center mb-0">
+                                <div class="count">
+                                    Total of patients : {{ pagination.getTotalItemCount }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="float-right">
+                                        <select class="custom-select custom-select-sm" name="limit" id="limit">
+                                            <option disabled selected>Number per page</option>
+                                            <option {% if limit == 10 %} selected="selected" {% endif %} value="10">10</option>
+                                            <option {% if limit == 25 %} selected="selected" {% endif %} value="25">25</option>
+                                            <option {% if limit == 50 %} selected="selected" {% endif %} value="50">50</option>
+                                        </select>
+                                    </div>
+                                    <div class="float-left navigation">
+                                        {{ knp_pagination_render(pagination) }}
+                                    </div>
+                                </div>
+                                <table class="table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th>Patient Name</th>
-                                        <th>Email</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
+                                        <th {% if pagination.isSorted('p.last_name') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Patient Name', 'p.last_name') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('p.email') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Email', 'p.email') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('p.city') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'City', 'p.city') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('p.address') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Address', 'p.address') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('p.phone_number') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'Address', 'p.phone_number') }}
+                                        </th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for patient in patients %}
+                                    {% for patient in pagination %}
                                         <tr>
                                             <td>
                                                 <h2 class="table-avatar">
@@ -59,6 +85,9 @@
                                     {% endfor %}
                                     </tbody>
                                 </table>
+                                <div class="navigation">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,6 +130,14 @@
         });
         $(document).on("click", ".action-delete", function () {
             window.location.href = $("#delete_modal input#id").val();
+        });
+        $('#limit').change(function(){
+            {% set route = app.request.attributes.get('_route') %}
+            {% set route_params = app.request.attributes.get('_route_params') %}
+            {% set query = route_params|merge(app.request.query.all) %}
+            let url = "{{ path(route,query|merge({ 'limit': '_itemNum' }))|escape('js') }}";
+            let item = $('select#limit').val();
+            jQuery(location).attr('href', url.replace('_itemNum',item));
         });
     </script>
 {% endblock %}
