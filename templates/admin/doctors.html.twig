@@ -25,16 +25,19 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="count">
-                                {{ pagination.getTotalItemCount }}
+                                Total of doctors : {{ pagination.getTotalItemCount }}
                             </div>
                             <div class="form-group">
-                                <div style="float: left;">
+                                <div class="float-right">
                                     <select class="custom-select custom-select-sm" name="limit" id="limit">
                                         <option disabled selected>Number per page</option>
-                                        <option {% if app.request.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
-                                        <option {% if app.request.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
-                                        <option {% if app.request.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
+                                        <option {% if limit == 10 %} selected="selected" {% endif %} value="10">10</option>
+                                        <option {% if limit == 25 %} selected="selected" {% endif %} value="25">25</option>
+                                        <option {% if limit == 50 %} selected="selected" {% endif %} value="50">50</option>
                                     </select>
+                                </div>
+                                <div class="float-left navigation">
+                                    {{ knp_pagination_render(pagination) }}
                                 </div>
                             </div>
                             <table class="table table-hover table-center mb-0">
@@ -42,6 +45,9 @@
                                     <tr>
                                         <th {% if pagination.isSorted('d.lastName') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.lastName') }}
+                                        </th>
+                                        <th {% if pagination.isSorted('d.city') %} class="sorted"{% endif %}>
+                                            {{ knp_pagination_sortable(pagination, 'City', 'd.city') }}
                                         </th>
                                         <th {% if pagination.isSorted('d.email') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Email', 'd.email') }}
@@ -52,9 +58,6 @@
                                         <th {% if pagination.isSorted('d.phoneNumber') %} class="sorted"{% endif %}>
                                             {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phoneNumber') }}
                                         </th>
-                                        <th {% if pagination.isSorted('d.createdAt') %} class="sorted"{% endif %}>
-                                            {{ knp_pagination_sortable(pagination, 'Member Since', 'd.createdAt') }}
-                                        </th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -64,13 +67,12 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
-                                            <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">Dr. {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
+                                            <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">{{ doctor.title|capitalize }} {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
                                         </h2>
                                     </td>
                                     <td>{{ doctor.email }}</td>
                                     <td>{{ doctor.speciality }}</td>
                                     <td>{{ doctor.phoneNumber }}</td>
-                                    <td>{{ doctor.createAt|date() }}</td>
                                     <td class="text-right">
                                         <div class="actions">
                                             <a  class="btn btn-sm bg-success-light" href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">

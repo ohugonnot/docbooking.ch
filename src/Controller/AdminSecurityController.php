@@ -90,18 +90,19 @@ class AdminSecurityController extends AbstractController
     {
         $dql   = "SELECT d FROM App:Doctor d";
         $query = $em->createQuery($dql);
+        $limit = $request->query->getInt('limit',25);
 
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit',10),
+            $limit,
             [
                 'defaultSortFieldName'      => 'd.first_name',
                 'defaultSortDirection' => 'ASC'
             ]
         );
         $doctors = $em->getRepository(Doctor::class)->findBy([], ['first_name' => 'ASC']);
-        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors,'pagination'=>$pagination]);
+        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors,'pagination'=>$pagination, 'limit'=>$limit]);
     }
 
     /**
