@@ -23,11 +23,9 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
 ### Upload ###
 public/uploads/*
 .idea
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

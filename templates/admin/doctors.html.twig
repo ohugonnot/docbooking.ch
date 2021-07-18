@@ -1,1 +1,105 @@
-{{ dump(doctors) }}
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">List of Doctors</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Doctor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Doctor Name</th>
+                                        <th>Speciality</th>
+                                        <th>Telephone</th>
+                                        <th>Member Since</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for doctor in doctors %}
+                                    <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                            <a href="{{ path('app_patient_dashboard',{'switch':doctor.email}) }}">Dr. {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{ doctor.speciality }}</td>
+                                    <td>{{ doctor.phoneNumber }}</td>
+                                    <td>{{ doctor.createAt|date() }}</td>
+                                    <td class="text-right">
+                                        <div class="actions">
+                                            <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_doctor_delete',{id:doctor.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
+                                                <i class="fe fe-trash"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <!--	<div class="modal-header">
+                        <h5 class="modal-title">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                <div class="modal-body">
+                    <div class="form-content p-2">
+                        <h4 class="modal-title">Delete</h4>
+                        <p class="mb-4">Are you sure want to delete?</p>
+                        <input type="hidden" name="id" id="id" value=""/>
+                        <button type="button" class="btn btn-primary action-delete" data-dismiss="modal">Delete </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Delete Modal -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).on("click", ".action-delete-modal", function () {
+            let id = $(this).data('url');
+            $("#delete_modal input#id").val(id);
+        });
+        $(document).on("click", ".action-delete", function () {
+            let url = $("#delete_modal input#id").val();
+            window.location.href = url;
+        });
+    </script>
+{% endblock %}

@@ -24,28 +24,34 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th>Patient ID</th>
                                         <th>Patient Name</th>
-                                        <th>Age</th>
+                                        <th>City</th>
                                         <th>Address</th>
                                         <th>Phone</th>
                                         <th>Last Visit</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for patient in patients %}
                                         <tr>
-                                            <td>{{ patient.id }}</td>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ patient.pictureProfile|default('/assets/admin/img/patients/patient1.jpg') }}" alt="User Image"></a>
-                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">{{ patient.lastName}} {{ patient.firstName }} </a>
+                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ patient.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                                    <a href="{{ path('app_patient_dashboard',{'switch':patient.email}) }}">{{ patient.lastname|striptags|slice(0, 15) }} {{ patient.firstname|striptags|slice(0, 15) }}</a> </a>
                                                 </h2>
                                             </td>
-                                            <td>{% if patient.dateBirth %}{{ patient.dateBirth|date }}{% endif %}</td>
+                                            <td>{{ patient.city }}</td>
                                             <td>{{ patient.formattedAddress2 }}</td>
                                             <td>{{ patient.phoneNumber }}</td>
                                             <td></td>
+                                            <td class="text-right">
+                                                <div class="actions">
+                                                    <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_patient_delete',{id:patient.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
+                                                        <i class="fe fe-trash"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -57,4 +63,42 @@
             </div>
         </div>
     </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <!--	<div class="modal-header">
+                        <h5 class="modal-title">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                <div class="modal-body">
+                    <div class="form-content p-2">
+                        <h4 class="modal-title">Delete</h4>
+                        <p class="mb-4">Are you sure want to delete?</p>
+                        <input type="hidden" name="id" id="id" value=""/>
+                        <button type="button" class="btn btn-primary action-delete" data-dismiss="modal">Delete </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Delete Modal -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).on("click", ".action-delete-modal", function () {
+            let id = $(this).data('url');
+            $("#delete_modal input#id").val(id);
+        });
+        $(document).on("click", ".action-delete", function () {
+            let url = $("#delete_modal input#id").val();
+            window.location.href = url;
+        });
+    </script>
 {% endblock %}

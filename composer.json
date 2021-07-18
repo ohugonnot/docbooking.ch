@@ -5,10 +5,12 @@
         "php": "^7.4.19",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "beberlei/doctrineextensions": "^1.2",
         "cravler/maxmind-geoip-bundle": "dev-master",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "knplabs/knp-paginator-bundle": "^5.2",
+        "liip/imagine-bundle": "^2.6",
         "oneup/uploader-bundle": "^3.0.0",
         "paypal/paypal-checkout-sdk": "^1.0",
         "paypal/rest-api-sdk-php": "*",
@@ -46,8 +48,7 @@
         "symfonycasts/reset-password-bundle": "^1.1",
         "twig/cssinliner-extra": "^3.0",
         "twig/extra-bundle": "^3.0",
-        "twig/inky-extra": "^3.0",
-        "ext-json": "*"
+        "twig/inky-extra": "^3.0"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

@@ -8,6 +8,7 @@ use App\Entity\Doctor;
 use App\Entity\Patient;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -43,7 +44,7 @@ class AdminSecurityController extends AbstractController
         );
         $admin->setPassword($encodedPassword);
         $admin->setEmail('admin@admin.admin');
-        $admin->setRoles(['ROLE_ADMIN','ROLE_SUPER_ADMIN']);
+        $admin->setRoles(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
         $em = $this->getDoctrine()->getManager();
         $em->persist($admin);
         $em->flush();
@@ -66,10 +67,10 @@ class AdminSecurityController extends AbstractController
         $nb_doctors = $em->getRepository(Doctor::class)->count([]);
         $nb_patients = $em->getRepository(Patient::class)->count([]);
         $nb_appointments = $em->getRepository(Appointment::class)->count([]);
-        $last_patients = $em->getRepository(Patient::class)->findBy([],['create_at'=>'DESC'],5);
+        $last_patients = $em->getRepository(Patient::class)->findBy([], ['create_at' => 'DESC'], 5);
         $last_doctors = $em->getRepository(Doctor::class)->findByLastAppointement();
-        $last_appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>'DESC'],5);
-        return $this->render('/admin/page.html.twig',[
+        $last_appointments = $em->getRepository(Appointment::class)->findBy([], ['create_time' => 'DESC'], 5);
+        return $this->render('/admin/page.html.twig', [
             'nb_doctors' => $nb_doctors,
             'nb_patients' => $nb_patients,
             'nb_appointments' => $nb_appointments,
@@ -85,8 +86,19 @@ class AdminSecurityController extends AbstractController
     public function doctors(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $doctors = $em->getRepository(Doctor::class)->findBy([],['first_name'=>'ASC']);
-        return $this->render('admin/doctors.html.twig',['doctors'=>$doctors]);
+        $doctors = $em->getRepository(Doctor::class)->findBy([], ['first_name' => 'ASC']);
+        return $this->render('admin/doctors.html.twig', ['doctors' => $doctors]);
+    }
+
+    /**
+     * @Route("admin/doctor/delete/{id}", name="app_doctor_delete")
+     */
+    public function deleteDoctor(Doctor $doctor): RedirectResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($doctor);
+        $em->flush();
+        return $this->redirectToRoute('app_admin_doctors');
     }
 
     /**
@@ -95,8 +107,19 @@ class AdminSecurityController extends AbstractController
     public function patients(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $patients = $em->getRepository(Patient::class)->findBy([],['first_name'=>'ASC']);
-        return $this->render('admin/patients.html.twig',['patients'=>$patients]);
+        $patients = $em->getRepository(Patient::class)->findBy([], ['first_name' => 'ASC']);
+        return $this->render('admin/patients.html.twig', ['patients' => $patients]);
+    }
+
+    /**
+     * @Route("admin/patient/delete/{id}", name="app_patient_delete")
+     */
+    public function deletePatient(Patient $patient): RedirectResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($patient);
+        $em->flush();
+        return $this->redirectToRoute('app_admin_patients');
     }
 
     /**
@@ -105,7 +128,7 @@ class AdminSecurityController extends AbstractController
     public function appointments(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $appointments = $em->getRepository(Appointment::class)->findBy([],['create_time'=>'DESC']);
-        return $this->render('admin/appointments.html.twig',['appointments'=>$appointments]);
+        $appointments = $em->getRepository(Appointment::class)->findBy([], ['create_time' => 'DESC']);
+        return $this->render('admin/appointments.html.twig', ['appointments' => $appointments]);
     }
 }
