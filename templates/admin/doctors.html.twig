@@ -70,6 +70,7 @@
                                             <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">{{ doctor.title|capitalize }} {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
                                         </h2>
                                     </td>
+                                    <td>{{ doctor.city }}</td>
                                     <td>{{ doctor.email }}</td>
                                     <td>{{ doctor.speciality }}</td>
                                     <td>{{ doctor.phoneNumber }}</td>
