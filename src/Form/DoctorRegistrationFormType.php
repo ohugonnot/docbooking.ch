@@ -14,10 +14,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 class DoctorRegistrationFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,7 +38,7 @@ class DoctorRegistrationFormType extends AbstractType
 					'Dr.' 				=>	'Dr.',
 					'Pr.'			   	=>	'Pr.'
 				],*/
-				'label' => 'Title',
+				'label' => $this->translator->trans('Title'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating'],
@@ -35,13 +46,13 @@ class DoctorRegistrationFormType extends AbstractType
 				
 			])
 			->add('first_name', TextType::class, [
-				'label' => 'First Name',
+				'label' => $this->translator->trans('First Name'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
 			->add('last_name', TextType::class, [
-				'label' => 'Last Name',
+				'label' => $this->translator->trans('Last Name'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
@@ -49,36 +60,36 @@ class DoctorRegistrationFormType extends AbstractType
 			->add('gender', ChoiceType::class, [
 				'choices'  => [
 					'Select' => null,
-					'Male' => 'Male',
-					'Female' => 'Female',
+                    $this->translator->trans('Male') => 'Male',
+                    $this->translator->trans('Female') => 'Female',
 				],
-				'label' => 'Gender',
+				'label' => $this->translator->trans('Gender'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
 			->add('phone_number', TextType::class, [
-				'label' => 'Phone or Mobile Number',
+				'label' => $this->translator->trans('Phone or Mobile Number'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
 			->add('address_line_1', TextType::class, [
-				'label'      => 'Address Line 1',
+				'label'      => $this->translator->trans('Address Line 1'),
 				'row_attr'   => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr'       => ['class' => 'form-control floating'],
 				'required'   => false
 			])
 			->add('address_line_2', TextType::class, [
-				'label' => 'Address Line 2',
+				'label' => $this->translator->trans('Address Line 2'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating'],
 				'required'=>false
 			])
 			->add('city', TextType::class, [
-				'label' => 'City',
+				'label' => $this->translator->trans('City'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
@@ -122,53 +133,53 @@ class DoctorRegistrationFormType extends AbstractType
 		 */
 			->add('country', ChoiceType::class, [
 				'choices' => [
-					'Switzerland' => 'CH',
+                    $this->translator->trans('Switzerland') => 'CH',
 				],
-				'label' => 'Country',
+				'label' => $this->translator->trans('Country'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating'],
 				'preferred_choices' => ['CH'],
 			])
 			->add('postal_code', TextType::class, [
-				'label' => 'Postal Code',
+				'label' => $this->translator->trans('Postal Code'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
 			->add('speciality', ChoiceType::class, [
 				'choices'  => [
-					'Select' => null,
-					'General Practitioner' 			=>	'General Practitioner',
-					'Urologist'			   			=>	'Urologist',
-					'Neurologist'		   			=>	'Neurologist',
-					'Dentist'			   			=>	'Dentist',
-					'Dental Hygienist'				=>  'Dental Hygienist',
-					'Orthopedist'		   			=>	'Orthopedist',
-					'Cardiologist'		   			=>	'Cardiologist',
-					'Psychologist'		   			=>	'Psychologist',
-					'Nutritionist-Dietician'		=>	'Nutritionist-Dietician',
-					'Alternative/Natural Medicine'	=>	'Alternative/Natural Medicine',
-					'Pediatrician'					=>	'Pediatrician',
-					'Dermatologist / Aesthetics'	=>	'Dermatologist / Aesthetics',
-					'Physiotherapist'				=>	'Physiotherapist',
-					'Gynecologist'					=>	'Gynecologist',
-					'Ophtalmologist'				=>  'Ophtalmologist',
-					'Other'							=>	'Other'
+                    $this->translator->trans('Select')                       =>   null,
+                    $this->translator->trans('General Practitioner') 		=>	'General Practitioner',
+                    $this->translator->trans('Urologist')			   		=>	'Urologist',
+                    $this->translator->trans('Neurologist')		   			=>	'Neurologist',
+                    $this->translator->trans('Dentist')			   			=>	'Dentist',
+                    $this->translator->trans('Dental Hygienist')				=>  'Dental Hygienist',
+                    $this->translator->trans('Orthopedist')		   			=>	'Orthopedist',
+                    $this->translator->trans('Cardiologist')		   			=>	'Cardiologist',
+                    $this->translator->trans('Psychologist')		   			=>	'Psychologist',
+                    $this->translator->trans('Nutritionist-Dietician')		=>	'Nutritionist-Dietician',
+                    $this->translator->trans('Alternative/Natural Medicine')	=>	'Alternative/Natural Medicine',
+                    $this->translator->trans('Pediatrician')					=>	'Pediatrician',
+                    $this->translator->trans('Dermatologist / Aesthetics')	=>	'Dermatologist / Aesthetics',
+                    $this->translator->trans('Physiotherapist')				=>	'Physiotherapist',
+                    $this->translator->trans('Gynecologist')			    	=>	'Gynecologist',
+                    $this->translator->trans('Ophtalmologist')				=>  'Ophtalmologist',
+                    $this->translator->trans('Other')						=>	'Other'
 				],
-				'label' => 'Specialty',
+				'label' => $this->translator->trans('Specialty'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
             ->add('email', TextType::class, [
-				'label' => 'Email',
+				'label' => $this->translator->trans('Email'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating']
 			])
             ->add('plainPassword', PasswordType::class, [
-				'label' => 'Create Password',
+				'label' => $this->translator->trans('Create Password'),
 				'attr' => ['class' => 'form-control floating'],
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],

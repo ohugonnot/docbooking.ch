@@ -25,21 +25,32 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorProfileSettingsFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 		$languages_json = file_get_contents('https://www.docbooking.ch/data/languages.json');
 		$languages= json_decode($languages_json);
 		$languages_choose = [];
-		$languages_choose[''] = 'Choose a Language...';
 		foreach($languages as $lang){
+            $this->translator->trans($lang->name);
 			$languages_choose[$lang->name] = $lang->name;
 		}
         $builder
 			->add('picture_profile', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => $this->translator->trans('Brochure (PDF file)'),
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -87,7 +98,7 @@ class DoctorProfileSettingsFormType extends AbstractType
 				'attr' => ['class' => 'form-control']
 			])
 			->add('phone_number', TelType::class, [
-				'label' => 'Phone Number',
+				'label' => $this->translator->trans('Phone Number'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
@@ -97,12 +108,12 @@ class DoctorProfileSettingsFormType extends AbstractType
 					'Male' => 'Male',
 					'Female' => 'Female',
 				],
-				'label' => 'Gender',
+				'label' => $this->translator->trans('Gender'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('date_birth', DateType::class, [
-				'label' => 'Date of Birth',
+				'label' => $this->translator->trans('Date of Birth'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'attr' => ['class' => 'form-control'],
 				'format' => 'dd/MM/yyyy',
@@ -110,7 +121,7 @@ class DoctorProfileSettingsFormType extends AbstractType
 				'html5' => false
 			])
 			->add('about_me', TextareaType::class, [
-				'label' => 'Biography',
+				'label' => $this->translator->trans('Biography'),
 				'row_attr' => ['class' => 'form-group mb-0'],
 				'attr' => ['class' => 'form-control', 'rows'	=>	"5"],
 				'required'=> false
@@ -118,51 +129,51 @@ class DoctorProfileSettingsFormType extends AbstractType
 			->add('speciality', ChoiceType::class, [
 				'choices'  => [
 					'Select' => null,
-					'General Practitioner' 			=>	'General Practitioner',
-					'Urologist'			   			=>	'Urologist',
-					'Neurologist'		   			=>	'Neurologist',
-					'Dentist'			   			=>	'Dentist',
-					'Dental Hygienist'				=>	'Dental Hygienist',
-					'Orthopedist'		   			=>	'Orthopedist',
-					'Cardiologist'		   			=>	'Cardiologist',
-					'Psychologist'		   			=>	'Psychologist',
-					'Nutritionist-Dietician'		=>	'Nutritionist-Dietician',
-					'Alternative/Natural Medicine'	=>	'Alternative/Natural Medicine',
-					'Pediatrician'					=>	'Pediatrician',
-					'Dermatologist / Aesthetics'	=>	'Dermatologist / Aesthetics',
-					'Physiotherapist'				=>	'Physiotherapist',
-					'Gynecologist'					=>	'Gynecologist',
-					'Ophtalmologist'				=>  'Ophtalmologist',
-					'Other'							=>	'Other'
+                    $this->translator->trans('General Practitioner') 		=>	'General Practitioner',
+                    $this->translator->trans('Urologist')			   		=>	'Urologist',
+                    $this->translator->trans('Neurologist')		   			=>	'Neurologist',
+                    $this->translator->trans('Dentist')			   			=>	'Dentist',
+                    $this->translator->trans('Dental Hygienist')				=>	'Dental Hygienist',
+                    $this->translator->trans('Orthopedist')	   		    	=>	'Orthopedist',
+                    $this->translator->trans('Cardiologist')		   			=>	'Cardiologist',
+                    $this->translator->trans('Psychologist')		   			=>	'Psychologist',
+                    $this->translator->trans('Nutritionist-Dietician')		=>	'Nutritionist-Dietician',
+                    $this->translator->trans('Alternative/Natural Medicine')	=>	'Alternative/Natural Medicine',
+                    $this->translator->trans('Pediatrician')					=>	'Pediatrician',
+                    $this->translator->trans('Dermatologist / Aesthetics')	=>	'Dermatologist / Aesthetics',
+                    $this->translator->trans('Physiotherapist')				=>	'Physiotherapist',
+                    $this->translator->trans('Gynecologist')					=>	'Gynecologist',
+                    $this->translator->trans('Ophtalmologist')				=>  'Ophtalmologist',
+                    $this->translator->trans('Other')			    		=>	'Other'
 				],
-				'label' => 'Medical Specialty',
+				'label' => $this->translator->trans('Medical Specialty'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('services', TextType::class, [
-				'label' => 'Services',
+				'label' => $this->translator->trans('Services'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('specialization', TextType::class, [
-				'label' => 'Specialization',
+				'label' => $this->translator->trans('Specialization'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('address_line_1', TextType::class, [
-				'label' => 'Address Line 1',
+				'label' => $this->translator->trans('Address Line 1'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'required'	=>	false
 			])
 			->add('address_line_2', TextType::class, [
-				'label' => 'Address Line 2',
+				'label' => $this->translator->trans('Address Line 2'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'required'=>false
 			])
 			->add('city', TextType::class, [
-				'label' => 'City',
+				'label' => $this->translator->trans('City'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
@@ -196,29 +207,29 @@ class DoctorProfileSettingsFormType extends AbstractType
 					'ZG' => 'ZG',
 					'ZH' => 'ZH'
 				],
-				'label' => 'State / Province',
+				'label' => $this->translator->trans('State / Province'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('country', ChoiceType::class, [
 				'choices' => [
-					'Switzerland' => 'CH',
+                    $this->translator->trans('Switzerland') => 'CH',
 				],
-				'label' => 'Country',
+				'label' => $this->translator->trans('Country'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'preferred_choices' => ['CH'],
 			])
 			->add('postal_code', TextType::class, [
-				'label' => 'Postal Code',
+				'label' => $this->translator->trans('Postal Code'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('receiving_patient_info', ChoiceType::class, [
 				'choices' => [
-					'Always' => 'always',
-					'If Patient Wishes' => 'if_patient_wishes',
-					'Never' => 'never',
+                    $this->translator->trans('Always') => 'always',
+                    $this->translator->trans('If Patient Wishes') => 'if_patient_wishes',
+                    $this->translator->trans('Never') => 'never',
 				],
 				'choice_attr' => function($choice, $key, $value) {
 					// adds a class like attending_yes, attending_no, etc
@@ -231,7 +242,7 @@ class DoctorProfileSettingsFormType extends AbstractType
 			])
 			->add('price_type', ChoiceType::class, [
 				'choices' => [
-					'Custom Price (per visit)' => 'custom_price'
+                    $this->translator->trans('Custom Price (per visit)') => 'custom_price'
 				],
 				'choice_attr' => function($choice, $key, $value) {
 					// adds a class like attending_yes, attending_no, etc
@@ -247,22 +258,22 @@ class DoctorProfileSettingsFormType extends AbstractType
 				'attr' => [
 					'min' => '0.00',
 					'max' => '1000.00',
-					'step' => '0.01'
+					'step' => '0.01',
+                    'class' => 'form-control',
 				],
 				'row_attr' => ['class' => 'col-md-4'],
-				'attr' => ['class' => 'form-control'],
-				'help' => 'Custom price you can add',
+				'help' => $this->translator->trans('Custom price you can add'),
 			])
 			->add('spoken_languages', ChoiceType::class, [
 				'choices' => [
-					'German' 	=> 'German',
-					'French' 	=> 'French',
-					'Italian' 	=> 'Italian',
-					'English' 	=> 'English',
-					'Spanish'	=> 'Spanish',
-					'Russian' 	=> 'Russian',
-					'Arabic' 	=> 'Arabic',
-					'Others' 	=> 'Other'
+                    $this->translator->trans('German') 	=> 'German',
+                    $this->translator->trans('French') 	=> 'French',
+                    $this->translator->trans('Italian') 	=> 'Italian',
+                    $this->translator->trans('English') 	=> 'English',
+                    $this->translator->trans('Spanish')	=> 'Spanish',
+                    $this->translator->trans('Russian') 	=> 'Russian',
+                    $this->translator->trans('Arabic') 	=> 'Arabic',
+                    $this->translator->trans('Others') 	=> 'Other'
 				],
 				'choice_attr' => function($choice, $key, $value) {
 					// adds a class like attending_yes, attending_no, etc

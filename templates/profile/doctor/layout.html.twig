@@ -10,54 +10,54 @@
 				<div class="col-md-12 col-12">
 					<nav aria-label="breadcrumb" class="page-breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{path('app_doctor_dashboard')}}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Your Profile</li>
+							<li class="breadcrumb-item"><a href="{{path('app_doctor_dashboard')}}">{{ "Home"|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ "Your Profile"|trans }}</li>
 						</ol>
 					</nav>
-					<h2 class="breadcrumb-title">Dashboard</h2>
+					<h2 class="breadcrumb-title">{{ "Dashboard"|trans }}</h2>
 					{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %}
 
-					- Schedule Timings
+					- {{ "Schedule Timings"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %}
 
-					- Appointments
+					- {{ "Appointments"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_patients' %}
 
-					- My Patients
+					- {{ "My Patients"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %}
 
-					- Business Hours
+					- {{ "Business Hours"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %}
 
-					- Profile Settings
+					- {{ "Profile Settings"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_social' %}
 
-					- Social Media
+					- {{ "Social Media"|trans }}
 
 					{% endif %}
 
 					{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %}
 
-					- Change Password
+					- {{ "Change Password"|trans }}
 
 					{% endif %}
 
@@ -79,7 +79,7 @@
 								<div class="profile-det-info">
 									<h3>{{ doctor.getTitle() }} {{ app.user.firstname }} {{ app.user.lastname }}</h3>
 									<div class="patient-details">
-										<h5 class="mb-0">{{doctor.getSpeciality()}}</h5>
+										<h5 class="mb-0">{{doctor.getSpeciality()|trans}}</h5>
 									</div>
 								</div>
 							</div>
@@ -90,63 +90,63 @@
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_dashboard') }}">
 											<i class="fas fa-columns"></i>
-											<span>Dashboard</span>
+											<span>{{ "Dashboard"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_schedule_timings') }}">
 											<i class="fas fa-hourglass-start"></i>
-											<span>Schedule Timings</span>
+											<span>{{ "Schedule Timings"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_appointments') }}">
 											<i class="fas fa-calendar-check"></i>
-											<span>Appointments</span>
+											<span>{{ "Appointments"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_patients' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_patients') }}">
 											<i class="fas fa-user-injured"></i>
-											<span>My Patients</span>
+											<span>{{ "My Patients"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_business_hours') }}">
 											<i class="fas fa-clock"></i>
-											<span>Business Hours</span>
+											<span>{{ "Business Hours"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_profilesettings') }}">
 											<i class="fas fa-user-cog"></i>
-											<span>Profile Settings</span>
+											<span>{{ "Profile Settings"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_social' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_social') }}">
 											<i class="fas fa-share-alt"></i>
-											<span>Social Media</span>
+											<span>{{ "Social Media"|trans }}</span>
 										</a>
 									</li>
 
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_changepassword') }}">
 											<i class="fas fa-lock"></i>
-											<span>Change Password</span>
+											<span>{{ "Change Password"|trans }}</span>
 										</a>
 									</li>
 
 									<li>
 										<a href="{{ path('app_doctor_logout') }}">
 											<i class="fas fa-sign-out-alt"></i>
-											<span>Logout</span>
+											<span>{{ "Logout"|trans }}</span>
 										</a>
 									</li>
 								</ul>

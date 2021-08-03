@@ -9,9 +9,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorChangePasswordFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -29,10 +40,10 @@ class DoctorChangePasswordFormType extends AbstractType
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => $this->translator->trans('New password'),
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => $this->translator->trans('Repeat Password'),
                 ],
                 'invalid_message' => 'The password fields must match.',
                 // Instead of being set onto the object directly,

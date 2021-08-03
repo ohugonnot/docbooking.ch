@@ -11,20 +11,20 @@
 					{% for flashError in app.flashes('doctor_profile_timing_success') %}
 						<div class="alert alert-success" role="alert">{{ flashError }}</div>
 					{% endfor %}
-					<h4 class="card-title">Schedule Timings</h4>
+					<h4 class="card-title">{{ "Schedule Timings"|trans }}</h4>
 					<div class="profile-box">
 						<div class="row">
 							<div class="col-lg-4">
 								<form id="formSlot" method="get">
 									<div class="form-group">               
-										<label>Timing Slot Duration</label>
+										<label>{{ "Timing Slot Duration"|trans }}</label>
 										<select id="timeSlot" name="slot" class="select form-control">
 											<option>-</option>
-											<option value="15" {% if app.request.get('' ~ 'slot') == '15' %}selected{%endif%}>15 mins</option>
-											<option value="20" {% if app.request.get('' ~ 'slot') == '20' %}selected{%endif%}>20 mins</option>
-											<option value="30" {% if app.request.get('' ~ 'slot') == '30' %}selected{%endif%}>30 mins</option>  
-											<option value="45" {% if app.request.get('' ~ 'slot') == '45' %}selected{%endif%}>45 mins</option>
-											<option value="1" {% if app.request.get('' ~ 'slot') == '1' %}selected{%endif%}>1 Hour</option>
+											<option value="15" {% if app.request.get('' ~ 'slot') == '15' %}selected{%endif%}>15 {{ "mins"|trans }}</option>
+											<option value="20" {% if app.request.get('' ~ 'slot') == '20' %}selected{%endif%}>20 {{ "mins"|trans }}</option>
+											<option value="30" {% if app.request.get('' ~ 'slot') == '30' %}selected{%endif%}>30 {{ "mins"|trans }}</option>
+											<option value="45" {% if app.request.get('' ~ 'slot') == '45' %}selected{%endif%}>45 {{ "mins"|trans }}</option>
+											<option value="1" {% if app.request.get('' ~ 'slot') == '1' %}selected{%endif%}>1 {{ "Hour"|trans }}</option>
 										</select>
 										{% if url_vars['name'] is defined %}
 										<input type="hidden" name="{{url_vars['name']}}" value="{{url_vars['value']}}">
@@ -35,7 +35,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 text-right">
-								<a id="dlproAddSlotLink" class="edit-link d-none" href=""><i class="fa fa-check"></i> SAVE SLOTS FOR THIS WEEK</a>
+								<a id="dlproAddSlotLink" class="edit-link d-none" href=""><i class="fa fa-check"></i> {{ "SAVE SLOTS FOR THIS WEEK"|trans }}</a>
 							</div>
 							<div class="col-md-12">
 								<div class="card booking-schedule schedule-widget">

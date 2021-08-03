@@ -17,7 +17,7 @@
 						</div>
 						<div class="col-md-12 col-lg-6 login-right">
 							<div class="login-header">
-								<h3>Login <span>as a Patient</span></h3>
+								<h3>{{ "Login"|trans }} <span>{{ "as a Patient"|trans }}</span></h3>
 							</div>
 							{% if error %}
 								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -26,26 +26,26 @@
 								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
 								<div class="form-group form-focus">
 									<input type="email" id="email" name="email" value="{{ last_username }}" class="form-control floating" required="required" autocomplete="Email" />
-									<label for="email" class="focus-label">Email</label>
+									<label for="email" class="focus-label">{{ "Email"|trans }}</label>
 								</div>
 								<div class="form-group form-focus">
 									<input type="password" id="password" name="password" class="form-control floating" required="required" autocomplete="current-password" />
-									<label for="password" class="focus-label">Password</label>
+									<label for="password" class="focus-label">{{ "Password"|trans }}</label>
 								</div>
 								<div class="w-100">
 									<div class="text-left float-left w-50">
 										<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-										<label for="remember_me">Remember me</label>
+										<label for="remember_me">{{ "Remember me"|trans }}</label>
 									</div>
 									<div class="text-right float-left w-50">
-										<a class="forgot-link" href="{{ path('app_patient_forgot_password_request') }}">Forgot Password ?</a>
+										<a class="forgot-link" href="{{ path('app_patient_forgot_password_request') }}">{{ "Forgot Password ?"|trans }}</a>
 									</div>
 								</div>
 								{% if redirect_to %}
 									<input type="hidden" name="redirect_to" value="{{ redirect_to }}">
 								{% endif %}
-								<button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="_submit" name="_submit">Sign in</button>
-								<div class="text-center dont-have">Don’t have an account yet ? <a href="{{ path('app_patient_register') }}">Register as a New Patient</a></div>
+								<button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="_submit" name="_submit">{{ "Sign in"|trans }}</button>
+								<div class="text-center dont-have">{{ "Don’t have an account yet ?"|trans }} <a href="{{ path('app_patient_register') }}">{{ "Register as a New Patient"|trans }}</a></div>
 							</form>
 						</div>
 					</div>

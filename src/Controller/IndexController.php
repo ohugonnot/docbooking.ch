@@ -9,6 +9,7 @@ use App\Entity\Patient;
 use App\Repository\AppointmentRepository;
 use App\Repository\DoctorRepository;
 use DateTime;
+use IntlDateFormatter;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
@@ -406,6 +407,7 @@ class IndexController extends AbstractController
      */
     public function nextPrev(Request $request, DoctorRepository $doctorRepository)
     {
+        $formatter = new IntlDateFormatter($request->getLocale(), IntlDateFormatter::FULL,IntlDateFormatter::FULL);
         $doctor_id = $request->query->get('doctor_id');
         $type = $request->query->get('type');
         $doctor = $doctorRepository->find($doctor_id);
@@ -453,8 +455,10 @@ class IndexController extends AbstractController
         foreach ($timing['time'] as $time) {
             $date = $time[0] . '-' . $time[1] . '-' . $time[2];
             $dateObj = DateTime::createFromFormat('j-m-Y', $date);
-            $monthName = $dateObj->format('F');
-            $dayName = $dateObj->format('D');
+            $formatter->setPattern('EEE');
+            $dayName = $formatter->format($dateObj);
+            $formatter->setPattern('LLLL');
+            $monthName = $formatter->format($dateObj);
             $output[] = '<li>' . "\n";
             $output[] = '<span>' . $dayName . '</span>' . "\n";
             $output[] = '<span class="slot-date">' . $time[0] . ' ' . $monthName . ' <small class="slot-year">' . $time[2] . '</small></span>' . "\n";

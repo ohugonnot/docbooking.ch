@@ -25,7 +25,6 @@ class AdminSwitchListener implements EventSubscriberInterface
         return [
             'kernel.request' => 'onRedirectSwitchAdmin',
             'kernel.exception' => 'onAccessDenied',
-
         ];
     }
 

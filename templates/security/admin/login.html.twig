@@ -22,19 +22,19 @@
 					<div class="login-right">
 						<div class="login-right-wrap">
 							<h1>Login</h1>
-							<p class="account-subtitle">Access to our administration</p>
+							<p class="account-subtitle">{{ "Access to our administration"|trans }}</p>
 
 							<!-- Form -->
 							<form method="post">
 								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
 								<div class="form-group">
-									<input type="email" id="email" name="email" value="{{ last_username }}" required="required" autocomplete="email" class="form-control" placeholder="Email">
+									<input type="email" id="email" name="email" value="{{ last_username }}" required="required" autocomplete="email" class="form-control" placeholder="{{ "Email"|trans }}">
 								</div>
 								<div class="form-group">
-									<input type="password" id="password" name="password" required="required" autocomplete="current-password" class="form-control" placeholder="Mot de passe">
+									<input type="password" id="password" name="password" required="required" autocomplete="current-password" class="form-control" placeholder="{{ "Password"|trans }}">
 								</div>
 								<div class="form-group">
-									<button class="btn btn-primary btn-block" type="submit">Login</button>
+									<button class="btn btn-primary btn-block" type="submit">{{ "Login"|trans }}</button>
 								</div>
 							</form>
 						</div>

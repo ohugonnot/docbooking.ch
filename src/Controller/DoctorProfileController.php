@@ -14,6 +14,7 @@ use App\Repository\DoctorRepository;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use IntlDateFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
@@ -444,6 +445,7 @@ class DoctorProfileController extends AbstractController
      */
     public function scheduletimings(Request $request)
     {
+        $formatter = new IntlDateFormatter($request->getLocale(), IntlDateFormatter::FULL,IntlDateFormatter::FULL);
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_doctor_login');
         }
@@ -487,7 +489,6 @@ class DoctorProfileController extends AbstractController
             ];
         }
         $slotRequested = $request->query->get('slot');
-        $slot = 3600;
         switch ($slotRequested) {
             case '15':
                 $slot = 900;
@@ -522,7 +523,7 @@ class DoctorProfileController extends AbstractController
         $output[] = '<div class="day-slot">' . "\n";
         $output[] = '<ul>' . "\n";
         $output[] = '<li class="left-arrow">' . "\n";
-        $output[] = '<a id="dlproPrev" href="?prev=' . $timing['prev']->getTimestamp() . '">' . "\n";
+        $output[] = '<a id="dlproPrev" href="?prev=' . $timing['prev']->getTimestamp() . '&slot='.$slotRequested. '">' . "\n";
         $output[] = '<i class="fa fa-chevron-left"></i>' . "\n";
         $output[] = '</a>' . "\n";
         $output[] = '</li>' . "\n";
@@ -530,15 +531,17 @@ class DoctorProfileController extends AbstractController
         foreach ($timing['time'] as $time) {
             $date = $time[0] . '-' . $time[1] . '-' . $time[2];
             $dateObj = DateTime::createFromFormat('j-m-Y', $date);
-            $monthName = $dateObj->format('F');
-            $dayName = $dateObj->format('D');
+            $formatter->setPattern('EEE');
+            $dayName = $formatter->format($dateObj);
+            $formatter->setPattern('LLLL');
+            $monthName = $formatter->format($dateObj);
             $output[] = '<li>' . "\n";
             $output[] = '<span>' . $dayName . '</span>' . "\n";
             $output[] = '<span class="slot-date">' . $time[0] . ' ' . $monthName . ' <small class="slot-year">' . $time[2] . '</small></span>' . "\n";
             $output[] = '</li>' . "\n";
         }
         $output[] = '<li class="right-arrow">' . "\n";
-        $output[] = '<a id="dlproNext"  href="?next=' . $timing['next']->getTimestamp() . '">' . "\n";
+        $output[] = '<a id="dlproNext"  href="?next=' . $timing['next']->getTimestamp() . '&slot='.$slotRequested.'">' . "\n";
         $output[] = '<i class="fa fa-chevron-right"></i>' . "\n";
         $output[] = '</a>' . "\n";
         $output[] = '</li>' . "\n";

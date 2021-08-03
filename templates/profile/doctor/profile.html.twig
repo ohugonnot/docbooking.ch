@@ -28,11 +28,11 @@
                 <div class="col-md-12 col-12">
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ path('app_index') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
+                            <li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ "Home"|trans }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ "Doctor Profile"|trans }}</li>
                         </ol>
                     </nav>
-                    <h2 class="breadcrumb-title">Doctor Profile</h2>
+                    <h2 class="breadcrumb-title">{{ "Doctor Profile"|trans }}</h2>
                 </div>
             </div>
         </div>
@@ -52,97 +52,101 @@
                             <div class="doc-info-cont">
                                 <h4 class="doc-name conveythis-no-translate">{{ doctor.getTitle() }} {{ doctor.getFirstName() }} {{ doctor.getLastName() }}</h4>
 
-                                <p class="doc-display-languages">{{ doctor.getSpokenLanguages()|join(' | ') }}</p>
+                                <p class="doc-display-languages">
+                                    {% for lang in doctor.getSpokenLanguages() %}
+                                        {{ lang|trans }}{% if not loop.last %} | {% endif %}
+                                    {% endfor %}
+                                </p>
                                 <div class="conveythis-no-translate">
 
                                     {% if doctor.getSpeciality() == 'General Practitioner' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-06.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Urologist' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-01.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
                                     {% elseif doctor.getSpeciality() == 'Neurologist' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-10.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Dentist' or doctor.getSpeciality() ==  'Dental Hygienist' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-05.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Orthopedist' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-03.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Cardiologist' %}
                                         <p class="doc-department">
                                             <img src="/assets/img/specialities/specialities-04.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Psychologist' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-02.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Nutritionist-Dietician' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-08.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Alternative/Natural Medicine' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-12.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Pediatrician' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-13.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Dermatologist / Aesthetics' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-11.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
 
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Gynecologist' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-14.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Physiotherapist' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-07.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% elseif doctor.getSpeciality() == 'Ophtalmologist' %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-09.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% else %}
                                         <p class="doc-department conveythis-no-translate">
                                             <img src="/assets/img/specialities/specialities-06.png" class="img-fluid"
-                                                 alt="Speciality">{{ doctor.getSpeciality() }}
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
                                         </p>
 
                                     {% endif %}
@@ -154,7 +158,7 @@
                                             {% if doctor.getPriceCustomValue() %}
                                                 <li>
                                                     <i class="far fa-money-bill-alt"></i>
-                                                    CHF {{ doctor.getPriceCustomValue() }} per visit
+                                                    CHF {{ doctor.getPriceCustomValue() }} {{ "per visit"|trans }}
                                                 </li>
                                             {% endif %}
                                         </ul>
@@ -184,7 +188,7 @@
                                     </li>
                                     <p class="doc-location"><i class="fas fa-map-marker-alt"></i> - <a
                                                 href="javascript:void(0);" data-toggle="modal"
-                                                data-target=".bd-direction-modal-lg">Get Directions</a></p>
+                                                data-target=".bd-direction-modal-lg">{{ "Get Directions"|trans }}</a></p>
                                 </ul>
                             </div>
                         </div>
@@ -201,13 +205,13 @@
                     <nav class="user-tabs mb-4">
                         <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+                                <a class="nav-link active" href="#doc_overview" data-toggle="tab">{{ "Overview"|trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#doc_locations" data-toggle="tab">Locations</a>
+                                <a class="nav-link" href="#doc_locations" data-toggle="tab">{{ "Locations"|trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
+                                <a class="nav-link" href="#doc_business_hours" data-toggle="tab">{{ "Business Hours"|trans }}</a>
                             </li>
                         </ul>
                     </nav>
@@ -217,13 +221,13 @@
                                 <div class="col-md-12 col-lg-9">
                                     {% if doctor.getAboutMe() %}
                                         <div class="widget about-widget">
-                                            <h4 class="widget-title">About Me</h4>
+                                            <h4 class="widget-title">{{ "About Me"|trans }}</h4>
                                             <p>{{ doctor.getAboutMe() }}</p>
                                         </div>
                                     {% endif %}
                                     {% if doctor.getEducations() %}
                                         <div class="widget education-widget">
-                                            <h4 class="widget-title">Education</h4>
+                                            <h4 class="widget-title">{{ "Education"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for education in doctor.getEducations() %}
@@ -235,7 +239,7 @@
                                                                 <div class="timeline-content">
                                                                     <a href="#/"
                                                                        class="name">{{ education.getCollegeInstitute() }}</a>
-                                                                    <div>{{ education.getDegree() }}</div>
+                                                                    <div>{{ education.getDegree()|trans }}</div>
                                                                     <span class="time">{{ education.getYearCompletion() }}</span>
                                                                 </div>
                                                             </div>
@@ -247,7 +251,7 @@
                                     {% endif %}
                                     {% if doctor.getExperiences() %}
                                         <div class="widget experience-widget">
-                                            <h4 class="widget-title">Work & Experience</h4>
+                                            <h4 class="widget-title">{{ "Work & Experience"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for experience in doctor.getExperiences() %}
@@ -274,7 +278,7 @@
                                     {% endif %}
                                     {% if doctor.getExperiences() %}
                                         <div class="widget awards-widget">
-                                            <h4 class="widget-title">Awards</h4>
+                                            <h4 class="widget-title">{{ "Awards"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for award in doctor.getAwards() %}
@@ -304,7 +308,7 @@
                                             <ul class="clearfix">
                                                 {% set services = doctor.getServices()|split(',') %}
                                                 {% for service in services %}
-                                                    <li>{{ service }}</li>
+                                                    <li>{{ service|capitalize|trans }}</li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -312,11 +316,11 @@
 
                                     {% if doctor.getSpecialization() %}
                                         <div class="service-list">
-                                            <h4>Specializations</h4>
+                                            <h4>{{ "Specializations"|trans }}</h4>
                                             <ul class="clearfix">
                                                 {% set specializations = doctor.getSpecialization()|split(',') %}
                                                 {% for specialization in specializations %}
-                                                    <li>{{ specialization }}</li>
+                                                    <li>{{ specialization|capitalize|trans }}</li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -334,7 +338,7 @@
                                                 <h4 class="clinic-name"><a href="#">{{ clinic.name }}</a></h4>
 
                                                 {% if doctor.getSpeciality() %}
-                                                    <p class="doc-speciality">{{ doctor.getSpeciality() }}</p>
+                                                    <p class="doc-speciality">{{ doctor.getSpeciality()|trans }}</p>
                                                 {% endif %}
 
                                                 <div class="clinic-details mb-0">
@@ -342,7 +346,7 @@
                                                         <i class="fas fa-map-marker-alt"></i> Lausanne, Switzerland <br>
                                                         <a href="javascript:void(0);" data-toggle="modal"
                                                            data-target=".bd-direction-modal-lg">
-                                                            Get Directions</a>
+                                                            {{ "Get Directions"|trans }}</a>
                                                     </h5>
                                                     {% if clinic.getImagesArray() %}
                                                         <ul>
@@ -391,7 +395,7 @@
                                                             {% if business_hour.dlproClosed is defined %}
                                                                 <div class="time-items">
 																<span class="time">
-																	<span class="badge bg-danger-light">Closed</span>
+																	<span class="badge bg-danger-light">{{ "Closed"|trans }}</span>
 																</span>
                                                                 </div>
                                                             {% else %}
@@ -403,7 +407,7 @@
                                                     {% endfor %}
                                                 </div>
                                             {% else %}
-                                                <p class="text-center">There are no Business Hours</p>
+                                                <p class="text-center">{{ "There are no Business Hours"|trans }}</p>
                                             {% endif %}
                                         </div>
                                     </div>

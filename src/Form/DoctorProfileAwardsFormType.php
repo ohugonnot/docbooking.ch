@@ -7,19 +7,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorProfileAwardsFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('awards', TextType::class, [
-				'label' => 'Awards',
+				'label' => $this->translator->trans('Awards'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('year', TextType::class, [
-				'label' => 'Year',
+				'label' => $this->translator->trans('Year'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])

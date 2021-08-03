@@ -1,0 +1,327 @@
+'Return to admin': 'Zurück zum Admin'
+Home: Start
+Doctors: Ärzte
+'Are you a healthcare professional?': 'Sind Sie medizinisches Fachpersonal?'
+Contact: Kontakt
+'Login / Signup': 'Einloggen / Anmelden'
+'Manage my Acct': 'Mein Konto Verwalten'
+'Toggle Dropdown': Dropdown-Menü
+Dashboard: Dashboard
+Favourites: Favoriten
+'Profile Settings': Profileinstellungen
+'Change Password': 'Passwort Ändern'
+Logout: Ausloggen
+'Schedule Timings': 'Termine Planen'
+Appointments: Termine
+'My Patients': 'Meine Patienten'
+'Social Media': 'Sozialen Medien'
+'About DocBooking & MEDoctor': 'Über DocBooking & MEDoctor'
+'For Patients': 'Für Patienten'
+'Patient Login': Patienten-Login
+'New Patient Registration': 'Neue Patientenregistrierung'
+'Symptom Checker for the Patient': 'Symptom-Checker für den Patienten'
+'For Doctors': 'Für Ärzte'
+'Doctor Login': Arzt-Login
+'New Doctor Registration': 'Neue Arztregistrierung'
+'Help for Doctors': 'Hilfe für Ärzte'
+'Contact Us': 'Kontaktieren Sie Uns'
+Switzerland: Schweiz
+'All rights reserved.': 'Alle Rechte vorbehalten.'
+'Terms and Conditions': Geschäftsbedingungen
+Policy: Richtlinien
+'Error Page': Fehlerseite
+'I Want to Book a Healthcare Professional': 'Ich möchte einen Gesundheits-Experte buchen'
+Search: Suche
+matches: Treffer
+'Sort by': 'Sortiere nach'
+'Shortest Waiting for Visit': 'Kürzeste Wartezeit auf Besuch'
+'Shortest Distance': 'Kürzeste Entfernung'
+'Lowest Price': 'Tiefster Preis'
+'Highest Price': 'Höchster Preis'
+'I Select': 'Ich Wähle'
+'Healthcare Specialty': Gesundheitswesen
+'General Practitioner': Hausarzt
+Urologist: Urologe
+Neurologist: Neurologe
+Dentist: Zahnarzt
+'Dental Hygienist': Zahnhygieniker
+Orthopedist: Orthopäde
+Cardiologist: Kardiologe
+Psychologist: Psychologe
+Nutritionist-Dietician: Ernährungsberater-Diätetiker
+'Alternative/Natural Medicine': Alternative/Naturheilkunde
+Pediatrician: Kinderarzt
+'Dermatologist / Aesthetics': 'Hautarzt / Ästhetik'
+Physiotherapist: Physiotherapeut
+Gynecologist: Gynäkologe
+Ophtalmologist: Augenarzt
+Other: Andere
+Location: Ort
+Language: Sprache
+German: Deutsch
+French: Französisch
+Italian: Italienisch
+English: Englisch
+Spanish: Spanisch
+Russian: Russisch
+Arabic: Arabisch
+Gender: Geschlecht
+'Male Doctor': Arzt
+'Female Doctor': Ärztin
+'FIND DOCTORS NOW': 'JETZT ARZT FINDEN'
+'I Book my Healthcare Professional': 'Ich buche meinen Arzt'
+'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit': 'In der Zwischenzeit überprüfe ich meine Symptome, um mich auf meinen Arztbesuch vorzubereiten'
+town: Stadt
+'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.': 'Buchen Sie kurzfristig einen Arzt in Ihrer Nähe. Hören Sie auf, 10-15 Tage zu warten, um einen Arzt zu sehen.'
+'Search by Doctor Name': 'Suche nach Arztname'
+'404 Error Page': '404 Fehlerseite'
+'404 Page - This page does not exist.': '404 Seite - Diese Seite existiert nicht.'
+'Click here to get back to the Homepage': 'Klicken Sie hier, um zur Startseite zurückzukehren'
+'Symptom Checker': Symptom-Checker
+'Symptom Checker and Differential Diagnosis': 'Symptomprüfer und Differenzialdiagnose'
+'I Check my Symptoms to Discover my Likely Diseases': 'Ich überprüfe meine Symptome, um meine wahrscheinlichen Krankheiten zu entdecken'
+'It''s anonymous and free': 'Es ist anonym und kostenlos'
+'I am Worried and I wish to Speak to a Healthcare Professional': 'Ich bin besorgt und möchte mit einem Angehörigen der Gesundheitsberufe sprechen'
+'Click the image below': 'Klicken Sie auf das Bild unten'
+'Help for Healthcare Professionals': 'Hilfe für medizinisches Fachpersonal'
+'Explainer Video': Erklärvideo
+"For all healthcare professional, to attract more patients, start your DocBooking.ch account today.<br>\n\t\t\t\tIt's free, fun and profitable.": "__For all healthcare professional, to attract more patients, start your DocBooking.ch account today.<br>\n\t\t\t\tIt's free, fun and profitable."
+'1. Ground Rules': '1. Grundregeln'
+'Any healthcare professional may create his account at any time.': '__Any healthcare professional may create his account at any time.'
+'If a healthcare professional''s account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional''s account.': '__If a healthcare professional''s account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional''s account.'
+'The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.': '__The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.'
+'2. Creating your Account': '2. Erstellen von Ihrem Konto'
+'To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).': '__To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).'
+'To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.': '__To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.'
+'3. Announcing your Free Slots for your Patients': '3. Bekanntgabe Ihrer freien Slots für Ihre Patienten'
+'This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.': '__This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.'
+'Choose you usual time duration to prepare your calendar (A).': '__Choose you usual time duration to prepare your calendar (A).'
+'Once you clicked your available slots, save them (B).': '__Once you clicked your available slots, save them (B).'
+'4. Getting More Patients': '4. Mehr Patienten gewinnen'
+'Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.': '__Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.'
+'For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.': '__For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.'
+'5. Getting even More Patients': '5. Noch mehr Patienten gewinnen'
+'As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.': '__As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.'
+'You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.': '__You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.'
+'You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.': '__You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.'
+'6. Getting Just Much More Patients': '6. Einfach viel mehr Patienten bekommen'
+'You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.': '__You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.'
+'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where <u>Firstname</u> by your first name and then <u>Lastname</u> by your last name. You can also adjust the image size, which are by default at <u>250px</u> and <u>62px</u>.': '__You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where <u>Firstname</u> by your first name and then <u>Lastname</u> by your last name. You can also adjust the image size, which are by default at <u>250px</u> and <u>62px</u>.'
+'7. Security and No Spam': '7. Sicherheit und kein Spam'
+'Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.': '__Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.'
+'In order to create your account, you will need your email address and a password. By giving us your email address, we are assurred that, once a booking is done, it will surely arrive at your email address. For your security, your email address will never be shown to your patient, neither will it be visible at any time during the booking process by the patient.': 'Um Ihr Konto zu erstellen, benötigen Sie Ihre E-Mail-Adresse und ein Passwort. Durch die Angabe Ihrer E-Mail-Adresse versichern wir uns, dass nach Abschluss einer Buchung diese sicher an Ihrer E-Mail-Adresse ankommt. Zu Ihrer Sicherheit wird Ihre E-Mail-Adresse Ihrem Patienten niemals angezeigt und ist auch während des Buchungsprozesses für den Patienten zu keinem Zeitpunkt sichtbar.'
+'9. Create 2 Accounts if you work at 2 Different Locations': '9. Erstellen Sie 2 Konten, wenn Sie an 2 verschiedenen Standorten arbeiten'
+'If you are a healthcare professional with 2 (or more) separate work locations, it is preferable to create 2 (or more) accounts at DocBooking, which will create 2 (or more) separate blue markers (or bubbles) on the map.': 'Wenn Sie ein medizinisches Fachpersonal mit 2 (oder mehr) separaten Arbeitsorten sind, ist es vorzuziehen, 2 (oder mehr) Konten bei DocBooking zu erstellen, wodurch 2 (oder mehr) separate blaue Markierungen (oder Blasen) auf der Karte erstellt werden.'
+'For this, it is necessary to operate with 2 (or more) separate email addresses and use a slightly different first name or last name, each account managing the schedule for the separate addresses. See the red arrows below.': 'Dazu ist es notwendig, mit 2 (oder mehr) separaten E-Mail-Adressen zu arbeiten und einen etwas anderen Vor- oder Nachnamen zu verwenden, wobei jedes Konto den Zeitplan für die separaten Adressen verwaltet. Siehe die roten Pfeile unten.'
+'10. Pricing': '10. Preisgestaltung'
+'Today, as we are in Beta-Testing, all services are free. Hereafter, you may discover the likely pricing table which will soon be applied.': 'Heute, da wir uns im Beta-Test befinden, sind alle Dienste kostenlos. Im Folgenden können Sie die wahrscheinliche Preistabelle entdecken, die in Kürze angewendet wird.'
+'11. If the above Help doesn''t Work': '11. Wenn die obige Hilfe nicht funktioniert'
+'In case the above is not enough, you can contact us at': 'Falls das oben Genannte nicht ausreicht, können Sie uns kontaktieren unter'
+'Or you also may call us at': 'Oder Sie können uns auch anrufen unter'
+'8. Receiving the Patient''s Symptoms Report': '8. Empfang des Symptomberichts des Patienten'
+'DocBooking.ch - Doctor Login': '__DocBooking.ch - Doctor Login'
+Login: __Login
+'as a Doctor or Therapist': '__as a Doctor or Therapist'
+Email: __Email
+Password: __Password
+'Remember me': '__Remember me'
+'Forgot Password ?': '__Forgot Password ?'
+'Sign in': '__Sign in'
+'Don’t have an account yet ?': '__Don’t have an account yet ?'
+'Register as a New Doctor': '__Register as a New Doctor'
+'as a Patient': '__as a Patient'
+'Register as a New Patient': '__Register as a New Patient'
+'Please sign in': '__Please sign in'
+'Access to our administration': '__Access to our administration'
+Title: __Title
+'First Name': '__First Name'
+'Last Name': '__Last Name'
+Male: __Male
+Female: __Female
+'Phone or Mobile Number': '__Phone or Mobile Number'
+'Address Line 1': '__Address Line 1'
+'Address Line 2': '__Address Line 2'
+City: __City
+Country: __Country
+'Postal Code': '__Postal Code'
+'Create Password': '__Create Password'
+'Register as New Doctor / Therapist': '__Register as New Doctor / Therapist'
+'Already have an account ?': '__Already have an account ?'
+Register: __Register
+'Patient Registration': '__Patient Registration'
+'Register as a Patient': '__Register as a Patient'
+Select: __Select
+Specialty: __Specialty
+'New password': '__New password'
+'Repeat Password': '__Repeat Password'
+'Old Password': '__Old Password'
+'Brochure (PDF file)': '__Brochure (PDF file)'
+'Date of Birth': '__Date of Birth'
+'Save Changes': '__Save Changes'
+'Your Profile': '__Your Profile'
+years: __years
+Doctor: __Doctor
+'Appt Date': '__Appt Date'
+'Booking Date': '__Booking Date'
+'Estimated Price': '__Estimated Price'
+Status: __Status
+PENDIND: __PENDIND
+'Pay Now': '__Pay Now'
+COMPLETE: __COMPLETE
+CANCELLED: __CANCELLED
+View: __View
+'Clinic Name': '__Clinic Name'
+'Clinic Address': '__Clinic Address'
+Awards: __Awards
+Year: __Year
+Degree: __Degree
+College/Institute: __College/Institute
+'Year of Completion': '__Year of Completion'
+'Hospital Name': '__Hospital Name'
+From: __From
+To: __To
+Designation: __Designation
+Memberships: __Memberships
+Registrations: __Registrations
+'Choose a Language...': '__Choose a Language...'
+'Phone Number': '__Phone Number'
+Biography: __Biography
+'Medical Specialty': '__Medical Specialty'
+Services: __Services
+Specialization: __Specialization
+'State / Province': '__State / Province'
+Always: __Always
+'If Patient Wishes': '__If Patient Wishes'
+Never: __Never
+'Custom Price (per visit)': '__Custom Price (per visit)'
+'Custom price you can add': '__Custom price you can add'
+Others: __Others
+'Website URL': '__Website URL'
+'Facebook URL': '__Facebook URL'
+'Twitter URL': '__Twitter URL'
+'Instagram URL': '__Instagram URL'
+'Pinterest URL': '__Pinterest URL'
+'Linkedin URL': '__Linkedin URL'
+'Youtube URL': '__Youtube URL'
+A-: __A-
+A+: __A+
+B-: __B-
+B+: __B+
+AB: __AB
+O-: __O-
+O+: __O+
+'Blood Group': '__Blood Group'
+Mobile: __Mobile
+Address: __Address
+State: __State
+'Zip Code': '__Zip Code'
+'Groupe Mutuel': '__Groupe Mutuel'
+CSS: __CSS
+Helsana: __Helsana
+Concordia: __Concordia
+Swica: __Swica
+Visana: __Visana
+Assura: __Assura
+Sanitas: __Sanitas
+Intras: __Intras
+KPT-CPT: __KPT-CPT
+Wincare: __Wincare
+Atupri: __Atupri
+ÖKK: __ÖKK
+Sympany: __Sympany
+Insurance: __Insurance
+'Insurance Number': '__Insurance Number'
+'3. Announcing your Available Slots for your Patients': '3. Bekanntgabe Ihrer verfügbaren Slots für Ihre Patienten'
+'Appointment ID#': '__Appointment ID#'
+'Order:': '__Order:'
+'Issued:': '__Issued:'
+'Confirmation From': '__Confirmation From'
+Description: __Description
+Quantity: __Quantity
+VAT: __VAT
+Total: __Total
+'General Consultation': '__General Consultation'
+'Subtotal:': '__Subtotal:'
+'Discount:': '__Discount:'
+'Total Amount:': '__Total Amount:'
+Close: __Close
+mins: __mins
+Hour: __Hour
+'SAVE SLOTS FOR THIS WEEK': '__SAVE SLOTS FOR THIS WEEK'
+'Basic Information': '__Basic Information'
+'Upload Photo': '__Upload Photo'
+'Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it.': '__Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it.'
+'A quality image of the face increases bookings by 40%.': '__A quality image of the face increases bookings by 40%.'
+Speciality: __Speciality
+'About Me': '__About Me'
+'Clinic Info': '__Clinic Info'
+'Clinic Images': '__Clinic Images'
+'Add More': '__Add More'
+'Contact Details': '__Contact Details'
+Pricing: __Pricing
+'Spoken Languages': '__Spoken Languages'
+'Receiving Patient Info by MEDoctor': '__Receiving Patient Info by MEDoctor'
+'Services and Specialization': '__Services and Specialization'
+'Note : Type & Press enter to add new services': '__Note : Type & Press enter to add new services'
+'Note : Type & Press  enter to add new specialization': '__Note : Type & Press  enter to add new specialization'
+Education: __Education
+Experience: __Experience
+Upload: __Upload
+'Processing dropped files...': '__Processing dropped files...'
+Cancel: __Cancel
+Retry: __Retry
+Delete: __Delete
+'Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb': '__Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb'
+'Are you sure want to delete?': '__Are you sure want to delete?'
+'Close:': '__Close:'
+'Doctor Profile': '__Doctor Profile'
+'per visit': '__per visit'
+'Get Directions': '__Get Directions'
+'No': __No
+'Yes': __Yes
+Ok: __Ok
+Check: __Check
+'Created with Sketch.': '__Created with Sketch.'
+error: __error
+Overview: __Overview
+Locations: __Locations
+'Business Hours': '__Business Hours'
+'Work & Experience': '__Work & Experience'
+Specializations: __Specializations
+Closed: __Closed
+'There are no Business Hours': '__There are no Business Hours'
+'Total Patient': '__Total Patient'
+'Till Today': '__Till Today'
+'Today Patient': '__Today Patient'
+Appoinments: __Appoinments
+'Patient Appoinment': '__Patient Appoinment'
+Upcoming: __Upcoming
+Today: __Today
+'Patient Name': '__Patient Name'
+Purpose: __Purpose
+Type: __Type
+General: __General
+'New Patient': '__New Patient'
+Fever: __Fever
+'Old Patient': '__Old Patient'
+Accept: __Accept
+Appointment: __Appointment
+'Booking confirmed For': '__Booking confirmed For'
+'Estimated Price:': '__Estimated Price:'
+Mon: __Mon
+Tue: __Tue
+Wed: __Wed
+Thu: __Thu
+Fri: __Fri
+Sat: __Sat
+Sun: __Sun
+Save: __Save
+Done: __Done
+'Save Change': '__Save Change'
+Phone: __Phone
+Age: __Age
+'Timing Slot Duration': '__Timing Slot Duration'
+'The appointment list is empty.': '__The appointment list is empty.'
+'The patient list is empty.': '__The patient list is empty.'
+'''Choose a Language...': '__''Choose a Language...'
+'Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.': '__Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.'

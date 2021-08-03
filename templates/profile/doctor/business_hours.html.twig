@@ -74,7 +74,7 @@
 {% block profileb %}
 	<div class="card businessHours">
 		<div class="card-body">
-			<h4 class="card-title">Basic Information</h4>
+			<h4 class="card-title">{{ "Basic Information"|trans }}</h4>
 			{% for flashError in app.flashes('doctor_profile_business_hours_error') %}
 				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 			{% endfor %}
@@ -89,24 +89,24 @@
 							{% for business_hour in business_hours %}
 								<div class="mb-2 row justify-content-between px-3 business-hours-cont">
 									<select id="day{{i}}" name="business-hours[{{i}}][day]" class="mb-2 mob">
-										<option value="Mon" {% if business_hour.day == 'Mon' %}selected{% endif %}>Mon</option>
-										<option value="Tue" {% if business_hour.day == 'Tue' %}selected{% endif %}>Tue</option>
-										<option value="Wed" {% if business_hour.day == 'Wed' %}selected{% endif %}>Wed</option>
-										<option value="Thu" {% if business_hour.day == 'Thu' %}selected{% endif %}>Thu</option>
-										<option value="Fri" {% if business_hour.day == 'Fri' %}selected{% endif %}>Fri</option>
-										<option value="Sat" {% if business_hour.day == 'Sat' %}selected{% endif %}>Sat</option>
-										<option value="Sun" {% if business_hour.day == 'Sun' %}selected{% endif %}>Sun</option>
+										<option value="Mon" {% if business_hour.day == 'Mon' %}selected{% endif %}>{{ "Mon"|trans }}</option>
+										<option value="Tue" {% if business_hour.day == 'Tue' %}selected{% endif %}>{{ "Tue"|trans }}</option>
+										<option value="Wed" {% if business_hour.day == 'Wed' %}selected{% endif %}>{{ "Wed"|trans }}</option>
+										<option value="Thu" {% if business_hour.day == 'Thu' %}selected{% endif %}>{{ "Thu"|trans }}</option>
+										<option value="Fri" {% if business_hour.day == 'Fri' %}selected{% endif %}>{{ "Fri"|trans }}</option>
+										<option value="Sat" {% if business_hour.day == 'Sat' %}selected{% endif %}>{{ "Sat"|trans }}</option>
+										<option value="Sun" {% if business_hour.day == 'Sun' %}selected{% endif %}>{{ "Sun"|trans }}</option>
 									</select>
 									<div class="mob">
-										<label class="text-grey mr-1">From</label>
+										<label class="text-grey mr-1">{{ "From"|trans }}</label>
 										<input class="ml-1" type="time" id="from{{i}}" name="business-hours[{{i}}][from]" value="{{business_hour.from}}">
 									</div>
 									<div class="mob mb-2">
-										<label class="text-grey mr-4">To</label>
+										<label class="text-grey mr-4">{{ "To"|trans }}</label>
 										<input class="ml-1" type="time" id="to{{i}}" name="business-hours[{{i}}][to]" value="{{business_hour.to}}">
 									</div>
 									<div class="mob mb-2">
-										<label class="text-grey mr-4">Closed</label>
+										<label class="text-grey mr-4">{{ "Closed"|trans }}</label>
 										<input class="ml-1" type="checkbox" name="business-hours[{{i}}][dlproClosed]" {% if business_hour.dlproClosed is defined %}checked{% endif %}>
 									</div>
 									<div class="mt-1 cancel fa fa-times text-danger delete"></div>
@@ -121,13 +121,13 @@
 					<div class="col-sm-10">
 						<div class="row px-3">
 							<div class="fa fa-plus-circle text-success add"></div>
-							<p class="text-success ml-3 add">Save</p>
+							<p class="text-success ml-3 add">{{ "Save"|trans }}</p>
 						</div>
 					</div>
 				</div>
 				<div class="row px-3 mt-3 justify-content-center"> 
-					<button class="btn exit mr-2">Cancel</button> 
-					<button type="submit" class="btn btn-success ml-2">Done</button> 
+					<button class="btn exit mr-2">{{ "Cancel"|trans }}</button>
+					<button type="submit" class="btn btn-success ml-2">{{ "Done"|trans }}</button>
 				</div>
 			</form>
 		</div>

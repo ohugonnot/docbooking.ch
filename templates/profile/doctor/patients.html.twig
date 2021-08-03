@@ -2,7 +2,7 @@
 
 {% block profileb %}
 	{% if not patients %}
-	<p>The patient list is empty.</p>
+	<p>{{ "The patient list is empty."|trans }}</p>
 	{% else %}
 	<div class="row row-grid">
 		{% for patient in patients %}
@@ -25,9 +25,9 @@
 					</div>
 					<div class="patient-info">
 						<ul>
-							<li>Phone <span>{{patient.getPhoneNumber()}}</span></li>
-							<li>Age <span>38 Years, Male</span></li>
-							<li>Blood Group <span>{{patient.getBloodGroup()}}</span></li>
+							<li>{{ "Phone"|trans }} <span>{{patient.getPhoneNumber()}}</span></li>
+							<li>{{ "Age"|trans }} <span> --- </span></li>
+							<li>{{ "Blood Group"|trans }} <span>{{patient.getBloodGroup()|trans}}</span></li>
 						</ul>
 					</div>
 				</div>

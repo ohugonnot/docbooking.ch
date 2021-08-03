@@ -27,6 +27,11 @@ class PatientProfileController extends AbstractController
      */
     public function index()
     {
+        /** @var Patient $user */
+        $user = $this->getUser();
+        if($user->isDoctor())
+            return $this->redirectToRoute('app_doctor_profile');
+
         return $this->render('profile/patient/index.html.twig', [
             'controller_name' => 'PatientProfileController',
         ]);
@@ -37,9 +42,12 @@ class PatientProfileController extends AbstractController
      */
     public function dashboard()
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user)
             return $this->redirectToRoute('app_patient_login');
-        }
+
+        if($user->isDoctor())
+            return $this->redirectToRoute('app_doctor_profile');
 
         $patient = $this->getDoctrine()->getRepository(Patient::class)->find($this->getUser()->getId());
         $appointments = ($patient) ? $patient->getAppointments() : [];
@@ -56,9 +64,8 @@ class PatientProfileController extends AbstractController
      */
     public function profile_settings(Request $request, SluggerInterface $slugger)
     {
-        if (!$this->getUser()) {
+        if (!$this->getUser())
             return $this->redirectToRoute('app_patient_login');
-        }
 
         $user = $this->getUser();
         $form = $this->createForm(PatientProfileSettingsFormType::class, $user);
@@ -102,9 +109,8 @@ class PatientProfileController extends AbstractController
      */
     public function change_password(Request $request)
     {
-        if (!$this->getUser()) {
+        if (!$this->getUser())
             return $this->redirectToRoute('app_doctor_login');
-        }
 
         $user = $this->getUser();
         $form = $this->createForm(PatientProfileChangePasswordType::class, $user);
@@ -144,9 +150,8 @@ class PatientProfileController extends AbstractController
      */
     public function favourites()
     {
-        if (!$this->getUser()) {
+        if (!$this->getUser())
             return $this->redirectToRoute('app_patient_login');
-        }
         $class = 'account-page';
         return $this->render('profile/patient/favourites.html.twig', [
             'controller_name' => 'PatientProfileController',

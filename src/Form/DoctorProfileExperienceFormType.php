@@ -8,19 +8,30 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorProfileExperienceFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('hospital_name', TextType::class, [
-				'label' => 'Hospital Name',
+				'label' => $this->translator->trans('Hospital Name'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('experience_from', DateType::class, [
-				'label' => 'From',
+				'label' => $this->translator->trans('From'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'format' => 'dd/MM/yyyy',
@@ -28,7 +39,7 @@ class DoctorProfileExperienceFormType extends AbstractType
 				'html5' => false
 			])
 			->add('experience_to', DateType::class, [
-				'label' => 'To',
+				'label' => $this->translator->trans('To'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'format' => 'dd/MM/yyyy',
@@ -36,7 +47,7 @@ class DoctorProfileExperienceFormType extends AbstractType
 				'html5' => false
 			])
 			->add('designation', TextType::class, [
-				'label' => 'Designation',
+				'label' => $this->translator->trans('Designation'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])

@@ -30,7 +30,7 @@
 							</div>
 							<div class="col-md-12 col-lg-6 login-right">
 								<div class="login-header">
-									<h3>Patient Registration
+									<h3>{{ "Patient Registration"|trans }}
 									<!-- <a href="doctor-register.html">Are you a Doctor?</a> -->
 									</h3>
 								</div>
@@ -56,12 +56,12 @@
 									<div class="text-right">
 										{% if redirect_to %}
 										<input type="hidden" name="redirect_to" value="{{ redirect_to }}">
-										<a class="forgot-link" href="{{ path('app_patient_login', {'redirect_to':redirect_to}) }}">Already have an account ?</a>
+										<a class="forgot-link" href="{{ path('app_patient_login', {'redirect_to':redirect_to}) }}">{{ "Already have an account ?"|trans }}</a>
 										{% else %}
-										<a class="forgot-link" href="{{ path('app_patient_login') }}">Already have an account ?</a>
+										<a class="forgot-link" href="{{ path('app_patient_login') }}">{{ "Already have an account ?"|trans }}</a>
 										{% endif %}
 									</div>
-									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Register as a Patient</button>
+									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">{{ "Register as a Patient"|trans }}</button>
 								{{ form_end(registrationForm) }}
 							<!-- /Register Form -->
 										

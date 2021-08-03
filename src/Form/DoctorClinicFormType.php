@@ -10,20 +10,31 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorClinicFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class, [
-				'label' => 'Clinic Name',
+				'label' => $this->translator->trans('Clinic Name'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'required' => false
 			])
 			->add('address', TextType::class, [
-				'label' => 'Clinic Address',
+				'label' => $this->translator->trans('Clinic Address'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'required' => false

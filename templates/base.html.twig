@@ -65,9 +65,9 @@
 					</div>
 					{% if is_granted('IS_IMPERSONATOR') %}
 						{% if app.user.isPatient %}
-							<a href="{{ impersonation_exit_path(path('app_admin_patients') ) }}">Return to admin</a>
+							<a href="{{ impersonation_exit_path(path('app_admin_patients') ) }}">{{ 'Return to admin'|trans }}</a>
 						{% else %}
-							<a href="{{ impersonation_exit_path(path('app_admin_doctors') ) }}">Return to admin</a>
+							<a href="{{ impersonation_exit_path(path('app_admin_doctors') ) }}">{{ 'Return to admin'|trans }}</a>
 						{% endif %}
 					{% else %}
 						<div class="main-menu-wrapper">
@@ -81,17 +81,19 @@
 							</div>
 							<ul class="main-nav">
 								<li>
-									<a href="{{ path('app_index') }}">Home</a>
+									<a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a>
 								</li>
-								<li>
-									<a href="{{ path('app_doctor_login') }}">Doctors</a>
-								</li>
+								{% if not app.user %}
+									<li>
+										<a href="{{ path('app_doctor_login') }}">{{ 'Doctors'|trans }}</a>
+									</li>
+								{% endif %}
 							</ul>
 						</div>
 						<ul class="nav header-navbar-rht">
 							{% if not app.user %}
 								<li class="nav-item">
-									<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">Are you a healthcare professional?</a>
+									<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">{{ 'Are you a healthcare professional?'|trans }}</a>
 								</li>
 							{% endif %}
 							<li class="nav-item contact-item">
@@ -99,7 +101,7 @@
 									<i class="far fa-hospital"></i>
 								</div>
 								<div class="header-contact-detail">
-									<p class="contact-header">Contact</p>
+									<p class="contact-header">{{ 'Contact'|trans }}</p>
 									<p class="contact-info-header"> +41 79 323 55 23</p>
 								</div>
 							</li>
@@ -110,8 +112,8 @@
 											<i class="far fa-user"></i>
 										</div>
 										<div class="header-contact-detail">
-											<p class="contact-header">Login / Signup</p>
-											<p class="contact-info-header">Manage my Acct</p>
+											<p class="contact-header">{{ 'Login / Signup'|trans }}</p>
+											<p class="contact-info-header">{{ 'Manage my Acct'|trans }}</p>
 										</div>
 									</a>
 								</li>
@@ -121,27 +123,27 @@
 									<div class="btn-group">
 										<button type="button" class="btn header-login">{{ app.user.firstname | default('') }} {{ app.user.lastname | default('') }},</button>
 										<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="sr-only">Toggle Dropdown</span>
+											<span class="sr-only">{{ 'Toggle Dropdown'|trans }}</span>
 										</button>
 										<div class="dropdown-menu">
 											{% if 'ROLE_PATIENT' in app.user.getRoles() %}
-												<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">Dashboard</a>
-												<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">Favourites</a>
-												<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">Profile Settings</a>
-												<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">Change Password</a>
+												<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">{{ 'Dashboard'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">{{ 'Favourites'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">{{ 'Profile Settings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">{{ 'Change Password'|trans }}</a>
 												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="{{ path('app_patient_logout') }}">Logout</a>
+												<a class="dropdown-item" href="{{ path('app_patient_logout') }}">{{ 'Logout'|trans }}</a>
 											{% endif %}
 											{% if 'ROLE_DOCTOR' in app.user.getRoles() %}
-												<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">Dashboard</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">Schedule Timings</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">Appointments</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">My Patients</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">Profile Settings</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_social') }}">Social Media</a>
-												<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">Change Password</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">{{ 'Dashboard'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">{{ 'Schedule Timings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">{{ 'Appointments'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">{{ 'My Patients'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">{{ 'Profile Settings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_social') }}">{{ 'Social Media'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">{{ 'Change Password'|trans }}</a>
 												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">Logout</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">{{ 'Logout'|trans }}</a>
 											{% endif %}
 										</div>
 									</div>
@@ -167,8 +169,8 @@
 										<img src="/assets/img/footer-logo.png" alt="logo">
 									</div>
 									<div class="footer-about-content">
-										<p><a href="{{path('app_about')}}" target="_blank"><i class="fas fa-angle-double-right"></i> About DocBooking & MEDoctor</a></p>
-										<p>Book a Doctor at Short notice near You. Stop waiting 10-15 Days to see a Doctor.</p>
+										<p><a href="{{path('app_about')}}" target="_blank"><i class="fas fa-angle-double-right"></i> {{ 'About DocBooking & MEDoctor'|trans }}</a></p>
+										<p>{{ 'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.'|trans }}</p>
 										<div class="social-icon">
 											<ul>
 												<li>
@@ -195,11 +197,11 @@
 							<div class="col-lg-3 col-md-6">
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Patients</h2>
+									<h2 class="footer-title">{{ 'For Patients'|trans }}</h2>
 									<ul>
-                                        <li><a href="{{path('app_patient_login')}}"><i class="fas fa-angle-double-right"></i> Patient Login</a></li>
-										<li><a href="{{path('app_patient_register')}}"><i class="fas fa-angle-double-right"></i> New Patient Registration</a></li>
-										<li><a href="{{path('app_ddx')}}"><i class="fas fa-angle-double-right"></i> Symptom Checker for the Patient</a></li>
+                                        <li><a href="{{path('app_patient_login')}}"><i class="fas fa-angle-double-right"></i> {{ 'Patient Login'|trans }}</a></li>
+										<li><a href="{{path('app_patient_register')}}"><i class="fas fa-angle-double-right"></i> {{ 'New Patient Registration'|trans }}</a></li>
+										<li><a href="{{path('app_ddx')}}"><i class="fas fa-angle-double-right"></i> {{ 'Symptom Checker for the Patient'|trans }}</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -207,11 +209,11 @@
 							<div class="col-lg-3 col-md-6">
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Doctors</h2>
+									<h2 class="footer-title">{{ 'For Doctors'|trans }}</h2>
 									<ul>
-                                        <li><a href="{{path('app_doctor_login')}}"><i class="fas fa-angle-double-right"></i> Doctor Login</a></li>
-                                        <li><a href="{{path('app_doctor_register')}}"><i class="fas fa-angle-double-right"></i> New Doctor Registration</a></li>
-                                        <li><a href="{{path('app_help_for_doctors')}}"><i class="fas fa-angle-double-right"></i> Help for Doctors</a></li>
+                                        <li><a href="{{path('app_doctor_login')}}"><i class="fas fa-angle-double-right"></i> {{ 'Doctor Login'|trans }}</a></li>
+                                        <li><a href="{{path('app_doctor_register')}}"><i class="fas fa-angle-double-right"></i> {{ 'New Doctor Registration'|trans }}</a></li>
+                                        <li><a href="{{path('app_help_for_doctors')}}"><i class="fas fa-angle-double-right"></i> {{ 'Help for Doctors'|trans }}</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -219,11 +221,11 @@
 							<div class="col-lg-3 col-md-6">
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-contact">
-									<h2 class="footer-title">Contact Us</h2>
+									<h2 class="footer-title">{{ 'Contact Us'|trans }}</h2>
 									<div class="footer-contact-info">
 										<div class="footer-address">
 											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> 4, place de la Gare, 1020 Renens-Lausanne, Switzerland</p>
+											<p> 4, place de la Gare, 1020 Renens-Lausanne, {{ 'Switzerland'|trans }}</p>
 										</div>
 										<p>
 											<i class="fas fa-phone-alt"></i>+41 79 323 55 23
@@ -256,16 +258,16 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
-										<p class="mb-0">&copy; 2020 DocBooking. All rights reserved.</p>
+										<p class="mb-0">&copy; 2021 DocBooking. {{ 'All rights reserved.'|trans }}</p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-6">
 									<!-- Copyright Menu -->
 									<div class="copyright-menu">
 										<ul class="policy-menu">
-											<li><a href="{{path('app_term_condition')}}">Terms and Conditions</a></li>
-											<li><a href="{{path('app_privacy_policy')}}">Policy</a></li>
-                                            						<li><a href="{{path('app_404')}}">Error Page</a></li>
+											<li><a href="{{path('app_term_condition')}}">{{ 'Terms and Conditions'|trans }}</a></li>
+											<li><a href="{{path('app_privacy_policy')}}">{{ 'Policy'|trans }}</a></li>
+                                            						<li><a href="{{path('app_404')}}">{{ 'Error Page'|trans }}</a></li>
 										</ul>
 									</div>
 									<!-- /Copyright Menu -->
@@ -281,7 +283,7 @@
 		</div>
 		<!-- /Main Wrapper -->
 
-<!-- ConveyThis code -->
+<!-- ConveyThis code
 <script src="//cdn.conveythis.com/javascript/conveythis-initializer.js"></script>
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function(e) {
@@ -290,7 +292,7 @@
 		});
 	});
 </script>
-<!-- End ConveyThis code -->
+ End ConveyThis code -->
 
 
 		<!-- jQuery -->

@@ -6,7 +6,7 @@
 			<nav class="user-tabs mb-4">
 				<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
 					<li class="nav-item">
-						<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+						<a class="nav-link active" href="#pat_appointments" data-toggle="tab">{{ "Appointments"|trans }}</a>
 					</li>
 				</ul>
 			</nav>
@@ -18,12 +18,12 @@
 								<table class="table table-hover table-center mb-0">
 									<thead>
 										<tr>
-											<th>Doctor</th>
-											<th>Appt Date</th>
-											<th>Booking Date</th>
-											<th>Estimated Price</th>
+											<th>{{ "Doctor"|trans }}</th>
+											<th>{{ "Appt Date"|trans }}</th>
+											<th>{{ "Booking Date"|trans }}</th>
+											<th>{{ "Estimated Price"|trans }}</th>
 											<!--<th>Paied Date</th>-->
-											<th>Status</th>
+											<th>{{ "Status"|trans }}</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -35,7 +35,7 @@
 													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
 														<img class="avatar-img rounded-circle" src="{% if appointment.getDoctor().getPictureProfile() %}{{appointment.getDoctor().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
 													</a>
-													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()}}</span></a>
+													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()|trans}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()|trans}}</span></a>
 												</h2>
 											</td>
 											<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
@@ -50,24 +50,24 @@
 											</td>-->
 											<td>
 												{% if appointment.getStatus() == 0 or appointment.getStatus() == 1 %}
-													<span class="badge badge-pill bg-warning-light">PENDIND</span></td>
+													<span class="badge badge-pill bg-warning-light">{{ "PENDIND"|trans }}</span></td>
 													{% if appointment.getStatus() == 1 %}
 													<a href="https://www.sandbox.paypal.com/checkoutnow?token={{appointment.getOrderID()}}" class="btn btn-sm">
-														<i class="fab fa-cc-paypal"></i> Pay Now
+														<i class="fab fa-cc-paypal"></i> {{ "Pay Now"|trans }}
 													</a>
 													{% endif %}
 												{% endif %}
 												{% if appointment.getStatus() == 2 %}
-													<span class="badge badge-pill bg-success-light">COMPLETE</span>
+													<span class="badge badge-pill bg-success-light">{{ "COMPLETE"|trans }}</span>
 												{% endif %}
 												{% if appointment.getStatus() == 3 %}
-													<span class="badge badge-pill bg-danger-light">CANCELLED</span>
+													<span class="badge badge-pill bg-danger-light">{{ "CANCELLED"|trans }}</span>
 												{% endif %}
 
 											<td class="text-right">
 												<div class="table-action">
 													<a href="javascript:void(0);" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}"  class="btn btn-sm bg-info-light">
-														<i class="far fa-eye"></i> View
+														<i class="far fa-eye"></i> {{ "View"|trans }}
 													</a>
 												</div>
 											</td>

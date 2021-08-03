@@ -29,9 +29,12 @@ security:
             entity:
                 class: App\Entity\Admin
                 property: email
-        all_users:
+        admin_patient:
             chain:
-                providers: [ 'app_patient_provider', 'app_doctor_provider', 'app_admin_provider' ]
+                providers: [ 'app_patient_provider','app_admin_provider' ]
+        admin_doctor:
+            chain:
+                providers: [ 'app_doctor_provider','app_admin_provider' ]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -51,7 +54,7 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: all_users }
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_patient }
         doctor:
             context: docbooking
             pattern: ^/doctor/
@@ -67,7 +70,7 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: all_users }
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_doctor }
         admin:
             context: docbooking
             pattern: ^/admin/
@@ -83,7 +86,7 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: all_users }
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: app_admin_provider }
         main:
             #anonymous: true
             lazy: true

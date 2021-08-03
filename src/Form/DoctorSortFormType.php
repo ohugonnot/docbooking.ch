@@ -6,9 +6,20 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorSortFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -18,7 +29,7 @@ class DoctorSortFormType extends AbstractType
 					'21' => 'Shortest Distance',
 					'22' => 'Lowest Price',
 				],
-				'label' => 'Gender',
+				'label' => $this->translator->trans('Gender'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])

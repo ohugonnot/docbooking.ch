@@ -18,7 +18,7 @@
 							<div class="col-md-12 col-lg-6 login-right">
 								{% if countryCode in ['CH','FR'] %}
 								<div class="login-header">
-									<h3>Register as New Doctor / Therapist 
+									<h3>{{ "Register as New Doctor / Therapist"|trans }}
 									<!-- <a href="register.html">Not a Doctor or Therapist?</a>-->
 									</h3>
 								</div>
@@ -41,7 +41,7 @@
 									{{ form_row(registrationForm.city) }}
 									{% do registrationForm.country.setRendered %}
 									<div class="form-group form-focus">
-										<label class="focus-label required" for="doctor_registration_form_cy">Country</label>
+										<label class="focus-label required" for="doctor_registration_form_cy">{{ "Country"|trans }}</label>
 										<input type="text" class="form-control floating" value="Switzerland" readonly>
 										<input type="hidden" id="doctor_registration_form_country" name="doctor_registration_form[country]" value="CH">
 									</div>
@@ -51,9 +51,9 @@
 									{{ form_row(registrationForm.email) }}
 									{{ form_row(registrationForm.plainPassword) }}
 									<div class="text-right">
-										<a class="forgot-link" href="{{ path('app_doctor_login') }}">Already have an account ?</a>
+										<a class="forgot-link" href="{{ path('app_doctor_login') }}">{{ "Already have an account ?"|trans }}</a>
 									</div>
-									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Register</button>
+									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">{{ "Register"|trans }}</button>
 								{{ form_end(registrationForm) }}
 								<!-- /Register Form -->
 								{% endif %}

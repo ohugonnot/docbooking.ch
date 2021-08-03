@@ -16,10 +16,9 @@
 		<div class="alert alert-success" role="alert">{{ flashError }}</div>
 	{% endfor %}
 	{{ form_start(requestForm) }}
-	<!-- Basic Information -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Basic Information</h4>
+			<h4 class="card-title">{{ "Basic Information"|trans }}</h4>
 			<div class="row form-row">
 				<div class="col-12 col-md-12">
 					<div class="form-group">
@@ -30,10 +29,10 @@
 							</div>
 							<div class="upload-img">
 								<div class="change-photo-btn">
-									<span><i class="fa fa-upload"></i> Upload Photo</span>
+									<span><i class="fa fa-upload"></i> {{ "Upload Photo"|trans }}</span>
 									<input type="file" id="{{requestForm.picture_profile.vars.id}}" name="{{requestForm.picture_profile.vars.full_name}}" class="upload">
 								</div>
-								<small class="form-text text-muted">Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it <a href="https://tinyjpg.com/">here</a>. A quality image of the face increases bookings by 40%.</small>
+								<small class="form-text text-muted">{{ "Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it."|trans }} <a href="https://tinyjpg.com/">here</a> {{ "A quality image of the face increases bookings by 40%."|trans }}</small>
 							</div>
 						</div>
 					</div>
@@ -68,28 +67,22 @@
 			</div>
 		</div>
 	</div>
-	<!-- /Basic Information -->
-	<!-- Speciality -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Speciality</h4>
+			<h4 class="card-title">{{ "Speciality"|trans }}</h4>
 			{{ form_row(requestForm.speciality) }}
 		</div>
 	</div>
-	<!-- /Speciality -->
-	<!-- About Me -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">About Me</h4>
+			<h4 class="card-title">{{ "About Me"|trans }}</h4>
 			{{ form_row(requestForm.about_me) }}
 		</div>
 	</div>
-	<!-- /About Me -->	
-	<!-- Clinic Info -->
 	<div class="card">
 		{% do requestForm.clinics.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Clinic Info</h4>
+			<h4 class="card-title">{{ "Clinic Info"|trans }}</h4>
 			<div class="clinic-info" data-prototype="{{ '<div class="row form-row clinic-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-md-6"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-md-10"><div class="form-group"><label>Clinic Images</label><div id="dZUpload__name__" class="dropzone" style="border:4px dashed black"></div></div><div class="upload-wrap"></div><input type="hidden" id="%s" name="%s" class="form-control" value="%s"></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.clinics.vars.prototype.name.vars.label, requestForm.clinics.vars.prototype.name.vars.id,requestForm.clinics.vars.prototype.name.vars.full_name,requestForm.clinics.vars.prototype.name.vars.value, requestForm.clinics.vars.prototype.address.vars.label,requestForm.clinics.vars.prototype.address.vars.id,requestForm.clinics.vars.prototype.address.vars.full_name,requestForm.clinics.vars.prototype.address.vars.value,requestForm.clinics.vars.prototype.images.vars.id,requestForm.clinics.vars.prototype.images.vars.full_name,requestForm.clinics.vars.prototype.images.vars.value)|e('html_attr') }}">
 				{% set i = 0 %}
 				{% for clinic in requestForm.clinics %}
@@ -104,7 +97,7 @@
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label>Clinic Images</label>
+										<label>{{ "Clinic Images"|trans }}</label>
 										<div class="dropzone dlpro-dropzone" style="border:4px dashed black" data-upload="{{i}}"></div>
 										{{ form_row(clinic.images) }}
 									</div>
@@ -129,15 +122,13 @@
 				{% endfor %}
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-clinic"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-clinic"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Clinic Info -->
-	<!-- Contact Details -->
 	<div class="card contact-card">
 		<div class="card-body">
-			<h4 class="card-title">Contact Details</h4>
+			<h4 class="card-title">{{ "Contact Details"|trans }}</h4>
 			<div class="row form-row">
 				<div class="col-md-6">
 					{{ form_row(requestForm.address_line_1) }}
@@ -160,11 +151,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- /Contact Details -->
-	<!-- Pricing -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Pricing</h4>
+			<h4 class="card-title">{{ "Pricing"|trans }}</h4>
 			<div class="form-group mb-0">
 				<div id="pricing_select">
 					{% do requestForm.price_type.setRendered %}
@@ -187,16 +176,14 @@
 				{% do requestForm.price_custom_value.setRendered %}
 				<div class="col-md-4">
 					<input type="text" class="form-control" id="{{requestForm.price_custom_value.vars.id}}" name="{{requestForm.price_custom_value.vars.full_name}}" value="{{requestForm.price_custom_value.vars.value}}" placeholder="20">
-					<small class="form-text text-muted">Custom price you can add</small>
+					<small class="form-text text-muted">{{ "Custom price you can add"|trans }}</small>
 				</div>
 			</div>						
 		</div>
 	</div>
-	<!-- /Pricing -->
-	<!-- Spoken Languages -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Spoken Languages</h4>
+			<h4 class="card-title">{{ "Spoken Languages"|trans }}</h4>
 			<div class="form-group mb-0">
 				<div id="pricing_select">
 					{% do requestForm.spoken_languages.setRendered %}
@@ -226,11 +213,9 @@
 			</div>						
 		</div>
 	</div>
-	<!-- /Spoken Languages -->
-	<!-- MEDoctor -->
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Receiving Patient Info by MEDoctor</h4>
+			<h4 class="card-title">{{ "Receiving Patient Info by MEDoctor"|trans }}</h4>
 			<div class="form-group mb-0">
 				<div id="medoctor_select">
 					{% do requestForm.receiving_patient_info.setRendered %}
@@ -251,11 +236,9 @@
 			</div>						
 		</div>
 	</div>
-	<!-- /MEDoctor -->
-	<!-- Services and Specialization -->
 	<div class="card services-card">
 		<div class="card-body">
-			<h4 class="card-title">Services and Specialization</h4>
+			<h4 class="card-title">{{ "Services and Specialization"|trans }}</h4>
 			{% do requestForm.services.setRendered %}
 			<div class="form-group">
 				<label>Services</label>
@@ -268,7 +251,7 @@
 					placeholder="Enter Services"  
 					value="{{requestForm.services.vars.value}}"
 				>
-				<small class="form-text text-muted">Note : Type & Press enter to add new services</small>
+				<small class="form-text text-muted">{{ "Note : Type & Press enter to add new services"|trans }}</small>
 			</div> 
 			{% do requestForm.specialization.setRendered %}
 			<div class="form-group mb-0">
@@ -282,16 +265,14 @@
 					name="{{requestForm.specialization.vars.full_name}}" 
 					value="{{requestForm.specialization.vars.value}}" 
 				>
-				<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
+				<small class="form-text text-muted">{{ "Note : Type & Press  enter to add new specialization"|trans }}</small>
 			</div> 
 		</div>       
 	</div>
-	<!-- /Services and Specialization -->
-	<!-- Education -->
 	<div class="card">
 		{% do requestForm.educations.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Education</h4>
+			<h4 class="card-title">{{ "Education"|trans }}</h4>
 			<div class="education-info" data-prototype="{{ '<div class="row form-row education-cont" ><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.educations.vars.prototype.degree.vars.label, requestForm.educations.vars.prototype.degree.vars.id,requestForm.educations.vars.prototype.degree.vars.full_name,requestForm.educations.vars.prototype.degree.vars.value, requestForm.educations.vars.prototype.college_institute.vars.label, requestForm.educations.vars.prototype.college_institute.vars.id,requestForm.educations.vars.prototype.college_institute.vars.full_name,requestForm.educations.vars.prototype.college_institute.vars.value, requestForm.educations.vars.prototype.year_completion.vars.label, requestForm.educations.vars.prototype.year_completion.vars.id,requestForm.educations.vars.prototype.year_completion.vars.full_name,requestForm.educations.vars.prototype.year_completion.vars.value)|e('html_attr') }}">
 			{% for education in requestForm.educations %}
 				<div class="row form-row education-cont">
@@ -317,16 +298,14 @@
 			
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Education -->			
-	<!-- Experience -->
 	<div class="card">
 		{% do requestForm.experiences.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Experience</h4>
+			<h4 class="card-title">{{ "Experience"|trans }}</h4>
 			<div class="experience-info" data-prototype="{{ '<div class="row form-row experience-cont"><div class="col-12 col-md-10 col-lg-11"><div class="row form-row"><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div></div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control datetimepicker" value="%s"></div> </div><div class="col-12 col-md-6 col-lg-4"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div></div></div><div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.experiences.vars.prototype.hospital_name.vars.label, requestForm.experiences.vars.prototype.hospital_name.vars.id,requestForm.experiences.vars.prototype.hospital_name.vars.full_name,requestForm.experiences.vars.prototype.hospital_name.vars.value,requestForm.experiences.vars.prototype.experience_from.vars.label, requestForm.experiences.vars.prototype.experience_from.vars.id,requestForm.experiences.vars.prototype.experience_from.vars.full_name,requestForm.experiences.vars.prototype.experience_from.vars.value,requestForm.experiences.vars.prototype.experience_to.vars.label, requestForm.experiences.vars.prototype.experience_to.vars.id,requestForm.experiences.vars.prototype.experience_to.vars.full_name,requestForm.experiences.vars.prototype.experience_to.vars.value,requestForm.experiences.vars.prototype.designation.vars.label, requestForm.experiences.vars.prototype.designation.vars.id,requestForm.experiences.vars.prototype.designation.vars.full_name,requestForm.experiences.vars.prototype.designation.vars.value)|e('html_attr') }}">
 				{% for experience in requestForm.experiences %}
 				<div class="row form-row experience-cont">
@@ -354,16 +333,14 @@
 				{% endfor %}
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Experience -->
-	<!-- Awards -->
 	<div class="card">
 		{% do requestForm.awards.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Awards</h4>
+			<h4 class="card-title">{{ "Awards"|trans }}</h4>
 			<div class="awards-info" data-prototype="{{ '<div class="row form-row awards-cont"><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.awards.vars.prototype.awards.vars.label, requestForm.awards.vars.prototype.awards.vars.id,requestForm.awards.vars.prototype.awards.vars.full_name,requestForm.awards.vars.prototype.awards.vars.value,requestForm.awards.vars.prototype.year.vars.label, requestForm.awards.vars.prototype.year.vars.id,requestForm.awards.vars.prototype.year.vars.full_name,requestForm.awards.vars.prototype.year.vars.value)|e('html_attr') }}">
 				{% for awards in requestForm.awards %}
 				<div class="row form-row awards-cont">
@@ -382,16 +359,14 @@
 				{% endfor %}
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Awards -->
-	<!-- Memberships -->
 	<div class="card">
 		{% do requestForm.memberships.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Memberships</h4>
+			<h4 class="card-title">{{ "Memberships"|trans }}</h4>
 			<div class="membership-info" data-prototype="{{ '<div class="row form-row membership-cont"><div class="col-12 col-md-10 col-lg-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2 col-lg-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.memberships.vars.prototype.memberships.vars.label, requestForm.memberships.vars.prototype.memberships.vars.id,requestForm.memberships.vars.prototype.memberships.vars.full_name,requestForm.memberships.vars.prototype.memberships.vars.value)|e('html_attr') }}">
 				{% for memberships in requestForm.memberships %}
 				<div class="row form-row membership-cont">
@@ -406,16 +381,14 @@
 				{% endfor %}
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Memberships -->
-	<!-- Registrations -->
 	<div class="card">
 		{% do requestForm.registrations.setRendered %}
 		<div class="card-body">
-			<h4 class="card-title">Registrations</h4>
+			<h4 class="card-title">{{ "Registrations"|trans }}</h4>
 			<div class="registrations-info" data-prototype="{{ '<div class="row form-row reg-cont"><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div></div><div class="col-12 col-md-5"><div class="form-group"><label>%s</label><input type="text" id="%s" name="%s" class="form-control" value="%s"></div> </div><div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div></div>'|format(requestForm.registrations.vars.prototype.registrations.vars.label, requestForm.registrations.vars.prototype.registrations.vars.id,requestForm.registrations.vars.prototype.registrations.vars.full_name,requestForm.registrations.vars.prototype.registrations.vars.value,requestForm.registrations.vars.prototype.year.vars.label, requestForm.registrations.vars.prototype.year.vars.id,requestForm.registrations.vars.prototype.year.vars.full_name,requestForm.registrations.vars.prototype.year.vars.value)|e('html_attr') }}">	
 			{% for registrations in requestForm.registrations %}
 				<div class="row form-row reg-cont">
@@ -433,17 +406,14 @@
 			{% endfor %}
 			</div>
 			<div class="add-more">
-				<a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
+				<a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> {{ "Add More"|trans }}</a>
 			</div>
 		</div>
 	</div>
-	<!-- /Registrations -->
 	<div class="submit-section submit-btn-bottom">
-		<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+		<button type="submit" class="btn btn-primary submit-btn">{{ "Save Changes"|trans }}</button>
 	</div>
 	{{ form_end(requestForm) }}	
-	
-	
 
    <script type="text/template" id="qq-template-manual-trigger">
         <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
@@ -458,11 +428,11 @@
                     <div>Select files</div>
                 </div>
                 <button type="button" id="trigger-upload" class="btn btn-primary">
-                    <i class="icon-upload icon-white"></i> Upload
+                    <i class="icon-upload icon-white"></i> {{ "Upload"|trans }}
                 </button>
             </div>
             <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
+                <span>{{ "Processing dropped files..."|trans }}</span>
                 <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
             </span>
             <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
@@ -476,9 +446,9 @@
                     <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
                     <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
                     <span class="qq-upload-size-selector qq-upload-size"></span>
-                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
-                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
-                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">{{ "Cancel"|trans }}</button>
+                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">{{ "Retry"|trans }}</button>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">{{ "Delete"|trans }}</button>
                     <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
                 </li>
             </ul>
@@ -486,15 +456,15 @@
             <dialog class="qq-alert-dialog-selector">
                 <div class="qq-dialog-message-selector"></div>
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Close</button>
+                    <button type="button" class="qq-cancel-button-selector">{{ "Close"|trans }}</button>
                 </div>
             </dialog>
 
             <dialog class="qq-confirm-dialog-selector">
                 <div class="qq-dialog-message-selector"></div>
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
+                    <button type="button" class="qq-cancel-button-selector">{{ "No"|trans }}</button>
+                    <button type="button" class="qq-ok-button-selector">{{ "Yes"|trans }}</button>
                 </div>
             </dialog>
 
@@ -502,8 +472,8 @@
                 <div class="qq-dialog-message-selector"></div>
                 <input type="text">
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
-                    <button type="button" class="qq-ok-button-selector">Ok</button>
+                    <button type="button" class="qq-cancel-button-selector">{{ "Cancel"|trans }}</button>
+                    <button type="button" class="qq-ok-button-selector">{{ "Ok"|trans }}</button>
                 </div>
             </dialog>
         </div>
@@ -528,8 +498,8 @@
 
         <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
           <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-          <title>Check</title>
-          <desc>Created with Sketch.</desc>
+          <title>{{ "Check"|trans }}</title>
+          <desc>{{ "Created with Sketch."|trans }}</desc>
           <defs></defs>
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
               <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
@@ -541,8 +511,8 @@
 
         <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
             <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-            <title>error</title>
-            <desc>Created with Sketch.</desc>
+            <title>{{ "error"|trans }}</title>
+            <desc>{{ "Created with Sketch."|trans }}</desc>
             <defs></defs>
             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
                 <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">

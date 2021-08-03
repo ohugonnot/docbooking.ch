@@ -14,14 +14,25 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PatientProfileSettingsFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('picture_profile', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => $this->translator->trans('Brochure (PDF file)'),
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => true,
@@ -58,7 +69,7 @@ class PatientProfileSettingsFormType extends AbstractType
 				'attr' => ['class' => 'form-control']
 			])
 			->add('date_birth', DateType::class, [
-				'label' => 'Date of Birth',
+				'label' => $this->translator->trans('Date of Birth'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'attr' => ['class' => 'form-control'],
 				'format' => 'dd/MM/yyyy',
@@ -68,15 +79,15 @@ class PatientProfileSettingsFormType extends AbstractType
 			->add('blood_group', ChoiceType::class, [
 				'choices'  => [
 					'Select' => '',
-					'A-' => 'A-',
-					'A+' => 'A+',
-					'B-' => 'B-',
-					'B+' => 'B+',
-					'AB' => 'AB',
-					'O-' => 'O-',
-					'O+' => 'O+',
+                    $this->translator->trans('A-') => 'A-',
+                    $this->translator->trans('A+') => 'A+',
+                    $this->translator->trans('B-') => 'B-',
+                    $this->translator->trans('B+') => 'B+',
+                    $this->translator->trans('AB') => 'AB',
+                    $this->translator->trans('O-') => 'O-',
+                    $this->translator->trans('O+') => 'O+',
 				],
-				'label' => 'Blood Group',
+				'label' => $this->translator->trans('Blood Group'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
@@ -86,12 +97,12 @@ class PatientProfileSettingsFormType extends AbstractType
 				'attr' => ['class' => 'form-control']
 			])
 			->add('phone_number', TelType::class, [
-				'label' => 'Mobile',
+				'label' => $this->translator->trans('Mobile'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('address', TextType::class, [
-				'label' => 'Address',
+				'label' => $this->translator->trans('Address'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
@@ -101,12 +112,12 @@ class PatientProfileSettingsFormType extends AbstractType
 				'attr' => ['class' => 'form-control']
 			])
 			->add('state', TextType::class, [
-				'label' => 'State',
+				'label' => $this->translator->trans('State'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('postal_code', TextType::class, [
-				'label' => 'Zip Code',
+				'label' => $this->translator->trans('Zip Code'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
@@ -118,28 +129,28 @@ class PatientProfileSettingsFormType extends AbstractType
 			->add('insurance', ChoiceType::class, [
 				'choices'  => [
 					'Select' 		=> '',
-					'Groupe Mutuel'	=>	'Groupe Mutuel',
-					'CSS'			=>	'CSS',
-					'Helsana'		=>	'Helsana',
-					'Concordia'		=>	'Concordia',
-					'Swica'			=>	'Swica',
-					'Visana'		=>	'Visana',
-					'Assura'		=>	'Assura',
-					'Sanitas'		=>	'Sanitas',
-					'Intras'		=>	'Intras',
-					'KPT-CPT'		=>	'KPT-CPT',
-					'Wincare'		=>	'Wincare',
-					'Atupri'		=>	'Atupri',
-					'ÖKK'			=>	'ÖKK',
-					'Sympany'		=>	'Sympany',
-					'Other'			=>	'Other'
+                    $this->translator->trans('Groupe Mutuel')	=>	'Groupe Mutuel',
+                    $this->translator->trans('CSS')		    =>	'CSS',
+                    $this->translator->trans('Helsana')		=>	'Helsana',
+                    $this->translator->trans('Concordia')	=>	'Concordia',
+                    $this->translator->trans('Swica')		=>	'Swica',
+                    $this->translator->trans('Visana')		=>	'Visana',
+                    $this->translator->trans('Assura')		=>	'Assura',
+                    $this->translator->trans('Sanitas')		=>	'Sanitas',
+                    $this->translator->trans('Intras')		=>	'Intras',
+                    $this->translator->trans('KPT-CPT')		=>	'KPT-CPT',
+                    $this->translator->trans('Wincare')		=>	'Wincare',
+                    $this->translator->trans('Atupri')		=>	'Atupri',
+                    $this->translator->trans('ÖKK')			=>	'ÖKK',
+                    $this->translator->trans('Sympany')		=>	'Sympany',
+                    $this->translator->trans('Other')		=>	'Other'
 				],
-				'label' => 'Insurance',
+				'label' => $this->translator->trans('Insurance'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])
 			->add('insurance_num', TextType::class, [
-				'label' => 'Insurance Number',
+				'label' => $this->translator->trans('Insurance Number'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control']
 			])

@@ -7,14 +7,25 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PatientResetPasswordRequestFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
-				'label' => 'Email',
+				'label' => $this->translator->trans('Email'),
 				'row_attr' => ['class' => 'form-group form-focus'],
 				'label_attr' => ['class' => 'focus-label'],
 				'attr' => ['class' => 'form-control floating'],

@@ -200,7 +200,7 @@ class AdminSecurityController extends AbstractController
             $request->query->getInt('page', 1),
             $limit,
             [
-                'defaultSortFieldName'      => 'a.create_time',
+                'defaultSortFieldName'      => 'a.app_time',
                 'defaultSortDirection' => 'DESC'
             ]
         );
@@ -217,6 +217,27 @@ class AdminSecurityController extends AbstractController
         $em->remove($appointment);
         $em->flush();
         return $this->redirectToRoute('app_admin_appointments');
+    }
+
+    /**
+     * @Route("clean", name="app_admin_clean")
+     */
+    public function clean(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $doctors = $em->getRepository(Doctor::class)->findAll();
+        foreach($doctors as $doctor)
+        {
+            if($doctor->getLangOther() === 'Choose a Language...')
+            {
+                $doctor->setLangOther(null);
+                $em->flush();
+            }
+
+
+        }
+        die();
+        return new Response('');
     }
 
 }

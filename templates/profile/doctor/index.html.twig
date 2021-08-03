@@ -14,9 +14,9 @@
 									</div>
 								</div>
 								<div class="dash-widget-info">
-									<h6>Total Patient</h6>
+									<h6>{{ "Total Patient"|trans }}</h6>
 									<h3>{{patients_count}}</h3>
-									<p class="text-muted">Till Today</p>
+									<p class="text-muted">{{ "Till Today"|trans }}</p>
 								</div>
 							</div>
 						</div>
@@ -28,7 +28,7 @@
 									</div>
 								</div>
 								<div class="dash-widget-info">
-									<h6>Today Patient</h6>
+									<h6>{{ "Today Patient"|trans }}</h6>
 									<h3>{{patients_count_today}}</h3>
 									<p class="text-muted">{{ "now"|date("j, M Y") }}</p>
 								</div>
@@ -42,9 +42,9 @@
 									</div>
 								</div>
 								<div class="dash-widget-info">
-									<h6>Appoinments</h6>
+									<h6>{{ "Appoinments"|trans }}</h6>
 									<h3>{{appointments_count}}</h3>
-									<p class="text-muted">Till Today</p>
+									<p class="text-muted">{{ "Till Today"|trans }}</p>
 								</div>
 							</div>
 						</div>
@@ -55,15 +55,15 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<h4 class="mb-4">Patient Appoinment</h4>
+			<h4 class="mb-4">{{ "Patient Appoinment"|trans }}</h4>
 			<div class="appointment-tab">
 				<!-- Appointment Tab -->
 				<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 					<li class="nav-item">
-						<a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+						<a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">{{ "Upcoming"|trans }}</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+						<a class="nav-link" href="#today-appointments" data-toggle="tab">{{ "Today"|trans }}</a>
 					</li> 
 				</ul>
 				<!-- /Appointment Tab -->
@@ -76,11 +76,11 @@
 									<table class="table table-hover table-center mb-0">
 										<thead>
 											<tr>
-												<th>Patient Name</th>
-												<th>Appt Date</th>
-												<th>Purpose</th>
-												<th>Type</th>
-												<th class="text-center">Estimated Price</th>
+												<th>{{ "Patient Name"|trans }}</th>
+												<th>{{ "Appt Date"|trans }}</th>
+												<th>{{ "Purpose"|trans }}</th>
+												<th>{{ "Type"|trans }}</th>
+												<th class="text-center">{{ "Estimated Price"|trans }}</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -94,8 +94,8 @@
 													</h2>
 												</td>
 												<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
-												<td>General</td>
-												<td>New Patient</td>
+												<td>{{ "General"|trans }}</td>
+												<td>{{ "New Patient"|trans }}</td>
 												<td class="text-center">CHF {{appointment.getProductPrice()}}</td>
 												<td class="text-right">
 													<div class="table-action">
@@ -112,13 +112,13 @@
 														{% else %}
 														<a href="#" class="btn btn-sm bg-success-light">
 															{% if appointment.getStatus() == 1 %}
-																PENDIND
+																{{ "PENDIND"|trans }}
 															{% endif %}
 															{% if appointment.getStatus() == 2 %}
-																COMPLETE
+																{{ "COMPLETE"|trans }}
 															{% endif %}
 															{% if appointment.getStatus() == 3 %}
-																CANCELLED
+																{{ "CANCELLED"|trans }}
 															{% endif %}
 														</a>
 														{% endif %}
@@ -141,11 +141,11 @@
 									<table class="table table-hover table-center mb-0">
 										<thead>
 											<tr>
-												<th>Patient Name</th>
-												<th>Appt Date</th>
-												<th>Purpose</th>
-												<th>Type</th>
-												<th class="text-center">Estimated Price</th>
+												<th>{{ "Patient Name"|trans }}</th>
+												<th>{{ "Appt Date"|trans }}</th>
+												<th>{{ "Purpose"|trans }}</th>
+												<th>{{ "Type"|trans }}</th>
+												<th class="text-center">{{ "Estimated Price"|trans }}</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -159,31 +159,31 @@
 													</h2>
 												</td>
 												<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
-												<td>Fever</td>
-												<td>Old Patient</td>
+												<td>{{ "Fever"|trans }}</td>
+												<td>{{ "Old Patient"|trans }}</td>
 												<td class="text-center">CHF {{appointment.getProductPrice()}}</td>
 												<td class="text-right">
 													<div class="table-action">
 														<a href="#" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}" class="btn btn-sm bg-info-light">
-															<i class="far fa-eye"></i> View
+															<i class="far fa-eye"></i> {{ "View"|trans }}
 														</a>
 														{% if appointment.getStatus() == 0 %}
 															<a href="{{path('app_doctor_appointments_success', {id: appointment.getId()})}}" class="btn btn-sm bg-success-light">
-																<i class="fas fa-check"></i> Accept
+																<i class="fas fa-check"></i> {{ "Accept"|trans }}
 															</a>
 															<a href="{{path('app_doctor_appointments_cancel', {id: appointment.getId()})}}" class="btn btn-sm bg-danger-light">
-																<i class="fas fa-times"></i> Cancel
+																<i class="fas fa-times"></i> {{ "Cancel"|trans }}
 															</a>
 														{% else %}
 															<a href="#" class="btn btn-sm bg-success-light">
 																{% if appointment.getStatus() == 1 %}
-																	PENDIND
+																	{{ "PENDIND"|trans }}
 																{% endif %}
 																{% if appointment.getStatus() == 2 %}
-																	COMPLETE
+																	{{ "COMPLETE"|trans }}
 																{% endif %}
 																{% if appointment.getStatus() == 3 %}
-																	CANCELLED
+																	{{ "CANCELLED"|trans }}
 																{% endif %}
 															</a>
 														{% endif %}
@@ -210,7 +210,7 @@
 			<div class="modal-dialog modal-dialog modal-lg modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Appointment ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">{{ "Appointment"|trans }} ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -239,7 +239,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Confirmation From</strong>
+												<strong class="customer-text">{{ "Confirmation From"|trans }}</strong>
 												<p class="invoice-details invoice-details-two">
 													Dr. {{appointment.getDoctor().getFirstName()}} {{appointment.getDoctor().getLastName()}} <br>
 													{{appointment.getDoctor().getAddressLine1()}}<br>
@@ -249,7 +249,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="invoice-info invoice-info2">
-												<strong class="customer-text">Booking confirmed For</strong>
+												<strong class="customer-text">{{ "Booking confirmed For"|trans }}</strong>
 												<p class="invoice-details">
 													{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}<br>
 													{% if appointment.getPatient().getInsurance() %}
@@ -299,14 +299,14 @@
 													<thead>
 														<tr>
 															<th>Description</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">VAT</th>
-															<th class="text-right">Total</th>
+															<th class="text-center">{{ "Quantity"|trans }}</th>
+															<th class="text-center">{{ "VAT"|trans }}</th>
+															<th class="text-right">{{ "Total"|trans }}</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>General Consultation</td>
+															<td>{{ "General Consultation"|trans }}</td>
 															<td class="text-center">1</td>
 															<td class="text-center">CHF  0</td>
 															<td class="text-right">CHF {{appointment.getProductPrice()}}</td>
@@ -320,15 +320,15 @@
 												<table class="invoice-table-two table">
 													<tbody>
 														<tr>
-															<th>Subtotal:</th>
+															<th>{{ "Subtotal:"|trans }}</th>
 															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
 														</tr>
 														<tr>
-															<th>Discount:</th>
+															<th>{{ "Discount:"|trans }}</th>
 															<td><span>-0%</span></td>
 														</tr>
 														<tr>
-															<th>Estimated Price:</th>
+															<th>{{ "Estimated Price:"|trans }}</th>
 															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
 														</tr>
 													</tbody>
@@ -343,7 +343,7 @@
 					
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ "Close"|trans }}</button>
 					</div>
 				</div>
 			</div>
@@ -355,7 +355,7 @@
 			<div class="modal-dialog modal-dialog modal-lg modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Appointment ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">{{ "Appointment"|trans }} ID#{{ "%'08.8s"|format(appointment.getId()) }}</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -384,7 +384,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Confirmation From</strong>
+												<strong class="customer-text">{{ "Confirmation From"|trans }}</strong>
 												<p class="invoice-details invoice-details-two">
 													Dr. {{appointment.getDoctor().getFirstName()}} {{appointment.getDoctor().getLastName()}} <br>
 													{{appointment.getDoctor().getAddressLine1()}}<br>
@@ -394,7 +394,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="invoice-info invoice-info2">
-												<strong class="customer-text">Booking confirmed For</strong>
+												<strong class="customer-text">{{ "Booking confirmed For"|trans }}</strong>
 												<p class="invoice-details">
 													{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}<br>
 													{% if appointment.getPatient().getInsurance() %}
@@ -444,14 +444,14 @@
 													<thead>
 														<tr>
 															<th>Description</th>
-															<th class="text-center">Quantity</th>
-															<th class="text-center">VAT</th>
-															<th class="text-right">Total</th>
+															<th class="text-center">{{ "Quantity"|trans }}</th>
+															<th class="text-center">{{ "VAT"|trans }}</th>
+															<th class="text-right">{{ "Total"|trans }}</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>General Consultation</td>
+															<td>{{ "General Consultation"|trans }}</td>
 															<td class="text-center">1</td>
 															<td class="text-center">CHF  0</td>
 															<td class="text-right">CHF {{appointment.getProductPrice()}}</td>
@@ -465,15 +465,15 @@
 												<table class="invoice-table-two table">
 													<tbody>
 														<tr>
-															<th>Subtotal:</th>
+															<th>{{ "Subtotal:"|trans }}</th>
 															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
 														</tr>
 														<tr>
-															<th>Discount:</th>
+															<th>{{ "Discount:"|trans }}</th>
 															<td><span>-0%</span></td>
 														</tr>
 														<tr>
-															<th>Estimated Price:</th>
+															<th>{{ "Estimated Price:"|trans }}</th>
 															<td><span>CHF {{appointment.getProductPrice()}}</span></td>
 														</tr>
 													</tbody>
@@ -488,7 +488,7 @@
 					
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ "Close"|trans }}</button>
 					</div>
 				</div>
 			</div>

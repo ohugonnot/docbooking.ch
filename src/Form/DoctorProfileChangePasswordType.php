@@ -9,14 +9,25 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DoctorProfileChangePasswordType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 		$builder
 			->add('oldPassword', PasswordType::class, [
-				'label' => 'Old Password',
+				'label' => $this->translator->trans('Old Password'),
 				'row_attr' => ['class' => 'form-group'],
 				'attr' => ['class' => 'form-control'],
 				'mapped' => false,
@@ -35,12 +46,12 @@ class DoctorProfileChangePasswordType extends AbstractType
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => $this->translator->trans('New password'),
 					'row_attr' => ['class' => 'form-group'],
 					'attr' => ['class' => 'form-control'],
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'label' => $this->translator->trans('Repeat Password'),
 					'row_attr' => ['class' => 'form-group'],
 					'attr' => ['class' => 'form-control'],
                 ],

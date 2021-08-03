@@ -164,7 +164,7 @@
 
 	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
 		<br>
-		<h1 style="text-align:center">I Want to Book a Healthcare Professional</h1>
+		<h1 style="text-align:center">{{ 'I Want to Book a Healthcare Professional'|trans }}</h1>
 	</div>
 
 	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12" style="padding: 0px 0px">
@@ -178,23 +178,23 @@
 				<div class="col-md-8 col-sm-12">
 					<nav aria-label="breadcrumb" class="page-breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Search</li>
+							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ 'Search'|trans }}</li>
 						</ol>
 					</nav>
-					<h2 class="breadcrumb-title">{{ pagination.getTotalItemCount() }} matches</h2>
+					<h2 class="breadcrumb-title">{{ pagination.getTotalItemCount() }} {{ 'matches'|trans }}</h2>
 				</div>
 				<div class="col-md-4 col-sm-12">
 					<div class="sort-by">
 						{# sorting of properties based on query components #}
-						<span class="sort-title">Sort by</span>
+						<span class="sort-title">{{ 'Sort by'|trans }}</span>
 						<span class="sortby-filter">
 							<select name="sort" id="dlproSort" class="select" style="min-width: 250px">
 								<option>Select</option>
-								<option {% if app.request.get('svsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?svsort=true" title="Shortest Waiting for Visit" value="Shortest Waiting for Visit">Shortest Waiting for Visit</option>
-                                <option {% if app.request.get('dsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?dsort=true" title="Shortest Distance" value="Shortest Distance">Shortest Distance</option>
-								<option {% if app.request.get('psort') == 'asc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=asc" title="Lowest Price" value="Lowest Price">Lowest Price</option>
-								<option {% if app.request.get('psort') == 'desc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=desc" title="Highest Price" value="Highest Price">Highest Price</option>
+								<option {% if app.request.get('svsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?svsort=true" title="Shortest Waiting for Visit" value="Shortest Waiting for Visit">{{ 'Shortest Waiting for Visit'|trans }}</option>
+                                <option {% if app.request.get('dsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?dsort=true" title="Shortest Distance" value="Shortest Distance">{{ 'Shortest Distance'|trans }}</option>
+								<option {% if app.request.get('psort') == 'asc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=asc" title="Lowest Price" value="Lowest Price">{{ 'Lowest Price'|trans }}</option>
+								<option {% if app.request.get('psort') == 'desc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=desc" title="Highest Price" value="Highest Price">{{ 'Highest Price'|trans }}</option>
 							</select>
 						</span>
 					</div>
@@ -208,118 +208,118 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-                        <h1 style="text-align:center">I Select</h1>
+                        <h1 style="text-align:center">{{ 'I Select'|trans }}</h1>
                     <br>
 					<!-- Search Filter -->
 					<div class="card search-filter">
 						<div class="card-body">
 							<form id="filterForm" action="{{ path('app_index') }}" method="post" enctype="application/x-www-form-urlencoded">
 								<div class="filter-widget">
-									<h4>Healthcare Specialty</h4>
+									<h4>{{ 'Healthcare Specialty'|trans }}</h4>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" {% if "General Practitioner" in spec %}checked{% endif %} value="General Practitioner">
-											<span class="checkmark"></span> General Practitioner
+											<span class="checkmark"></span> {{ 'General Practitioner'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" {% if "Urologist" in spec %}checked{% endif %} value="Urologist" >
-											<span class="checkmark"></span> Urologist
+											<span class="checkmark"></span> {{ 'Urologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" {% if "Neurologist" in spec %}checked{% endif %} value="Neurologist">
-											<span class="checkmark"></span> Neurologist
+											<span class="checkmark"></span> {{ 'Neurologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" {% if "Dentist" in spec %}checked{% endif %} value="Dentist">
-											<span class="checkmark"></span> Dentist
+											<span class="checkmark"></span> {{ 'Dentist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" {% if "Dental Hygienist" in spec %}checked{% endif %} value="Dental Hygienist">
-											<span class="checkmark"></span> Dental Hygienist
+											<span class="checkmark"></span> {{ 'Dental Hygienist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Orthopedist" {% if "Orthopedist" in spec %}checked{% endif %} >
-											<span class="checkmark"></span> Orthopedist
+											<span class="checkmark"></span> {{ 'Orthopedist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Cardiologist" {% if "Cardiologist" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Cardiologist
+											<span class="checkmark"></span> {{ 'Cardiologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Psychologist" {% if "Psychologist" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Psychologist
+											<span class="checkmark"></span> {{ 'Psychologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Nutritionist-Dietician" {% if "Nutritionist-Dietician" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Nutritionist-Dietician
+											<span class="checkmark"></span> {{ 'Nutritionist-Dietician'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Alternative/Natural Medicine" {% if "Alternative/Natural Medicine" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Alternative/Natural Medicine
+											<span class="checkmark"></span> {{ 'Alternative/Natural Medicine'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Pediatrician" {% if "Pediatrician" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Pediatrician
+											<span class="checkmark"></span> {{ 'Pediatrician'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Dermatologist / Aesthetics" {% if "Dermatologist / Aesthetics" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Dermatologist / Aesthetics
+											<span class="checkmark"></span> {{ 'Dermatologist / Aesthetics'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Physiotherapist" {% if "Physiotherapist" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Physiotherapist
+											<span class="checkmark"></span> {{ 'Physiotherapist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Gynecologist" {% if "Gynecologist" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Gynecologist
+											<span class="checkmark"></span> {{ 'Gynecologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Ophtalmologist" {% if "Ophtalmologist" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Ophtalmologist
+											<span class="checkmark"></span> {{ 'Ophtalmologist'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="spec[]" type="checkbox" value="Other" {% if "Other" in spec %}checked{% endif %}>
-											<span class="checkmark"></span> Other
+											<span class="checkmark"></span> {{ 'Other'|trans }}
 										</label>
 									</div>
 								</div>
 								<div class="filter-widget">
-									<h4>Location</h4> 
+									<h4>{{ 'Location'|trans }}</h4> 
 									<div size="1" class="sc-3lqdzs-0 cNGARV">
 										<div class="dl1e6-0 cmCNPn">
 											<div class="bkivry-0 jQpQPf">
 												<div class="bkivry-0 j3cl20-0 vxeagd-0 egmZCc">
-													<select id="form-field-1" name="filter_address[]" data-placeholder="town" multiple="multiple" class="sc-1od3ffh-0 kqWqou js-filter-address-basic-multiple" tabindex="8">
+													<select id="form-field-1" name="filter_address[]" data-placeholder="{{ 'town'|trans }}" multiple="multiple" class="sc-1od3ffh-0 kqWqou js-filter-address-basic-multiple" tabindex="8">
 														<option value=""></option>
 														{%for city in filter_place%}
 															<option value="{{city}}">{{city}}</option>
@@ -327,12 +327,10 @@
 													</select>
 												</div>
 												<div class="bkivry-0 j3cl20-0 znpd2u-0 iApOWg sc-11ow7ya-0 gXarcg">
-													<div class="sc-1hnf4jn-0 kspQVs">0 km</div>
+													<div class="sc-1hnf4jn-0 kspQVs">2 km</div>
 													<svg viewBox="0 0 24 24" sizes="" class="sc-1exlta7-0 ixGTSc"><path d="M17.71 9.29c-.39-.39-1.02-.39-1.41-.01l-.01.01-4.29 4.3-4.29-4.3c-.39-.39-1.03-.39-1.42 0s-.39 1.03 0 1.42l5 5c.39.39 1.02.39 1.41.01l.01-.01 5-5c.39-.39.39-1.02 0-1.42z"></path></svg>
 													<select name="filter_distance" aria-label="Où?" class="bkivry-0 eaLMPF">
-														
-														<option value="0" selected>0 km</option>
-														<option value="2">< 2 km</option>
+														<option value="2" selected>< 2 km</option>
 														<option value="5">< 5 km</option>
 														<option value="10">< 10 km</option>
 														<option value="15">< 15 km</option>
@@ -346,85 +344,83 @@
 									</div>
 								</div>
 								<div class="filter-widget">
-									<h4>Language</h4>
+									<h4>{{ 'Language'|trans }}</h4>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="German" {% if "German" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> German
+											<span class="checkmark"></span> {{ 'German'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="French" {% if "French" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> French
+											<span class="checkmark"></span> {{ 'French'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="Italian" {% if "Italian" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> Italian
+											<span class="checkmark"></span> {{ 'Italian'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="English" {% if "English" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> English
+											<span class="checkmark"></span> {{ 'English'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="Spanish" {% if "Spanish" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> Spanish
+											<span class="checkmark"></span> {{ 'Spanish'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="Russian" {% if "Russian" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> Russian
+											<span class="checkmark"></span> {{ 'Russian'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" value="Arabic" {% if "Arabic" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> Arabic
+											<span class="checkmark"></span> {{ 'Arabic'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="lang[]" type="checkbox" id="spoken_languages_other" value="Other" {% if "Other" in language_other %}checked{% endif %}>
-											<span class="checkmark"></span> Other
+											<span class="checkmark"></span> {{ 'Other'|trans }}
 										</label>
 									</div>
 									<div>
 										{% if options_other %}
-										<select id="lang_other" name="lang_other[]" class="form-control" multiple="multiple" placeholder="Choose a Language...">
+										<select id="lang_other" name="lang_other[]" class="form-control" multiple="multiple" data-placeholder="{{ "Choose a Language..."|trans }}">
 											{% for other in options_other %}
-												{% if other != 'Choose a Language...' and other != '' %}
-												<option value="{{ other }}" {% if other in lang_oth %}selected{% endif %}>{{ other }}</option>
-												{% endif %}
+													<option value="{{ other }}" {% if other in lang_oth %}selected{% endif %}>{{ other|trans }}</option>
 											{% endfor %}
 										</select>
 										{% endif %}
 									</div>
 								</div>
 								<div class="filter-widget">
-									<h4>Gender</h4>
+									<h4>{{ 'Gender'|trans }}</h4>
 									<div>
 										<label class="custom_check">
 											<input name="gen[]" type="checkbox" value="Male" {% if "Male" in gender %}checked{% endif %} >
-											<span class="checkmark"></span> Male Doctor
+											<span class="checkmark"></span> {{ 'Male Doctor'|trans }}
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
 											<input name="gen[]" type="checkbox" value="Female" {% if "Female" in gender %}checked{% endif %} >
-											<span class="checkmark"></span> Female Doctor
+											<span class="checkmark"></span> {{ 'Female Doctor'|trans }}
 										</label>
 									</div>
 								</div>
 								<input type="hidden" id="search-field-q" name="search-field-q" value="">
 								<div class="btn-search">
-									<button id="filterFormSubmit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>FIND DOCTORS NOW</span></button>
+									<button id="filterFormSubmit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>{{ 'FIND DOCTORS NOW'|trans }}</span></button>
 								</div>
 							</form>
 						</div>
@@ -433,7 +429,7 @@
           		</div>
 
 				<div class="col-md-12 col-lg-8 col-xl-9">
-					<h1 style="text-align:center">I Book my Healthcare Professional</h1>
+					<h1 style="text-align:center">{{ 'I Book my Healthcare Professional'|trans }}</h1>
                     <br>
                     <div class="load-more text-center dlpro-pagination">
 						{{ knp_pagination_render(pagination) }}
@@ -459,66 +455,71 @@
                                             <h4 class="doc-name"><a href="{{path('app_doctor_profile', {slug: doctor.getUrlProfile()})}}">{{doctor.getTitle()}} {{doctor.getFirstName()}} {{doctor.getLastName()}}</a></h4>
                                             </div>
                                             
-											<p class="doc-display-languages">{{doctor.getDisplayLanguage()}}</p>			
+											<p class="doc-display-languages">
+												{% for lang in doctor.getDisplayLanguage() %}
+													{{ lang|trans }}{% if not loop.last %} | {% endif %}
+												{% endfor %}
+
+											</p>
 								{% if doctor.getSpeciality() == 'General Practitioner' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Urologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Neurologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-10.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-10.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Dentist' or doctor.getSpeciality() ==  'Dental Hygienist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Orthopedist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Cardiologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Psychologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Nutritionist-Dietician' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-08.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-08.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Alternative/Natural Medicine' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-12.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-12.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Pediatrician' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-13.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-13.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Dermatologist / Aesthetics' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-11.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-11.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Gynecologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-14.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-14.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Physiotherapist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-07.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-07.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% elseif doctor.getSpeciality() == 'Ophtalmologist' %}
 									<h5 class="doc-department">
-										<img src="/assets/img/specialities/specialities-09.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+										<img src="/assets/img/specialities/specialities-09.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 									</h5>
 								{% else %}
 										<h5 class="doc-department">
-											<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()}}
+											<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
 										</h5>
 								{% endif %}
 											<div class="clinic-details">
@@ -584,10 +585,10 @@
 			<div class="banner-wrapper">
 				<div class="search-box">
 					<div class="form-group search-info">
-						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="Search by Doctor Name" value="{{q}}">
+						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="{{ 'Search by Doctor Name'|trans }}" value="{{q}}">
 						<div class="Typeahead-menu"></div>
 					</div>
-					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>{{ 'Search'|trans }}</span></button>
 				</div>
 			</div>
 		</div>
@@ -598,11 +599,11 @@
 		<!-- MEDoctor -->
 			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
                 	<br>
-                	<h1 style="text-align:center"><p style="color:rgb(152,86,176)">Meanwhile, I Check my Symptoms to Prepare for my Medical Visit</p></h1>
+                	<h1 style="text-align:center"><p style="color:rgb(152,86,176)">{{ 'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit'|trans }}</p></h1>
                 	<br>
 				<div class="blog grid-blog">
 					<div class="center-object">
-						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="740"></iframe>
+						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="745"></iframe>
 					</div>
 				</div>
 			</div>
@@ -728,7 +729,7 @@ $(document).ready(function(){
 		var selectedValues = new Array();
 		{% set cnt = 0 %}
 		{%for lg in lang_oth %}
-		selectedValues[{{ cnt }}] = '{{ lg|replace({"'": ""})}}';
+			selectedValues[{{ cnt }}] = '{{ lg|replace({"'": ""})}}';
 		{% set cnt = cnt + 1 %}
 		{% endfor %}
 		$('#lang_other').css('display', 'block');
@@ -857,7 +858,7 @@ $(document).ready(function(){
 	$('select[name="filter_distance"]').change(function() {
 		var val = $(this).val();
 		if(typeof val === "undefined"){
-			$('.sc-1hnf4jn-0').html('< 0 km');
+			$('.sc-1hnf4jn-0').html('< 2 km');
 		}
 		else{
 			$('.sc-1hnf4jn-0').html('< ' + val + ' km');
@@ -867,7 +868,7 @@ $(document).ready(function(){
 	//$('.chosen-select').val({{filter_address|json_encode()|raw}}).trigger('chosen:updated');
 	$('.js-filter-address-basic-multiple').select2();
 	{%if filter_distance %}
-	$('select[name="filter_distance"]').val('{{filter_distance}}').trigger('change');
+		$('select[name="filter_distance"]').val('{{filter_distance}}').trigger('change');
 	{% endif %}
 	{%if filter_address %}
 		$('.js-filter-address-basic-multiple').val({{filter_address|json_encode()|raw}}).change();

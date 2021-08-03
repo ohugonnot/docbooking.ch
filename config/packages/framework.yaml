@@ -16,3 +16,4 @@ framework:
     php_errors:
         log: true
     disallow_search_engine_index: false
+    default_locale: en
