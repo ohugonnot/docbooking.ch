@@ -39,38 +39,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        patient:
-            context: docbooking
-            pattern: ^/patient/
-            provider: app_patient_provider
-            #anonymous: true
-            guard:
-                authenticators:
-                    - App\Security\PatientAuthenticator
-            logout:
-                path:   app_patient_logout
-                target: app_patient_login
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                path:     /
-            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_patient }
-        doctor:
-            context: docbooking
-            pattern: ^/doctor/
-            provider: app_doctor_provider
-            #anonymous: true
-            guard:
-                authenticators:
-                    - App\Security\DoctorAuthenticator
-            logout:
-                path:   app_doctor_logout
-                target: app_doctor_login
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                path:     /
-            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_doctor }
         admin:
             context: docbooking
             pattern: ^/admin/
@@ -87,6 +55,38 @@ security:
                 lifetime: 604800 # 1 week in seconds
                 path:     /
             switch_user: { role: ROLE_ADMIN, parameter: switch, provider: app_admin_provider }
+        doctor:
+            context: docbooking
+            pattern: ^/doctor/
+            provider: app_doctor_provider
+            #anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\DoctorAuthenticator
+            logout:
+                path:   app_doctor_logout
+                target: app_doctor_login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_doctor }
+        patient:
+            context: docbooking
+            pattern: ^/
+            provider: app_patient_provider
+            #anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\PatientAuthenticator
+            logout:
+                path: app_patient_logout
+                target: app_patient_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
+            switch_user: { role: ROLE_ADMIN, parameter: switch, provider: admin_patient }
         main:
             #anonymous: true
             lazy: true

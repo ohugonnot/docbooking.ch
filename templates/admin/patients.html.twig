@@ -59,6 +59,9 @@
                                             <th {% if pagination.isSorted('p.email') %} class="sorted"{% endif %}>
                                                 {{ knp_pagination_sortable(pagination, 'Email', 'p.email') }}
                                             </th>
+                                            <th {% if pagination.isSorted('p.create_at') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Date of Registration', 'p.create_at') }}
+                                            </th>
                                             <th {% if pagination.isSorted('p.city') %} class="sorted"{% endif %}>
                                                 {{ knp_pagination_sortable(pagination, 'City', 'p.city') }}
                                             </th>
@@ -81,6 +84,7 @@
                                                     </h2>
                                                 </td>
                                                 <td>{{ patient.email }}</td>
+                                                <td>{{ patient.createAt|date() }}</td>
                                                 <td>{{ patient.city }}</td>
                                                 <td>{{ patient.formattedAddress2 }}</td>
                                                 <td>{{ patient.phoneNumber }}</td>

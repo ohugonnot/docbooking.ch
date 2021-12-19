@@ -308,7 +308,7 @@
                                             <ul class="clearfix">
                                                 {% set services = doctor.getServices()|split(',') %}
                                                 {% for service in services %}
-                                                    <li>{{ service|capitalize|trans }}</li>
+                                                    <li>{{ service|capitalize }}</li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -320,7 +320,7 @@
                                             <ul class="clearfix">
                                                 {% set specializations = doctor.getSpecialization()|split(',') %}
                                                 {% for specialization in specializations %}
-                                                    <li>{{ specialization|capitalize|trans }}</li>
+                                                    <li>{{ specialization|capitalize }}</li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -514,7 +514,7 @@
 		}
 
 		$(document).ready(function () {
-			$('.dlproColapseLink').on('click', function () {
+			$(document).on('click','.dlproColapseLink', function () {
 				var id = $(this).attr('href'), btn = $(this);
 				$.each($(id).find('li').find('a'), function () {
 					if ($(this).css('display') == 'none') {

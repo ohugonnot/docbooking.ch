@@ -50,7 +50,7 @@
 											</td>-->
 											<td>
 												{% if appointment.getStatus() == 0 or appointment.getStatus() == 1 %}
-													<span class="badge badge-pill bg-warning-light">{{ "PENDIND"|trans }}</span></td>
+													<span class="badge badge-pill bg-warning-light">{{ "PENDING"|trans }}</span></td>
 													{% if appointment.getStatus() == 1 %}
 													<a href="https://www.sandbox.paypal.com/checkoutnow?token={{appointment.getOrderID()}}" class="btn btn-sm">
 														<i class="fab fa-cc-paypal"></i> {{ "Pay Now"|trans }}

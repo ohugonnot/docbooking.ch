@@ -10,11 +10,11 @@
 				<div class="col-md-12 col-12">
 					<nav aria-label="breadcrumb" class="page-breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ 'Checkout'|trans }}</li>
 						</ol>
 					</nav>
-					<h2 class="breadcrumb-title">Booking Confirmation & Checkout</h2>
+					<h2 class="breadcrumb-title">{{ 'Booking Confirmation & Checkout'|trans }}</h2>
 				</div>
 			</div>
 		</div>
@@ -27,13 +27,13 @@
 				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 			{% endfor %}
             <br>
-			<center><h3><p style="color:rgb(152,86,176)">This is the Schedule I have Chosen</p></h3></center>
+			<center><h3><p style="color:rgb(152,86,176)">{{ 'This is the Schedule I have Chosen'|trans }}</p></h3></center>
 			<!-- Schedule Widget -->
 			<div class="card booking-schedule schedule-widget">	
 				{{doctor.getTimings()|formatTimingCheckout(timeSelected, daySelected, monthSelected, yearSelected)|raw}}
 			</div>
 			<!-- /Schedule Widget -->
-			<center><h3><p style="color:rgb(152,86,176)">I Complete my Booking</p></h3></center>
+			<center><h3><p style="color:rgb(152,86,176)">{{ 'I Complete my Booking'|trans }}</p></h3></center>
 			<div class="row">
 				<div class="col-md-7 col-lg-8">
 					<div class="card">
@@ -42,43 +42,74 @@
 							<form method="post" action="{{path('app_checkout_payment')}}">	
 								<!-- Personal Information -->
 								<div class="info-widget">
-									<h4 class="card-title">Personal Information</h4>
+									<h4 class="card-title">{{ 'Personal Information'|trans }}</h4>
 									<div class="row">
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group card-label">
-												<label>First Name</label>
+												<label>{{ 'First Name'|trans }}</label>
 												<input class="form-control" type="text" value="{{user.getFirstName()}}" readonly>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group card-label">
-												<label>Last Name</label>
+												<label>{{ 'Last Name'|trans }}</label>
 												<input class="form-control" type="text" value="{{user.getLastName()}}" readonly>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group card-label">
-												<label>Email</label>
+												<label>{{ 'Email'|trans }}</label>
 												<input class="form-control" type="email" value="{{user.getEmail()}}" readonly>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group card-label">
-												<label>Phone</label>
+												<label>{{ 'Phone'|trans }}</label>
 												<input class="form-control" type="text" value="{{user.getPhoneNumber()}}" readonly>
 											</div>
 										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Address'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getAddress()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'City'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getCity()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Postal Code'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getPostalCode()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Blood Group'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.BloodGroup}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Birth Date'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.DateBirth|date('m/d/Y')}}" readonly>
+											</div>
+										</div>
+
 										{% if user.getInsurance() %}
                                         <div class="col-md-6 col-sm-12">
 											<div class="form-group card-label">
-												<label>Insurance: {{user.getInsurance()}}</label>
+												<label>{{ 'Insurance'|trans }}: {{user.getInsurance()}}</label>
 												<input class="form-control" name="insuranceNum" type="text" value="{{user.getInsuranceNum()}}" readonly>
 											</div>
 										</div>
 										{% endif %}
 									</div>
 									{% if not user.getId()%}
-									<div class="exist-customer">Are You an Existing Patient ? <a href="{{path('app_patient_login')}}">Click here for a Fast Login</a></div>
+									<div class="exist-customer">{{ 'Are You an Existing Patient'|trans }} ? <a href="{{path('app_patient_login')}}">{{ 'Click here for a Fast Login'|trans }}</a></div>
 									{% endif %}
 								</div>
 								<!-- /Personal Information -->
@@ -88,7 +119,7 @@
 										<label class="payment-radio confirm-booking-option">
 											<input type="radio" name="payment_method" value="confirm_booking" checked>
 											<span class="checkmark"></span>
-											Confirm Booking
+											{{ 'Confirm Booking'|trans }}
 										</label>
 									</div>
 									<!-- /Payment Place -->
@@ -106,13 +137,13 @@
 									<div class="terms-accept">
 										<div class="custom-checkbox">
 											<input type="checkbox" name="terms_accept" id="terms_accept" value="1">
-											<label for="terms_accept">I have read and accept <a href="https://www.docbooking.ch/term-condition">Terms &amp; Conditions</a></label>
+											<label for="terms_accept">{{ 'I have read and accept'|trans }} <a href="https://www.docbooking.ch/term-condition">{{ 'Terms and Conditions'|trans }}</a></label>
 										</div>
 									</div>
 									<!-- /Terms Accept -->	
 									<!-- Submit Section -->
 									<div class="submit-section mt-4">
-										<button type="submit" class="btn btn-primary submit-btn">Confirm Booking</button>
+										<button type="submit" class="btn btn-primary submit-btn">{{ 'Confirm Booking'|trans }}</button>
 									</div>
 									<!-- /Submit Section -->	
 								</div>
@@ -125,7 +156,7 @@
 					<!-- Booking Summary -->
 					<div class="card booking-card">
 						<div class="card-header">
-							<h4 class="card-title">Booking Summary</h4>
+							<h4 class="card-title">{{ 'Booking Summary'|trans }}</h4>
 						</div>
 						<div class="card-body">	
 							<!-- Booking Doctor Info -->
@@ -146,13 +177,13 @@
 							<div class="booking-summary">
 								<div class="booking-item-wrap">
 									<ul class="booking-date">
-										<li>Date <span>{{date_chekout}}</span></li>
-										<li>Time <span>{{timeSelected}}</span></li>
+										<li>{{ 'Date'|trans }} <span>{{date_chekout}}</span></li>
+										<li>{{ 'Time'|trans }} <span>{{timeSelected}}</span></li>
 									</ul>
 									<div class="booking-total">
 										<ul class="booking-total-list">
 											<li>
-												<span>Estimated Price</span>
+												<span>{{ 'Estimated Price'|trans }}</span>
 												<span class="total-cost">CHF {{price}}</span>
 											</li>
 										</ul>

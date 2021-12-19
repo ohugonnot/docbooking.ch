@@ -620,7 +620,8 @@ jQuery(document).ready(function() {
 		$(".education-info").append(newForm);
 		init(index);
     });
-	$('.education-info').children()[0].remove();
+    if($('.education-info').children()[0])
+		$('.education-info').children()[0].remove();
 });
 jQuery(document).ready(function() {
     $('.experience-info').attr('data-index', $('.experience-info').find('experience-cont').length);
@@ -637,7 +638,8 @@ jQuery(document).ready(function() {
 	if($(first).val() === ""){
 		$('.experience-info').children()[0].remove();
 	};
-	$('.experience-info').children()[0].remove();
+	if($('.experience-info').children()[0])
+		$('.experience-info').children()[0].remove();
 });
 jQuery(document).ready(function() {
     $('.awards-info').attr('data-index', $('.awards-info').find('awards-cont').length);
@@ -742,8 +744,11 @@ $(document).ready(function(){
 {% if requestForm.clinics is empty %}
 $(document).ready(function(){
 	var newForm = $('.clinic-form').html();
-	newForm = newForm.replace(/__name__/g, 0);
-	$('.clinic-form').html(newForm);
+	if(newForm)
+	{
+		newForm = newForm.replace(/__name__/g, 0);
+		$('.clinic-form').html(newForm);
+	}
 });
 {% endif %}
 

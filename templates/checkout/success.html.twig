@@ -10,11 +10,11 @@
 				<div class="col-md-12 col-12">
 					<nav aria-label="breadcrumb" class="page-breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Booking</li>
+							<li class="breadcrumb-item"><a href="index.html">{{ 'Home'|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ 'Booking'|trans }}</li>
 						</ol>
 					</nav>
-					<h2 class="breadcrumb-title">Booking</h2>
+					<h2 class="breadcrumb-title">{{ 'Booking'|trans }}</h2>
 				</div>
 			</div>
 		</div>
@@ -30,10 +30,10 @@
 						<div class="card-body">
 							<div class="success-cont">
 								<i class="fas fa-check"></i>
-								<h3>Appointment booked Successfully!</h3>
-								<p><h3>Appointment booked with <br>
-								<strong>Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}}</strong><br> on <strong>{{appointment.getAppDate().format('j M Y')}}, at {{appointment.getAppTime().format('H:i')}}</strong></h3><br><br>
-                                <h4>Your Appointment will be <strong>confirmed by Email and Text Message</strong></h4></p>
+								<h3>{{ 'Appointment booked Successfully!'|trans }}</h3>
+								<p><h3>{{ 'Appointment booked with'|trans }} <br>
+								<strong>{{ 'Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}}</strong><br> {{ 'on'|trans }} <strong>{{appointment.getAppDate().format('j M Y')}}, {{ 'at'|trans }} {{appointment.getAppTime().format('H:i')}}</strong></h3><br><br>
+                                <h4>{{ 'Your Appointment will be'|trans }} <strong>{{ 'confirmed by Email or Text Message'|trans }}</strong></h4></p>
 							</div>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="invoice-info">
-										<strong class="customer-text">Confirmation From</strong>
+										<strong class="customer-text">{{ 'Confirmation From'|trans }}</strong>
 										<p class="invoice-details invoice-details-two">
 											Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}} <br>
 											{{doctor.getAddressLine1()}}<br>
@@ -73,7 +73,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="invoice-info invoice-info2">
-										<strong class="customer-text">Booking confirmed For</strong>
+										<strong class="customer-text">{{ "Booking confirmed For"|trans }}</strong>
 										<p class="invoice-details">
 											{{appointment.getPatient().getFirstName()}} {{appointment.getPatient().getLastName()}}<br>
 											{{appointment.getPatient().getAddress()}} <br>
@@ -110,15 +110,15 @@
 										<table class="invoice-table table table-bordered">
 											<thead>
 												<tr>
-													<th>Description</th>
-													<th class="text-center">Quantity</th>
-													<th class="text-center">VAT</th>
-													<th class="text-right">Total</th>
+													<th>{{ 'Description'|trans }}</th>
+													<th class="text-center">{{ 'Quantity'|trans }}</th>
+													<th class="text-center">{{ 'VAT'|trans }}</th>
+													<th class="text-right">{{ 'Total'|trans }}</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<td>General Consultation</td>
+													<td>{{ 'General Consultation'|trans }}</td>
 													<td class="text-center">1</td>
 													<td class="text-center">&euro; 0</td>
 													<td class="text-right">&euro;{{appointment.getProductPrice()}}</td>
@@ -132,15 +132,15 @@
 										<table class="invoice-table-two table">
 											<tbody>
 												<tr>
-													<th>Subtotal:</th>
+													<th>{{ 'Subtotal'|trans }}:</th>
 													<td><span>&euro;{{appointment.getProductPrice()}}</span></td>
 												</tr>
 												<tr>
-													<th>Discount:</th>
+													<th>{{ 'Discount'|trans }}:</th>
 													<td><span>-0%</span></td>
 												</tr>
 												<tr>
-													<th>Total Amount:</th>
+													<th>{{ 'Total Amount'|trans }}:</th>
 													<td><span>&euro;{{appointment.getProductPrice()}}</span></td>
 												</tr>
 											</tbody>
@@ -152,7 +152,7 @@
 						<!-- /Invoice Item -->
 						<!-- Invoice Information -->
 						<div class="other-info">
-							<h4>Other information</h4>
+							<h4>{{ 'Other information'|trans }}</h4>
 							<p class="text-muted mb-0">Door Access Code to the Building is 2244B after 19h00.
 								Depending on the waiting list, your waiting time can be aound 30 minutes.</p>
 							</div>

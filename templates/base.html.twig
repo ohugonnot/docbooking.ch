@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="DocBooking - Book a Doctor near You - Schedules at 12 - 48 hours Waiting only">
-		<meta name="keywords" content="booking, doctor, available, schedule, April, May, June, July, symptom checker, diagnosis, medicine, natural, general practitioner, therapist, physiotherapist, dentist, psychologist, flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy">
+		<meta name="keywords" content="booking, doctor, available, schedule, November, December, January, February, symptom checker, diagnosis, medicine, natural, general practitioner, therapist, physiotherapist, dentist, psychologist, flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy">
 		<meta name="author" content="Sean Kelly">
 		<meta name="google-site-verification" content="9eQ9giGNEjTdLoRdI96g8EB9DPAuQ0r8-hM0HBnDsc8" />
 		<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -86,6 +86,9 @@
 								{% if not app.user %}
 									<li>
 										<a href="{{ path('app_doctor_login') }}">{{ 'Doctors'|trans }}</a>
+									</li>
+                                    <li>
+										<a href="{{ path('app_ddx') }}">{{ 'Symptoms'|trans }}</a>
 									</li>
 								{% endif %}
 							</ul>
@@ -258,7 +261,7 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
-										<p class="mb-0">&copy; 2021 DocBooking. {{ 'All rights reserved.'|trans }}</p>
+										<p class="mb-0">&copy; 2021 DocBooking by <a href="https://akh-web.fr" target="_blank">akh-web.fr.</a> {{ 'All rights reserved.'|trans }}</p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-6">

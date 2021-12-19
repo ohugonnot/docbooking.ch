@@ -644,92 +644,109 @@ function dlproNext(t, e, n) {
 function dlproCollapsse() {
     $.each($(".dlpro-calendar-time-render"), function () {
         var t = $(this);
-        t.has("li").length &&
-            $.each(t.find("li"), function () {
-                if ($(this).find("a").length > 4) {
-                    var t = 1;
-                    $.each($(this).find("a"), function () {
-                        t > 4 && $(this).hide(), t++;
-                    });
-                }
-            });
+		var index_show = [];
+        if(t.has("li").length)
+		{
+			$.each(t.find("li"), function () {
+				var first = undefined;
+				$.each($(this).find("a"), function (index,el) {
+					if($(el).hasClass('selected'))
+					{
+						if(!first)
+							first = index;
+						if(index-first<4)
+							index_show.push(index);
+					}
+				});
+			});
+			$.each(t.find("li"), function () {
+				$.each($(this).find("a"), function (index,el) {
+					if(!index_show.includes(index))
+						$(el).hide();
+				});
+			});
+		}
     });
 }
 function dlproDoCollapsse() {
+	dlproCollapsse();
     $.each($(".dlpro-calendar-time-render"), function () {
         var t = $(this);
         t.has("li").length
             ? $.each(t.find("li"), function () {
-                  if ($(this).find("a.selected").length > 4) return t.find("div.is-dlpro-show-more").show(), (isExistCollapse = !0), !1;
+                  if ($(this).find("a.selected:not(:visible)").length > 0)
+                  	return t.find("div.is-dlpro-show-more").show(), (isExistCollapse = !0), !1;
                   t.find("div.is-dlpro-show-more").css("display", "none");
               })
             : t.find("div.is-dlpro-show-more").css("display", "none");
-    }),
-        isExistCollapse && dlproCollapsse();
+    });
 }
 $(document).ready(function () {
-    $("a.page-link").on("click", function () {
-        return $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", $(this).attr("href")), $("#filterForm").submit(), !1;
-    }),
-        $(".dlproColapseLink").on("click", function () {
-            var t = $(this).attr("href"),
-                e = $(this);
-            $.each($(t).find("li").find("a"), function () {
-                "none" == $(this).css("display") && $(this).show();
-            }),
-                e.hide();
-        }),
-        dlproDoCollapsse();
-}),
-    $(document).ready(function () {
-        $("#dlproSort").change(function () {
-            $("#filterForm").attr("action", $(this).children("option:selected").data("href")), $("#filterForm").submit();
-        });
-    }),
-    $(document).ready(function () {
-        $(document).on("click", ".dlproTimeElementSelected", function () {
-            if (0 == isDoctor) {
-                var t = $(this).data("doctorid"),
-                    e = $(this).data("id"),
-                    n = $(this).data("time");
-                $(
-                    '<form action="' +
-                        DLPRO_CHECKOUT_REDIRECT +
-                        '" method="post"><input type="hidden" name="doctorid" value="' +
-                        t +
-                        '"><input type="hidden" name="timeid" value="' +
-                        e +
-                        '"><input type="hidden" name="time" value="' +
-                        n +
-                        '"></form>'
-                )
-                    .appendTo("body")
-                    .submit();
-            }
-            return !1;
-        }),
-            $("#spoken_languages_other").change(function () {
-                this.checked ? ($(this).val(), $("#lang_other").css("display", "block"), $("#lang_other").select2({ tags: !0 })) : ($("#lang_other").select2("destroy"), $("#lang_other").css("display", "none")),
-                    $("#search-field-q").val($("#search-doctor-field").val()),
-                    $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
-            }),
-            $('input[name="spec[]"]').change(function () {
-                $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
-            }),
-            $('input[name="lang[]"]').change(function () {
-                $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
-            }),
-            $('input[name="gen[]"]').change(function () {
-                $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
-            });
-    });
 
-$(document).ready(function(){
+	$(document).on("click","a.page-link", function () {
+		return $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", $(this).attr("href")), $("#filterForm").submit(), !1;
+	});
+
+	$(document).on("click",'.dlproColapseLink', function () {
+		var t = $(this).attr("href"),
+			e = $(this);
+		$.each($(t).find("li").find("a"), function () {
+			"none" == $(this).css("display") && $(this).show();
+		});
+		e.hide();
+	});
+
+	dlproDoCollapsse();
+
+	$("#dlproSort").change(function () {
+		$("#filterForm").attr("action", $(this).children("option:selected").data("href")), $("#filterForm").submit();
+	});
+
+	$(document).on("click", ".dlproTimeElementSelected", function () {
+		if (0 == isDoctor) {
+			var t = $(this).data("doctorid"),
+					e = $(this).data("id"),
+					n = $(this).data("time");
+			$(
+					'<form action="' +
+					DLPRO_CHECKOUT_REDIRECT +
+					'" method="post"><input type="hidden" name="doctorid" value="' +
+					t +
+					'"><input type="hidden" name="timeid" value="' +
+					e +
+					'"><input type="hidden" name="time" value="' +
+					n +
+					'"></form>'
+			)
+					.appendTo("body")
+					.submit();
+		}
+		return !1;
+	});
+
+	$("#spoken_languages_other").change(function () {
+		this.checked ? ($(this).val(), $("#lang_other").css("display", "block"), $("#lang_other").select2({ tags: !0 })) : ($("#lang_other").select2("destroy"), $("#lang_other").css("display", "none")),
+				$("#search-field-q").val($("#search-doctor-field").val()),
+				$("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="spec[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="lang[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="gen[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
 	if ($('#spoken_languages_other').is(':checked')) {
 		var selectedValues = new Array();
 		{% set cnt = 0 %}
 		{%for lg in lang_oth %}
-			selectedValues[{{ cnt }}] = '{{ lg|replace({"'": ""})}}';
+		selectedValues[{{ cnt }}] = '{{ lg|replace({"'": ""})}}';
 		{% set cnt = cnt + 1 %}
 		{% endfor %}
 		$('#lang_other').css('display', 'block');
@@ -744,7 +761,7 @@ $(document).ready(function(){
 	else{
 		$('#lang_other').css('display', 'none');
 	}
-});
+})
 </script>
 {% verbatim %}
 <script id="result-template" type="text/x-handlebars-template">

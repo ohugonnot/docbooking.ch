@@ -617,7 +617,7 @@ $(document).ready(function(){
 		$('#filterForm').submit();
 		return false;
 	});
-	$('.dlproColapseLink').on('click', function(){
+	$(document).on('click','.dlproColapseLink',function(){
 		var id =  $(this).attr('href'), btn = $(this);
 		$.each($(id).find('li').find('a'), function(){
 			if($(this).css('display') == 'none'){
