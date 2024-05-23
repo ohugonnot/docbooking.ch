@@ -1,6 +1,14 @@
-AddHandler application/x-httpd-php74 .php
+AddHandler application/x-httpd-php-hostpoint-default .php
 
 ErrorDocument 404 /404
+
+#AddHandler application/x-httpd-php74 .php
+
+
+#Require valid-user
+#AuthType Basic
+#AuthName 'Authentication required'
+#AuthUserFile /home/fapulavi/.htpasswds/htpasswd.92731b30-0e54-4682-a6d6-a5b4b014b8d9
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^www.docbooking.ch$ [NC]

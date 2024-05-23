@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env
 /.env.local
@@ -26,6 +25,7 @@ yarn-error.log
 ### Upload ###
 public/uploads/*
 .idea
+
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
