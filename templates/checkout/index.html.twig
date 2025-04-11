@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckoutController!{% endblock %}
+
+{% block body %}
+	<!-- Breadcrumb -->
+	<div class="breadcrumb-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-md-12 col-12">
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ 'Checkout'|trans }}</li>
+						</ol>
+					</nav>
+					<h2 class="breadcrumb-title">{{ 'Booking Confirmation & Checkout'|trans }}</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Breadcrumb -->		
+	<!-- Page Content -->
+	<div class="content">
+		<div class="container">
+			{% for flashError in app.flashes('patient_checkout_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
+            <br>
+			<center><h3><p style="color:rgb(152,86,176)">{{ 'This is the Schedule I have Chosen'|trans }}</p></h3></center>
+			<!-- Schedule Widget -->
+			<div class="card booking-schedule schedule-widget">	
+				{{doctor.getTimings()|formatTimingCheckout(timeSelected, daySelected, monthSelected, yearSelected)|raw}}
+			</div>
+			<!-- /Schedule Widget -->
+			<center><h3><p style="color:rgb(152,86,176)">{{ 'I Complete my Booking'|trans }}</p></h3></center>
+			<div class="row">
+				<div class="col-md-7 col-lg-8">
+					<div class="card">
+						<div class="card-body">	
+							<!-- Checkout Form -->
+							<form method="post" action="{{path('app_checkout_payment')}}">	
+								<!-- Personal Information -->
+								<div class="info-widget">
+									<h4 class="card-title">{{ 'Personal Information'|trans }}</h4>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'First Name'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getFirstName()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Last Name'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getLastName()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Email'|trans }}</label>
+												<input class="form-control" type="email" value="{{user.getEmail()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Phone'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getPhoneNumber()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Address'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getAddress()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'City'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getCity()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Postal Code'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.getPostalCode()}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Blood Group'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.BloodGroup}}" readonly>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Birth Date'|trans }}</label>
+												<input class="form-control" type="text" value="{{user.DateBirth|date('m/d/Y')}}" readonly>
+											</div>
+										</div>
+
+										{% if user.getInsurance() %}
+                                        <div class="col-md-6 col-sm-12">
+											<div class="form-group card-label">
+												<label>{{ 'Insurance'|trans }}: {{user.getInsurance()}}</label>
+												<input class="form-control" name="insuranceNum" type="text" value="{{user.getInsuranceNum()}}" readonly>
+											</div>
+										</div>
+										{% endif %}
+									</div>
+									{% if not user.getId()%}
+									<div class="exist-customer">{{ 'Are You an Existing Patient'|trans }} ? <a href="{{path('app_patient_login')}}">{{ 'Click here for a Fast Login'|trans }}</a></div>
+									{% endif %}
+								</div>
+								<!-- /Personal Information -->
+								<div class="payment-widget">
+									<!-- Payment Place -->
+									<div class="payment-list">
+										<label class="payment-radio confirm-booking-option">
+											<input type="radio" name="payment_method" value="confirm_booking" checked>
+											<span class="checkmark"></span>
+											{{ 'Confirm Booking'|trans }}
+										</label>
+									</div>
+									<!-- /Payment Place -->
+									<!-- <h4 class="card-title">Payment if You are Not Insured in Switzerland</h4> -->
+									<!-- Paypal Payment -->
+									<!--<div class="payment-list">
+										<label class="payment-radio paypal-option">
+											<input type="radio" name="payment_method" value="paypal">
+											<span class="checkmark"></span>
+											Paypal
+										</label>
+									</div>-->
+									<!-- /Paypal Payment -->
+									<!-- Terms Accept -->
+									<div class="terms-accept">
+										<div class="custom-checkbox">
+											<input type="checkbox" name="terms_accept" id="terms_accept" value="1">
+											<label for="terms_accept">{{ 'I have read and accept'|trans }} <a href="https://www.docbooking.ch/term-condition">{{ 'Terms and Conditions'|trans }}</a></label>
+										</div>
+									</div>
+									<!-- /Terms Accept -->	
+									<!-- Submit Section -->
+									<div class="submit-section mt-4">
+										<button type="submit" class="btn btn-primary submit-btn">{{ 'Confirm Booking'|trans }}</button>
+									</div>
+									<!-- /Submit Section -->	
+								</div>
+							</form>
+							<!-- /Checkout Form -->
+						</div>
+					</div>	
+				</div>
+				<div class="col-md-5 col-lg-4 theiaStickySidebar">	
+					<!-- Booking Summary -->
+					<div class="card booking-card">
+						<div class="card-header">
+							<h4 class="card-title">{{ 'Booking Summary'|trans }}</h4>
+						</div>
+						<div class="card-body">	
+							<!-- Booking Doctor Info -->
+							<div class="booking-doc-info">
+								<a href="{{path('app_doctor_profile', {slug: doctor.getUrlProfile()})}}" class="booking-doc-img">
+									<img src="{% if doctor.getPictureProfile() %}{{doctor.getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="Doctor Image">
+								</a>
+								<div class="booking-info">
+									<h4><a href="{{path('app_doctor_profile', {slug: doctor.getUrlProfile()})}}">{{doctor.getTitle()}} {{doctor.getFirstName()}} {{doctor.getLastName()}}</a></h4>
+									{% if doctor.getFormattedAddress2() is not empty %}
+									<div class="clinic-details">
+										<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.getFormattedAddress2()}}</p>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<!-- Booking Doctor Info -->
+							<div class="booking-summary">
+								<div class="booking-item-wrap">
+									<ul class="booking-date">
+										<li>{{ 'Date'|trans }} <span>{{date_chekout}}</span></li>
+										<li>{{ 'Time'|trans }} <span>{{timeSelected}}</span></li>
+									</ul>
+									<div class="booking-total">
+										<ul class="booking-total-list">
+											<li>
+												<span>{{ 'Estimated Price'|trans }}</span>
+												<span class="total-cost">CHF {{price}}</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Booking Summary -->	
+				</div>
+			</div>
+		</div>
+	</div>		
+	<!-- /Page Content -->
+{% endblock %}

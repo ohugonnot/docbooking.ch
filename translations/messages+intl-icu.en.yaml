@@ -1,0 +1,531 @@
+'Website URL': 'Website URL'
+'Facebook URL': 'Facebook URL'
+'Twitter URL': 'Twitter URL'
+'Instagram URL': 'Instagram URL'
+'Pinterest URL': 'Pinterest URL'
+'Linkedin URL': 'Linkedin URL'
+'Youtube URL': 'Youtube URL'
+Registrations: Registrations
+Year: Year
+'Clinic Name': 'Clinic Name'
+'Clinic Address': 'Clinic Address'
+Degree: Degree
+College/Institute: College/Institute
+'Year of Completion': 'Year of Completion'
+'Hospital Name': 'Hospital Name'
+From: From
+To: To
+Designation: Designation
+Memberships: Memberships
+Gender: Gender
+'Brochure (PDF file)': 'Brochure (PDF file)'
+'Date of Birth': 'Date of Birth'
+'First Name': 'First Name'
+'Last Name': 'Last Name'
+'Phone or Mobile Number': 'Phone or Mobile Number'
+Email: Email
+'Create Password': 'Create Password'
+Title: Title
+Male: Male
+Female: Female
+'Address Line 1': 'Address Line 1'
+'Address Line 2': 'Address Line 2'
+City: City
+Switzerland: Switzerland
+Country: Country
+'Postal Code': 'Postal Code'
+Select: Select
+'General Practitioner': 'General Practitioner'
+Urologist: Urologist
+Neurologist: Neurologist
+Dentist: Dentist
+'Dental Hygienist': 'Dental Hygienist'
+Orthopedist: Orthopedist
+Cardiologist: Cardiologist
+Psychologist: Psychologist
+Nutritionist-Dietician: Nutritionist-Dietician
+'Alternative/Natural Medicine': 'Alternative/Natural Medicine'
+Pediatrician: Pediatrician
+'Dermatologist / Aesthetics': 'Dermatologist / Aesthetics'
+Physiotherapist: Physiotherapist
+Gynecologist: Gynecologist
+Ophtalmologist: Ophtalmologist
+Specialty: Specialty
+'Phone Number': 'Phone Number'
+Biography: Biography
+'Medical Specialty': 'Medical Specialty'
+Services: Services
+Specialization: Specialization
+'State / Province': 'Canton / Province'
+Always: Always
+'If Patient Wishes': 'If Patient Wishes'
+Never: Never
+'Custom Price (per visit)': 'Custom Price (per visit)'
+'Custom price you can add': 'Custom price you can add'
+German: German
+French: French
+Italian: Italian
+English: English
+Spanish: Spanish
+Russian: Russian
+Arabic: Arabic
+Others: Others
+Awards: Awards
+Home: Home
+'404 Error Page': '404 Error Page'
+'404 Page - This page does not exist.': '404 Page - This page does not exist.'
+'Click here to get back to the Homepage': 'Click here to get back to the Homepage'
+'Symptom Checker': 'Symptom Checker'
+'Symptom Checker and Differential Diagnosis': 'Symptom Checker and Differential Diagnosis'
+'I Check my Symptoms to Discover my Likely Diseases': 'I Check my Symptoms to Discover my Likely Diseases'
+'It''s anonymous and free': 'It''s anonymous and free'
+'I am Worried and I wish to Speak to a Healthcare Professional': 'I am Worried and I wish to Speak to a Healthcare Professional'
+'Click the image below': 'Click the image below'
+'Help for Healthcare Professionals': 'Help for Healthcare Professionals'
+'Explainer Video': 'Explainer Video'
+'For all healthcare professional, to attract more patients, start your DocBooking.ch account today.': 'For all healthcare professional, to attract more patients, start your DocBooking.ch account today.'
+'It''s free, practicle and profitable.': 'It''s free, practicle and profitable.'
+'1. Ground Rules': '1. Ground Rules'
+'Any healthcare professional may create his account at any time.': 'Any healthcare professional may create his account at any time.'
+'If a healthcare professional''s account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional''s account.': 'If a healthcare professional''s account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional''s account.'
+'The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.': 'The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.'
+'2. Creating your Account': '2. Creating your Account'
+'To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).': 'To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).'
+'To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.': 'To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.'
+'3. Announcing your Available Slots for your Patients': '3. Announcing your Available Slots for your Patients'
+'This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.': 'This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.'
+'Choose you usual time duration to prepare your calendar (A).': 'Choose you usual time duration to prepare your calendar (A).'
+'Once you clicked your available slots, save them (B).': 'Once you clicked your available slots, save them (B).'
+'4. Getting More Patients': '4. Getting More Patients'
+'Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.': 'Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.'
+'For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.': 'For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.'
+'5. Getting even More Patients': '5. Getting even More Patients'
+'As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.': 'As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.'
+'You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.': 'You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.'
+'You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.': 'You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.'
+'6. Getting Just Much More Patients': '6. Getting Just Much More Patients'
+'You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.': 'You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.'
+'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where Firstname by your first name and then Lastname by your last name. You can also adjust the image size, which are by default at 250px and 62px.': 'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where Firstname by your first name and then Lastname by your last name. You can also adjust the image size, which are by default at 250px and 62px.'
+'7. Security and No Spam': '7. Security and No Spam'
+'Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.': 'Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.'
+'In order to create your account, you will need your email address and a password. By giving us your email address, we are assurred that, once a booking is done, it will surely arrive at your email address. For your security, your email address will never be shown to your patient, neither will it be visible at any time during the booking process by the patient.': 'In order to create your account, you will need your email address and a password. By giving us your email address, we are assurred that, once a booking is done, it will surely arrive at your email address. For your security, your email address will never be shown to your patient, neither will it be visible at any time during the booking process by the patient.'
+'8. Receiving the Patient''s Symptoms Report': '8. Receiving the Patient''s Symptoms Report'
+'Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.': 'Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.'
+'9. Create 2 Accounts if you work at 2 Different Locations': '9. Create 2 Accounts if you work at 2 Different Locations'
+'If you are a healthcare professional with 2 (or more) separate work locations, it is preferable to create 2 (or more) accounts at DocBooking, which will create 2 (or more) separate blue markers (or bubbles) on the map.': 'If you are a healthcare professional with 2 (or more) separate work locations, it is preferable to create 2 (or more) accounts at DocBooking, which will create 2 (or more) separate blue markers (or bubbles) on the map.'
+'For this, it is necessary to operate with 2 (or more) separate email addresses and use a slightly different first name or last name, each account managing the schedule for the separate addresses. See the red arrows below.': 'For this, it is necessary to operate with 2 (or more) separate email addresses and use a slightly different first name or last name, each account managing the schedule for the separate addresses. See the red arrows below.'
+'10. Pricing': '10. Pricing'
+'Today, as we are in Beta-Testing, all services are free. Hereafter, you may discover the likely pricing table which will soon be applied.': 'Today, as we are in Beta-Testing, all services are free. Hereafter, you may discover the likely pricing table which will soon be applied.'
+'11. If the above Help doesn''t Work': '11. If the above Help doesn''t Work'
+'In case the above is not enough, you can contact us at': 'In case the above is not enough, you can contact us at'
+'Or you also may call us at': 'Or you also may call us at'
+'Basic Information': 'Basic Information'
+Mon: Mon
+Tue: Tue
+Wed: Wed
+Thu: Thu
+Fri: Fri
+Sat: Sat
+Sun: Sun
+Closed: Closed
+Save: Save
+Cancel: Cancel
+Done: Done
+'Save Change': 'Save Change'
+'Your Profile': 'Your Profile'
+Dashboard: Dashboard
+'Schedule Timings': 'Schedule Timings'
+Appointments: Appointments
+'My Patients': 'My Patients'
+'Business Hours': 'Business Hours'
+'Profile Settings': 'Profile Settings'
+'Payment': 'Payment'
+'Social Media': 'Social Media'
+'Change Password': 'Change Password'
+Logout: Logout
+'Doctor Profile': 'Doctor Profile'
+'per visit': 'per visit'
+'Get Directions': 'Get Directions'
+Overview: Overview
+Locations: Locations
+'About Me': 'About Me'
+Education: Education
+'Work & Experience': 'Work & Experience'
+Specializations: Specializations
+'There are no Business Hours': 'There are no Business Hours'
+'The patient list is empty.': 'The patient list is empty.'
+Phone: Phone
+Age: Age
+'Timing Slot Duration': 'Timing Slot Duration'
+mins: mins
+Hour: Hour
+'SAVE SLOTS FOR THIS WEEK': 'SAVE SLOTS FOR THIS WEEK'
+'Save Changes': 'Save Changes'
+'Upload Photo': 'Upload Photo'
+'Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it.': 'Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it.'
+'A quality image of the face increases bookings by 40%.': 'A quality image of the face increases bookings by 40%.'
+Speciality: Speciality
+'Clinic Info': 'Clinic Info'
+'Clinic Images': 'Clinic Images'
+'Add More': 'Add More'
+'Contact Details': 'Contact Details'
+Pricing: Pricing
+'Spoken Languages': 'Spoken Languages'
+'Receiving Patient Info by MEDoctor': 'Receiving Patient Info by MEDoctor'
+'Services and Specialization': 'Services and Specialization'
+'Note : Type & Press enter to add new services': 'Note : Type & Press enter to add new services'
+'Note : Type & Press  enter to add new specialization': 'Note : Type & Press  enter to add new specialization'
+Experience: Experience
+Upload: Upload
+'Processing dropped files...': 'Processing dropped files...'
+Retry: Retry
+Delete: Delete
+Close: Close
+'No': 'No'
+'Yes': 'Yes'
+Ok: Ok
+Check: Check
+'Created with Sketch.': 'Created with Sketch.'
+error: error
+'The appointment list is empty.': 'The appointment list is empty.'
+View: View
+Accept: Accept
+PENDING: PENDING
+COMPLETE: COMPLETE
+CANCELLED: CANCELLED
+Appointment: Appointment
+'Order:': 'Order:'
+'Issued:': 'Issued:'
+'Confirmation From': 'Confirmation From'
+'Booking confirmed For': 'Booking confirmed For'
+Quantity: Quantity
+VAT: VAT
+Total: Total
+'General Consultation': 'General Consultation'
+'Subtotal:': 'Subtotal:'
+'Discount:': 'Discount:'
+'Estimated Price:': 'Estimated Price:'
+'Total Patient': 'Total Patient'
+'Till Today': 'Till Today'
+'Today Patient': 'Today Patient'
+Appoinments: Appoinments
+'Patient Appoinment': 'Patient Appoinment'
+Upcoming: Upcoming
+Today: Today
+'Patient Name': 'Patient Name'
+'Appt Date': 'Appt Date'
+Purpose: Purpose
+Type: Type
+'Estimated Price': 'Estimated Price'
+General: General
+'New Patient': 'New Patient'
+Fever: Fever
+'Old Patient': 'Old Patient'
+years: years
+'Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb': 'Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb'
+Doctor: Doctor
+'Booking Date': 'Booking Date'
+Status: Status
+'Pay Now': 'Pay Now'
+'Return to admin': 'Return to admin'
+Doctors: Doctors
+'Are you a healthcare professional?': 'Are you a healthcare professional?'
+Contact: Contact
+'Login / Signup': 'Login / Signup'
+'Manage my Acct': 'Manage my Acct'
+'Toggle Dropdown': 'Toggle Dropdown'
+Favourites: Favourites
+'About DocBooking & MEDoctor': 'About DocBooking & MEDoctor'
+'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.': 'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.'
+'For Patients': 'For Patients'
+'Patient Login': 'Patient Login'
+'New Patient Registration': 'New Patient Registration'
+'Symptom Checker for the Patient': 'Symptom Checker for the Patient'
+'For Doctors': 'For Doctors'
+'Doctor Login': 'Doctor Login'
+'New Doctor Registration': 'New Doctor Registration'
+'Help for Doctors': 'Help for Doctors'
+'Contact Us': 'Contact Us'
+'All rights reserved.': 'All rights reserved.'
+'Terms and Conditions': 'Terms and Conditions'
+Policy: Policy
+'Error Page': 'Error Page'
+'Register as New Doctor / Therapist': 'Register as New Doctor / Therapist'
+'Already have an account ?': 'Already have an account ?'
+Register: Register
+'Patient Registration': 'Patient Registration'
+'Register as a Patient': 'Register as a Patient'
+'I Want to Book a Healthcare Professional': 'I Want to Book a Healthcare Professional'
+Search: Search
+matches: matches
+'Sort by': 'Sort by'
+'Shortest Waiting for Visit': 'Shortest Waiting for Visit'
+'Shortest Distance': 'Shortest Distance'
+'Lowest Price': 'Lowest Price'
+'Highest Price': 'Highest Price'
+'I Select': 'I Select'
+'Healthcare Specialty': 'Healthcare Specialty'
+Location: Location
+town: town
+Language: Language
+'Choose a Language...': 'Choose a Language...'
+'Male Doctor': 'Male Doctor'
+'Female Doctor': 'Female Doctor'
+'FIND DOCTORS NOW': 'FIND DOCTORS NOW'
+'I Book my Healthcare Professional': 'I Book my Healthcare Professional'
+'Search by Doctor Name': 'Search by Doctor Name'
+'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit': 'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit'
+'DocBooking.ch - Doctor Login': 'DocBooking.ch - Doctor Login'
+Login: Login
+'as a Doctor or Therapist': 'as a Doctor or Therapist'
+Password: Password
+'Remember me': 'Remember me'
+'Forgot Password ?': 'Forgot Password ?'
+'Sign in': 'Sign in'
+'Don’t have an account yet ?': 'Don’t have an account yet ?'
+'Register as a New Doctor': 'Register as a New Doctor'
+'as a Patient': 'as a Patient'
+'Register as a New Patient': 'Register as a New Patient'
+'Please sign in': 'Please sign in'
+'Access to our administration': 'Access to our administration'
+'Appointment ID#': 'Appointment ID#'
+Description: Description
+'Total Amount:': 'Total Amount:'
+'Are you sure want to delete?': 'Are you sure want to delete?'
+'Close:': 'Close:'
+Afar: Afar
+Abkhazian: Abkhazian
+Afrikaans: Afrikaans
+Akan: Akan
+Amharic: Amharic
+Aragonese: Aragonese
+Assamese: Assamese
+Avar: Avar
+Aymara: Aymara
+Azerbaijani: Azerbaijani
+Bashkir: Bashkir
+Belarusian: Belarusian
+Bulgarian: Bulgarian
+Bihari: Bihari
+Bislama: Bislama
+Bambara: Bambara
+Bengali: Bengali
+Tibetan: Tibetan
+Breton: Breton
+Bosnian: Bosnian
+Catalan: Catalan
+Chechen: Chechen
+Chamorro: Chamorro
+Corsican: Corsican
+Cree: Cree
+Czech: Czech
+'Old Church Slavonic / Old Bulgarian': 'Old Church Slavonic / Old Bulgarian'
+Chuvash: Chuvash
+Welsh: Welsh
+Danish: Danish
+Divehi: Divehi
+Dzongkha: Dzongkha
+Ewe: Ewe
+Greek: Greek
+Esperanto: Esperanto
+Estonian: Estonian
+Basque: Basque
+Persian: Persian
+Peul: Peul
+Finnish: Finnish
+Fijian: Fijian
+Faroese: Faroese
+'West Frisian': 'West Frisian'
+Irish: Irish
+'Scottish Gaelic': 'Scottish Gaelic'
+Galician: Galician
+Guarani: Guarani
+Gujarati: Gujarati
+Manx: Manx
+Hausa: Hausa
+Hebrew: Hebrew
+Hindi: Hindi
+'Hiri Motu': 'Hiri Motu'
+Croatian: Croatian
+Haitian: Haitian
+Hungarian: Hungarian
+Armenian: Armenian
+Herero: Herero
+Interlingua: Interlingua
+Indonesian: Indonesian
+Interlingue: Interlingue
+Igbo: Igbo
+'Sichuan Yi': 'Sichuan Yi'
+Inupiak: Inupiak
+Ido: Ido
+Icelandic: Icelandic
+Inuktitut: Inuktitut
+Japanese: Japanese
+Javanese: Javanese
+Georgian: Georgian
+Kongo: Kongo
+Kikuyu: Kikuyu
+Kuanyama: Kuanyama
+Kazakh: Kazakh
+Greenlandic: Greenlandic
+Cambodian: Cambodian
+Kannada: Kannada
+Korean: Korean
+Kanuri: Kanuri
+Kashmiri: Kashmiri
+Kurdish: Kurdish
+Komi: Komi
+Cornish: Cornish
+Kirghiz: Kirghiz
+Latin: Latin
+Luxembourgish: Luxembourgish
+Ganda: Ganda
+Limburgian: Limburgian
+Lingala: Lingala
+Laotian: Laotian
+Lithuanian: Lithuanian
+Luba-Katanga: Luba-Katanga
+Latvian: Latvian
+Malagasy: Malagasy
+Marshallese: Marshallese
+Maori: Maori
+Macedonian: Macedonian
+Malayalam: Malayalam
+Mongolian: Mongolian
+Moldovan: Moldovan
+Marathi: Marathi
+Malay: Malay
+Maltese: Maltese
+Burmese: Burmese
+Nauruan: Nauruan
+'Norwegian Bokmål': 'Norwegian Bokmål'
+'North Ndebele': 'North Ndebele'
+Nepali: Nepali
+Ndonga: Ndonga
+Dutch: Dutch
+'Norwegian Nynorsk': 'Norwegian Nynorsk'
+Norwegian: Norwegian
+'South Ndebele': 'South Ndebele'
+Navajo: Navajo
+Chichewa: Chichewa
+Occitan: Occitan
+Ojibwa: Ojibwa
+Oromo: Oromo
+Oriya: Oriya
+'Ossetian / Ossetic': 'Ossetian / Ossetic'
+'Panjabi / Punjabi': 'Panjabi / Punjabi'
+Pali: Pali
+Polish: Polish
+Pashto: Pashto
+Portuguese: Portuguese
+Quechua: Quechua
+'Raeto Romance': 'Raeto Romance'
+Kirundi: Kirundi
+Romanian: Romanian
+Rwandi: Rwandi
+Sanskrit: Sanskrit
+Sardinian: Sardinian
+Sindhi: Sindhi
+'Northern Sami': 'Northern Sami'
+Sango: Sango
+Serbo-Croatian: Serbo-Croatian
+Sinhalese: Sinhalese
+Slovak: Slovak
+Slovenian: Slovenian
+Samoan: Samoan
+Shona: Shona
+Somalia: Somalia
+Albanian: Albanian
+Serbian: Serbian
+Swati: Swati
+'Southern Sotho': 'Southern Sotho'
+Sundanese: Sundanese
+Swedish: Swedish
+Swahili: Swahili
+Tamil: Tamil
+Telugu: Telugu
+Tajik: Tajik
+Thai: Thai
+Tigrinya: Tigrinya
+Turkmen: Turkmen
+'Tagalog / Filipino': 'Tagalog / Filipino'
+Tswana: Tswana
+Tonga: Tonga
+Turkish: Turkish
+Tsonga: Tsonga
+Tatar: Tatar
+Twi: Twi
+Tahitian: Tahitian
+Uyghur: Uyghur
+Ukrainian: Ukrainian
+Urdu: Urdu
+Uzbek: Uzbek
+Venda: Venda
+Vietnamese: Vietnamese
+Volapük: Volapük
+Walloon: Walloon
+Wolof: Wolof
+Xhosa: Xhosa
+Yiddish: Yiddish
+Yoruba: Yoruba
+Zhuang: Zhuang
+Chinese: Chinese
+Zulu: Zulu
+Dr.: Dr.
+label_previous: label_previous
+label_next: label_next
+'Blood Group': 'Blood Group'
+A-: A-
+A+: A+
+B-: B-
+B+: B+
+AB: AB
+O-: O-
+O+: O+
+Mobile: Mobile
+Address: Address
+State: Canton
+'Zip Code': 'Zip Code'
+Insurance: Insurance
+'Groupe Mutuel': 'Groupe Mutuel'
+CSS: CSS
+Helsana: Helsana
+Concordia: Concordia
+Swica: Swica
+Visana: Visana
+Assura: Assura
+Sanitas: Sanitas
+Intras: Intras
+KPT-CPT: KPT-CPT
+Wincare: Wincare
+Atupri: Atupri
+ÖKK: ÖKK
+Sympany: Sympany
+Autre: Autre
+'Insurance Number': 'Insurance Number'
+'Old Password': 'Old Password'
+'New password': 'New password'
+'Repeat Password': 'Repeat Password'
+Other: Other
+'Booking confirmed for Patient:': 'Booking confirmed for Patient:'
+'No Price': 'No Price'
+'Price not Shown': 'Price not Shown'
+Checkout: Checkout
+'Booking Confirmation & Checkout': 'Booking Confirmation & Checkout'
+'This is the Schedule I have Chosen': 'This is the Schedule I have Chosen'
+'I Complete my Booking': 'I Complete my Booking'
+'Personal Information': 'Personal Information'
+'Birth Date': 'Birth Date'
+'Are You an Existing Patient': 'Are You an Existing Patient'
+'Click here for a Fast Login': 'Click here for a Fast Login'
+'Confirm Booking': 'Confirm Booking'
+'I have read and accept': 'I have read and accept'
+'Terms &amp; Conditions': 'Terms and Conditions'
+'Booking Summary': 'Booking Summary'
+Date: Date
+Time: Time
+Symptoms: Symptoms
+'DocBooking - Book a Doctor near You - Schedules at 12 - 48 hours Waiting only': 'DocBooking - Book a Doctor near You - Schedules at 12 - 48 hours Waiting only'
+'booking, doctor, available, schedule, January, February, March, general practitioner, therapist, physiotherapist, dentist, psychologist, symptom checker, diagnosis, medicine, natural,  flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy': 'booking, doctor, available, schedule, January, February, March, general practitioner, therapist, physiotherapist, dentist, psychologist, symptom checker, diagnosis, medicine, natural,  flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy'
+'About DocBooking + MEDoctor': 'About DocBooking + MEDoctor'
+'DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only': 'DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only'

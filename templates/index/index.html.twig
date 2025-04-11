@@ -1,0 +1,903 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<style>
+.dlpro-pagination{
+	display: flex;
+    justify-content: center;
+}
+.jQpQPf {
+    position: relative;
+}
+.gXarcg {
+    bottom: 6px;
+    right: 1px;
+    background-color: rgb(255, 255, 255);
+    position: absolute !important;
+    height: 24px !important;
+    width: auto !important;
+    border-color: rgb(187, 187, 187) !important;
+    border-width: 0px 0px 0px 1px !important;
+    border-radius: 0px !important;
+}
+.iApOWg {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    outline: none;
+    padding: 0px 8px 0px 12px;
+    color: rgb(68, 68, 68);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 4px;
+    height: 36px;
+    font-size: 16px;
+    line-height: 24px;
+}
+.kqWqou {
+    display: block;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-basis: 25%;
+    border: none;
+    font-size: 16px;
+    line-height: 24px;
+    height: 24px;
+    margin: 0px 4px 4px 0px;
+    min-width: 130px;
+    color: rgb(68, 68, 68);
+    outline: none;
+    appearance: none;
+    background-color: transparent;
+}
+.kspQVs {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-box-align: center;
+    align-items: center;
+    user-select: none;
+    margin-right: 8px;
+}
+.ixGTSc {
+    width: 24px;
+    height: 24px;
+}
+.iApOWg > select {
+    opacity: 0;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    font-size: 16px;
+}
+.iApOWg > select > option {
+    color: rgb(68, 68, 68);
+}
+.iApOWg {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    outline: none;
+    padding: 0px 8px 0px 12px;
+    color: rgb(68, 68, 68);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 4px;
+    height: 36px;
+    font-size: 16px;
+    line-height: 24px;
+}
+.gXarcg {
+    bottom: 6px;
+    right: 1px;
+    background-color: rgb(255, 255, 255);
+    position: absolute !important;
+    height: 24px !important;
+    width: auto !important;
+    border-color: rgb(187, 187, 187) !important;
+    border-width: 0px 0px 0px 1px !important;
+    border-radius: 0px !important;
+}
+.egmZCc {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    min-height: 36px;
+    padding: 4px 0px 0px 4px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+}
+.jTCHuP:hover {
+    background-color: rgb(255, 238, 225);
+}
+.jTCHuP {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    height: 26px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(68, 68, 68);
+    background: rgb(231, 241, 251);
+    margin: 0px 4px 4px 0px;
+    padding: 0px 8px;
+    border-radius: 2px;
+}
+.select2-container{
+	/*
+		display: flex;
+	    flex-wrap: wrap;
+    	width: 100% !important;
+	 */
+}
+.selection{
+	width: 100% !important;
+}
+.select2-container--default .select2-selection--multiple{
+	border: none !important;
+	background-image: none !important;
+}
+.center-object{
+  margin: auto;
+  width: 300px;
+  border: 0px;
+  padding: 0px;
+}
+</style>
+{% endblock %}
+{% block body %}
+
+	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+		<br>
+		<h1 style="text-align:center">{{ 'I Want to Book a Healthcare Professional'|trans }}</h1>
+	</div>
+
+	<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12" style="padding: 0px 0px">
+		<br>
+		<div id="map" class="map-listing"></div>
+	</div>
+
+	<div class="breadcrumb-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-sm-12">
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ 'Search'|trans }}</li>
+						</ol>
+					</nav>
+					<h2 class="breadcrumb-title">{{ pagination.getTotalItemCount() }} {{ 'matches'|trans }}</h2>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="sort-by">
+						{# sorting of properties based on query components #}
+						<span class="sort-title">{{ 'Sort by'|trans }}</span>
+						<span class="sortby-filter">
+							<select name="sort" id="dlproSort" class="select" style="min-width: 250px">
+								<option>Select</option>
+								<option {% if app.request.get('svsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?svsort=true" title="Shortest Waiting for Visit" value="Shortest Waiting for Visit">{{ 'Shortest Waiting for Visit'|trans }}</option>
+                                <option {% if app.request.get('dsort') == 'true' %}selected="selected"{% endif %} class="sortable" data-href="/?dsort=true" title="Shortest Distance" value="Shortest Distance">{{ 'Shortest Distance'|trans }}</option>
+								<option {% if app.request.get('psort') == 'asc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=asc" title="Lowest Price" value="Lowest Price">{{ 'Lowest Price'|trans }}</option>
+								<option {% if app.request.get('psort') == 'desc' %}selected="selected"{% endif %} class="sortable" data-href="/?psort=desc" title="Highest Price" value="Highest Price">{{ 'Highest Price'|trans }}</option>
+							</select>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+                        <h1 style="text-align:center">{{ 'I Select'|trans }}</h1>
+                    <br>
+
+					<!-- Search Filter -->
+					<div class="card search-filter">
+						<div class="card-body">
+							<form id="filterForm" action="{{ path('app_index', app.request.query.all) }}" method="post" enctype="application/x-www-form-urlencoded">
+								<div class="filter-widget">
+									<h4>{{ 'Healthcare Specialty'|trans }}</h4>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" {% if "General Practitioner" in spec %}checked{% endif %} value="General Practitioner">
+											<span class="checkmark"></span> {{ 'General Practitioner'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" {% if "Urologist" in spec %}checked{% endif %} value="Urologist" >
+											<span class="checkmark"></span> {{ 'Urologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" {% if "Neurologist" in spec %}checked{% endif %} value="Neurologist">
+											<span class="checkmark"></span> {{ 'Neurologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" {% if "Dentist" in spec %}checked{% endif %} value="Dentist">
+											<span class="checkmark"></span> {{ 'Dentist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" {% if "Dental Hygienist" in spec %}checked{% endif %} value="Dental Hygienist">
+											<span class="checkmark"></span> {{ 'Dental Hygienist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Orthopedist" {% if "Orthopedist" in spec %}checked{% endif %} >
+											<span class="checkmark"></span> {{ 'Orthopedist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Cardiologist" {% if "Cardiologist" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Cardiologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Psychologist" {% if "Psychologist" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Psychologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Nutritionist-Dietician" {% if "Nutritionist-Dietician" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Nutritionist-Dietician'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Alternative/Natural Medicine" {% if "Alternative/Natural Medicine" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Alternative/Natural Medicine'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Pediatrician" {% if "Pediatrician" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Pediatrician'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Dermatologist / Aesthetics" {% if "Dermatologist / Aesthetics" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Dermatologist / Aesthetics'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Physiotherapist" {% if "Physiotherapist" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Physiotherapist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Gynecologist" {% if "Gynecologist" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Gynecologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Ophtalmologist" {% if "Ophtalmologist" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Ophtalmologist'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="spec[]" type="checkbox" value="Other" {% if "Other" in spec %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Other'|trans }}
+										</label>
+									</div>
+								</div>
+								<div class="filter-widget">
+									<h4>{{ 'Location'|trans }}</h4> 
+									<div size="1" class="sc-3lqdzs-0 cNGARV">
+										<div class="dl1e6-0 cmCNPn">
+											<div class="bkivry-0 jQpQPf">
+												<div class="bkivry-0 j3cl20-0 vxeagd-0 egmZCc">
+													<select id="form-field-1" name="filter_address[]" data-placeholder="{{ 'town'|trans }}" multiple="multiple" class="sc-1od3ffh-0 kqWqou js-filter-address-basic-multiple" tabindex="8">
+														<option value=""></option>
+														{%for city in filter_place%}
+															<option value="{{city}}">{{city}}</option>
+														{% endfor %}
+													</select>
+												</div>
+												<div class="bkivry-0 j3cl20-0 znpd2u-0 iApOWg sc-11ow7ya-0 gXarcg">
+													<div class="sc-1hnf4jn-0 kspQVs">2 km</div>
+													<svg viewBox="0 0 24 24" sizes="" class="sc-1exlta7-0 ixGTSc"><path d="M17.71 9.29c-.39-.39-1.02-.39-1.41-.01l-.01.01-4.29 4.3-4.29-4.3c-.39-.39-1.03-.39-1.42 0s-.39 1.03 0 1.42l5 5c.39.39 1.02.39 1.41.01l.01-.01 5-5c.39-.39.39-1.02 0-1.42z"></path></svg>
+													<select name="filter_distance" aria-label="Où?" class="bkivry-0 eaLMPF">
+														<option value="2" selected>< 2 km</option>
+														<option value="5">< 5 km</option>
+														<option value="10">< 10 km</option>
+														<option value="15">< 15 km</option>
+														<option value="20">< 20 km</option>
+														<option value="30">< 30 km</option>
+														<option value="40">< 40 km</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="filter-widget">
+									<h4>{{ 'Language'|trans }}</h4>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="German" {% if "German" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'German'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="French" {% if "French" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'French'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="Italian" {% if "Italian" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Italian'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="English" {% if "English" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'English'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="Spanish" {% if "Spanish" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Spanish'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="Russian" {% if "Russian" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Russian'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" value="Arabic" {% if "Arabic" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Arabic'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="lang[]" type="checkbox" id="spoken_languages_other" value="Other" {% if "Other" in language_other %}checked{% endif %}>
+											<span class="checkmark"></span> {{ 'Other'|trans }}
+										</label>
+									</div>
+									<div>
+										{% if options_other %}
+										<select id="lang_other" name="lang_other[]" class="form-control" multiple="multiple" data-placeholder="{{ "Choose a Language..."|trans }}">
+											{% for other in options_other %}
+													<option value="{{ other }}" {% if other in lang_oth %}selected{% endif %}>{{ other|trans }}</option>
+											{% endfor %}
+										</select>
+										{% endif %}
+									</div>
+								</div>
+								<div class="filter-widget">
+									<h4>{{ 'Gender'|trans }}</h4>
+									<div>
+										<label class="custom_check">
+											<input name="gen[]" type="checkbox" value="Male" {% if "Male" in gender %}checked{% endif %} >
+											<span class="checkmark"></span> {{ 'Male Doctor'|trans }}
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input name="gen[]" type="checkbox" value="Female" {% if "Female" in gender %}checked{% endif %} >
+											<span class="checkmark"></span> {{ 'Female Doctor'|trans }}
+										</label>
+									</div>
+								</div>
+								<input type="hidden" id="search-field-q" name="search-field-q" value="">
+								<div class="btn-search">
+									<button id="filterFormSubmit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>{{ 'FIND DOCTORS NOW'|trans }}</span></button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /Search Filter -->
+          		</div>
+
+				<div class="col-md-12 col-lg-8 col-xl-9">
+					<h1 style="text-align:center">{{ 'I Book my Healthcare Professional'|trans }}</h1>
+                    <br>
+                    <div class="load-more text-center dlpro-pagination">
+						{{ knp_pagination_render(pagination) }}
+					</div>
+					<div class="doctors">
+                    {% for doctor in pagination %}
+					{% if doctor is iterable %}
+					{% set doctor = doctor[0] %}
+					{% endif %}
+						<!-- Doctor Widget -->
+						<div class="card doctor-{{doctor.getId()}}">
+							<div class="card-body">
+								<div class="doctor-widget">
+									<div class="doc-info-left">
+										<div class="doctor-img">
+											<a href="{{path('app_doctor_profile', {slug: doctor.getUrlProfile()})}}">
+												<img src="{% if doctor.getPictureProfile() %}{{doctor.getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" class="img-fluid" alt="User Image" loading="lazy">
+											</a>
+										</div>
+										<div class="doc-info-cont">    
+                                            
+                                            <div class="conveythis-no-translate">
+                                            <h4 class="doc-name"><a href="{{path('app_doctor_profile', {slug: doctor.getUrlProfile()})}}">{{doctor.getTitle()}} {{doctor.getFirstName()}} {{doctor.getLastName()}}</a></h4>
+                                            </div>
+                                            
+											<p class="doc-display-languages">
+												{% for lang in doctor.getDisplayLanguage() %}
+													{{ lang|trans }}{% if not loop.last %} | {% endif %}
+												{% endfor %}
+
+											</p>
+								{% if doctor.getSpeciality() == 'General Practitioner' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Urologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Neurologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-10.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Dentist' or doctor.getSpeciality() ==  'Dental Hygienist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Orthopedist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Cardiologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Psychologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Nutritionist-Dietician' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-08.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Alternative/Natural Medicine' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-12.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Pediatrician' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-13.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Dermatologist / Aesthetics' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-11.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Gynecologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-14.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Physiotherapist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-07.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% elseif doctor.getSpeciality() == 'Ophtalmologist' %}
+									<h5 class="doc-department">
+										<img src="/assets/img/specialities/specialities-09.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+									</h5>
+								{% else %}
+										<h5 class="doc-department">
+											<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">{{doctor.getSpeciality()|trans}}
+										</h5>
+								{% endif %}
+											<div class="clinic-details">
+												{% if doctor.getCity() or doctor.getState() or doctor.getCountry() %}
+                                                
+                                                <div class="conveythis-no-translate">
+												<p class="doc-location"><i class="fas fa-map-marker-alt"></i>  {{doctor.getFormattedAddress2()|raw}}</p>
+                                                </div>
+                                                
+												{% endif %}
+												{% if doctor.getClinics() %}
+												<ul class="clinic-gallery">
+													{% for clinic in doctor.getClinics()%}
+														{% set imgs = clinic.getImagesArray() %}
+														{% for img in imgs %}
+														<li>
+															<a href="" data-fancybox="gallery">
+																<img src="/uploads/doctors/clinics/{{img}}" alt="Feature" loading="lazy">
+															</a>
+														</li>
+														{% endfor %}
+													{% endfor %}
+												</ul>
+												{% endif %}
+											</div>
+                                        </div>
+                                    </div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+													{% if doctor.getPriceCustomValue() %}
+													<li><i class="far fa-money-bill-alt"></i> CHF {{doctor.getPriceCustomValue()}} <i class="fas fa-info-circle" data-toggle="tooltip" title="For the 1st Visit"></i> </li>
+													{% endif %}
+												</ul>
+											</div>
+										</div>
+                                    </div>
+                                    <br>
+                
+							<!-- Schedule Widget -->
+							<div class="card booking-schedule schedule-widget">
+								{% set times = doctor.getTimings() %}
+								{{times|formathomeCalendar(doctor)|raw}}
+							</div>
+							<!-- /Schedule Widget -->
+                                    
+                            </div>
+						</div>
+						<!-- /Doctor Widget -->
+                    {% endfor %}   
+                    </div>					
+                    <div class="load-more text-center dlpro-pagination">
+						{{ knp_pagination_render(pagination) }}
+					</div>	
+				</div>
+			</div>
+		</div>
+
+		<!-- Search by Doctor Name -->
+
+	<section class="section section-search">
+		<div class="container-fluid">
+			<div class="banner-wrapper">
+				<div class="search-box">
+					<div class="form-group search-info">
+						<input type="text" id="search-doctor-field" name="search-doctor-field-q" class="form-control" id="q" placeholder="{{ 'Search by Doctor Name'|trans }}" value="{{q}}">
+						<div class="Typeahead-menu"></div>
+					</div>
+					<button id="search-q-submit" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>{{ 'Search'|trans }}</span></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+		<!-- /Search by Doctor Name -->
+
+		{% if false %}
+		<!-- MEDoctor -->
+			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+                	<br>
+                	<h1 style="text-align:center"><p style="color:rgb(152,86,176)">{{ 'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit'|trans }}</p></h1>
+                	<br>
+				<div class="blog grid-blog">
+					<div class="center-object">
+						<iframe id="loginframe" src="https://www.medoctor.com" scrolling="no" frameborder="0" width="300" height="745"></iframe>
+					</div>
+				</div>
+			</div>
+		<!-- /MEDoctor -->
+		{% endif %}
+	</div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">
+var locations = {{allDoctors|json_encode|raw}};
+var DLPRO_APP_INDEX_PATH = '{{ path('app_index') }}';
+var DLPRO_APP_NEXT_PREV_AJAX = '{{path('app_next_prev-ajax')}}';
+var DLPRO_CHECKOUT_REDIRECT = '{{path('app_checkout_redirect')}}';
+var isDoctor = '{{isDoctor}}';
+</script>
+<script type="text/javascript" src="/dist/js/home.min.js" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&libraries=places&callback=initialize" defer></script>
+<!--<script type="text/javascript" src="/dist/js/gmap.js"></script>-->
+<script type="text/javascript">
+var isExistCollapse = !1;
+function dlproPrev(t, e, n) {
+    var i = $(t);
+    return (
+        $.get(DLPRO_APP_NEXT_PREV_AJAX, { type: "prev", doctor_id: n, prev: e }, function (t) {
+            return t && (i.closest("div.schedule-widget").html(t), dlproDoCollapsse()), !1;
+        }),
+        !1
+    );
+}
+function dlproNext(t, e, n) {
+    var i = $(t);
+    return (
+        $.get(DLPRO_APP_NEXT_PREV_AJAX, { type: "next", doctor_id: n, next: e }, function (t) {
+            return t && (i.closest("div.schedule-widget").html(t), dlproDoCollapsse()), !1;
+        }),
+        !1
+    );
+}
+function dlproCollapsse() {
+    $.each($(".dlpro-calendar-time-render"), function () {
+        var t = $(this);
+		var index_show = [];
+        if(t.has("li").length)
+		{
+			$.each(t.find("li"), function () {
+				var first = undefined;
+				$.each($(this).find("a"), function (index,el) {
+					if($(el).hasClass('selected'))
+					{
+						if(!first)
+							first = index;
+						if(index-first<4)
+							index_show.push(index);
+					}
+				});
+			});
+			$.each(t.find("li"), function () {
+				$.each($(this).find("a"), function (index,el) {
+					if(!index_show.includes(index))
+						$(el).hide();
+				});
+			});
+		}
+    });
+}
+function dlproDoCollapsse() {
+	dlproCollapsse();
+    $.each($(".dlpro-calendar-time-render"), function () {
+        var t = $(this);
+        t.has("li").length
+            ? $.each(t.find("li"), function () {
+                  if ($(this).find("a.selected:not(:visible)").length > 0)
+                  	return t.find("div.is-dlpro-show-more").show(), (isExistCollapse = !0), !1;
+                  t.find("div.is-dlpro-show-more").css("display", "none");
+              })
+            : t.find("div.is-dlpro-show-more").css("display", "none");
+    });
+}
+$(document).ready(function () {
+
+	$(document).on("click","a.page-link", function () {
+		return $("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", $(this).attr("href")), $("#filterForm").submit(), !1;
+	});
+
+	$(document).on("click",'.dlproColapseLink', function () {
+		var t = $(this).attr("href"),
+			e = $(this);
+		$.each($(t).find("li").find("a"), function () {
+			"none" == $(this).css("display") && $(this).show();
+		});
+		e.hide();
+	});
+
+	dlproDoCollapsse();
+
+	$("#dlproSort").change(function () {
+		$("#filterForm").attr("action", $(this).children("option:selected").data("href")), $("#filterForm").submit();
+	});
+
+	$(document).on("click", ".dlproTimeElementSelected", function () {
+		if (0 == isDoctor) {
+			var t = $(this).data("doctorid"),
+					e = $(this).data("id"),
+					n = $(this).data("time");
+			$(
+					'<form action="' +
+					DLPRO_CHECKOUT_REDIRECT +
+					'" method="post"><input type="hidden" name="doctorid" value="' +
+					t +
+					'"><input type="hidden" name="timeid" value="' +
+					e +
+					'"><input type="hidden" name="time" value="' +
+					n +
+					'"></form>'
+			)
+					.appendTo("body")
+					.submit();
+		}
+		return !1;
+	});
+
+	$("#spoken_languages_other").change(function () {
+		this.checked ? ($(this).val(), $("#lang_other").css("display", "block"), $("#lang_other").select2({ tags: !0 })) : ($("#lang_other").select2("destroy"), $("#lang_other").css("display", "none")),
+				$("#search-field-q").val($("#search-doctor-field").val()),
+				$("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="spec[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="lang[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	$('input[name="gen[]"]').change(function () {
+		$("#search-field-q").val($("#search-doctor-field").val()), $("#filterForm").attr("action", DLPRO_APP_INDEX_PATH);
+	});
+
+	if ($('#spoken_languages_other').is(':checked')) {
+		var selectedValues = new Array();
+		{% set cnt = 0 %}
+		{%for lg in lang_oth %}
+		selectedValues[{{ cnt }}] = '{{ lg|replace({"'": ""})}}';
+		{% set cnt = cnt + 1 %}
+		{% endfor %}
+		$('#lang_other').css('display', 'block');
+		$("#lang_other").select2({
+			tags: true
+		});
+		if(selectedValues){
+			$("#lang_other").val(selectedValues);
+			$('#lang_other').trigger('change');
+		}
+	}
+	else{
+		$('#lang_other').css('display', 'none');
+	}
+})
+</script>
+{% verbatim %}
+<script id="result-template" type="text/x-handlebars-template">
+	<div class="ProfileCard u-cf" onClick="window.location.replace('https://www.docbooking.ch/doctor/{{slug}}.html');">
+		<img class="ProfileCard-avatar" src="{{picture_profile}}" loading="lazy">
+		<div class="ProfileCard-details">
+			<div class="ProfileCard-realName">{{first_name}}&nbsp;{{last_name}}</div>
+			<div class="ProfileCard-languages">{{spoken_languages}}</div>
+			<div class="ProfileCard-description">
+				{{#if (eq speciality "General Practitioner")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5> 
+				{{else if (eq speciality "Urologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Neurologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-10.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Dentist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Dental Hygienist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Orthopedist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Cardiologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Psychologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Nutritionist-Dietician")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-08.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Alternative/Natural Medicine")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-12.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Pediatrician")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-13.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Dermatologist / Aesthetics")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-11.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Gynecologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-14.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Physiotherapist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-07.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else if (eq speciality "Ophtalmologist")}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-09.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{else}}
+					<h5 class="doc-department">
+						<img src="/assets/img/specialities/specialities-06.png" class="img-fluid" alt="Speciality" loading="lazy">
+						{{speciality}}
+					</h5>
+				{{/if}}
+			</div>
+			<div class="ProfileCard-address">{{description}}</div>
+        </div>
+    </div>
+</script>
+{% endverbatim %}
+
+<script>
+$('.searchbar-place-around-me-icon').on('click', function(e){
+	if(!$('.searchbar-place-around-me-button').hasClass('searchbar-place-around-me-button-enabled')){
+		$('.searchbar-place-around-me-button').addClass('searchbar-place-around-me-button-enabled');
+		$('.pac-target-input').attr('readonly', 'readonly');
+	}
+});
+$('.searchbar-delete').on('click', function(e){
+	if($('.searchbar-place-around-me-button').hasClass('searchbar-place-around-me-button-enabled')){
+		$('.searchbar-place-around-me-button').removeClass('searchbar-place-around-me-button-enabled');
+	}
+});
+$(document).ready(function(){
+	$('select[name="filter_distance"]').change(function() {
+		var val = $(this).val();
+		if(typeof val === "undefined"){
+			$('.sc-1hnf4jn-0').html('< 2 km');
+		}
+		else{
+			$('.sc-1hnf4jn-0').html('< ' + val + ' km');
+		}
+	});
+	//$('.chosen-select').chosen({});
+	//$('.chosen-select').val({{filter_address|json_encode()|raw}}).trigger('chosen:updated');
+	$('.js-filter-address-basic-multiple').select2();
+	{%if filter_distance %}
+		$('select[name="filter_distance"]').val('{{filter_distance}}').trigger('change');
+	{% endif %}
+	{%if filter_address %}
+		$('.js-filter-address-basic-multiple').val({{filter_address|json_encode()|raw}}).change();
+	{% endif %}
+	$('#search-q-submit').on('click', function(){
+		$('#search-field-q').val($('#search-doctor-field').val());
+		$('#filterForm').submit();
+	});
+	
+});
+</script>
+{% endblock %}

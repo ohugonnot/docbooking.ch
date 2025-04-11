@@ -1,0 +1,55 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+
+{% block profileb %}
+	<div class="card">
+		<div class="card-body">
+			<!-- Social Form -->
+			{% for flashError in app.flashes('doctor_profile_social_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
+			{% for flashError in app.flashes('doctor_profile_social_success') %}
+				<div class="alert alert-success" role="alert">{{ flashError }}</div>
+			{% endfor %}
+			{{ form_start(requestForm) }}
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.website_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.facebook_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.twitter_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.instagram_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.pinterest_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.linkedin_url) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-8">
+						{{ form_row(requestForm.youtube_url) }}
+					</div>
+				</div>
+				<div class="submit-section">
+					<button type="submit" class="btn btn-primary submit-btn">{{ "Save Changes"|trans }}</button>
+				</div>
+			{{ form_end(requestForm) }}
+		</div>
+	</div>	
+{% endblock %}

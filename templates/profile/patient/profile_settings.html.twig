@@ -1,0 +1,83 @@
+{% extends 'profile/patient/layout.html.twig' %}
+
+{% block profileb %}
+	{% for flashError in app.flashes('patient_profile_social_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	{% for flashError in app.flashes('patient_profile_social_success') %}
+		<div class="alert alert-success" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	<div class="card">
+		<div class="card-body">
+			<!-- Profile Settings Form -->
+			{{ form_start(requestForm) }}
+			<div class="row form-row">
+				<div class="col-12 col-md-12">
+					<div class="form-group">
+						{% do requestForm.picture_profile.setRendered %}
+						<div class="change-avatar">
+							<div class="profile-img">
+								<img src="{% if app.user.getPictureProfile() %} {{app.user.getPictureProfile()}} {% else %}/assets/img/patient-default.jpg{% endif %}" alt="User Image">
+							</div>
+							<div class="upload-img">
+								<div class="change-photo-btn">
+									<span><i class="fa fa-upload"></i>{{ "Upload Photo"|trans }}</span>
+									<input type="file" id="{{requestForm.picture_profile.vars.id}}" name="{{requestForm.picture_profile.vars.full_name}}" class="upload">
+								</div>
+								<small class="form-text text-muted">{{ "Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb"|trans }}</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.first_name) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.last_name) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{% do requestForm.date_birth.setRendered %}
+					<div class="form-group">
+						<label for="{{requestForm.date_birth.vars.id}}">{{requestForm.date_birth.vars.label}}</label>
+						<div class="cal-icon">
+							<input type="text" id="{{requestForm.date_birth.vars.id}}" name="{{requestForm.date_birth.vars.full_name}}" class="form-control datetimepicker" value="{{requestForm.date_birth.vars.value}}">
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.blood_group) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.email) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.phone_number) }}
+				</div>
+				<div class="col-12">
+					{{ form_row(requestForm.address) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.city) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.state) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.postal_code) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.country) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.insurance) }}
+				</div>
+				<div class="col-12 col-md-6">
+					{{ form_row(requestForm.insurance_num) }}
+				</div>
+				<div class="submit-section">
+					<button type="submit" class="btn btn-primary submit-btn">{{ "Save Changes"|trans }}</button>
+				</div>
+			{{ form_end(requestForm) }}
+		</div>
+	</div>					
+{% endblock %}

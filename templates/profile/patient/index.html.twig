@@ -1,0 +1,91 @@
+{% extends 'profile/patient/layout.html.twig' %}
+
+{% block profileb %}
+	<div class="card">
+		<div class="card-body pt-0">
+			<nav class="user-tabs mb-4">
+				<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+					<li class="nav-item">
+						<a class="nav-link active" href="#pat_appointments" data-toggle="tab">{{ "Appointments"|trans }}</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="tab-content pt-0">
+				<div id="pat_appointments" class="tab-pane fade show active">
+					<div class="card card-table mb-0">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-hover table-center mb-0">
+									<thead>
+										<tr>
+											<th>{{ "Doctor"|trans }}</th>
+											<th>{{ "Appt Date"|trans }}</th>
+											<th>{{ "Booking Date"|trans }}</th>
+											<th>{{ "Estimated Price"|trans }}</th>
+											<!--<th>Paied Date</th>-->
+											<th>{{ "Status"|trans }}</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for appointment in appointments %}
+										<tr>
+											<td>
+												<h2 class="table-avatar">
+													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}" class="avatar avatar-sm mr-2">
+														<img class="avatar-img rounded-circle" src="{% if appointment.getDoctor().getPictureProfile() %}{{appointment.getDoctor().getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+													</a>
+													<a href="{{path('app_doctor_profile', {slug: appointment.getDoctor().getUrlProfile()})}}">{{appointment.getDoctor().getTitle()|trans}}  {{appointment.getDoctor().getFirstName()}}  {{appointment.getDoctor().getLastName()}}<span>{{appointment.getDoctor().getSpeciality()|trans}}</span></a>
+												</h2>
+											</td>
+											<td>{{appointment.getAppDate().format('j M Y')}} <span class="d-block text-info">{{appointment.getAppTime().format('H:i')}}</span></td>
+											<td>{{appointment.getCreateTime().format('j M Y')}}</td>
+											<td>CHF {{appointment.getProductPrice()}}</td>
+											<!--<td>
+												{% if appointment.getIsPayed() == 1 %}
+													{{appointment.getDatePaied().format('j M Y')}}
+												{% else %}
+													-
+												{% endif %}
+											</td>-->
+											<td>
+												{% if appointment.getStatus() == 0 or appointment.getStatus() == 1 %}
+													<span class="badge badge-pill bg-warning-light">{{ "PENDING"|trans }}</span></td>
+													{% if appointment.getStatus() == 1 %}
+													<a href="https://www.sandbox.paypal.com/checkoutnow?token={{appointment.getOrderID()}}" class="btn btn-sm">
+														<i class="fab fa-cc-paypal"></i> {{ "Pay Now"|trans }}
+													</a>
+													{% endif %}
+												{% endif %}
+												{% if appointment.getStatus() == 2 %}
+													<span class="badge badge-pill bg-success-light">{{ "COMPLETE"|trans }}</span>
+												{% endif %}
+												{% if appointment.getStatus() == 3 %}
+													<span class="badge badge-pill bg-danger-light">{{ "CANCELLED"|trans }}</span>
+												{% endif %}
+
+											<td class="text-right">
+												<div class="table-action">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#viewModalAppointment{{appointment.getId()}}"  class="btn btn-sm bg-info-light">
+														<i class="far fa-eye"></i> {{ "View"|trans }}
+													</a>
+												</div>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block profilemodals %}
+	{% for appointment in appointments %}
+		{% include '_include/appointment_modal.html.twig' with {appointment: appointment} %}
+	{% endfor %}
+{% endblock %}

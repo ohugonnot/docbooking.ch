@@ -1,0 +1,121 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">List of Doctors</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Doctor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-12 p-0">
+                                <div class="count float-right">
+                                    Total of doctors : {{ pagination.getTotalItemCount }}
+                                </div>
+                                <div class="input-group col-sm-4 pl-0 float-left">
+                                    <input id="search-input" type="text" value="{{ search|default(null) }}" class="form-control" placeholder="Search doctors">
+                                    <div class="input-group-append">
+                                        <button id="search" class="btn btn-secondary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="form-group">
+                                    <div class="float-right">
+                                        <select class="custom-select custom-select-sm" name="limit" id="limit">
+                                            <option disabled selected>Number per page</option>
+                                            <option {% if limit == 10 %} selected="selected" {% endif %} value="10">10</option>
+                                            <option {% if limit == 25 %} selected="selected" {% endif %} value="25">25</option>
+                                            <option {% if limit == 50 %} selected="selected" {% endif %} value="50">50</option>
+                                        </select>
+                                    </div>
+                                    <div class="float-left navigation">
+                                        {{ knp_pagination_render(pagination) }}
+                                    </div>
+                                </div>
+                                <table class="table table-hover table-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th {% if pagination.isSorted('d.last_name') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Doctor Name', 'd.last_name') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.city') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'City', 'd.city') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.email') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Email', 'd.email') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.create_at') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Date of Registration', 'd.create_at') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.speciality') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Speciality', 'd.speciality') }}
+                                            </th>
+                                            <th {% if pagination.isSorted('d.phone_number') %} class="sorted"{% endif %}>
+                                                {{ knp_pagination_sortable(pagination, 'Telephone', 'd.phone_number') }}
+                                            </th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for doctor in pagination %}
+                                        <tr>
+                                        <td> 
+                                            <h2 class="table-avatar">
+                                                <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile()|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                                <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">{{ doctor.title|capitalize }} {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ doctor.city }}</td>
+                                        <td>{{ doctor.email }}</td>
+                                        <td>{{ doctor.createAt|date() }}</td>
+                                        <td>{{ doctor.speciality }}</td>
+                                        <td>{{ doctor.phoneNumber }}</td>
+                                        <td class="text-right">
+                                            <div class="actions">
+                                                <a  class="btn btn-sm bg-success-light" href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">
+                                                    <i class="fe fe-pencil"></i>
+                                                </a>
+                                                <a data-toggle="modal" href="#delete_modal" data-url="{{ path('app_doctor_delete',{id:doctor.id}) }}" class="action-delete-modal btn btn-sm bg-danger-light">
+                                                    <i class="fe fe-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="navigation">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% include '_include/delete_modal.html.twig' %}
+
+{% endblock %}

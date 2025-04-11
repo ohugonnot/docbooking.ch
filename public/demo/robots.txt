@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /assets/
+Disallow: /documentation/
+Disallow: /.cm4all/
+
+Sitemap: https://www.docbooking.ch/sitemap.xml

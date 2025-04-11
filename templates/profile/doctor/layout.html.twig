@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ doctor.getTitle() }} {{ app.user.firstname }} {{ app.user.lastname }}{% endblock %}
+
+{% block body %}
+
+	<div class="breadcrumb-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-md-12 col-12">
+					<nav aria-label="breadcrumb" class="page-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{{path('app_doctor_dashboard')}}">{{ "Home"|trans }}</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{ "Your Profile"|trans }}</li>
+						</ol>
+					</nav>
+					<h2 class="breadcrumb-title">{{ "Dashboard"|trans }}</h2>
+					{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %}
+
+					- {{ "Schedule Timings"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %}
+
+					- {{ "Appointments"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_patients' %}
+
+					- {{ "My Patients"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %}
+
+					- {{ "Business Hours"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %}
+
+					- {{ "Profile Settings"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_social' %}
+
+					- {{ "Social Media"|trans }}
+
+					{% endif %}
+
+					{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %}
+
+					- {{ "Change Password"|trans }}
+
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+					<div class="profile-sidebar">
+						<div class="widget-profile pro-widget-content">
+							<div class="profile-info-widget">
+								<a href="#" class="booking-doc-img">
+									<img src="{% if doctor.getPictureProfile() %}{{doctor.getPictureProfile()}}{% else %}/assets/img/doctor-default.jpg{% endif %}" alt="User Image">
+								</a>
+								<div class="profile-det-info">
+									<h3>{{ doctor.getTitle() }} {{ app.user.firstname }} {{ app.user.lastname }}</h3>
+									<div class="patient-details">
+										<h5 class="mb-0">{{doctor.getSpeciality()|trans}}</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="dashboard-widget">
+							<nav class="dashboard-menu">
+								<ul>
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_dashboard' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_dashboard') }}">
+											<i class="fas fa-columns"></i>
+											<span>{{ "Dashboard"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_schedule_timings' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_schedule_timings') }}">
+											<i class="fas fa-hourglass-start"></i>
+											<span>{{ "Schedule Timings"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_appointments' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_appointments') }}">
+											<i class="fas fa-calendar-check"></i>
+											<span>{{ "Appointments"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_patients' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_patients') }}">
+											<i class="fas fa-user-injured"></i>
+											<span>{{ "My Patients"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_business_hours' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_business_hours') }}">
+											<i class="fas fa-clock"></i>
+											<span>{{ "Business Hours"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_profilesettings' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_profilesettings') }}">
+											<i class="fas fa-user-cog"></i>
+											<span>{{ "Profile Settings"|trans }}</span>
+										</a>
+									</li>
+
+									<li {% if app.request.attributes.get('_route') == 'app_doctor_payment' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_payment') }}">
+											<i class="fas fa-credit-card"></i>
+											<span>{{ "Payment"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_social' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_social') }}">
+											<i class="fas fa-share-alt"></i>
+											<span>{{ "Social Media"|trans }}</span>
+										</a>
+									</li>
+
+									<li{% if app.request.attributes.get('_route') == 'app_doctor_changepassword' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_changepassword') }}">
+											<i class="fas fa-lock"></i>
+											<span>{{ "Change Password"|trans }}</span>
+										</a>
+									</li>
+
+									<li>
+										<a href="{{ path('app_doctor_logout') }}">
+											<i class="fas fa-sign-out-alt"></i>
+											<span>{{ "Logout"|trans }}</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-7 col-lg-8 col-xl-9">
+					{% block profileb %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

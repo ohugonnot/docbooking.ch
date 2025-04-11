@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocBooking.ch - Differential Diagnosis - DDx{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">{{ 'Home'|trans }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ 'Symptom Checker'|trans }}</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">{{ 'Symptom Checker'|trans }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container">
+        <div class="row">
+
+		<!-- MEDoctor -->
+			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+                		<br>
+                		<h1 style="text-align:center">{{ 'I Check my Symptoms to Discover my Likely Diseases'|trans }}</h1>
+                		<h4 style="text-align:center">{{ 'It\'s anonymous and free'|trans }}</h4>
+                		<br>
+
+					<center>
+						<iframe id="loginframe" src="https://www.medoctor.com?inframe=1" scrolling="yes" frameborder="0" width="360" height="700"></iframe>
+					</center>
+
+			</div>
+		<!-- /MEDoctor -->
+
+			<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+                		<br>
+                		<h1 style="text-align:center">{{ 'I am Worried and I wish to Speak to a Healthcare Professional'|trans }}</h1>
+                		<h4 style="text-align:center">{{ 'Click the image below'|trans }}</h4>
+                		<br>
+
+					<center>
+						<a href="https://www.docbooking.ch" target="_blank">
+                        <img src="/assets/img/patient-worried.png" width="360" height="270" class="responsive-img">
+						</a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+					</center>
+
+			</div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+{% endblock %}

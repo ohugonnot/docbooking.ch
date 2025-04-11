@@ -1,0 +1,329 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="{{ 'DocBooking - Book a Doctor near You - Schedules at 12 - 48 hours Waiting only'|trans }}">
+		<meta name="keywords" content="{{ 'booking, doctor, available, schedule, January, February, March, general practitioner, therapist, physiotherapist, dentist, psychologist, symptom checker, diagnosis, medicine, natural,  flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy'|trans }}">
+		<meta name="author" content="Sean Kelly">
+		<meta name="google-site-verification" content="9eQ9giGNEjTdLoRdI96g8EB9DPAuQ0r8-hM0HBnDsc8" />
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158937519-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'UA-158937519-1');
+		</script>
+		<!--<meta http-equiv="refresh" content="300">-->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<title>{% block title %}{{ 'DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only'|trans }}{% endblock %}</title>
+		<!-- Favicons -->
+		<link href="assets/img/favicon.png" rel="icon">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css">
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="/assets/plugins/fancybox/jquery.fancybox.min.css">
+		<!-- Daterangepicker CSS -->
+		<link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/assets/css/style.css">
+		<link rel="stylesheet" href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" type="text/css" />
+		<link rel="stylesheet" href="/assets/plugins/dropzone/dist/dropzone.css" type="text/css" />
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="/assets/js/html5shiv.min.js"></script>
+			<script src="/assets/js/respond.min.js"></script>
+		<![endif]-->
+		<style>
+			.from-admin {background-color: #f7ff4052;}
+		</style>
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body class="{{ classBody | default('') }}">
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+			<header class="header">
+				<nav class="navbar navbar-expand-lg header-nav {% if is_granted('IS_IMPERSONATOR') %} from-admin {% endif %}">
+					<div class="navbar-header">
+						<a id="mobile_btn" href="javascript:void(0);">
+							<span class="bar-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            </span>
+						</a>
+						<a href="{{ path('app_index') }}" class="navbar-brand logo">
+							<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
+						</a>
+					</div>
+					{% if is_granted('IS_IMPERSONATOR') %}
+						{% if app.user.isPatient %}
+							<a href="{{ impersonation_exit_path(path('app_admin_patients') ) }}">{{ 'Return to admin'|trans }}</a>
+						{% else %}
+							<a href="{{ impersonation_exit_path(path('app_admin_doctors') ) }}">{{ 'Return to admin'|trans }}</a>
+						{% endif %}
+					{% else %}
+						<div class="main-menu-wrapper">
+							<div class="menu-header">
+								<a href="{{ path('app_index') }}" class="menu-logo">
+									<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
+								</a>
+								<a id="menu_close" class="menu-close" href="javascript:void(0);">
+									<i class="fas fa-times"></i>
+								</a>
+							</div>
+							<ul class="main-nav">
+								<li>
+									<a href="{{ path('app_index') }}">{{ 'Home'|trans }}</a>
+								</li>
+								{% if not app.user %}
+									<li>
+										<a href="{{ path('app_doctor_login') }}">{{ 'Doctors'|trans }}</a>
+									</li>
+                                    <li>
+										<a href="{{ path('app_ddx') }}">{{ 'Symptoms'|trans }}</a>
+									</li>
+                                    <li>
+										<a href="https://www.docbooking.ch/?&_locale=de">DE</a> | 
+                                        <a href="https://www.docbooking.ch/?&_locale=fr">FR</a> | 
+                                        <a href="https://www.docbooking.ch/?&_locale=it">IT</a> | 
+                                        <a href="https://www.docbooking.ch/?&_locale=en">EN</a>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+						<ul class="nav header-navbar-rht">
+							{% if not app.user %}
+								<li class="nav-item">
+									<a class="nav-link header-login" href="{{ path('app_doctor_register') }}">{{ 'Are you a healthcare professional?'|trans }}</a>
+								</li>
+							{% endif %}
+							<li class="nav-item contact-item">
+<!-- Not Useful Now 								
+								<div class="header-contact-img"> 
+									<i class="far fa-hospital"></i>
+								</div>   
+
+								<div class="header-contact-detail">
+									<p class="contact-header">{{ 'Contact'|trans }}</p>               
+								</div>
+ -->
+							</li>
+							{% if not app.user %}
+								<li class="nav-item contact-item">
+									<a href="{{ path('app_patient_register') }}">
+										<div class="header-contact-img">
+											<i class="far fa-user"></i>
+										</div>
+										<div class="header-contact-detail">
+											<p class="contact-header">{{ 'Login / Signup'|trans }}</p>
+											<p class="contact-info-header">{{ 'Manage my Acct'|trans }}</p>
+										</div>
+									</a>
+								</li>
+							{% endif %}
+							<li class="nav-item">
+								{% if app.user %}
+									<div class="btn-group">
+										<button type="button" class="btn header-login">{{ app.user.firstname | default('') }} {{ app.user.lastname | default('') }},</button>
+										<button type="button" class="btn dropdown-toggle fas fa-chevron-down header-login-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="sr-only">{{ 'Toggle Dropdown'|trans }}</span>
+										</button>
+										<div class="dropdown-menu">
+											{% if 'ROLE_PATIENT' in app.user.getRoles() %}
+												<a class="dropdown-item" href="{{ path('app_patient_dashboard') }}">{{ 'Dashboard'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_favourites') }}">{{ 'Favourites'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_settings') }}">{{ 'Profile Settings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_patient_profile_change_password') }}">{{ 'Change Password'|trans }}</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="{{ path('app_patient_logout') }}">{{ 'Logout'|trans }}</a>
+											{% endif %}
+											{% if 'ROLE_DOCTOR' in app.user.getRoles() %}
+												<a class="dropdown-item" href="{{ path('app_doctor_dashboard') }}">{{ 'Dashboard'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_schedule_timings') }}">{{ 'Schedule Timings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_appointments') }}">{{ 'Appointments'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_patients') }}">{{ 'My Patients'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_profilesettings') }}">{{ 'Profile Settings'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_social') }}">{{ 'Social Media'|trans }}</a>
+												<a class="dropdown-item" href="{{ path('app_doctor_changepassword') }}">{{ 'Change Password'|trans }}</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="{{ path('app_doctor_logout') }}">{{ 'Logout'|trans }}</a>
+											{% endif %}
+										</div>
+									</div>
+								{% else %}
+
+								{% endif %}
+							</li>
+						</ul>
+					{% endif %}
+				</nav>
+			</header>
+			{% block body %}{% endblock %}
+			<!-- Footer -->
+			<footer class="footer">
+				<!-- Footer Top -->
+				<div class="footer-top">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<div class="footer-logo">
+										<img src="/assets/img/footer-logo.png" alt="logo">
+									</div>
+									<div class="footer-about-content">
+										<p><a href="{{path('app_about')}}" target="_blank"><i class="fas fa-angle-double-right"></i> {{ 'About DocBooking + MEDoctor'|trans }}</a></p>
+										<p>{{ 'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.'|trans }}</p>
+										<div class="social-icon">
+											<ul>
+												<li>
+													<a href="https://www.facebook.com/DocBookingCompany" target="_blank"><i class="fab fa-facebook-f"></i></a>
+												</li>
+												<li>
+													<a href="https://www.twitter.com/docbooking" target="_blank"><i class="fab fa-twitter"></i></a>
+												</li>
+												<li>
+													<a href="https://www.linkedin.com/company/docbookingcompany/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+												</li>
+												<li>
+													<a href="https://www.instagram.com/docbooking_company/" target="_blank"><i class="fab fa-instagram"></i></a>
+												</li>
+												<li>
+													<a href="https://www.youtube.com/channel/UC20P8AHd041QmTV4pn-6xhg" target="_blank"><i class="fab fa-youtube"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">{{ 'For Patients'|trans }}</h2>
+									<ul>
+                                        <li><a href="{{path('app_patient_login')}}"><i class="fas fa-angle-double-right"></i> {{ 'Patient Login'|trans }}</a></li>
+										<li><a href="{{path('app_patient_register')}}"><i class="fas fa-angle-double-right"></i> {{ 'New Patient Registration'|trans }}</a></li>
+										<li><a href="{{path('app_ddx')}}"><i class="fas fa-angle-double-right"></i> {{ 'Symptom Checker for the Patient'|trans }}</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">{{ 'For Doctors'|trans }}</h2>
+									<ul>
+                                        <li><a href="{{path('app_doctor_login')}}"><i class="fas fa-angle-double-right"></i> {{ 'Doctor Login'|trans }}</a></li>
+                                        <li><a href="{{path('app_doctor_register')}}"><i class="fas fa-angle-double-right"></i> {{ 'New Doctor Registration'|trans }}</a></li>
+                                        <li><a href="{{path('app_help_for_doctors')}}"><i class="fas fa-angle-double-right"></i> {{ 'Help for Doctors'|trans }}</a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-contact">
+									<h2 class="footer-title">{{ 'Contact Us'|trans }}</h2>
+									<div class="footer-contact-info">
+										<div class="footer-address">
+											<span><i class="fas fa-map-marker-alt"></i></span>
+											<p> Av. des Alpes 78, 1820 Montreux, {{ 'Switzerland'|trans }}</p>
+										</div>
+										<div class="footer-address">
+											<span><i class="fas fa-map-marker-alt"></i></span>
+											<p>Sinserstrasse 7, 6330 Cham (ZG) {{ 'Switzerland'|trans }}</p>
+										</div>
+
+										<p class="mb-0">
+
+										</p>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Footer Top -->
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<div class="container-fluid">
+						<!-- Copyright -->
+						<div class="copyright">
+							<div class="row">
+								<div class="col-md-6 col-lg-6">
+									<div class="copyright-text">
+												<p class="mb-0">&copy; 2022 DocBooking by <a href="https://www.web-developpeur.com/" target="_blank">ASFolken with ❤</a> {{ 'All rights reserved.'|trans }}</p>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-6">
+									<!-- Copyright Menu -->
+									<div class="copyright-menu">
+										<ul class="policy-menu">
+											<li><a href="{{path('app_term_condition')}}">{{ 'Terms and Conditions'|trans }}</a></li>
+											<li><a href="{{path('app_privacy_policy')}}">{{ 'Policy'|trans }}</a></li>
+											<li><a href="{{path('app_404')}}">           {{ 'Error Page'|trans }}</a></li>
+										</ul>
+									</div>
+									<!-- /Copyright Menu -->
+								</div>
+							</div>
+						</div>
+						<!-- /Copyright -->
+					</div>
+				</div>
+				<!-- /Footer Bottom -->
+			</footer>
+			<!-- /Footer -->
+		</div>
+		<!-- /Main Wrapper -->
+
+<!-- ConveyThis code
+<script src="//cdn.conveythis.com/javascript/conveythis-initializer.js"></script>
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function(e) {
+		ConveyThis_Initializer.init({
+			api_key: "pub_3823debe0b5fda3a676a98f8a5f232b4"
+		});
+	});
+</script>
+ End ConveyThis code -->
+
+
+		<!-- jQuery -->
+		<!-- <script src="/assets/js/jquery.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/plugins/dropzone/dist/dropzone.js"></script>
+		<!-- Bootstrap Core JS -->
+		<script src="/assets/js/popper.min.js"></script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+		<!-- Sticky Sidebar JS -->
+		<script src="/assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+		<script src="/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+		<!-- Select2 JS -->
+		<script src="/assets/plugins/select2/js/select2.min.js"></script>
+		<!-- Datetimepicker JS -->
+		<script src="/assets/js/moment.min.js"></script>
+		<script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+		<!-- Fancybox JS -->
+		<script src="/assets/plugins/fancybox/jquery.fancybox.min.js"></script>
+		<!-- Daterangepicker JS -->
+		<script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+		<!-- Custom JS -->
+		<script src="/assets/js/script.js"></script>
+		{% block javascripts %}
+		{# Default javascripts #}
+		{% endblock %}
+		{% block profilemodals %}{% endblock %}
+	</body>
+</html>

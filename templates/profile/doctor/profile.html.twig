@@ -1,0 +1,699 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ doctor.getTitle() }} {{ doctor.getFirstName() }} {{ doctor.getLastName() }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+
+        .dlpro-address {
+            display: table;
+        }
+
+        .dlpro-address i,
+        .dlpro-address address {
+            display: table-cell;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="breadcrumb-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-12 col-12">
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('app_index') }}">{{ "Home"|trans }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ "Doctor Profile"|trans }}</li>
+                        </ol>
+                    </nav>
+                    <h2 class="breadcrumb-title">{{ "Doctor Profile"|trans }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="doctor-widget">
+                        <div class="doc-info-left">
+                            <div class="doctor-img">
+                                <img src="{% if doctor.getPictureProfile() %}{{ doctor.getPictureProfile() }}{% else %}/assets/img/doctor-default.jpg{% endif %}"
+                                     class="img-fluid" alt="User Image">
+                            </div>
+                            <div class="doc-info-cont">
+                                <h4 class="doc-name conveythis-no-translate">{{ doctor.getTitle() }} {{ doctor.getFirstName() }} {{ doctor.getLastName() }}</h4>
+
+                                <p class="doc-display-languages">
+                                    {% for lang in doctor.getSpokenLanguages() %}
+                                        {{ lang|trans }}{% if not loop.last %} | {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <div class="conveythis-no-translate">
+
+                                    {% if doctor.getSpeciality() == 'General Practitioner' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-06.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Urologist' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-01.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+                                    {% elseif doctor.getSpeciality() == 'Neurologist' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-10.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Dentist' or doctor.getSpeciality() ==  'Dental Hygienist' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-05.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Orthopedist' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-03.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Cardiologist' %}
+                                        <p class="doc-department">
+                                            <img src="/assets/img/specialities/specialities-04.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Psychologist' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-02.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Nutritionist-Dietician' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-08.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Alternative/Natural Medicine' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-12.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Pediatrician' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-13.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Dermatologist / Aesthetics' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-11.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Gynecologist' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-14.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Physiotherapist' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-07.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% elseif doctor.getSpeciality() == 'Ophtalmologist' %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-09.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% else %}
+                                        <p class="doc-department conveythis-no-translate">
+                                            <img src="/assets/img/specialities/specialities-06.png" class="img-fluid"
+                                                 alt="Speciality">{{ doctor.getSpeciality()|trans }}
+                                        </p>
+
+                                    {% endif %}
+                                </div>
+
+                                {% if doctor.getClinics() %}
+                                    <div class="clinic-details">
+                                        <ul>
+                                            {% if doctor.getPriceCustomValue() %}
+                                                <li>
+                                                    <i class="far fa-money-bill-alt"></i>
+                                                    CHF {{ doctor.getPriceCustomValue() }} {{ "per visit"|trans }}
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+
+                                        <ul class="clinic-gallery">
+                                            {% for clinic in doctor.getClinics() %}
+                                                {% for img in clinic.getImagesArray() %}
+                                                    <li>
+                                                        <a href="/public/uploads/doctors/clinics/{{ img }}"
+                                                           data-fancybox="gallery">
+                                                            <img src="/public/uploads/doctors/clinics/{{ img }}"
+                                                                 alt="Feature">
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="doc-info-right">
+                            <div class="clini-infos">
+                                <ul>
+                                    <li class="dlpro-address conveythis-no-translate"><i
+                                                class="fas fa-map-marker-alt"></i> {{ doctor.getFormattedAddress()|raw }}
+                                    </li>
+                                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i> - <a
+                                                href="javascript:void(0);" data-toggle="modal"
+                                                data-target=".bd-direction-modal-lg">{{ "Get Directions"|trans }}</a></p>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="doc-info-right">
+                            <div class="clini-infos">
+                                {% if doctor.getPhoneNumber() %}
+                                    <a href="https://wa.me/{{ doctor.PhoneNumber()
+                                    |replace({' ': ''})
+                                    |replace({'+': ''})
+                                    |replace({'-': ''}) }}" target="_blank">
+                                        <img alt="whatsapp" height="75" src="/assets/img/WhatsApp.jpg">
+                                    </a>
+                                {% endif %}
+                                {% if doctor.email %}
+                                    <a href="mailto:{{ doctor.email }}">
+                                        <img alt="email" height="75" src="/assets/img/email.jpg">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4 p-3">
+                <div class="row">
+                    <!-- Partie gauche -->
+                    <div class="col-md-4">
+                        <p><strong>RCC Number:</strong> {{ doctor.getRccNumber() }}</p>
+                        <p><strong>Reimbursed by:</strong> {{ doctor.getReimbursedBy() }}</p>
+                        <p><strong>Payment by:</strong> {{ doctor.getPaymentBy() }}</p>
+                        <p><strong>Member of:</strong> {{ doctor.getMemberOf() }}</p>
+                    </div>
+
+                    <!-- Partie centrale -->
+                    <div class="col-md-4">
+                        <p><strong>Connected with:</strong></p>
+                        <ul>
+                            {% for connected in doctor.getConnectedDoctors() %}
+                                <li>
+                                    <a href="{{ path('app_doctor_profile', {'slug': connected.getSlug()}) }}">
+                                        Dr. {{ connected.getFirstName() }} {{ connected.getLastName() }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>No connections yet</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Partie droite -->
+                    <div class="col-md-4 text-center">
+                        <a class=" " href="https://www.docbooking.ch/ddx" target="_blank">
+                            <img src="/assets/img/detectorai.jpg" alt="DDx AI" height="75"><br>
+                            Test your Symptoms
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card booking-schedule schedule-widget">
+                {% set times = doctor.getTimings() %}
+                {{ times|formathomeCalendar(doctor)|raw }}
+            </div>
+            <div class="card">
+                <div class="card-body pt-0">
+                    <nav class="user-tabs mb-4">
+                        <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#doc_overview" data-toggle="tab">{{ "Overview"|trans }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#doc_locations" data-toggle="tab">{{ "Locations"|trans }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#doc_business_hours" data-toggle="tab">{{ "Business Hours"|trans }}</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="tab-content pt-0">
+                        <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-9">
+                                    {% if doctor.getAboutMe() %}
+                                        <div class="widget about-widget">
+                                            <h4 class="widget-title">{{ "About Me"|trans }}</h4>
+                                            <p>{{ doctor.getAboutMe() }}</p>
+                                        </div>
+                                    {% endif %}
+                                    {% if doctor.getEducations() %}
+                                        <div class="widget education-widget">
+                                            <h4 class="widget-title">{{ "Education"|trans }}</h4>
+                                            <div class="experience-box">
+                                                <ul class="experience-list">
+                                                    {% for education in doctor.getEducations() %}
+                                                        <li>
+                                                            <div class="experience-user">
+                                                                <div class="before-circle"></div>
+                                                            </div>
+                                                            <div class="experience-content">
+                                                                <div class="timeline-content">
+                                                                    <a href="#/"
+                                                                       class="name">{{ education.getCollegeInstitute() }}</a>
+                                                                    <div>{{ education.getDegree()|trans }}</div>
+                                                                    <span class="time">{{ education.getYearCompletion() }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if doctor.getExperiences() %}
+                                        <div class="widget experience-widget">
+                                            <h4 class="widget-title">{{ "Work & Experience"|trans }}</h4>
+                                            <div class="experience-box">
+                                                <ul class="experience-list">
+                                                    {% for experience in doctor.getExperiences() %}
+                                                        <li>
+                                                            <div class="experience-user">
+                                                                <div class="before-circle"></div>
+                                                            </div>
+                                                            <div class="experience-content">
+                                                                <div class="timeline-content">
+                                                                    <a href="#/"
+                                                                       class="name">{{ experience.getHospitalName() }}</a>
+                                                                    {% if experience.getExperienceFrom() %}
+                                                                        <span class="time">{{ experience.getExperienceFrom().format('Y') }} - {{ experience.getExperienceToCustom() }} {{ experience.getExperienceTotalYear() }}</span>
+                                                                    {% else %}
+                                                                        <span class="time"></span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if doctor.getExperiences() %}
+                                        <div class="widget awards-widget">
+                                            <h4 class="widget-title">{{ "Awards"|trans }}</h4>
+                                            <div class="experience-box">
+                                                <ul class="experience-list">
+                                                    {% for award in doctor.getAwards() %}
+                                                        <li>
+                                                            <div class="experience-user">
+                                                                <div class="before-circle"></div>
+                                                            </div>
+                                                            <div class="experience-content">
+                                                                <div class="timeline-content">
+                                                                    <p class="exp-year">{{ award.getYear() }}</p>
+                                                                    <h4 class="exp-title">{{ award.getAwards() }}</h4>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur
+                                                                        adipiscing elit. Proin a ipsum tellus. Interdum
+                                                                        et malesuada fames ac ante ipsum primis in
+                                                                        faucibus.</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if doctor.getServices() %}
+                                        <div class="service-list">
+                                            <h4>Services</h4>
+                                            <ul class="clearfix">
+                                                {% set services = doctor.getServices()|split(',') %}
+                                                {% for service in services %}
+                                                    <li>{{ service|capitalize }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if doctor.getSpecialization() %}
+                                        <div class="service-list">
+                                            <h4>{{ "Specializations"|trans }}</h4>
+                                            <ul class="clearfix">
+                                                {% set specializations = doctor.getSpecialization()|split(',') %}
+                                                {% for specialization in specializations %}
+                                                    <li>{{ specialization|capitalize }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" id="doc_locations" class="tab-pane fade">
+                            {% for clinic in doctor.getClinics() %}
+                                <div class="location-list">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="clinic-content">
+                                                <h4 class="clinic-name"><a href="#">{{ clinic.name }}</a></h4>
+
+                                                {% if doctor.getSpeciality() %}
+                                                    <p class="doc-speciality">{{ doctor.getSpeciality()|trans }}</p>
+                                                {% endif %}
+
+                                                <div class="clinic-details mb-0">
+                                                    <h5 class="clinic-direction">
+                                                        <i class="fas fa-map-marker-alt"></i> Lausanne, Switzerland <br>
+                                                        <a href="javascript:void(0);" data-toggle="modal"
+                                                           data-target=".bd-direction-modal-lg">
+                                                            {{ "Get Directions"|trans }}</a>
+                                                    </h5>
+                                                    {% if clinic.getImagesArray() %}
+                                                        <ul>
+                                                            {% for img in clinic.getImagesArray() %}
+                                                                <li>
+                                                                    <a href="/public/uploads/doctors/clinics/{{ img }}"
+                                                                       data-fancybox="gallery2">
+                                                                        <img src="/public/uploads/doctors/clinics/{{ img }}"
+                                                                             alt="Feature Image">
+                                                                    </a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="widget business-widget">
+                                        <div class="widget-content">
+                                            {% if doctor.getBusinessHoursArray() %}
+                                                <div class="listing-hours">
+                                                    <div class="listing-day current">
+                                                        <div class="day">Today <span>{{ "now"|date("j M Y") }}</span>
+                                                        </div>
+                                                        <div class="time-items">
+                                                            <span class="open-status">{{ doctor.getBusinessHoursArray()|formatIsOpeningNow|raw }}</span>
+                                                            <span class="time">{{ doctor.getBusinessHoursArray()|formatOpeningNow }}</span>
+                                                        </div>
+                                                    </div>
+                                                    {% for business_hour in doctor.getBusinessHoursArray() %}
+                                                        <div class="listing-day {% if business_hour.dlproClosed is defined %}closed{% endif %}">
+                                                            <div class="day">{{ business_hour.day }}</div>
+                                                            {% if business_hour.dlproClosed is defined %}
+                                                                <div class="time-items">
+																<span class="time">
+																	<span class="badge bg-danger-light">{{ "Closed"|trans }}</span>
+																</span>
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="time-items">
+                                                                    <span class="time">{{ business_hour.from }} AM - {{ business_hour.to }} PM</span>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <p class="text-center">{{ "There are no Business Hours"|trans }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div style="display: none;">
+		<div id="map"></div>
+		<div id="mapDirections" class="modal fade bd-direction-modal-lg" tabindex="-1" role="dialog"
+			 aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="load_map"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+		var isExistCollapse = false;
+		function dlproCollapsse() {
+			$.each($('.dlpro-calendar-time-render'), function () {
+				var el = $(this);
+				if (el.has("li").length) {
+					$.each(el.find('li'), function () {
+						if ($(this).find('a').length > 4) {
+							//console.log('n=' + $(this).find('a.selected').length);
+							var count = 1;
+							$.each($(this).find('a'), function () {
+								if (count > 4) {
+									$(this).hide();
+								}
+								count++;
+							});
+						}
+					});
+				}
+			});
+		}
+
+		function dlproPrev(el, timestamp, doctorID) {
+			var current_element = $(el);
+			$.get('{{ path('app_next_prev-ajax') }}', {
+				type: 'prev',
+				doctor_id: doctorID,
+				prev: timestamp
+			}, function (response) {
+				if (response) {
+					current_element.closest('div.schedule-widget').html(response);
+					dlproDoCollapsse();
+				}
+				return false;
+			});
+			return false;
+		}
+
+		function dlproNext(el, timestamp, doctorID) {
+			var current_element = $(el);
+			$.get('{{ path('app_next_prev-ajax') }}', {
+				type: 'next',
+				doctor_id: doctorID,
+				next: timestamp
+			}, function (response) {
+				if (response) {
+					current_element.closest('div.schedule-widget').html(response);
+					dlproDoCollapsse();
+				}
+				return false;
+			});
+			return false;
+		}
+
+		function dlproDoCollapsse() {
+			$.each($('.dlpro-calendar-time-render'), function () {
+				var el = $(this);
+				if (el.has("li").length) {
+					$.each(el.find('li'), function () {
+						//console.log($(this).find('a.selected').length);
+						if ($(this).find('a.selected').length > 4) {
+							//console.log('n=' + $(this).find('a.selected').length);
+							el.find('div.is-dlpro-show-more').show();
+							isExistCollapse = true;
+							return false;
+						} else {
+							el.find('div.is-dlpro-show-more').css('display', 'none');
+						}
+					});
+				} else {
+					el.find('div.is-dlpro-show-more').css('display', 'none');
+				}
+			});
+			if (isExistCollapse) {
+				dlproCollapsse();
+			}
+		}
+
+		$(document).ready(function () {
+			$(document).on('click','.dlproColapseLink', function () {
+				var id = $(this).attr('href'), btn = $(this);
+				$.each($(id).find('li').find('a'), function () {
+					if ($(this).css('display') == 'none') {
+						$(this).show();
+					} else {
+						//$(this).hide();
+					}
+				});
+				btn.hide();
+			});
+
+			var isExistCollapse = false;
+			$.each($('.dlpro-calendar-time-render'), function () {
+				var el = $(this);
+				if (el.has("li").length) {
+					$.each(el.find('li'), function () {
+						if ($(this).find('a.selected').length > 4) {
+							el.find('div.is-dlpro-show-more').show();
+							isExistCollapse = true;
+							return false;
+						} else {
+							el.find('div.is-dlpro-show-more').css('display', 'none');
+						}
+					});
+				} else {
+					el.find('div.is-dlpro-show-more').css('display', 'none');
+				}
+			});
+
+			if (isExistCollapse) {
+				dlproCollapsse();
+			}
+		});
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}"></script>
+	<script>
+		var map, infoWindow, directionsService, pointA, pointB, map_bounds;
+		function initMap() {
+			infoWindow = new google.maps.InfoWindow;
+			// Try HTML5 geolocation.
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					var pos = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					map = new google.maps.Map(document.getElementById('map'), {
+						center: {lat: position.coords.latitude, lng: position.coords.longitude},
+						zoom: 15,
+						zoomControl: true,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					});
+					directionsService = new google.maps.DirectionsService;
+					directionsDisplay = new google.maps.DirectionsRenderer({
+						map: map
+					});
+					pointA = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					markerA = new google.maps.Marker({
+						position: pointA,
+						title: "Your Address",
+						label: "A",
+						map: map
+					}),
+						pointB = new google.maps.LatLng({{ doctor.getLatitude() }}, {{ doctor.getLongitude() }});
+					markerB = new google.maps.Marker({
+						position: new google.maps.LatLng({{ doctor.getLatitude() }}, {{ doctor.getLongitude() }}),
+						title: "Address Doctor ",
+						label: "B",
+						map: map
+					});
+					calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+					infoWindow.setPosition(pos);
+					infoWindow.setContent('Location found.');
+					infoWindow.open(map);
+					if (map_bounds == null) {
+						map_bounds = new google.maps.LatLngBounds();
+					}
+					map_bounds.extend(markerB.getPosition());
+					map.fitBounds(map_bounds);
+					google.maps.event.addListenerOnce(map, 'idle', function () {
+						$('.load_map').append($('#map'));
+					});
+				}, function () {
+					handleLocationError(true, infoWindow, map.getCenter());
+				});
+			} else {
+				// Browser doesn't support Geolocation
+				handleLocationError(false, infoWindow, map.getCenter());
+			}
+		}
+
+		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+			infoWindow.setPosition(pos);
+			infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+			infoWindow.open(map);
+		}
+
+		function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+			directionsService.route({
+				origin: pointA,
+				destination: pointB,
+				avoidTolls: true,
+				avoidHighways: false,
+				travelMode: google.maps.TravelMode.DRIVING
+			}, function (response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+				} else {
+					window.alert('Directions request failed due to ' + status);
+				}
+			});
+		}
+
+		// Resize map to show on a Bootstrap's modal
+		$('#mapDirections').on('shown.bs.modal', function () {
+			initMap();
+		});
+		$(document).on('click', '.dlproTimeElementSelected', function () {
+			{% if isDoctor == false %}
+			var doctorid = $(this).data('doctorid');
+			var timeid = $(this).data('id');
+			var time = $(this).data('time');
+			$('<form action="{{ path('app_checkout_redirect') }}" method="post"><input type="hidden" name="doctorid" value="' + doctorid + '"><input type="hidden" name="timeid" value="' + timeid + '"><input type="hidden" name="time" value="' + time + '"></form>').appendTo('body').submit();
+			{% endif %}
+			return false;
+		});
+	</script>
+
+{% endblock %}

@@ -1,0 +1,532 @@
+'Return to admin': 'Torna a admin'
+Home: Homepage
+Doctors: Medici
+'Are you a healthcare professional?': 'Sei un operatore sanitario?'
+Contact: Contatto
+'Login / Signup': 'Entra / Registrati'
+'Manage my Acct': 'Gestisci il mio Account'
+'Toggle Dropdown': 'Attiva Menu a Discesa'
+Dashboard: 'Pannello di Controllo'
+Favourites: Preferiti
+'Profile Settings': 'Impostazioni del Profilo'
+'Payment': 'Pagamento'
+'Change Password': 'Cambiare la Password'
+Logout: Disconnettersi
+'Schedule Timings': 'Orari di Pianificazione'
+Appointments: Appointments
+'My Patients': 'I miei Pazienti'
+'Social Media': 'Social Media'
+'About DocBooking & MEDoctor': 'Informazioni su DocBooking e MEDoctor'
+'For Patients': 'Per i Pazienti'
+'Patient Login': 'Accesso Paziente'
+'New Patient Registration': 'Registrazione Nuovo Paziente'
+'Symptom Checker for the Patient': 'Controllo dei Sintomi per il Paziente'
+'For Doctors': 'Per i Medici'
+'Doctor Login': 'Accesso Medico'
+'New Doctor Registration': 'Registrazione Nuovo Medico'
+'Help for Doctors': 'Aiuto per i Medici'
+'Contact Us': Contattaci
+Switzerland: Svizzera
+'All rights reserved.': 'Tutti i Diritti Riservati.'
+'Terms and Conditions': 'Terms and Conditions'
+Policy: Politica
+'Error Page': 'Pagina di Errore'
+'I Want to Book a Healthcare Professional': 'Voglio Prenotare un Professionista Sanitario'
+Search: Ricerca
+matches: corrispondenze
+'Sort by': 'Ordina per'
+'Shortest Waiting for Visit': 'Attesa Più Breve per la Visita'
+'Shortest Distance': 'Distanza Più Breve'
+'Lowest Price': 'Prezzo Più Basso'
+'Highest Price': 'Prezzo Più Alto'
+'I Select': 'Io Seleziono'
+'Healthcare Specialty': 'Specialità sanitaria'
+'General Practitioner': 'Medico di base'
+Urologist: Urologo
+Neurologist: Neurologo
+Dentist: Dentista
+'Dental Hygienist': 'Igienista dentale'
+Orthopedist: Ortopedico
+Cardiologist: Cardiologo
+Psychologist: Psicologo
+Nutritionist-Dietician: Nutrizionista-Dietologo
+'Alternative/Natural Medicine': 'Medicina alternativa/naturale'
+Pediatrician: Pediatra
+'Dermatologist / Aesthetics': 'Dermatologo / Estetica'
+Physiotherapist: Fisioterapista
+Gynecologist: Ginecologo
+Ophtalmologist: Oculista
+Other: Altro
+Location: Posizione
+Language: Lingua
+German: Tedesco
+French: Francese
+Italian: Italiano
+English: Inglese
+Spanish: Spagnolo
+Russian: Russo
+Arabic: Arabo
+Greek: Greco
+Portuguese: Portoghese
+Gender: Genere
+'Male Doctor': Dottore
+'Female Doctor': Dottoressa
+'FIND DOCTORS NOW': 'TROVA MEDICI ORA'
+'I Book my Healthcare Professional': 'Prenoto il mio Operatore Sanitario'
+'Meanwhile, I Check my Symptoms to Prepare for my Medical Visit': 'Nel frattempo, controllo i miei sintomi per prepararmi alla visita medica'
+town: Città
+'Book a Doctor at Short Notice near You. Stop waiting 10-15 Days to see a Doctor.': 'Prenota un Dottore a Breve Preavviso vicino a Te. Smetti di aspettare 10-15 Giorni per vedere un Dottore'
+'Search by Doctor Name': 'Cerca per Nome del Dottore'
+'404 Error Page': '404 Pagina di Errore'
+'404 Page - This page does not exist.': 'Pagina 404 - Questa pagina non esiste.'
+'Click here to get back to the Homepage': 'Clicca qui per tornare alla Homepage'
+'Symptom Checker': 'Controllo dei Sintomi'
+'Symptom Checker and Differential Diagnosis': 'Controllo dei Sintomi e Diagnosi Differenziale'
+'I Check my Symptoms to Discover my Likely Diseases': 'Controllo i miei Sintomi per scoprire le mie Probabili Malattie'
+'It''s anonymous and free': 'È anonimo e gratuito'
+'I am Worried and I wish to Speak to a Healthcare Professional': 'Sono preoccupato e desidero Parlare con un Operatore Sanitario'
+'Click the image below': 'Clicca l''immagine qui sotto'
+'Help for Healthcare Professionals': 'Aiuto per gli Operatori Sanitari'
+'Explainer Video': 'Video Esplicativo'
+"For all healthcare professional, to attract more patients, start your DocBooking.ch account today.<br>\n\t\t\t\tIt's free, fun and profitable.": "Per tutti gli operatori sanitari, per attirare più pazienti, avvia oggi il tuo account DocBooking.ch.<br>\n\t\t\t\tÈ gratuito, divertente e redditizio."
+'1. Ground Rules': '1. Regole di Base'
+'Any healthcare professional may create his account at any time.': 'Qualsiasi professionista sanitario può creare il proprio account in qualsiasi momento.'
+'If a healthcare professional''s account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional''s account.': 'Se l''account di un operatore sanitario trasmette informazioni false, informazioni insufficienti, credenziali insufficienti o simili, il team di DocBooking può sospendere, bloccare o eliminare l''account di tale operatore sanitario.'
+'The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.': 'La sospensione, il blocco o la cancellazione di un account verrà eseguita dopo ragionevole discussione con il professionista sanitario e un tempo ragionevole per porre rimedio alla situazione.'
+'2. Creating your Account': '2. Creazione del tuo Account'
+'To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).': 'Per creare un account per un medico o qualsiasi altro operatore sanitario, è sufficiente fare clic sul pulsante verde (vedi freccia rossa).'
+'To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.': 'Per facilitare il lavoro, in alcuni casi, il tuo account è già stato creato in anticipo con le informazioni di base dallo staff di DocBooking. Basta chiedere il nome utente e la password e sarai subito operativo.'
+'3. Announcing your Available Slots for your Patients': '3. Annuncio degli Slot disponibili per i tuoi Pazienti'
+'This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.': 'Questo richiede 5 minuti al giorno. Per far sapere ai tuoi pazienti quando sei disponibile, annuncia i tuoi spazi liberi ogni volta che puoi.'
+'Choose you usual time duration to prepare your calendar (A).': 'Scegli la tua durata abituale per preparare il tuo calendario (A).'
+'Once you clicked your available slots, save them (B).': 'Dopo aver fatto clic sugli slot disponibili, salvali (B).'
+'4. Getting More Patients': '4. Ottenere più Pazienti'
+'Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.': 'Anche l''annuncio delle disdette dell''ultimo minuto di un paziente è molto utile. Annunciare immediatamente tali slot, che sono appena stati liberati, ha grandi possibilità di essere riempiti abbastanza rapidamente.'
+'For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.': 'Per tassi di successo più elevati, mostra una tua foto di qualità, preferibilmente una in cui il paziente può quasi vederti negli occhi. Il contatto visivo è sempre stato molto rassicurante.'
+'5. Getting even More Patients': '5. Ottenere ancora più Pazienti'
+'As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.': 'Quando ti iscrivi a www.DocBooking.ch, riceverai automaticamente e possiedi un URL per il tuo profilo professionale, come nell''immagine qui sotto. Ciò aumenterà notevolmente la tua visibilità e le tue capacità di prenotazione.'
+'You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.': 'Puoi copiare il tuo link personalizzato su tutta la tua pagina di social media, come qui, un esempio di Facebook. Puoi aggiungere il link alla tua pagina personalizzata alla tua pagina di social media in luoghi diversi. Vedi la freccia rossa.'
+'You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.': 'Puoi ripetere questa operazione per qualsiasi pagina di social media che possiedi, come Instagram, Twitter e simili.'
+'6. Getting Just Much More Patients': '6. Ottenere solo molti più Pazienti'
+'You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.': 'Puoi anche incorporare l''immagine qui sotto nel tuo sito web. Quando un paziente vuole prenotare una visita con te, clicca sull''immagine sottostante, che lo porta direttamente alla tua pagina DocBooking.'
+'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where <u>Firstname</u> by your first name and then <u>Lastname</u> by your last name. You can also adjust the image size, which are by default at <u>250px</u> and <u>62px</u>.': 'Puoi aggiungere tu stesso il codice al tuo sito web o chiedere al tuo webmaster di farlo. Devi solo modificare un po'' il tuo codice, dove <u>Nome</u> con il tuo nome e poi <u>Cognome</u> con il tuo cognome. Puoi anche regolare le dimensioni dell''immagine, che per impostazione predefinita sono <u>250px</u> e <u>62px</u>.'
+'7. Security and No Spam': '7. Sicurezza e niente Spam'
+'Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.': 'Diverse funzionalità di sicurezza sono integrate in DocBooking e nel tuo account professionale. Ci stiamo lavorando continuamente per il vostro comfort e facilità d''uso.'
+'In order to create your account, you will need your email address and a password. By giving us your email address, we are assurred that, once a booking is done, it will surely arrive at your email address. For your security, your email address will never be shown to your patient, neither will it be visible at any time during the booking process by the patient.': 'Per creare il tuo account, avrai bisogno del tuo indirizzo email e di una password. Fornendoci il tuo indirizzo e-mail, siamo certi che, una volta effettuata la prenotazione, arriverà sicuramente al tuo indirizzo e-mail. Per la tua sicurezza, il tuo indirizzo email non verrà mai mostrato al tuo paziente, né sarà visibile in qualsiasi momento durante il processo di prenotazione da parte del paziente.'
+'9. Create 2 Accounts if you work at 2 Different Locations': '9. Crea 2 Account se lavori in 2 Sedi Diverse'
+'If you are a healthcare professional with 2 (or more) separate work locations, it is preferable to create 2 (or more) accounts at DocBooking, which will create 2 (or more) separate blue markers (or bubbles) on the map.': 'Se sei un operatore sanitario con 2 (o più) sedi di lavoro separate, è preferibile creare 2 (o più) account su DocBooking, che creeranno 2 (o più) indicatori blu (o bolle) separati sulla mappa.'
+'For this, it is necessary to operate with 2 (or more) separate email addresses and use a slightly different first name or last name, each account managing the schedule for the separate addresses. See the red arrows below.': 'Per questo, è necessario operare con 2 (o più) indirizzi e-mail separati e utilizzare un nome o cognome leggermente diverso, ogni account gestisce la pianificazione per gli indirizzi separati. Vedi le frecce rosse sotto.'
+'10. Pricing': '10. Prezzi'
+'Today, as we are in Beta-Testing, all services are free. Hereafter, you may discover the likely pricing table which will soon be applied.': 'Oggi, essendo in Beta-Testing, tutti i servizi sono gratuiti. Di seguito, potresti scoprire la probabile tabella dei prezzi che verrà presto applicata.'
+'11. If the above Help doesn''t Work': '11. Se l''Aiuto di cui sopra non Funziona'
+'In case the above is not enough, you can contact us at': 'Nel caso in cui quanto sopra non fosse sufficiente, puoi contattarci a'
+'Or you also may call us at': 'Oppure puoi anche chiamarci al'
+'8. Receiving the Patient''s Symptoms Report': '8. Ricezione del Referto sui Sintomi del Paziente'
+'DocBooking.ch - Doctor Login': 'DocBooking.ch - Login Medico'
+Login: Login
+'as a Doctor or Therapist': 'come Medico o Terapista'
+Email: E-mail
+Password: Password
+'Remember me': 'Ricordati di me'
+'Forgot Password ?': 'Ha dimenticato la Password ?'
+'Sign in': Registrazione
+'Don’t have an account yet ?': 'Non hai ancora un conto ?'
+'Register as a New Doctor': 'Registrati come nuovo Medico'
+'as a Patient': 'come Paziente'
+'Register as a New Patient': 'Registrati come Nuovo Paziente'
+'Please sign in': 'Per favore accedi'
+'Access to our administration': 'Accesso alla nostra amministrazione'
+Title: Titolo
+'First Name': Nome
+'Last Name': Cognome
+Male: Maschio
+Female: Femmina
+'Phone or Mobile Number': 'Telefono o Numero di Cellulare'
+'Address Line 1': 'Indirizzo Linea 1'
+'Address Line 2': 'Indirizzo Linea 2'
+City: Città
+Country: Nazione
+'Postal Code': 'Codice Postale'
+'Create Password': 'Crea Password'
+'Register as New Doctor / Therapist': 'Registrati come Nuovo Medico / Terapista'
+'Already have an account ?': 'Hai già un Account ?'
+Register: Registrati
+'Patient Registration': 'Registrazione del Paziente'
+'Register as a Patient': 'Registrati come Paziente'
+Select: Selezionare
+Specialty: Specialità
+'New password': 'Nuova Password'
+'Repeat Password': 'Ripeti la Password'
+'Old Password': 'Vecchia Password'
+'Brochure (PDF file)': 'Opuscolo (file PDF)'
+'Date of Birth': 'Data di Nascita'
+'Save Changes': 'Save Changes'
+'Your Profile': 'Il tuo profilo'
+years: anni
+Doctor: Medico
+'Appt Date': 'Data di Appuntamento'
+'Booking Date': 'Data di prenotazione'
+'Estimated Price': 'Prezzo Stimato'
+Status: Stato
+PENDING: 'IN SOSPESO'
+'Pay Now': 'Paga Ora'
+COMPLETE: COMPLETO
+CANCELLED: ANNULLATO
+View: Visualizzazione
+'Clinic Name': 'Nome della Clinica'
+'Clinic Address': 'Indirizzo della Clinica'
+Awards: Premi
+Year: Anno
+Degree: Livello
+College/Institute: Collegio/Istituto
+'Year of Completion': 'Anno di Completamento'
+'Hospital Name': 'Nome dell''ospedale'
+From: Da
+To: A
+Designation: Designazione
+Memberships: Abbonamenti
+Registrations: Iscrizioni
+'Choose a Language...': 'Scegli una lingua...'
+'Phone Number': 'Numero di Telefono'
+Biography: Biografia
+'Medical Specialty': 'Specialità Medica'
+Services: Servizi
+Specialization: Specializzazione
+'State / Province': 'Cantone / Provincia'
+Always: Sempre
+'If Patient Wishes': 'Se il Paziente lo Desidera'
+Never: Mai
+'Custom Price (per visit)': 'Prezzo Personalizzato (per Visita)'
+'Custom price you can add': 'Prezzo Personalizzato che puoi Aggiungere'
+Others: Altri
+'Website URL': 'URL Website'
+'Facebook URL': 'URL Facebook'
+'Twitter URL': 'URL Twitter'
+'Instagram URL': 'URL Instagram'
+'Pinterest URL': 'URL Pinterest'
+'Linkedin URL': 'URL Linkedin'
+'Youtube URL': 'URL Youtube'
+A-: A-
+A+: A+
+B-: B-
+B+: B+
+AB: AB
+O-: O-
+O+: O+
+'Blood Group': 'Gruppo Sanguigno'
+Mobile: Cellulare
+Address: Indirizzo
+State: Cantone
+'Zip Code': 'Codice Postale'
+'Groupe Mutuel': 'Groupe Mutuel'
+CSS: CSS
+Helsana: Helsana
+Concordia: Concordia
+Swica: Swica
+Visana: Visana
+Assura: Assura
+Sanitas: Sanitas
+Intras: Intras
+KPT-CPT: KPT-CPT
+Wincare: Wincare
+Atupri: Atupri
+ÖKK: ÖKK
+Sympany: Sympany
+Insurance: Assicurazione
+'Insurance Number': 'Numero di polizza'
+'Doctor Profile': 'Profilo medico'
+'per visit': 'per visita'
+'Get Directions': 'Get Directions'
+Overview: Panoramica
+Locations: Sedi
+'Business Hours': 'Ore di Lavoro'
+'About Me': 'A Proposito di Me'
+Education: 'Formazione Scolastica'
+'Work & Experience': 'Esperienza di Lavoro'
+Specializations: Specializzazioni
+Closed: Chiuso
+'There are no Business Hours': 'Non ci sono Orari di Apertura'
+mins: Minuti
+Hour: Ora
+'SAVE SLOTS FOR THIS WEEK': 'SALVA SLOT PER QUESTA SETTIMANA'
+'Basic Information': 'Informazioni di Base'
+'Upload Photo': 'Carica una Foto'
+'Allowed JPG, JPEG or PNG. Max size 600 x 600 pixels and 200 KB. A square image is always better. If image is too voluminous, you can compress it.': 'JPG, JPEG o PNG consentiti. Dimensione massima 600 x 600 pixel e 200 KB. Un''immagine quadrata è sempre meglio. Se l''immagine è troppo voluminosa, puoi comprimerla.'
+'A quality image of the face increases bookings by 40%.': 'Un''immagine di qualità del viso aumenta le prenotazioni del 40%.'
+Speciality: Specialità
+'Clinic Info': 'Informazioni sulla Clinica'''
+'Clinic Images': 'Immagini della Clinica'
+'Add More': 'Aggiungere Altro'
+'Contact Details': 'Dettagli del Contatto'
+Pricing: Prezzi
+'Spoken Languages': 'Lingue Parlate'
+'Receiving Patient Info by MEDoctor': 'Ricezione di Informazioni sul Paziente da MEDoctor'
+'Services and Specialization': 'Servizi e Specializzazioni'
+'Note : Type & Press enter to add new services': 'Nota: Digita e Premi Invio per aggiungere nuovi servizi'
+'Note : Type & Press  enter to add new specialization': 'Nota: Digita e Premi Invio per aggiungere una nuova specializzazione'
+Experience: Esperienza
+Upload: Caricamento
+'Processing dropped files...': 'Elaborazione dei file eliminati...'
+Cancel: Annulla
+Retry: Riprova
+Delete: Elimina
+Close: Chiudere
+'No': 'No'
+'Yes': Si
+Ok: Ok
+Check: 'Dai un''''Occhiata'
+'Created with Sketch.': 'Creato con Sketch.'
+error: errore
+'Allowed JPG, GIF or PNG. Max size 600 * 600 pixels and 500 kb': 'JPG, GIF o PNG consentiti. Dimensione massima 600 * 600 pixel e 500 kb'
+'Appointment ID#': 'Appuntamento ID#'
+'Order:': 'Ordine:'
+'Issued:': 'Rilasciato:'
+'Confirmation From': 'Conferma Da'
+Description: Descrizione
+Quantity: Quantità
+VAT: I.V.A.
+Total: Totale
+'General Consultation': 'Consultazione Generale'
+'Subtotal:': 'Totale parziale:'
+'Discount:': 'Sconto:'
+'Total Amount:': 'Importo Totale:'
+'Are you sure want to delete?': 'Sei sicuro di voler eliminare?'
+'Close:': 'Chiudere:'
+'Total Patient': 'Paziente Totale'
+'Till Today': 'Fino ad Oggi'
+'Today Patient': 'Oggi Paziente'
+Appoinments: Appuntamenti
+'Patient Appoinment': 'Appuntamento del Paziente'
+Upcoming: Prossimo
+Today: Oggi
+'Patient Name': 'Nome Paziente'
+Purpose: Scopo
+Type: Tipo
+General: Generale
+'New Patient': 'Nuovo Paziente'
+Fever: Febbre
+'Old Patient': 'Paziente Esistente'
+Accept: Accettare
+Appointment: Appuntamento
+'Booking confirmed For': 'Prenotazione confermata per'
+'Estimated Price:': 'Prezzo Stimato:'
+Mon: Lun
+Tue: Mar
+Wed: Mer
+Thu: Gio
+Fri: Ven
+Sat: Sab
+Sun: Dom
+Save: Salva
+Done: Fatto
+'Save Change': 'Salva Modifica'
+Phone: Telefono
+Age: Età
+'Timing Slot Duration': 'Durata della Fascia Oraria'
+'The appointment list is empty.': 'L''elenco degli appuntamenti è vuoto.'
+'The patient list is empty.': 'L''elenco dei pazienti è vuoto.'
+'Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.': 'Una volta terminato il processo di prenotazione con l''operatore sanitario, il paziente ha la possibilità di rispondere alle domande sui sintomi dell''intelligenza artificiale, che funge da preparazione alla visita medica. Serve anche come anamnesi per il medico, in modo che possa avere una panoramica del paziente, prima della sua presenza fisica.'
+'For all healthcare professional, to attract more patients, start your DocBooking.ch account today.': 'Per tutti gli operatori sanitari, per attirare più pazienti, apri oggi il tuo account DocBooking.ch.'
+'It''s free, practicle and profitable.': 'È gratuito, pratico e redditizio.'
+'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where Firstname by your first name and then Lastname by your last name. You can also adjust the image size, which are by default at 250px and 62px.': 'Puoi aggiungere tu stesso il codice al tuo sito web o chiedere al tuo webmaster di farlo. Hai solo bisogno di aggiustare un po'' il tuo codice, dove Nome con il tuo nome e poi Cognome con il tuo cognome. Puoi anche regolare le dimensioni dell''immagine, che per impostazione predefinita sono 250 px e 62 px.'
+Afar: __Afar
+Abkhazian: __Abkhazian
+Afrikaans: __Afrikaans
+Akan: __Akan
+Amharic: __Amharic
+Aragonese: __Aragonese
+Assamese: __Assamese
+Avar: __Avar
+Aymara: __Aymara
+Azerbaijani: __Azerbaijani
+Bashkir: __Bashkir
+Belarusian: __Belarusian
+Bulgarian: __Bulgarian
+Bihari: __Bihari
+Bislama: __Bislama
+Bambara: __Bambara
+Bengali: __Bengali
+Tibetan: __Tibetan
+Breton: __Breton
+Bosnian: __Bosnian
+Catalan: __Catalan
+Chechen: __Chechen
+Chamorro: __Chamorro
+Corsican: __Corsican
+Cree: __Cree
+Czech: __Czech
+'Old Church Slavonic / Old Bulgarian': '__Old Church Slavonic / Old Bulgarian'
+Chuvash: __Chuvash
+Welsh: __Welsh
+Danish: __Danish
+Divehi: __Divehi
+Dzongkha: __Dzongkha
+Ewe: __Ewe
+Esperanto: __Esperanto
+Estonian: __Estonian
+Basque: __Basque
+Persian: __Persian
+Peul: __Peul
+Finnish: __Finnish
+Fijian: __Fijian
+Faroese: __Faroese
+'West Frisian': '__West Frisian'
+Irish: __Irish
+'Scottish Gaelic': '__Scottish Gaelic'
+Galician: __Galician
+Guarani: __Guarani
+Gujarati: __Gujarati
+Manx: __Manx
+Hausa: __Hausa
+Hebrew: __Hebrew
+Hindi: __Hindi
+'Hiri Motu': '__Hiri Motu'
+Croatian: __Croatian
+Haitian: __Haitian
+Hungarian: __Hungarian
+Armenian: __Armenian
+Herero: __Herero
+Interlingua: __Interlingua
+Indonesian: __Indonesian
+Interlingue: __Interlingue
+Igbo: __Igbo
+'Sichuan Yi': '__Sichuan Yi'
+Inupiak: __Inupiak
+Ido: __Ido
+Icelandic: __Icelandic
+Inuktitut: __Inuktitut
+Japanese: __Japanese
+Javanese: __Javanese
+Georgian: __Georgian
+Kongo: __Kongo
+Kikuyu: __Kikuyu
+Kuanyama: __Kuanyama
+Kazakh: __Kazakh
+Greenlandic: __Greenlandic
+Cambodian: __Cambodian
+Kannada: __Kannada
+Korean: __Korean
+Kanuri: __Kanuri
+Kashmiri: __Kashmiri
+Kurdish: __Kurdish
+Komi: __Komi
+Cornish: __Cornish
+Kirghiz: __Kirghiz
+Latin: __Latin
+Luxembourgish: __Luxembourgish
+Ganda: __Ganda
+Limburgian: __Limburgian
+Lingala: __Lingala
+Laotian: __Laotian
+Lithuanian: __Lithuanian
+Luba-Katanga: __Luba-Katanga
+Latvian: __Latvian
+Malagasy: __Malagasy
+Marshallese: __Marshallese
+Maori: __Maori
+Macedonian: __Macedonian
+Malayalam: __Malayalam
+Mongolian: __Mongolian
+Moldovan: __Moldovan
+Marathi: __Marathi
+Malay: __Malay
+Maltese: __Maltese
+Burmese: __Burmese
+Nauruan: __Nauruan
+'Norwegian Bokmål': '__Norwegian Bokmål'
+'North Ndebele': '__North Ndebele'
+Nepali: __Nepali
+Ndonga: __Ndonga
+Dutch: __Dutch
+'Norwegian Nynorsk': '__Norwegian Nynorsk'
+Norwegian: __Norwegian
+'South Ndebele': '__South Ndebele'
+Navajo: __Navajo
+Chichewa: __Chichewa
+Occitan: __Occitan
+Ojibwa: __Ojibwa
+Oromo: __Oromo
+Oriya: __Oriya
+'Ossetian / Ossetic': '__Ossetian / Ossetic'
+'Panjabi / Punjabi': '__Panjabi / Punjabi'
+Pali: __Pali
+Polish: __Polish
+Pashto: __Pashto
+Quechua: __Quechua
+'Raeto Romance': '__Raeto Romance'
+Kirundi: __Kirundi
+Romanian: __Romanian
+Rwandi: __Rwandi
+Sanskrit: __Sanskrit
+Sardinian: __Sardinian
+Sindhi: __Sindhi
+'Northern Sami': '__Northern Sami'
+Sango: __Sango
+Serbo-Croatian: __Serbo-Croatian
+Sinhalese: __Sinhalese
+Slovak: __Slovak
+Slovenian: __Slovenian
+Samoan: __Samoan
+Shona: __Shona
+Somalia: __Somalia
+Albanian: __Albanian
+Serbian: __Serbian
+Swati: __Swati
+'Southern Sotho': '__Southern Sotho'
+Sundanese: __Sundanese
+Swedish: __Swedish
+Swahili: __Swahili
+Tamil: __Tamil
+Telugu: __Telugu
+Tajik: __Tajik
+Thai: __Thai
+Tigrinya: __Tigrinya
+Turkmen: __Turkmen
+'Tagalog / Filipino': '__Tagalog / Filipino'
+Tswana: __Tswana
+Tonga: __Tonga
+Turkish: __Turkish
+Tsonga: __Tsonga
+Tatar: __Tatar
+Twi: __Twi
+Tahitian: __Tahitian
+Uyghur: __Uyghur
+Ukrainian: __Ukrainian
+Urdu: __Urdu
+Uzbek: __Uzbek
+Venda: __Venda
+Vietnamese: __Vietnamese
+Volapük: __Volapük
+Walloon: __Walloon
+Wolof: __Wolof
+Xhosa: __Xhosa
+Yiddish: __Yiddish
+Yoruba: __Yoruba
+Zhuang: __Zhuang
+Chinese: __Chinese
+Zulu: __Zulu
+Dr.: Dr.
+label_previous: __label_previous
+label_next: __label_next
+'Booking confirmed for Patient:': 'Prenotazione confermata per il Paziente:'
+'No Price': 'Nessun Prezzo'
+'Price not Shown': 'Prezzo non Mostrato'
+Checkout: Checkout
+'Booking Confirmation & Checkout': 'Conferma della Prenotazione e Checkout'
+'This is the Schedule I have Chosen': 'Questo è il Programma che ho Scelto'
+'I Complete my Booking': 'Ho Completato la mia Prenotazione'
+'Personal Information': 'Informazione Personale'
+'Birth Date': 'Data di Nascita'
+'Are You an Existing Patient': 'Sei un Paziente Esistente?'
+'Click here for a Fast Login': 'Clicca qui per un Login Veloce'
+'Confirm Booking': 'Conferma Prenotazione'
+'I have read and accept': 'Ho letto e accetto'
+'Terms &amp; Conditions': 'Termini e Condizioni'
+'Booking Summary': 'Riepilogo della Prenotazione'
+Date: Data
+Time: Ora
+Symptoms: Sintomi
+'DocBooking - Book a Doctor near You - Schedules at 12 - 48 hours Waiting only': 'DocBooking - Prenota un medico vicino a te - Orari a 12 - 48 ore solo in attesa'
+'booking, doctor, available, schedule, January, February, March, general practitioner, therapist, physiotherapist, dentist, psychologist, symptom checker, diagnosis, medicine, natural,  flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy': 'prenotazione, dottore, disponibile, orari, gennaio, febbraio, marzo, medico di base, terapista, fisioterapista, dentista, psicologo, sintomatico, diagnosi, medicina, naturale, influenza, depressione, massaggi, dolore, omeopatia, ginecologo, febbre, allergia'
+'About DocBooking + MEDoctor': 'Informazioni su DocBooking + MEDoctor'
+'DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only': 'DocBooking - Prenota un medico vicino a te - Orari a 12 - 48 ore solo in attesa'

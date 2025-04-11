@@ -1,0 +1,218 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocBooking.ch - Help for Doctors{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">{{ 'Home'|trans }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ 'Help for Healthcare Professionals'|trans }}</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">{{ 'Help for Healthcare Professionals'|trans }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+		<div class="card-body">
+                <h2><p>{{ 'Explainer Video'|trans }}</p></h2>
+			<div style="padding:10px">
+				<h5>
+				{{ "For all healthcare professional, to attract more patients, start your DocBooking.ch account today."|trans|raw }}<br>
+				{{ "It's free, practicle and profitable."|trans|raw }}<br><br>
+        			</h5>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/AEWEqSrkYyo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '1. Ground Rules'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'Any healthcare professional may create his account at any time.'|trans }}
+        			<br>
+        			<br>
+            			{{ "If a healthcare professional's account is conveying false information, insufficient information, insufficient credentials or the like, the DocBooking Team may suspend, block or delete that healthcare professional's account."|trans }}
+        			<br>
+        			<br>
+            			{{ 'The suspension, blocking or deletion of an account will be performed after reasonable discussion with the healthcare professional, and reasonable time to remedy to the situation.'|trans }}</h5>
+			</div>
+		</div>
+
+		<div class="card-body">
+		<h2><p>{{ '2. Creating your Account'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+            			{{ 'To create an account for a doctor or any other healthcare professional, all it takes is to click on the green button (see red arrow).'|trans }}
+        			<br>
+        			<br>
+            			{{ 'To make job easier, in some cases, your account has already been created in advance with the basic information by the DocBooking staff. Just ask for your username and password, and you will be up and running.'|trans }}
+            			</h5>
+        			<br>
+				<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/proregistration.png" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '3. Announcing your Available Slots for your Patients'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'This takes you 5 minutes per day. In order to let your patients know when you are available, announce your free slots every time you can.'|trans }}
+            			<br>
+				<br>{{ 'Choose you usual time duration to prepare your calendar (A).'|trans }}
+				<br>{{ 'Once you clicked your available slots, save them (B).'|trans }}
+				</h5>
+        			<br>
+				<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/announceslots.png" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '4. Getting More Patients'|trans }}</p></h2>
+				<div style="padding:20px">
+				<h5>
+				{{ 'Announcing the last minute cancellations of a patient is very useful too. Immediately announcing such slots, which just got freed up, has big chances of being filled quite quickly.'|trans }}
+				<br>
+            			<br>
+            			{{ 'For higher success rates, show a quality photo of yourself, preferably one where the patient can almost see into your eyes. Eye contact has always been very reassuring.'|trans }}
+				</h5>
+        			<br>
+				<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/eyecontact.png" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '5. Getting even More Patients'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>{{ 'As you subscribe with www.DocBooking.ch, you will automatically receive and own a URL for your professional profile, such as on the image below. This will vastly increase your visibility and booking capabilities.'|trans }}
+				</h5>
+				<br>
+
+				<div style="background-color:#E7F1FF">
+					<div class="conveythis-no-translate">
+						<pre>
+  <span>https://www.docbooking.ch/doctor/Firstname-Lastname.html</span>
+						</pre>
+					</div>
+				</div>
+
+        			<a href="https://www.docbooking.ch/doctor/Demo-1-Demo-1.html" target="_blank"><img src="/assets/img/docpersonalized.png" class="responsive-img"> </a>
+				<br>
+				<h5>
+            			<br>{{ 'You can copy your personalized link to all your social media page, such as here, a Facebook example. You can the add the link to your personalized page to your social media page at different places. See the red arrow.'|trans }}
+				</h5>
+        			<br>
+				<a href="https://www.facebook.com/pages/category/Cardiologist/Doctor-Demo1-Demo1-106609954480837/" target="_blank"><img src="/assets/img/facebookdemo.png" class="responsive-img"></a>
+        			<br>
+				<h5>
+				<br>{{ 'You may repeat this for any social media page you own, such as your Instagram, your Twitter and the like.'|trans }}
+				</h5>
+			</div>
+		</div>
+
+		<div class="card-body">
+		<h2><p>{{ '6. Getting Just Much More Patients'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+            			{{ 'You can also embed the image below into your Website. When a patient wants to book a visit with you, he clicks on the image below, which takes him directly to your DocBooking page.'|trans }}
+				<br>
+				<br>
+				<a href="https://www.docbooking.ch/doctor/Demo-1-Demo-1.html">
+				<img src="https://www.docbooking.ch/assets/img/logo.png" alt="DocBooking FastBooking Logo" style="width:250px;height:62px;">
+				</a>
+				<br>
+				<br>
+				{{ 'You can add the code yourself to your Website or ask your Webmaster to do it. You just need to adjust your code a bit, where Firstname by your first name and then Lastname by your last name. You can also adjust the image size, which are by default at 250px and 62px.'|trans }}
+				</h5>
+				<br>
+				<div style="background-color:#E7F1FF">
+					<div class="conveythis-no-translate">
+						<pre>
+
+  <span><</span><span>a href="</span><span>https://www.docbooking.ch/doctor/Firstname-Lastname.html" target="_blank"></span>
+      <span><</span><span>img src</span><span>="https://www.docbooking.ch/assets/img/docbookingfastbooking.png" 
+      alt="DocBooking FastBooking" style="width:250px;height:62px;"></span>
+  <span><</span><span>/a></span>
+						</pre>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+		<div class="card-body">
+		<h2><p>{{ '7. Security and No Spam'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'Several security features are built into DocBooking and your professional account. We are continuously working on it for your comfort and ease of use.'|trans }}
+				<br>
+				<br>{{ 'In order to create your account, you will need your email address and a password. By giving us your email address, we are assurred that, once a booking is done, it will surely arrive at your email address. For your security, your email address will never be shown to your patient, neither will it be visible at any time during the booking process by the patient.'|trans }}</h5>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ "8. Receiving the Patient's Symptoms Report"|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'Once the booking process with with the healthcare professional is done, the patient has the option to answer the symptoms questions of the artificial intelligence, which serves as a preparation to the medical visit. It also serve as a medical history for the doctor, so he may have a overview of the patient, prior to his physical presence.'|trans }}
+				</h5>
+				<br>
+        			<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/samplereport-small.png" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '9. Create 2 Accounts if you work at 2 Different Locations'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'If you are a healthcare professional with 2 (or more) separate work locations, it is preferable to create 2 (or more) accounts at DocBooking, which will create 2 (or more) separate blue markers (or bubbles) on the map.'|trans }}
+				<br>
+				<br>
+				{{ 'For this, it is necessary to operate with 2 (or more) separate email addresses and use a slightly different first name or last name, each account managing the schedule for the separate addresses. See the red arrows below.'|trans }}
+				</h5>
+				<br>
+        			<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/twoaccounts.jpg" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ '10. Pricing'|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'Today, as we are in Beta-Testing, all services are free. Hereafter, you may discover the likely pricing table which will soon be applied.'|trans }}</h5>
+				<br>
+				<a href="https://www.docbooking.ch" target="_blank"><img src="/assets/img/pricing.png" class="responsive-img"> </a>
+			</div>
+		</div>
+
+		<div class="card-body">
+                <h2><p>{{ "11. If the above Help doesn't Work"|trans }}</p></h2>
+			<div style="padding:20px">
+				<h5>
+				{{ 'In case the above is not enough, you can contact us at'|trans }} <i class="fas fa-envelope"></i> <a href="mailto:contact-for-doctors@docbooking.ch">contact-for-doctors@docbooking.ch</a>
+
+				<br>
+				<br>
+				{{ 'Or you also may call us at'|trans }} <i class="fas fa-phone-alt"></i> <a href="tel:+41793235523">079 323 55 23</a>.</h5>
+			</div>
+		</div>
+
+		<br>
+		<br>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+{% endblock %}

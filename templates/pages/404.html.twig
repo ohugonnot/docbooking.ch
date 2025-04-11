@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocBooking.ch - 404 Error Page{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">{{ 'Home'|trans }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ '404 Error Page'|trans }}</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">{{ '404 Error Page'|trans }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+		<h2>{{ '404 Page - This page does not exist.'|trans }}</h2>
+		<br>
+		<br>
+		<h2><a href="https://www.docbooking.ch/">{{ 'Click here to get back to the Homepage'|trans }}</a></h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /Page Content -->
+{% endblock %}

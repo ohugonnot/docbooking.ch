@@ -1,0 +1,102 @@
+<form method="get" action="{{ action }}" enctype="application/x-www-form-urlencoded">
+	<div class="filter-widget">
+		<h4>Medical Specialty</h4>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" checked value="1">
+				<span class="checkmark"></span> General Practitioner
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="2" >
+				<span class="checkmark"></span> Urologist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="3">
+				<span class="checkmark"></span> Neurologist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="4">
+				<span class="checkmark"></span> Dentist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="5">
+				<span class="checkmark"></span> Orthopedic
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="6">
+				<span class="checkmark"></span> Cardiologist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="7">
+				<span class="checkmark"></span> Psychologist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="8">
+				<span class="checkmark"></span> Nutritionist-Dietician
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="9">
+				<span class="checkmark"></span> Pediatrician
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="10">
+				<span class="checkmark"></span> Dermatologist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue[]" value="11">
+				<span class="checkmark"></span> Physiotherapist
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="filterValue" value="12">
+				<span class="checkmark"></span> Other
+			</label>
+		</div>
+		<input type="hidden" name="filterField" value="a.speciality">
+	</div>
+	<div class="filter-widget">
+		<h4>Gender</h4>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="gender" value="" checked>
+				<span class="checkmark"></span> Indifferent
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="gender" value="Male" >
+				<span class="checkmark"></span> Male Doctor
+			</label>
+		</div>
+		<div>
+			<label class="custom_check">
+				<input type="checkbox" name="gender" value="Female" >
+				<span class="checkmark"></span> Female Doctor
+			</label>
+		</div>
+	</div>
+	<div class="btn-search">
+		<button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>FIND DOCTORS NOW</span></button>
+	</div>
+</form>

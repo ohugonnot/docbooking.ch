@@ -1,0 +1,1 @@
+<option{% for attr, value in options %} {% if attr == 'href' %}data-href="{{ value }}&value={{ title }}" {% else %}{{ attr }}="{{ value }}"{% endif %}{% endfor %} class="sorting dlpro-sort-list-doctors" value="{{ title }}" {% if app.request.get('' ~ 'value') ==  title %}selected{% endif %}>{{ title }}</option>
