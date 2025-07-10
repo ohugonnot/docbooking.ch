@@ -183,6 +183,28 @@
 	</div>
 	<div class="card">
 		<div class="card-body">
+			<h4 class="card-title">{{ "Additional Information"|trans }}</h4>
+			<div class="row form-row">
+				<div class="col-md-6">
+					{{ form_row(requestForm.rcc_number) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.reimbursed_by) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.payment_by) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(requestForm.member_of) }}
+				</div>
+				<div class="col-12">
+					{{ form_row(requestForm.connectedDoctors) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-body">
 			<h4 class="card-title">{{ "Spoken Languages"|trans }}</h4>
 			<div class="form-group mb-0">
 				<div id="pricing_select">
@@ -713,6 +735,34 @@ $(".registrations-info").on('click','.trash', function () {
 	$(this).closest('.reg-cont').remove();
 	return false;
 });
+
+$(document).ready(function() {
+	$('.select2-ajax').select2({
+		placeholder: 'Search doctors...',
+		ajax: {
+			url: function() {
+				return $(this).data('url');
+			},
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					q: params.term
+				};
+			},
+			processResults: function (data) {
+				return {
+					results: data
+				};
+			},
+			cache: true
+		},
+		minimumInputLength: 1,
+		allowClear: true,
+		width: '100%'
+	});
+});
+
 $('#pricing_select input[name="doctor_profile_settings_form[price_type]"]').on('click', function() {
 	if ($(this).val() == 'price_free') {
 		$('#custom_price_cont').hide();

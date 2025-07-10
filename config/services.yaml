@@ -11,6 +11,8 @@ parameters:
     container.dumper.inline_factories: true
     locale: 'en'
     app_locales: 'en|fr'
+    GOOGLE_CAPTCHA_SECRET_KEY: '%env(GOOGLE_CAPTCHA_SECRET_KEY)%'
+    GOOGLE_MAP_PUBLIC_KEY: '%env(GOOGLE_MAP_PUBLIC_KEY)%'
 
 cravler_max_mind_geo_ip:
     client:

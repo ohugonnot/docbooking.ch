@@ -7,6 +7,9 @@
 /public/bundles/
 /var/
 /vendor/
+config/app/
+Resources/
+public/assets/plugins/Formstone
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

@@ -90,12 +90,6 @@
                                     <li>
 										<a href="{{ path('app_ddx') }}">{{ 'Symptoms'|trans }}</a>
 									</li>
-                                    <li>
-										<a href="https://www.docbooking.ch/?&_locale=de">DE</a> | 
-                                        <a href="https://www.docbooking.ch/?&_locale=fr">FR</a> | 
-                                        <a href="https://www.docbooking.ch/?&_locale=it">IT</a> | 
-                                        <a href="https://www.docbooking.ch/?&_locale=en">EN</a>
-									</li>
 								{% endif %}
 							</ul>
 						</div>
@@ -106,15 +100,14 @@
 								</li>
 							{% endif %}
 							<li class="nav-item contact-item">
-<!-- Not Useful Now 								
-								<div class="header-contact-img"> 
+								<div class="header-contact-img">
 									<i class="far fa-hospital"></i>
-								</div>   
-
-								<div class="header-contact-detail">
-									<p class="contact-header">{{ 'Contact'|trans }}</p>               
 								</div>
- -->
+								<div class="header-contact-detail">
+									<p class="contact-header">{{ 'Contact'|trans }}</p>
+
+                                    
+								</div>
 							</li>
 							{% if not app.user %}
 								<li class="nav-item contact-item">
@@ -236,15 +229,22 @@
 									<div class="footer-contact-info">
 										<div class="footer-address">
 											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> Av. des Alpes 78, 1820 Montreux, {{ 'Switzerland'|trans }}</p>
+											<p> 4, place de la Gare, 1020 Renens-Lausanne, {{ 'Switzerland'|trans }}</p>
 										</div>
-										<div class="footer-address">
-											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p>Sinserstrasse 7, 6330 Cham (ZG) {{ 'Switzerland'|trans }}</p>
-										</div>
-
+										<p>
+											<i class="fas fa-phone-alt"></i>+41 21 000 0000
+										</p>
 										<p class="mb-0">
-
+											<i class="fas fa-envelope"></i>
+											<script type="text/javascript">
+											<!--
+											    var string1 = "docbooking.switzerland";
+											    var string2 = "@";
+											    var string3 = "gmail.com";
+											    var string4 = string1 + string2 + string3;
+											    document.write("<a href=" + "mail" + "to:" + string1 + string2 + string3 + ">" + string4 + "</a>");
+											//-->
+											</script>
 										</p>
 									</div>
 								</div>
@@ -262,7 +262,7 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
-												<p class="mb-0">&copy; 2022 DocBooking by <a href="https://www.web-developpeur.com/" target="_blank">ASFolken with ❤</a> {{ 'All rights reserved.'|trans }}</p>
+										<p class="mb-0">&copy; 2021 DocBooking by <a href="https://akh-web.fr" target="_blank">akh-web.fr.</a> {{ 'All rights reserved.'|trans }}</p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-6">

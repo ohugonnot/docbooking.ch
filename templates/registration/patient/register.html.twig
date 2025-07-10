@@ -61,6 +61,7 @@
 										<a class="forgot-link" href="{{ path('app_patient_login') }}">{{ "Already have an account ?"|trans }}</a>
 										{% endif %}
 									</div>
+									<input type="hidden" id="recaptchaResponse" name="recaptcha-response">
 									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">{{ "Register as a Patient"|trans }}</button>
 								{{ form_end(registrationForm) }}
 							<!-- /Register Form -->
@@ -69,12 +70,17 @@
 						</div>
 					</div>
 					<!-- /Register Content -->
-								
 				</div>
 			</div>
-
 		</div>
-
-	</div>		
+	</div>
+	<script src="https://www.google.com/recaptcha/api.js?render={{ google_captcha_key }}"></script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('{{ google_captcha_key }}', {action: 'homepage'}).then(function(token) {
+				document.getElementById('recaptchaResponse').value = token
+			});
+		});
+	</script>
 	<!-- /Page Content -->
 {% endblock %}

@@ -79,9 +79,9 @@
                                     <tbody>
                                         {% for doctor in pagination %}
                                         <tr>
-                                        <td>
+                                        <td> 
                                             <h2 class="table-avatar">
-                                                <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
+                                                <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ doctor.pictureProfile()|default('/assets/admin/img/patients/patient1.jpg')|imagine_filter('my_thumb') }}" alt="User Image"></a>
                                                 <a href="{{ path('app_doctor_dashboard',{'switch':doctor.email}) }}">{{ doctor.title|capitalize }} {{ doctor.lastname|striptags|slice(0, 15) }} {{ doctor.firstname|striptags|slice(0, 15) }}</a>
                                             </h2>
                                         </td>

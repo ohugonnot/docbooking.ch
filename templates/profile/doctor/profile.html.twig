@@ -192,6 +192,96 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="doc-info-right">
+                            <div class="clini-infos">
+                                {# Date du jour au format jj.mm.aaaa #}
+                                {% set currentDate = "now"|date("d.m.Y") %}
+                                {% if doctor.getPhoneNumber() %}
+                                    {% set phone = doctor.getPhoneNumber()|replace({' ':'','+':'','-':''}) %}
+                                    {% if phone starts with '0' %}
+                                        {% set phone = '41' ~ phone|slice(1) %}
+                                    {% endif %}
+
+                                    {# Récupération des informations de l'utilisateur ou valeurs par défaut #}
+                                    {% set patientFirstName = app.user ? app.user.getFirstName() : '........' %}
+                                    {% set patientLastName = app.user ? app.user.getLastName() : '........' %}
+                                    {% set patientBirthYear = app.user and app.user.getDateBirth() ? app.user.getDateBirth()|date('Y') : '........' %}
+
+                                    {# Message prérempli pour WhatsApp #}
+                                    {% set msgWhatsApp =
+                                        "Hello " ~ doctor.getTitle() ~ " " ~ doctor.getFirstName() ~ " " ~ doctor.getLastName() ~ "," ~
+                                        "%0a%0a" ~
+                                        "My name is " ~ patientFirstName ~ " " ~ patientLastName ~ "." ~
+                                        "%0a" ~ "My year of birth is " ~ patientBirthYear ~ "." ~
+                                        "%0a%0a" ~
+                                        "I'm looking to book a visit with you on " ~ currentDate ~ "." ~
+                                        "%0a" ~
+                                        "If not possible, when else would you be available?" ~
+                                        "%0a%0a" ~
+                                        "Thank you in advance for returning this message." ~
+                                        "%0a%0a" ~
+                                        "P.S. You have received this message via the platform DocBooking https://www.docbooking.ch/doctor/" ~ doctor.getSlug() ~ ".html"
+                                    %}
+
+                                    <a href="https://wa.me/{{ phone }}?text={{ msgWhatsApp }}" target="_blank">
+                                        <img alt="whatsapp" height="75" src="/assets/img/whatsapptext.png">
+                                    </a>
+                                {% endif %}
+
+                                {% if doctor.email %}
+                                    {# Définition d'un objet et d'un message pour le mail #}
+                                    {% set subject = "Booking request for " ~ currentDate %}
+                                    {% set bodyMail =
+                                        "Hello " ~ doctor.getTitle() ~ " " ~ doctor.getFirstName() ~ " " ~ doctor.getLastName() ~ "," ~ "\n\n" ~
+                                        "My name is " ~ patientFirstName ~ " " ~ patientLastName ~ ".\n" ~
+                                        "My year of birth is " ~ patientBirthYear ~ ".\n\n" ~
+                                        "I'm looking to book a visit with you on " ~ currentDate ~ ".\n" ~
+                                        "If not possible, when else would you be available?\n\n" ~
+                                        "Thank you in advance for returning this message.\n\n" ~
+                                        "P.S. You have received this message via the platform DocBooking https://www.docbooking.ch/doctor/" ~ doctor.getSlug() ~ ".html"
+                                    %}
+                                    <a href="mailto:{{ doctor.email }}?subject={{ subject|url_encode }}&body={{ bodyMail|url_encode }}">
+                                        <img alt="email" height="75" src="/assets/img/email.png">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4 p-3">
+                <div class="row">
+                    <!-- Partie gauche -->
+                    <div class="col-md-4">
+                        <p><strong>RCC Number:</strong> {{ doctor.getRccNumber() }}</p>
+                        <p><strong>Reimbursed by:</strong> {{ doctor.getReimbursedBy() }}</p>
+                        <p><strong>Payment by:</strong> {{ doctor.getPaymentBy() }}</p>
+                        <p><strong>Member of:</strong> {{ doctor.getMemberOf() }}</p>
+                    </div>
+
+                    <!-- Partie centrale -->
+                    <div class="col-md-4">
+                        <p><strong>Connected with:</strong></p>
+                        <ul>
+                            {% for connected in doctor.getConnectedDoctors() %}
+                                <li>
+                                    <a href="{{ path('app_doctor_profile', {'slug': connected.getSlug()}) }}">
+                                        Dr. {{ connected.getFirstName() }} {{ connected.getLastName() }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>No connections yet</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Partie droite -->
+                    <div class="col-md-4 text-center">
+                        <a class=" " href="https://www.docbooking.ch/ddx" target="_blank">
+                            <img src="/assets/img/earlydetector.png" alt="DDx AI" height="75"><br>
+                            Test your Symptoms
+                        </a>
                     </div>
                 </div>
             </div>
@@ -225,84 +315,109 @@
                                             <p>{{ doctor.getAboutMe() }}</p>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getEducations() %}
+
+                                    {% set hasEducation = false %}
+                                    {% for education in doctor.getEducations() %}
+                                        {% if education.getDegree() or education.getCollegeInstitute() or education.getYearCompletion() %}
+                                            {% set hasEducation = true %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if hasEducation %}
                                         <div class="widget education-widget">
                                             <h4 class="widget-title">{{ "Education"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for education in doctor.getEducations() %}
-                                                        <li>
-                                                            <div class="experience-user">
-                                                                <div class="before-circle"></div>
-                                                            </div>
-                                                            <div class="experience-content">
-                                                                <div class="timeline-content">
-                                                                    <a href="#/"
-                                                                       class="name">{{ education.getCollegeInstitute() }}</a>
-                                                                    <div>{{ education.getDegree()|trans }}</div>
-                                                                    <span class="time">{{ education.getYearCompletion() }}</span>
+                                                        {% if education.getDegree() or education.getCollegeInstitute() or education.getYearCompletion() %}
+                                                            <li>
+                                                                <div class="experience-user">
+                                                                    <div class="before-circle"></div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
+                                                                <div class="experience-content">
+                                                                    <div class="timeline-content">
+                                                                        <a href="#/" class="name">{{ education.getCollegeInstitute() }}</a>
+                                                                        <div>{{ education.getDegree()|trans }}</div>
+                                                                        <span class="time">{{ education.getYearCompletion() }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getExperiences() %}
+                                    {% set hasExperience = false %}
+                                    {% for experience in doctor.getExperiences() %}
+                                        {% if experience.getHospitalName() or experience.getExperienceFrom() or experience.getExperienceTo() %}
+                                            {% set hasExperience = true %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if hasExperience %}
                                         <div class="widget experience-widget">
                                             <h4 class="widget-title">{{ "Work & Experience"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for experience in doctor.getExperiences() %}
-                                                        <li>
-                                                            <div class="experience-user">
-                                                                <div class="before-circle"></div>
-                                                            </div>
-                                                            <div class="experience-content">
-                                                                <div class="timeline-content">
-                                                                    <a href="#/"
-                                                                       class="name">{{ experience.getHospitalName() }}</a>
-                                                                    {% if experience.getExperienceFrom() %}
-                                                                        <span class="time">{{ experience.getExperienceFrom().format('Y') }} - {{ experience.getExperienceToCustom() }} {{ experience.getExperienceTotalYear() }}</span>
-                                                                    {% else %}
-                                                                        <span class="time"></span>
-                                                                    {% endif %}
+                                                        {% if experience.getHospitalName() or experience.getExperienceFrom() or experience.getExperienceTo() %}
+                                                            <li>
+                                                                <div class="experience-user">
+                                                                    <div class="before-circle"></div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
+                                                                <div class="experience-content">
+                                                                    <div class="timeline-content">
+                                                                        <a href="#/" class="name">{{ experience.getHospitalName() }}</a>
+                                                                        {% if experience.getExperienceFrom() %}
+                                                                            <span class="time">{{ experience.getExperienceFrom().format('Y') }} - {{ experience.getExperienceToCustom() }} {{ experience.getExperienceTotalYear() }}</span>
+                                                                        {% else %}
+                                                                            <span class="time"></span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getExperiences() %}
+
+                                    {% set hasAwards = false %}
+                                    {% for award in doctor.getAwards() %}
+                                        {% if award.getAwards() or award.getYear() %}
+                                            {% set hasAwards = true %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if hasAwards %}
                                         <div class="widget awards-widget">
                                             <h4 class="widget-title">{{ "Awards"|trans }}</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
                                                     {% for award in doctor.getAwards() %}
-                                                        <li>
-                                                            <div class="experience-user">
-                                                                <div class="before-circle"></div>
-                                                            </div>
-                                                            <div class="experience-content">
-                                                                <div class="timeline-content">
-                                                                    <p class="exp-year">{{ award.getYear() }}</p>
-                                                                    <h4 class="exp-title">{{ award.getAwards() }}</h4>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipiscing elit. Proin a ipsum tellus. Interdum
-                                                                        et malesuada fames ac ante ipsum primis in
-                                                                        faucibus.</p>
+                                                        {% if award.getAwards() or award.getYear() %}
+                                                            <li>
+                                                                <div class="experience-user">
+                                                                    <div class="before-circle"></div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
+                                                                <div class="experience-content">
+                                                                    <div class="timeline-content">
+                                                                        <p class="exp-year">{{ award.getYear() }}</p>
+                                                                        <h4 class="exp-title">{{ award.getAwards() }}</h4>
+                                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>
                                     {% endif %}
-                                    {% if doctor.getServices() %}
+
+                                    {% if doctor.getServices()  is not empty %}
                                         <div class="service-list">
                                             <h4>Services</h4>
                                             <ul class="clearfix">
@@ -314,7 +429,7 @@
                                         </div>
                                     {% endif %}
 
-                                    {% if doctor.getSpecialization() %}
+                                    {% if doctor.getSpecialization() is not empty %}
                                         <div class="service-list">
                                             <h4>{{ "Specializations"|trans }}</h4>
                                             <ul class="clearfix">
@@ -549,8 +664,13 @@
 			}
 		});
 	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fWsdvWvc9pHt-AyXFbl_vz7R7sjrco4"></script>
-	<script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&loading=async"
+            async
+            defer
+    ></script>
+
+    <script>
 		var map, infoWindow, directionsService, pointA, pointB, map_bounds;
 		function initMap() {
 			infoWindow = new google.maps.InfoWindow;
@@ -604,7 +724,7 @@
 				// Browser doesn't support Geolocation
 				handleLocationError(false, infoWindow, map.getCenter());
 			}
-		}
+		%}
 
 		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 			infoWindow.setPosition(pos);

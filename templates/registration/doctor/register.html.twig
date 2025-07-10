@@ -53,6 +53,7 @@
 									<div class="text-right">
 										<a class="forgot-link" href="{{ path('app_doctor_login') }}">{{ "Already have an account ?"|trans }}</a>
 									</div>
+									<input type="hidden" id="recaptchaResponse" name="recaptcha-response">
 									<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">{{ "Register"|trans }}</button>
 								{{ form_end(registrationForm) }}
 								<!-- /Register Form -->
@@ -70,5 +71,14 @@
 
 	</div>		
 	<!-- /Page Content -->
-	
+
+
+	<script src="https://www.google.com/recaptcha/api.js?render={{ google_captcha_key }}"></script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('{{ google_captcha_key }}', {action: 'homepage'}).then(function(token) {
+				document.getElementById('recaptchaResponse').value = token
+			});
+		});
+	</script>
 {% endblock %}

@@ -1,4 +1,4 @@
-AddHandler application/x-httpd-php-hostpoint-default .php
+Use php-fpm default
 
 ErrorDocument 404 /404
 

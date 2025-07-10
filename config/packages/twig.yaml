@@ -1,2 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        google_map_key: '%env(GOOGLE_MAP_PUBLIC_KEY)%'
+        google_captcha_key: '%env(GOOGLE_CAPTCHA_PUBLIC_KEY)%'
+

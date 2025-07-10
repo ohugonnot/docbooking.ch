@@ -129,6 +129,13 @@
 										</a>
 									</li>
 
+									<li {% if app.request.attributes.get('_route') == 'app_doctor_payment' %} class="active" {% endif %}>
+										<a href="{{ path('app_doctor_payment') }}">
+											<i class="fas fa-credit-card"></i>
+											<span>{{ "Payment"|trans }}</span>
+										</a>
+									</li>
+
 									<li{% if app.request.attributes.get('_route') == 'app_doctor_social' %} class="active" {% endif %}>
 										<a href="{{ path('app_doctor_social') }}">
 											<i class="fas fa-share-alt"></i>
