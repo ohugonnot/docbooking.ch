@@ -532,7 +532,11 @@
 var locations = {{allDoctors|json_encode|raw}};
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&libraries=places&callback=initialize&v=weekly"></script>
+<script
+		src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initialize&loading=async&v=weekly"
+		async
+		defer
+></script>
 <script type="text/javascript" src="/assets/js/map.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
 <script type="text/javascript" src="/assets/plugins/typeahead.js/dist/typeahead.bundle.js"></script>

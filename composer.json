@@ -2,12 +2,12 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.4.19",
+        "php": "^7.4 || ^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "cravler/maxmind-geoip-bundle": "dev-master",
+        "cravler/maxmind-geoip-bundle": "^1.7",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "knplabs/knp-paginator-bundle": "^5.2",
         "liip/imagine-bundle": "^2.6",
@@ -51,8 +51,6 @@
         "twig/inky-extra": "^3.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
-        ,
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.19",
         "symfony/stopwatch": "^5.3",
@@ -64,7 +62,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -105,5 +106,7 @@
             "allow-contrib": false,
             "require": "5.3.*"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

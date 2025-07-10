@@ -622,7 +622,11 @@ var DLPRO_CHECKOUT_REDIRECT = '{{path('app_checkout_redirect')}}';
 var isDoctor = '{{isDoctor}}';
 </script>
 <script type="text/javascript" src="/dist/js/home.min.js" defer></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&libraries=places&callback=initialize" defer></script>
+<script
+		src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initialize&loading=async"
+		async
+		defer
+></script>
 <!--<script type="text/javascript" src="/dist/js/gmap.js"></script>-->
 <script type="text/javascript">
 var isExistCollapse = !1;

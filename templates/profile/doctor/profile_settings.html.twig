@@ -737,8 +737,27 @@ $(".registrations-info").on('click','.trash', function () {
 });
 
 $(document).ready(function() {
-	$('.select2').select2({
-		placeholder: "Search and select doctors",
+	$('.select2-ajax').select2({
+		placeholder: 'Search doctors...',
+		ajax: {
+			url: function() {
+				return $(this).data('url');
+			},
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					q: params.term
+				};
+			},
+			processResults: function (data) {
+				return {
+					results: data
+				};
+			},
+			cache: true
+		},
+		minimumInputLength: 1,
 		allowClear: true,
 		width: '100%'
 	});
