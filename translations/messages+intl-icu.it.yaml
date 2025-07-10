@@ -9,7 +9,7 @@ Contact: Contatto
 Dashboard: 'Pannello di Controllo'
 Favourites: Preferiti
 'Profile Settings': 'Impostazioni del Profilo'
-'Payment': 'Pagamento'
+Payment: Pagamento
 'Change Password': 'Cambiare la Password'
 Logout: Disconnettersi
 'Schedule Timings': 'Orari di Pianificazione'
@@ -530,3 +530,9 @@ Symptoms: Sintomi
 'booking, doctor, available, schedule, January, February, March, general practitioner, therapist, physiotherapist, dentist, psychologist, symptom checker, diagnosis, medicine, natural,  flu, depression, massage, pain, homeopathy, gynaecologist, fever, allergy': 'prenotazione, dottore, disponibile, orari, gennaio, febbraio, marzo, medico di base, terapista, fisioterapista, dentista, psicologo, sintomatico, diagnosi, medicina, naturale, influenza, depressione, massaggi, dolore, omeopatia, ginecologo, febbre, allergia'
 'About DocBooking + MEDoctor': 'Informazioni su DocBooking + MEDoctor'
 'DocBooking - Book a Doctor near You. 12 - 48 hours Waiting only': 'DocBooking - Prenota un medico vicino a te - Orari a 12 - 48 ore solo in attesa'
+'RCC Number': '__RCC Number'
+'Reimbursed by': '__Reimbursed by'
+'Payment by': '__Payment by'
+'Member of': '__Member of'
+'Connected doctors': '__Connected doctors'
+'Additional Information': '__Additional Information'

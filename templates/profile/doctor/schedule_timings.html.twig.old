@@ -1,0 +1,367 @@
+{% extends 'profile/doctor/layout.html.twig' %}
+
+{% block profileb %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-body">
+					{% for flashError in app.flashes('doctor_timing_timing_error') %}
+						<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+					{% endfor %}
+					{% for flashError in app.flashes('doctor_profile_timing_success') %}
+						<div class="alert alert-success" role="alert">{{ flashError }}</div>
+					{% endfor %}
+					<h4 class="card-title">Schedule Timings</h4>
+					<div class="profile-box">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="form-group">               
+									<label>Timing Slot Duration</label>
+									<select id="timeSlot" class="select form-control">
+										<option>-</option>
+										<option value="all">All</option>
+										<option value="15">15 mins</option>
+										<option value="30">30 mins</option>  
+										<option value="45">45 mins</option>
+										<option value="1">1 Hour</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<a id="dlproAddSlotLink" class="edit-link d-none" href=""><i class="fa fa-check"></i> Save Slot</a>
+							</div>
+							<div class="col-md-12">
+								<div class="card booking-schedule schedule-widget">
+									<!-- Schedule Header -->
+									<div class="schedule-header">
+										<div class="row">
+											<div class="col-md-12">
+												<!-- Day Slot -->
+												<div class="day-slot dlpro-calendar-render">
+												</div>
+												<!-- /Day Slot -->
+											
+											</div>
+										</div>
+									</div>
+									<!-- /Schedule Header -->	
+									<!-- Schedule Content -->
+									<div class="schedule-cont">
+										<div class="row">
+											<div class="col-md-12">
+												<!-- Time Slot -->
+												<div class="time-slot dlpro-calendar-time-render">
+												</div>
+												<!-- /Time Slot -->
+											</div>
+										</div>
+									</div>
+									<!-- /Schedule Content -->
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+	function nextWeekdayDate(date, day_in_week) {
+		var ret = new Date(date||new Date());
+		ret.setDate(ret.getDate() + (day_in_week - 1 - ret.getDay() + 7) % 7 + 1);
+		return ret;
+	}
+	var listTiming = {{listTiming|json_encode|raw}};
+	var DlproTimingModule = (function(){
+		var self ={}; // On définit une variable vide 
+		var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var output = '', output_time='', output_list='', listDate = {};
+		var dt;
+		var slot;
+		var sub_output_time;
+		var firstOfWeek;
+		var lastOfWeek;
+		var isPrev;
+		var isNext;
+
+		self.init = function(slt, givDate, isPrevs, isNexts) { 
+			if(givDate){
+				dt = new Date(givDate);
+			}
+			else{
+				dt = new Date();
+			}
+			if(!slt){
+				slot = 3600;
+			}
+			else{
+				slot = slt;
+			}
+			isPrev = isPrevs;
+			isNext = isNexts;
+			output = '';
+			output_time='';
+			output_list='';
+			sub_output_time='';
+			sub_output_time_db='';
+			listDate = {};
+			firstOfWeek = 0;
+			lastOfWeek = 0;
+			
+		}
+
+		self.secondsToHms = function(d) {
+			d = Number(d);
+			
+			var h = Math.floor(d / 3600);
+			var m = Math.floor(d % 3600 / 60);
+			var s = Math.floor(d % 3600 % 60);
+			
+			return {hDisplay: h, mDisplay: m, sDisplay: s}; 
+		}
+		
+		self.getHeader = function() {
+			if(!isPrev && !isNext){
+				var iDayOfWeek = dt.getDay();
+				firstOfWeek = dt.getDate() - iDayOfWeek + (iDayOfWeek === 0 ?  -6:1);
+				lastOfWeek = dt.getDate() + ((7 - dt.getDay()) === 7 ? 0 : (7 - dt.getDay()));
+			}
+			else if(isNext){
+				firstOfWeek = nextWeekdayDate(dt, 1).getDate();
+				lastOfWeek = nextWeekdayDate(dt, 0).getDate();
+				firstDateOfWeek = nextWeekdayDate(dt, 1);
+				lastDateOfWeek = nextWeekdayDate(dt, 0);
+				console.log(firstOfWeek);
+				console.log(lastOfWeek);
+			}
+			else{
+				var beforeOneWeek = new Date(dt.getTime() - 60 * 60 * 24 * 7 * 1000);
+				var day = beforeOneWeek.getDay();
+				var diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -6 : 1);
+				firstOfWeek = diffToMonday;
+				lastOfWeek = diffToMonday + 6;
+			}
+			var k =0;
+			for(var i=firstOfWeek;i<=lastOfWeek; i++){
+				console.log(i);
+				dt.setDate(i);
+				listDate[k] = {
+					day: dt.getDate(), 
+					month: dt.getMonth(), 
+					year: dt.getFullYear()
+				};
+				output_list += '<li> \
+						<span>' + days[dt.getDay()] + '</span> \
+						<span class="slot-date">' + dt.getDate() + ' ' + (monthNames[dt.getMonth()]) + ' <small class="slot-year">' + dt.getFullYear() + '</small></span> \
+				</li>';
+				k++;
+			} 
+		} 
+		
+		self.getPrevNext = function() {
+			if(isNext){
+				output = '<ul><li class="left-arrow"> \
+														<a id="dlproPrevDate" href data-prevdate="' + firstDateOfWeek + '"> \
+															<i class="fa fa-chevron-left"></i> \
+														</a> \
+													</li>' + output_list;
+							output += '<li class="right-arrow"> \
+														<a id="dlproNextDate" href data-nextdate="' + lastDateOfWeek + '"> \
+															<i class="fa fa-chevron-right"></i> \
+														</a> \
+													</li></ul>';
+			}
+			else{
+				dt.setDate(dt.getDate() - 6);
+				output = '<ul><li class="left-arrow"> \
+														<a id="dlproPrevDate" href data-prevdate="' + dt + '"> \
+															<i class="fa fa-chevron-left"></i> \
+														</a> \
+													</li>' + output_list;
+				dt.setDate(lastOfWeek);
+				output += '<li class="right-arrow"> \
+														<a id="dlproNextDate" href data-nextdate="' + dt + '"> \
+															<i class="fa fa-chevron-right"></i> \
+														</a> \
+													</li></ul>';
+			}
+			output_time+='<ul class="clearfix">';
+		} 
+		
+		self.getSubBody = function() { 
+			sub_output_time='<li>';
+			for( var i = 25200;i<=72000; i = i + slot){
+				var tr;
+				tr = self.secondsToHms(i).hDisplay + ':';
+				if(self.secondsToHms(i).mDisplay<10){
+					tr = tr + '0' + self.secondsToHms(i).mDisplay;
+				}
+				else{
+					tr = tr +  self.secondsToHms(i).mDisplay;
+				}
+				sub_output_time+='<a class="timing dlproTimeElement" href="#" data-step="' + tr + '" data-time="' + tr + '" data-id="%ID%" data-year="%YEAR%" data-month="%MONTH%" data-day="%DAY%"> \
+				<span>' + tr + '</span> <span>AM</span> \
+				</a>';
+			}
+			sub_output_time+='</li>';
+		}
+		
+		self.getSubBodyDB = function() { 
+			sub_output_time='<li>';
+			for( var i = 25200;i<=72000; i = i + slot){
+				var tr;
+				tr = self.secondsToHms(i).hDisplay + ':';
+				if(self.secondsToHms(i).mDisplay<10){
+					tr = tr + '0' + self.secondsToHms(i).mDisplay;
+				}
+				else{
+					tr = tr +  self.secondsToHms(i).mDisplay;
+				}
+				sub_output_time+='<a class="timing dlproTimeElement" href="#" data-step="' + tr + '" data-time="' + tr + '" data-id="%ID%" data-year="%YEAR%" data-month="%MONTH%" data-day="%DAY%"> \
+				<span>' + tr + '</span> <span>AM</span> \
+				</a>';
+			}
+			sub_output_time+='</li>';
+		}
+		
+		self.include = function(arr,obj) {
+			return (arr.indexOf(obj) != -1) ? arr.indexOf(obj) : false;
+		}
+		
+		self.getBody  = function() {
+			var k = 0;
+			for(var t= firstOfWeek; t<=lastOfWeek; t++){
+				var day = listDate[k].day;
+				var month = listDate[k].month;
+				var year = listDate[k].year;
+				var i = listDate[k].day.toString() + listDate[k].month.toString() + listDate[k].year.toString();
+				if(listTiming[i]){
+					var id_db = listTiming[i].id;
+					var day_db = listTiming[i].day;
+					var month_db = listTiming[i].month;
+					var year_db = listTiming[i].year;
+					var times_db = JSON.parse(listTiming[i].times);
+					sub_output_time_db='<li>';
+					for( var j = 25200;j<=72000; j = j + slot){
+						var tr;
+						tr = self.secondsToHms(j).hDisplay + ':';
+						if(self.secondsToHms(j).mDisplay<10){
+							tr = tr + '0' + self.secondsToHms(j).mDisplay.toString();
+						}
+						else{
+							tr = tr +  self.secondsToHms(j).mDisplay.toString();
+						}
+						var filtered = times_db.filter(function(el) {
+							return (el.time === tr && el.selected === true) ? 'selected' : '';
+						});
+						var selected = '';
+						if(filtered.slice(0,1).shift() !== undefined){
+							selected = (filtered.slice(0,1).shift().selected == true) ? 'selected' : '';
+						}
+						sub_output_time_db += '<a class="timing dlproTimeElement ' + selected + '" href="#" data-step="' + self.secondsToHms(j).hDisplay + '" data-time="' + tr + '" data-id="' + id_db + '" data-year="' + year_db + '" data-month="' + month_db + '" data-day="' + day_db + '"><span>' + tr + '</span><span>AM</span></a>';
+					}
+					sub_output_time_db+='</li>';
+					output_time +=  sub_output_time_db;
+				}
+				else{
+					output_time +=  sub_output_time.split('%DAY%').join(day).split('%MONTH%').join(month).split('%YEAR%').join(year).split('%ID%').join('');
+				}
+			k = k + 1;
+			}
+		}
+		
+		self.print = function(slt, givDate, isPrev, isNext) {
+			self.init(slt, givDate, isPrev, isNext);
+			self.getHeader();
+			self.getPrevNext();
+			self.getSubBody();
+			self.getBody();
+			$('.dlpro-calendar-render').html(output);
+			$('.dlpro-calendar-time-render').html(output_time);
+		} 
+
+		return self;
+	})();
+	
+	DlproTimingModule.print();
+	$('#timeSlot').val('1').change();
+	
+	$('#timeSlot').on('change', function(){
+		var slot = $(this).val();
+		if(slot == '15'){
+			DlproTimingModule.print(900);
+		}
+		else if(slot == '30'){
+			DlproTimingModule.print(1800);
+		}
+		else if(slot == '45'){
+			DlproTimingModule.print(2700);
+		}
+		else if(slot == '1'){
+			DlproTimingModule.print(3600);
+		}
+		else{
+			DlproTimingModule.print(60);
+		}
+		return false;
+	});
+	
+	
+	$(document).on('click', '.dlproTimeElement' , function(){
+		if($('#dlproAddSlotLink').hasClass('d-none')){
+			$('#dlproAddSlotLink').removeClass('d-none');
+		}
+		if($(this).hasClass('selected')){
+			$(this).removeClass('selected');
+		}
+		else{
+			$(this).addClass('selected');
+		}
+		return false;
+	});
+	
+
+	
+	$(document).on('click', '#dlproPrevDate' , function(e){
+		e.stopPropagation();
+		var prevdate = $(this).data('prevdate');
+		DlproTimingModule.print(false, prevdate, true, false);
+		return false;
+	});
+	
+	$(document).on('click', '#dlproNextDate', function(e){
+		e.stopPropagation();
+		var nextdate = $(this).data('nextdate');
+		DlproTimingModule.print(false, nextdate, false, true);
+		return false;
+	});
+	
+	$(document).on('click', '#dlproAddSlotLink', function(e){
+		var arr_output = [];
+		$('.dlproTimeElement').each(function() {
+			var selected = $(this).hasClass('selected');
+			var day = $(this).data('day');
+			var month = $(this).data('month');
+			var year = $(this).data('year');
+			var id = $(this).data('id');
+			var time = $(this).data('time');
+			var step = $(this).data('step');
+			arr_output.push({id: id, selected: selected, day: day, month: month, year: year, time: time, step: step}); 
+		});
+		$.post(
+			'{{ path('app_doctor_schedule_timings_save') }}',
+			{data: JSON.stringify(arr_output), time_slot: $('#timeSlot').val()},
+			function(response){
+				window.location.reload(false); 
+			}
+		);
+		return false;
+	});
+</script>
+{% endblock %}
